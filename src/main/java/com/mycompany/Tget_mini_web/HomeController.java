@@ -3,6 +3,7 @@ package com.mycompany.Tget_mini_web;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jdk.internal.org.jline.utils.Log;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -11,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 public class HomeController {
 	@RequestMapping("")
 	public String index() {
-		log.info("index() ì‹¤í–‰");
+		Log.info("index() ½ÇÇà"); 
 		return "home";
 	}
 }
