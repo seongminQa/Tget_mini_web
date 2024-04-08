@@ -421,7 +421,7 @@
           <svg class="bi" aria-hidden="true">
             <use xlink:href="#clipboard"></use>
           </svg>
-          지속능경영
+          지속가능경영
         </a>
 
         <a class="icon-link icon-link-hover" style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);" href="#">
@@ -494,7 +494,7 @@
           </svg>
           사이버감사실
         </a>
-        <div style="text-align:center" ;>
+        <div style="text-align:center;">
           <br>
           <ul>
             <li style="list-style:none;">(05717)서울 송파구 중대로 135 아이티벤처타워, 아이티벤처타워 12층(가락동 78)</li>
