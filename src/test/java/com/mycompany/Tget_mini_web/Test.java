@@ -1,3 +1,4 @@
+package com.mycompany.Tget_mini_web;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Test {
