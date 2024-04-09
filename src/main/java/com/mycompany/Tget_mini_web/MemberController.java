@@ -20,4 +20,9 @@ public class MemberController {
 		log.info("member.index() 실행");
 		return "member/index";
 	}
+	@RequestMapping("/login")
+	public String login() {
+		log.info("member.login() 실행");
+		return "member/log_in";
+	}
 }
