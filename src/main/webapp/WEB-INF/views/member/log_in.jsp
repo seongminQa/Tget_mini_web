@@ -16,18 +16,35 @@
 		<!-- jQuery -->
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 		
+		<link rel="stylesheet" href="/Tget_mini_web/resources/css/login.css">
+		
 		<!-- 사용자 정의 자바스크립트 -->
 		<script>
 			
 		</script>
 	</head>
 	<body>
-
-		<div class="card">
-		  <div class="card-header">Header</div>
-		  <div class="card-body">
-		  	content
-		  </div> 
-		</div>
+		
+		<div class="d-flex justify-content-center">   
+         <div class="login-wrapper">
+        <img src ="/Tget_mini_web/resources/image/project_image/t_get_logo.svg" style="width:200px ; height: 145px;" >
+        <form method="post" action="서버의url" id="login-form">
+            <input type="text" name="userName" placeholder="id">
+            <input type="password" name="userPassword" placeholder="Password">
+             <label for="remember-check">
+                <input type="checkbox" id="remember-check">아이디 저장하기
+              	<input type="checkbox" id="remember-check">자동 로그인
+            </label> 
+            
+            <input type="submit" value="Login">
+            <div class="link">
+              <p>	
+              <a href="memberId">아이디 찾기</a> | <a href="memberPW">비밀번호 찾기</a> | <a href="memberRegist">회원가입</a> 
+              </p>
+            </div>
+        </form>
+    </div>
+</div>
+		
 	</body>
 </html>
