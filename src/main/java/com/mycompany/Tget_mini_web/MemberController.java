@@ -15,14 +15,22 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
+	// member 기본 인덱스 페이지 매핑
 	@RequestMapping("")
 	public String index() {
 		log.info("member.index() 실행");
 		return "member/index";
 	}
+	// member 로그인 화면 매핑
 	@RequestMapping("/login")
 	public String login() {
 		log.info("member.login() 실행");
 		return "member/log_in";
+	}
+	// member 로그인 화면 매핑
+	@RequestMapping("/wishlist")
+	public String wishList() {
+		log.info("member.wish_list() 실행");
+		return "member/wish_list";
 	}
 }
