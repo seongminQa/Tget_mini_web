@@ -38,7 +38,7 @@
 	</head>
 	<body>
 		
-		<div class="d-flex justify-content-center">   
+		<div class="d-flex justify-content-center"style="margin-top:10%;">   
          <div class="login-wrapper">
          <div style="text-align : center;">
         <img src ="/Tget_mini_web/resources/image/project_image/t_get_logo.svg" style="width:200px ; height: 145px;" > 
@@ -51,11 +51,12 @@
              
              
              	<div class="me-5">
-	            	<input type="checkbox" id="remember-check" class="m-1">아이디 저장하기  
-	         		   	         	             	
+	            	<input type="checkbox" id="remember-check" class="m-1">아이디 저장하기  	         	             	
              	</div>
+             	
 				<div>
 	             	<input type="checkbox" id="remember-check" class="m-1">자동 로그인             	
+             	
              	</div>
              </label> 
             
