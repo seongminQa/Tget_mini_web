@@ -2,19 +2,22 @@
 *{
     padding: 0;
     margin: 0;
-    border: none;
+    
 }
 
 
 body{
     font-size: 15px;
     font-family: 'Roboto', sans-serif;
+    
 }
 .login-wrapper{
     width: 400px;
     height: 350px;
     padding: 40px;
     box-sizing: border-box;
+    
+    
 }
 
 .login-wrapper > h2{
