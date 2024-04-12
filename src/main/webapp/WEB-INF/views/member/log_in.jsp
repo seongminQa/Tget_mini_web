@@ -20,21 +20,44 @@
 		
 		<!-- 사용자 정의 자바스크립트 -->
 		<script>
-			
+/* 		function loginCheck(){
+			if (document.loginform.userid.value == ""){
+				alert("아이디를 입력해 주세요.");
+				document.loginform.userid.focus();
+				return false;
+			} else if (document.loginform.pwd.value == ""){
+				alert("비밀번호를 입력해주세요.");
+				document.loginform.pwd.focus();
+				return false;
+			} else {
+				return true;
+			}
+		}
+		 */
 		</script>
 	</head>
 	<body>
 		
 		<div class="d-flex justify-content-center">   
          <div class="login-wrapper">
-        <img src ="/Tget_mini_web/resources/image/project_image/t_get_logo.svg" style="width:200px ; height: 145px;" >
-        <form method="post" action="서버의url" id="login-form">
+         <div style="text-align : center;">
+        <img src ="/Tget_mini_web/resources/image/project_image/t_get_logo.svg" style="width:200px ; height: 145px;" > 
+        <form method="post" action="#" id="login-form">
             <input type="text" name="userName" placeholder="id">
+               
             <input type="password" name="userPassword" placeholder="Password">
-             <label for="remember-check">
-                <input type="checkbox" id="remember-check">아이디 저장하기
-              	<input type="checkbox" id="remember-check">자동 로그인
-            </label> 
+              
+             <label for="remember-check" class="d-flex justify-content-center">
+             
+             
+             	<div class="me-5">
+	            	<input type="checkbox" id="remember-check" class="m-1">아이디 저장하기  
+	         		   	         	             	
+             	</div>
+				<div>
+	             	<input type="checkbox" id="remember-check" class="m-1">자동 로그인             	
+             	</div>
+             </label> 
             
             <input type="submit" value="Login">
             <div class="link">
@@ -43,6 +66,7 @@
               </p>
             </div>
         </form>
+        </div>
     </div>
 </div>
 		
