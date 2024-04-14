@@ -33,4 +33,9 @@ public class MemberController {
 		log.info("member.wish_list() 실행");
 		return "member/wish_list";
 	}
+	@RequestMapping("/sign_up")
+	public String sign_up() {
+		log.info("member.sign_up() 실행");
+		return "member/sign_up";
+	}
 }
