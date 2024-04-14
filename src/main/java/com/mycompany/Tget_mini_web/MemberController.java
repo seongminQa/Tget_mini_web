@@ -21,21 +21,22 @@ public class MemberController {
 		log.info("member.index() 실행");
 		return "member/index";
 	}
-	// member 로그인 화면 매핑
+	// member 로그인 페이지 매핑
 	@RequestMapping("/login")
 	public String login() {
 		log.info("member.login() 실행");
 		return "member/log_in";
 	}
-	// member 로그인 화면 매핑
-	@RequestMapping("/wishlist")
-	public String wishList() {
-		log.info("member.wish_list() 실행");
-		return "member/wish_list";
-	}
+	// member 회원가입 페이지 매핑
 	@RequestMapping("/sign_up")
 	public String sign_up() {
 		log.info("member.sign_up() 실행");
 		return "member/sign_up";
+	}
+	// member 장바구니 페이지 매핑
+	@RequestMapping("/shoppingcart")
+	public String shoppingCart() {
+		log.info("member.shopping_cart() 실행");
+		return "member/shopping_cart";
 	}
 }
