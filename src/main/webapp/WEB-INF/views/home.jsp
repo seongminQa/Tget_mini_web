@@ -42,7 +42,6 @@
 <body>
 
   <!-- header -->
-  <!-- header -->
   <header class="container" style="border-bottom: 5px solid #D95B96">
 
     <div class="row align-items-center">
@@ -70,6 +69,12 @@
             <a class="nav-link" href="#" style="color: black;">
               <img src="/Tget_mini_web/resources/image/project_image/user.svg" style="height: 20px; width: 15px;" />
               <span style="font-size: small; display: block;">마이페이지</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="${pageContext.request.contextPath}/member/shoppingcart" style="color: black;">
+              <img src="/Tget_mini_web/resources/image/project_image/cart.svg" style="height: 20px; width: 20px;" />
+              <span style="font-size: small; display: block;">장바구니</span>
             </a>
           </li>
         </ul>
