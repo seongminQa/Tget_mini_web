@@ -188,9 +188,10 @@ td {
 
 .cart__mainbtns {
   text-align: center;
-  padding-top: 40px;
+  padding-top: 20px;
   display: block;
   margin: auto;
+  justify-content: center;
 }
 
 .cart__bigorderbtn {
@@ -204,6 +205,10 @@ td {
 .cart__bigorderbtn.left {
   background-color: white;
   border: 1px lightgray solid;
+}
+
+.cart__bigorderbtn.left:hover {
+	background-color: skyblue;	
 }
 
 .cart__bigorderbtn.right {

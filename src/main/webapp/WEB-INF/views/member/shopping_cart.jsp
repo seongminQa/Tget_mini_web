@@ -16,7 +16,7 @@
     <!-- jQuery -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 
-    <!-- css -->
+    <!-- shopping_cart css -->
     <link rel="stylesheet" href="/Tget_mini_web/resources/css/shopping_cart.css"/>
     
     <!-- 체크박스 전체 선택 자바스크립트 참조 -->
@@ -78,9 +78,12 @@
 		};
 
       </script>
-    <!-- 내부 css 적용 (테스트용) -->
+    
+    <!-- 테스트용 css -->
     <style>
-
+		*{
+			/* border:1px solid blue; */
+		}
     </style>
   </head>
   <body>
