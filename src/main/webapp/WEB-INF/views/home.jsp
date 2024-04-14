@@ -61,7 +61,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" style="color: black;">
+            <a class="nav-link" href="${pageContext.request.contextPath}/member/sign_up" style="color: black;">
               <img src="/Tget_mini_web/resources/image/project_image/sign-up.svg" style="height: 20px; width: 15px;" />
               <span style="font-size: small; display: block;">회원 가입</span>
             </a>
