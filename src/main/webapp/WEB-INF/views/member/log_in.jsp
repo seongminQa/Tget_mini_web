@@ -38,9 +38,9 @@
 	</head>
 	<body>
 		
-		<div class="d-flex justify-content-center"style="margin-top:10%;">   
+	 	<div class="d-flex justify-content-center"style="margin-top:10%;">   
          <div class="login-wrapper">
-         <div style="text-align : center;">
+          <div style="text-align : center;">
         <img src ="/Tget_mini_web/resources/image/project_image/t_get_logo.svg" style="width:200px ; height: 145px;" > 
         <form method="post" action="#" id="login-form">
             <input type="text" name="userName" placeholder="id">
