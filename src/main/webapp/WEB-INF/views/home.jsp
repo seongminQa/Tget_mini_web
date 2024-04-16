@@ -162,27 +162,32 @@
           <div class="carousel-item active">
             <!--5개 카드  -->
             <div class="row row-cols-md-1  row-cols-lg-5 g-5">
+              
+              
               <div class="col">
                 <div id="card h-100">
+                  <a>
                   <img
-                    src="https://tickets.interpark.com/contents/_next/image?url=http%3A%2F%2Fticketimage.interpark.com%2FPlay%2Fimage%2Flarge%2F24%2F24000651_p.gif&w=256&q=75"
+                    src="https://tickets.interpark.com/contents/_next/image?url=http%3A%2F%2Fticketimage.interpark.com%2FPlay%2Fimage%2Flarge%2F23%2F23017766_p.gif&w=256&q=75"
                     class="card-img-top" alt="...">
-                  <div id="card-body">
-                    <h5>아트</h5>
-                    <p>링크아트센터 벅스홀</p>
-                    <p id="date">2024.02.13 ~ 2024.05.12</p>
+                  </a>
+                  <div class="card-body">
+                    <h5>알앤제이</h5>
+                    <p>동국대학교 이해랑예술극장</p>
+                    <p>2024.02.07 ~ 2024.04.28</p>
                   </div>
                 </div>
               </div>
               <div class="col">
                 <div id="card h-100">
-                  <img
-                    src="https://tickets.interpark.com/contents/_next/image?url=http%3A%2F%2Fticketimage.interpark.com%2FPlay%2Fimage%2Flarge%2F23%2F23017766_p.gif&w=256&q=75"
-                    class="card-img-top" alt="...">
+                <a href="${pageContext.request.contextPath}/item"><img
+                    src="https://tickets.interpark.com/contents/_next/image?url=http%3A%2F%2Fticketimage.interpark.com%2FTCMS3.0%2FGMain%2FPlay%2F2404%2F240402033345_24004955.gif&w=1920&q=75"
+                    class="card-img-top" alt="..."></a>
+                  
                   <div class="card-body">
-                    <h5>알앤제이</h5>
-                    <p>동국대학교 이해랑예술극장</p>
-                    <p>2024.02.07 ~ 2024.04.28</p>
+                    <h5>존경하는 엘레나 선생님</h5>
+                    <p>상명아트홀1관</p>
+                    <p>2024.06.01 ~ 2024.06.30</p>
                   </div>
                 </div>
               </div>
@@ -242,12 +247,12 @@
               <div class="col">
                 <div id="card h-100">
                   <img
-                    src="https://tickets.interpark.com/contents/_next/image?url=http%3A%2F%2Fticketimage.interpark.com%2FTCMS3.0%2FGMain%2FPlay%2F2404%2F240402033345_24004955.gif&w=1920&q=75"
+                    src="https://tickets.interpark.com/contents/_next/image?url=http%3A%2F%2Fticketimage.interpark.com%2FPlay%2Fimage%2Flarge%2F24%2F24000651_p.gif&w=256&q=75"
                     class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5>존경하는 엘레나 선생님</h5>
-                    <p>상명아트홀1관</p>
-                    <p>2024.06.01 ~ 2024.06.30</p>
+                  <div id="card-body">
+                    <h5>아트</h5>
+                    <p>링크아트센터 벅스홀</p>
+                    <p id="date">2024.02.13 ~ 2024.05.12</p>
                   </div>
                 </div>
               </div>
