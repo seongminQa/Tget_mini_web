@@ -21,33 +21,30 @@
     
     <!-- 체크박스 전체 선택 자바스크립트 참조 -->
     <!-- defer 속성은 페이지가 모두 로드된 후에 해당 외부 스크립트가 실행됨을 명시 -->
-	<script defer src="/Tget_mini_web/resources/js/shopping_cart.js"></script>
+	<!-- <script defer src="/Tget_mini_web/resources/js/shopping_cart.js"></script> -->
     
     <!-- 사용자 정의 자바스크립트 -->
     <script>
 		 // 체크박스 전체 선택 or 전체 선택 해제 (자바스크립트)
 		 function checkedAll() {
-			console.log("체크박스 클릭")
+			 // 아이디 값이 checkAll인 것을 찾아 ch 변수에 저장
+			 const ch = document.querySelector('#checkAll');
+			 // ch 가 클릭 되었을 때 이벤트 함수 발생
 			
-			// 아이디 값이 checkAll인 것을 찾아 ch 변수에 저장
-			const ch = document.querySelector('#checkAll');
-			// ch 가 클릭 되었을 때 이벤트 함수 발생
-			ch.addEventListener('click', function(){
-				const checkboxes = document.querySelectorAll('input[name=tiket]');
-				
-				if(ch.checked){
-					for(const checkbox of checkboxes){
-						checkbox.checked = true;
-					}
+			const checkboxes = document.querySelectorAll('input[name=tiket]');
+			if(ch.checked){
+				console.log("체크박스 전체 선택")
+				for(const checkbox of checkboxes){
+					checkbox.checked = true;
 				}
-				else{
-					for(const checkbox of checkboxes){
-						checkbox.checked = false;
-					}
+			}
+			else{
+				console.log("체크박스 전체 선택 해제")
+				for(const checkbox of checkboxes){
+					checkbox.checked = false;
 				}
-			});
-		}  
-		
+			}
+		}
 		// 체크박스 전체 선택 or 전체 선택 해제 (제이쿼리 사용)
 		/* $(document).ready(function () {
 		 $("#checkAll").change(function () {
@@ -60,9 +57,9 @@
 		   }
 		 });
 		}); */
-      
-		// 체크된 상품들의 가격 정보 받아오기
+        
 		
+		// 체크된 상품들의 가격 정보 받아오기
 		function priceSum() {
 			const checkboxes = document.querySelectorAll('input[name=tiket]');
 			console.log(checkboxes);
@@ -75,6 +72,7 @@
 				}
 			}
 			console.log("총 합계: " + totalSum);
+			alert("총 합계: " + totalSum);
 		};
 
       </script>
@@ -90,7 +88,7 @@
   	<!-- header(헤더) -->
   	<%@include file="/WEB-INF/views/common/header.jsp"%>
     <!-- 장바구니 시작 -->
-    <section class="container">
+    <section class="container mt-3 mb-5">
       <div class="cart__title">
         <button class="sort__shopping__basket__btn">장바구니</button>
       </div>
@@ -144,7 +142,7 @@
               <td>
                 <span class="price">40,000원</span><br />
               </td>
-              <td style="width: 15%"><button class="cart__list__cansel">X</button></td>
+              <td style="width: 15%"><button class="cart__list__cansel" style="border:none; background-color:transparent;"><img style="width:140%; height: 140%;" src="/Tget_mini_web/resources/image/shoppingcart/trash.svg"/></button></td>
             </tr>
             <!-- 두번째 목록 -->
             <tr class="cart__list__detail">
@@ -178,7 +176,7 @@
               <td>
                 <span class="price">32,000원</span><br/>
               </td>
-              <td style="width: 15%"><button class="cart__list__cansel">X</button></td>
+              <td style="width: 15%"><button class="cart__list__cansel" style="border:none; background-color:transparent;"><img style="width:140%; height: 140%;" src="/Tget_mini_web/resources/image/shoppingcart/trash.svg"/></button></td>
             </tr>
             <!-- 세번째 목록 -->
             <tr class="cart__list__detail">
@@ -212,7 +210,7 @@
               <td>
                 <span class="price">30,800원</span><br />
               </td>
-              <td style="width: 15%"><button class="cart__list__cansel">X</button></td>
+              <td style="width: 15%"><button class="cart__list__cansel" style="border:none; background-color:transparent;"><img style="width:140%; height: 140%;" src="/Tget_mini_web/resources/image/shoppingcart/trash.svg"/></button></td>
             </tr>
           </tbody>
 
