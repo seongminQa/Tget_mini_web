@@ -18,6 +18,7 @@
 		
 		<!-- 사용자 정의 자바스크립트 -->
 	<style>
+        
         input { /* input 태그가 가진 기본적인 설정들을 지움 */
             outline: none;
             border:none;
@@ -71,7 +72,7 @@
             <h4><strong>회원가입</strong></h4>
         </div> -->
 
-        <form class="row d-flex flex-column align-items-center ms-5" style="margin-top: 50px;">
+        <form method="post" class="row d-flex flex-column align-items-center ms-5" style="margin-top: 50px;">
             <div class="div_form row">
                 <label for="id" class="col-3 pt-3"><strong>아이디</strong></label>
                 <input class="col-9" type="text" id="id" name="id" placeholder="6~20자 영문, 숫자">
