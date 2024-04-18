@@ -16,7 +16,7 @@
 		  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 		  <script>
 			  $(function(){
-				  
+				  $('.tabcontent > div').hide();
 				  $('.tabnav a').click(function () { 
 					  /* tabnav' 클래스의 자식인 'a' 요소에 클릭 이벤트 핸들러를 추가 */
 				    $('.tabcontent > div').hide().filter(this.hash).fadeIn(); 
