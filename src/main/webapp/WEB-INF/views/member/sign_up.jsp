@@ -92,6 +92,10 @@
                 <input class="col-9" type="text" id="name" name="name" placeholder="ex. 홍길동">
             </div>
             <div class="div_form row">
+                <label for="email" class="col-3 pt-3"><strong>이메일</strong></label>
+                <input class="col-9" type="text" id="email" name="email" placeholder="ex. tget0101@naver.com">
+            </div>
+            <div class="div_form row">
                 <label for="nickname" class="col-3 pt-3"><strong>닉네임</strong></label>
                 <input class="col-9" type="text" id="nickname" name="nickname" placeholder="ex. 연뮤덕">
             </div>
