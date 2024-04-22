@@ -34,7 +34,7 @@ body{
     box-sizing: border-box;
     margin-bottom: 16px;
     border-radius: 6px;
-    background-color: #F8F8F8;
+    background-color:#F8F8F8; 
 }
 #login-form > input::placeholder{
     color: #D2D2D2;
@@ -53,6 +53,8 @@ body{
     color: #999999;
 }
 /* 체크박스가 선택되지 않았을 때의 라벨 스타일 */
+/* type속성 값이 checkbox인 input요소를 선택하는데 여기서 + 는 인접형제 선택자 label요소를 선택
+   결과적으론  input[type="checkbox"] 와 연결된 label요소에 체크박스이미지를 배경으로 사용*/
 #login-form input[type="checkbox"] + label{
     cursor: pointer;
     padding-left: 26px;
