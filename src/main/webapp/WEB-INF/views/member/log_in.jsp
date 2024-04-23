@@ -89,9 +89,9 @@
 </div>
 
 	    <!-- footer 하단고정-->
-	    
+	     <div class="fixed-bottom"> 
     <%@include file="/WEB-INF/views/common/footer.jsp"%>	
-	    
+	    </div>
 		
 	</body>
 </html>
