@@ -420,8 +420,9 @@
 	</div>
 	<!-- 베스트 관람 후기  -->
     <div class="container">
-    <div id="review-title" style="margin-top: 150px;  ">
-      <h3><b>베스트 관람후기</b></h3>
+    <div id="review-title" style="margin-top: 150px;">
+      <h3><b><a href="${pageContext.request.contextPath}/board">베스트 관람후기</a></b></h3>
+      
     </div>
       <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 g-4">
         <div class="col">
