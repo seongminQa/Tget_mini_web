@@ -21,8 +21,15 @@
 				color: white;
 				background-color: #D95B96;
 			}
-			.card {
-				/* border: none; */
+			ul {
+				list-style: none;
+			}
+			a {
+				text-decoration: none;
+				color: #D95B96;
+			}
+			a:hover {
+			  color : red;
 			}
 		</style>
 </head>

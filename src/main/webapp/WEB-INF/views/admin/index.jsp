@@ -14,6 +14,24 @@
 		
 		<!-- jQuery -->
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+		<style>
+			.card-header {
+				font-size: 20px;
+				font-weight: bold;
+				color: white;
+				background-color: #D95B96;
+			}
+			ul {
+				list-style: none;
+			}
+			a {
+				text-decoration: none;
+				color: #D95B96;
+			}
+			a:hover {
+			  color : red;
+			}
+		</style>
 </head>
 <body>
 
@@ -30,7 +48,7 @@
 					<div class="card">
 						<div class="card-header">관리자 페이지</div>
 						<div class="card-body">
-							
+							안녕하세요?
 						</div>
 					</div>
 					<!-- #################################### -->

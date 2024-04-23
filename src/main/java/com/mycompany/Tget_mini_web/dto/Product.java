@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
-	private int pno; // 연극의 고유 번호
-	private String pkind;
+	private int pno; // 연극 or 뮤지컬의 고유 번호
+	private String pkind; // 연극 or 뮤지컬 분류
 	private String pimg; // 연극의 포스터 이미지
 	private String ptitle; // 연극의 제목
 	private String pgenre; // 연극의 장르
@@ -23,7 +23,8 @@ public class Product {
 	private String pperiod;
 	private int pprice; // 연극의 가격
 //	private String[] actors; // 연극 배우들
-	// 시트 필드?>
+//	private int pseats;  // 좌석수
+//  private int ptotal_amount;  // 연극의 총 판매량	
 	
-	// 추후 제품 상세 추가
+	// 회원관리는 고민중입니다.
 }

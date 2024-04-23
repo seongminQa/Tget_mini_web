@@ -38,11 +38,11 @@ public class MemberController {
 	}
 
 	// member 장바구니 페이지 매핑
-	@RequestMapping("/shoppingcart")
+	/*@RequestMapping("/shoppingcart")
 	public String shoppingCart() {
 		log.info("member.shopping_cart() 실행");
 		return "member/shopping_cart";
-	}
+	}*/
 
 	// member 회원정보수정 페이지 매핑
 	@RequestMapping("/memberInfoModify")

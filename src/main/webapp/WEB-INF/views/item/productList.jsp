@@ -27,7 +27,6 @@
     		display: grid;
     		
     	}
-    	
       	a {
 	        color: #242428;
 	        text-decoration: none;
@@ -62,10 +61,10 @@
       <!-- 캐러셀 섹션 -->
       <section class="rankCarousel m-3 pb-3 text-bg-light text-center" style="border-radius: 20px;">
         <div class="grid d-flex justify-content-between align-items-center">
-          <div class="g-col-8 p-3">
+          <div class="g-col-8 ms-3">
             <h3>랭킹</h3>
           </div>
-          <div class="g-col-4 p-3">
+          <div class="g-col-4 me-3">
             <a href="">전체보기</a>
           </div>
         </div>

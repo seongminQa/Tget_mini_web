@@ -12,7 +12,6 @@
       <div class="accordion-body">
       	<ul>
       		<li><a href="${pageContext.request.contextPath}/admin/member">회원 조회</a></li>
-      		<li><a href="${pageContext.request.contextPath}/admin/member">회원 등록</a></li>
       	</ul>  
       </div>
     </div>
@@ -27,9 +26,6 @@
       <div class="accordion-body">
         <ul>
       		<li><a href="${pageContext.request.contextPath}/admin/product">상품 조회</a></li>
-      		<li><a href="${pageContext.request.contextPath}/admin/product">상품 등록</a></li>
-      		<li><a href="${pageContext.request.contextPath}/admin/product">상품 수정</a></li>
-      		<li><a href="${pageContext.request.contextPath}/admin/product">상품 삭제</a></li>
       	</ul> 
       </div>
     </div>
