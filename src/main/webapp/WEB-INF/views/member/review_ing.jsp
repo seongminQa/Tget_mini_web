@@ -84,7 +84,7 @@
   			 	<div style="margin-top:18px;">
   			 	<div style="text-align : center;">  
 					<table class="table">
-					  <thead>
+					  <thead class="table">
 					    <tr>
 					      <th scope="col">공연명</th>
 					      <th scope="col">제목</th>
