@@ -18,26 +18,25 @@
 			  $(function(){
 				  $('.tabcontent > div').hide();
 				  $('.tabnav a').click(function () { 
-					  /* tabnav' 클래스의 자식인 'a' 요소에 클릭 이벤트 핸들러를 추가 */
-				    $('.tabcontent > div').hide().filter(this.hash).fadeIn(); 
+				  /* tabnav' 클래스의 자식인 'a' 요소에 클릭 이벤트 핸들러를 추가 */
+				  $('.tabcontent > div').hide().filter(this.hash).fadeIn(); 
 				  /* 'tabcontent' 클래스의 자식인 'div' 요소들을 숨기고,
 				    클릭된 링크의 해시값을 기준으로 필터링한 다음 해당 'div' 
 				    요소를 서서히 나타내는 애니메이션을 적용 */
-				    $('.tabnav a').removeClass('active');
-				    $(this).addClass('active');
-				    /* 'tabnav' 클래스의 자식인 'a' 요소들에서 'active' 클래스를 제거하고,
-				           그 다음에는 클릭된 링크에 'active' 클래스를 추가 */
-				    return false;
-				    /* 클릭된 링크의 기본 동작을 중지합니다. 
-				      여기서는 다른 페이지로 이동하는 것을 막고, 
-				      탭 기능만 실행  */
+				  $('.tabnav a').removeClass('active');
+				  $(this).addClass('active');
+				  /* 'tabnav' 클래스의 자식인 'a' 요소들에서 'active' 클래스를 제거하고,
+				    그 다음에는 클릭된 링크에 'active' 클래스를 추가 */
+				  return false;
+				  /* 클릭된 링크의 기본 동작을 중지합니다. 
+				    여기서는 다른 페이지로 이동하는 것을 막고, 
+				    탭 기능만 실행  */
 				  }).filter(':eq(0)').click();
-				  
 				  /* 페이지가 로드될 때 첫 번째 'a' 요소에 대한 클릭 이벤트를 즉시 발생
 				  eq->이퀄라이저 선택한 요소중에서 전달받은 인덱스에 해당하는 요소 선택
 				  	페이지가 로드될 때 첫 번째 탭이 활성화되고 해당 콘텐츠가 표시
 				  */
-				 });
+				  });
           </script>
           
 		  
