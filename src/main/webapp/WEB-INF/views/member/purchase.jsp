@@ -15,13 +15,23 @@
 <!-- jQuery 외부 라이브러리 설정 -->
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-<script type="text/javascript">
-	
-</script>
+	<link rel="stylesheet" href="/Tget_mini_web/resources/css/purchase.css">
+<!-- 반응형 제거 코드 -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- 반응형 제거 코드 -->
+<style >
 
+table tr td {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 140px;
+}
+
+</style>
 </head>
 
 <body>
+
 	<!-- header(헤더) -->
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 
@@ -29,6 +39,7 @@
 
 
 	<!-- context ######-->
+	
 	<div class="content"
 		style="background-color: white-space; width: 100%; height: 100vh">
 		<div class="row justify-content-center">
@@ -53,10 +64,14 @@
 					 <h4 class="ps-2 pt-5"></h4> 
 					 
 					 <div class="content-box">
+					 <div class="d-flex justify-content-center"style="margin-top:5%;">
+					 <div class="me-2">
 					 조회기간
-					 <button type="button" class="btn btn-outline-warning btn-sm">1개월</button>
-					 <button type="button" class="btn btn-outline-warning btn-sm">3개월</button>
-					 <button type="button" class="btn btn-outline-warning btn-sm">6개월</button>
+					 <button type="button" class="round gray">1개월</button>
+					 <button type="button" class="round gray">3개월</button>
+					 <button type="button" class="round gray">6개월</button>
+					 </div>
+					 
 					 <p>
 					 <label for="startdate">시작일 입력 </label>
 					 <input type="date" id="startdate" name="startdate" value="2024-03-22">
@@ -72,11 +87,13 @@
 					 
 					 </p>
 					 </div>
-
+					 </div>
+		
 						
 					<!-- 중앙 예매 한 내역 -->
-					<div style="margin-top:23px">
-					<div style="text-align : center;">  
+					
+				 <div class="sub"style="margin-top:23px;">
+					<div style="text-align : center; ">  
 					<table class="table">
 					  <thead class="table">
 					    <tr>
@@ -91,11 +108,11 @@
 					    </tr>
 					  </thead>
 					   
-					  <tbody class="table-group-divider">
+					  <tbody class="table-group-divider" >
 					    <tr>
 					      <th scope="row">2024.02.20</th>
 					      <td>11223322</td>
-					      <td>창작가무극(다원영의 악의 기원)</td>
+					      <td>창작가무극</td>
 						  <td>2024.03.11</td>
 					      <td>2</td>
 					      <td>2024.03.10 | 23:59</td>
@@ -107,17 +124,19 @@
 					  </tbody>
 					  
 					</table>
+					</div>  
 					</div> 
-					</div>
 					<!-- 중앙 예매 한 내역 -->					
 					
 				<!-- bg -->
 				</div>
 
 					<!-- context 감싸는 div 밑에서부터  -->
+				</div>
 			</div>
 		</div>
-	</div>
+
+					
 	<!-- context ######-->
 
 
