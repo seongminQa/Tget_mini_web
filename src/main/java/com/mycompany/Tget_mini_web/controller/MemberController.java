@@ -39,4 +39,16 @@ public class MemberController {
 		log.info("member.shopping_cart() 실행");
 		return "member/shopping_cart";
 	}
+	// member 회원정보수정 페이지 매핑
+		@RequestMapping("/memberInfoModify")
+		public String memberInfoModify() {
+			log.info("member.shopping_cart() 실행");
+			return "member/memberInfoModify";
+		}
+	// member 회원정보수정 페이지 매핑
+			@RequestMapping("/memberInfoWithdrawal")
+			public String memberInfoWithdrawal() {
+				log.info("member.shopping_cart() 실행");
+				return "member/memberInfoWithdrawal";
+			}
 }
