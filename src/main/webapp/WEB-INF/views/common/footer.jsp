@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <div class="fixed-bottom"> 
-	<div class="d-flex justify-content-evenly mt-2 p-4"
+<!--     <div class="fixed-bottom">  -->
+	<div class="d-flex justify-content-evenly"
   style="border-top: 2px solid gray; background-color: lightgray;">
   <div class="overflow-hidden">
     <a class="icon-link icon-link-hover" style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);" href="#">
@@ -103,4 +103,4 @@
 
   </div>
 </div>
-</div>
+<!-- </div> -->
