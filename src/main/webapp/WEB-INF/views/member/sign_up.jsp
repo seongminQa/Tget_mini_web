@@ -72,7 +72,7 @@
             <h4><strong>회원가입</strong></h4>
         </div> -->
 
-        <form method="post" class="row d-flex flex-column align-items-center ms-5" style="margin-top: 50px;">
+        <form method="post" class="row d-flex flex-column align-items-center ms-5" style="margin-top: 50px; margin-bottom: 50px;">
             <div class="div_form row">
                 <label for="id" class="col-3 pt-3"><strong>아이디</strong></label>
                 <input class="col-9" type="text" id="id" name="id" placeholder="6~20자 영문, 숫자">
@@ -156,6 +156,9 @@
             <button type="submit" class="submit_btn btn" style="background-color: #D95B96; color: white;">가입 완료</button>
         </form>
 
+<!-- footer 하단고정-->
+	
+	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 
 
 
