@@ -47,24 +47,23 @@ table tr td {
 			
 				<div class="col-3">
 					<div style="background-color: white" class="pt-5 pb-5">
-						<p class="ms-3">
-							홍길동님의 <br />마이페이지
-						</p>
+						  <h4 class="ms-3"><strong>홍길동</strong>님의 <br />마이페이지</h4>
 						<hr />
-						<ul>
+						<%@include file="/WEB-INF/views/common/myPageList.jsp"%>
+						<!-- <ul>
 							<a href="#"><li>회원정보 수정</li></a>
 							<a href="#"><li>내가 쓴 후기</li></a>
 							<a href="#"><li>구매 내역</li></a>
 							<a href="#"><li>회원 탈퇴</li></a>
-						</ul>
+						</ul> -->
 					</div>
 				</div>
 					<!-- bg -->
-				<div class="col-9" style="background-color: white">
+				<div class="col-9" style="background-color: white; ">
 					 <h4 class="ps-2 pt-5"></h4> 
 					 
 					 <div class="content-box">
-					 <div class="d-flex justify-content-center"style="margin-top:5%;">
+					 <div class="d-flex justify-content-center">
 					 <div class="me-2">
 					 조회기간
 					 <button type="button" class="round gray">1개월</button>
@@ -92,7 +91,7 @@ table tr td {
 						
 					<!-- 중앙 예매 한 내역 -->
 					
-				 <div class="sub"style="margin-top:23px;">
+				 <div class="sub"style="margin-top:10px;" >
 					<div style="text-align : center; ">  
 					<table class="table">
 					  <thead class="table">
@@ -122,6 +121,35 @@ table tr td {
 					    </tr>
 
 					  </tbody>
+					   <tbody class="table-group-divider" >
+					    <tr>
+					      <th scope="row">2024.02.21</th>
+					      <td>1155522</td>
+					      <td>옥탑방 고양이</td>
+						  <td>2024.04.04</td>
+					      <td>4</td>
+					      <td>2024.04.5 | 04:44</td>
+					      <td>취소 | 
+					      <button type="button" class="btn btn-outline-dark btn-sm">상세</button>
+					      </td>
+					    </tr>
+
+					  </tbody>
+					   </tbody>
+					   <tbody class="table-group-divider" >
+					    <tr>
+					      <th scope="row">2024.06.19</th>
+					      <td>16884320</td>
+					      <td>지킬엔하이드박사</td>
+						  <td>2024.07.25</td>
+					      <td>8</td>
+					      <td>2024.07.26 | 15:15</td>
+					      <td>취소 | 
+					      <button type="button" class="btn btn-outline-dark btn-sm">상세</button>
+					      </td>
+					    </tr>
+
+					  </tbody>
 					  
 					</table>
 					</div>  
@@ -143,7 +171,9 @@ table tr td {
 
 
 	<!-- footer 하단고정-->
+	<div class="fixed-bottom">
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
+	</div>
 
 
 </body>
