@@ -30,14 +30,11 @@
       <div class="pb-3 row" style="width: 70%">
         <div class="col-3">
           <div style="background-color: white" class="pt-5 pb-5">
-            <p class="ms-3">홍길동님의 <br/>마이페이지</p>
+             <h4 class="ms-3"><strong>홍길동</strong>님의 <br />마이페이지</h4>
             <hr/>
-            <ul>
-              <a href="#"><li>회원정보 수정</li></a>
-              <a href="#"><li>내가 쓴 후기</li></a>
-              <a href="#"><li>구매 내역</li></a>
-              <a href="#"><li>회원 탈퇴</li></a>
-            </ul>
+          
+             <%@include file="/WEB-INF/views/common/myPageList.jsp"%>
+            
           </div>
       
         </div>
@@ -81,7 +78,7 @@
   			</div> 
   			 -->
   			 	<!-- 공연 후기 -->
-  			 	<div style="margin-top:18px;">
+  			 	<div style="margin-top:27px;">
   			 	<div style="text-align : center;">  
 					<table class="table">
 					  <thead class="table">
@@ -156,8 +153,10 @@
  
 
   		
-    <!-- footer 하단고정-->
-    <%@include file="/WEB-INF/views/common/footer.jsp"%>
+   <!-- footer 하단고정-->
+	<div class="fixed-bottom">
+	<%@include file="/WEB-INF/views/common/footer.jsp"%>
+	</div>
      
 	</body>
 </html>
