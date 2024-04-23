@@ -19,25 +19,27 @@ body{
     box-sizing: border-box;
     
     
+    
 }
 	/* 로그인 폼 제목(h2)의 스타일 */
-.login-wrapper > h2{
+.login-wrapper > h1{
     font-size: 24px;
     color: #D95B96;
-    margin-bottom: 20px;
+    
+
 }
 	/* 로그인 폼의 입력 필드 스타일 */
 #login-form > input{
     width: 100%;
-    height: 48px;
+    height: 40px;
     padding: 0 10px;
     box-sizing: border-box;
     margin-bottom: 16px;
     border-radius: 6px;
     background-color:#F8F8F8; 
 }
-#login-form > input::placeholder{
-    color: #D2D2D2;
+#login-form > input:placeholder{
+    color: black;
 }
 	/* 로그인 폼의 제출 버튼 스타일 */
 #login-form > input[type="submit"]{
@@ -52,24 +54,8 @@ body{
 #login-form > label{
     color: #999999;
 }
-/* 체크박스가 선택되지 않았을 때의 라벨 스타일 */
-/* type속성 값이 checkbox인 input요소를 선택하는데 여기서 + 는 인접형제 선택자 label요소를 선택
-   결과적으론  input[type="checkbox"] 와 연결된 label요소에 체크박스이미지를 배경으로 사용*/
-#login-form input[type="checkbox"] + label{
-    cursor: pointer;
-    padding-left: 26px;
-    background-image: url("checkbox.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    
-}
-/* 체크박스가 선택되었을 때의 라벨 스타일 */
-#login-form input[type="checkbox"]:checked + label{
-    background-image: url("checkbox-active.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-     
-}
+
+
 
 a {
 	color:black;
@@ -80,3 +66,4 @@ a:hover {
 	color:#D95B96;
 }
 
+@charset "UTF-8";
