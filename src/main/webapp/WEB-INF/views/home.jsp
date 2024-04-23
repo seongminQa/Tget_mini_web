@@ -60,7 +60,7 @@
                </a>
              </li>
              <li class="nav-item">
-               <a class="nav-link" href="#" style="color: black;">
+               <a class="nav-link" href="${pageContext.request.contextPath}/member/memberInfoModify" style="color: black;">
                  <span style="font-size: small; display: block;">마이페이지</span>
                </a>
              </li>
@@ -74,7 +74,7 @@
          </div>
 
          <div class="d-flex justify-content-start">
-           <a class="navbar-brand" href="#"><img src="/Tget_mini_web/resources/image/project_image/t_get_logo.svg" style="height: 100px;" /></a>
+           <a class="navbar-brand" href="${pageContext.request.contextPath}"><img src="/Tget_mini_web/resources/image/project_image/t_get_logo.svg" style="height: 100px;" /></a>
          </div>
 
       
@@ -90,7 +90,7 @@
 
     <div class="row d-flex align-items-start">
       <div class="row justify-content-between">
-        <div class="col mt-2">
+        <div class="col-8 mt-2">
           <ul class="nav">
             <li class="nav-item">
               <a class="menu nav-link" style="color: grey;">연극</a>
@@ -100,10 +100,12 @@
             </li> 
           </ul>
         </div>
-        <div class="col mt-2">
-          <div class="d-flex">
-            <input class="form-control" type="text" placeholder="Search" style="width:300px; margin-left: 300px">
-            <button class="btn" style="background-color: #D95B96; color:white" type="button">Search</button>
+        <div class="col-4 mt-2">
+          <div class="row d-flex mb-3" style="border: 1px solid #D95B96; border-radius:50px; height:45px; ">
+            <input class="col-10" type="text" placeholder="검색어를 입력해주세요." style="border:none; outline: none; background-color: transparent;"/>
+            <button class="col-1" type="button" style="border:none; background-color: transparent;">
+            	<img src="/Tget_mini_web/resources/image/project_image/search.svg" style="height:30px;"/>
+            </button>
           </div>
         </div>
       </div>
