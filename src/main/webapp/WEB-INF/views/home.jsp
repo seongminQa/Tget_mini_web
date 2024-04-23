@@ -46,36 +46,36 @@
   <header class="container" >
 
     <div class="" >
-	    <div class="d-flex justify-content-end" >
-	
-	        <ul class="nav justify-content-center" >
-	          <li class="nav-item">
-	            <a class="nav-link" href="${pageContext.request.contextPath}/member/login" style="color: black;">
-	              <span style="font-size: small; display: block;">로그인</span>
-	            </a>
-	          </li>
-	          <li class="nav-item">
-	            <a class="nav-link" href="${pageContext.request.contextPath}/member/sign_up" style="color: black;">
-	              <span style="font-size: small; display: block;">회원 가입</span>
-	            </a>
-	          </li>
-	          <li class="nav-item">
-	            <a class="nav-link" href="#" style="color: black;">
-	              <span style="font-size: small; display: block;">마이페이지</span>
-	            </a>
-	          </li>
-	          <li class="nav-item">
-	            <a class="nav-link" href="${pageContext.request.contextPath}/member/shoppingcart" style="color: black;">
-	              <span style="font-size: small; display: block;">장바구니</span>
-	            </a>
-	          </li>
-	        </ul>
-	
-	      </div>
+       <div class="d-flex justify-content-end" >
+   
+           <ul class="nav justify-content-center" >
+             <li class="nav-item">
+               <a class="nav-link" href="${pageContext.request.contextPath}/member/login" style="color: black;">
+                 <span style="font-size: small; display: block;">로그인</span>
+               </a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="${pageContext.request.contextPath}/member/sign_up" style="color: black;">
+                 <span style="font-size: small; display: block;">회원 가입</span>
+               </a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="#" style="color: black;">
+                 <span style="font-size: small; display: block;">마이페이지</span>
+               </a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="${pageContext.request.contextPath}/member/shoppingcart" style="color: black;">
+                 <span style="font-size: small; display: block;">장바구니</span>
+               </a>
+             </li>
+           </ul>
+   
+         </div>
 
-	      <div class="d-flex justify-content-start">
-	        <a class="navbar-brand" href="#"><img src="/Tget_mini_web/resources/image/project_image/t_get_logo.svg" style="height: 100px;" /></a>
-	      </div>
+         <div class="d-flex justify-content-start">
+           <a class="navbar-brand" href="#"><img src="/Tget_mini_web/resources/image/project_image/t_get_logo.svg" style="height: 100px;" /></a>
+         </div>
 
       
     </div>
@@ -304,121 +304,121 @@
     </div>
     </div>
     <!-- Carousel End -->
-	<!-- 연극 or 뮤지컬 티저영상 시작-->
-	<div class="d-flex"style="height:500px; background-color:#F6F6F6; margin-top:150px;margin-bottom:150px;">
-		<div id="video_box" class="container d-flex">
-			<div id="video_text_box" style="flex:1">
-				<div id="ticket_spot">Ticket Spot</div>
-				<div id="content_title">2024 뮤지컬 시카고</div>
-				<div id="video_btn_box" class="d-flex">
-					<div class="d-flex" id="video_btn"><i class="bi bi-chevron-left"></i></div>
-					<div class="d-flex" id="video_btn"><i class="bi bi-chevron-right"></i></div>
-				</div>
-			</div>
-			<div style="flex:1">
-				<iframe id="teaser" width="750" height="370" src="https://www.youtube.com/embed/36hshluncms?si=hdggGK2elEh1VqpM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-			</div>
-		</div>
-		
-	</div>
+   <!-- 연극 or 뮤지컬 티저영상 시작-->
+   <div class="d-flex"style="height:500px; background-color:#F6F6F6; margin-top:150px;margin-bottom:150px;">
+      <div id="video_box" class="container d-flex">
+         <div id="video_text_box" style="flex:1">
+            <div id="ticket_spot">Ticket Spot</div>
+            <div id="content_title">2024 뮤지컬 시카고</div>
+            <div id="video_btn_box" class="d-flex">
+               <div class="d-flex" id="video_btn"><i class="bi bi-chevron-left"></i></div>
+               <div class="d-flex" id="video_btn"><i class="bi bi-chevron-right"></i></div>
+            </div>
+         </div>
+         <div style="flex:1">
+            <iframe id="teaser" width="750" height="370" src="https://www.youtube.com/embed/36hshluncms?si=hdggGK2elEh1VqpM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+         </div>
+      </div>
+      
+   </div>
     <!-- 연극 or 뮤지컬 티저영상 끝-->
-	<!-- 추천? ...제목모름  이주의 공연·전시-->
-	<div class="container d-flex " >
-		<div id="left_content" style="flex:1;" >
-			<div id="left_img" class="d-flex">
-				<img id ="left_img_inner" alt="" src="https://i.namu.wiki/i/Tg9pV1JoPH4RU2sPOjq1iftIf10NWTT-Qygqc5ZFwnjc9GqlcbHf3xZZrLh-ObRL433oQn_Oba8NEVwS4cQ_dTcUkgbNexN-KGHxusjVi9z392t21bz5vWlkcC-wWzFCEb4IxmJdOuXqI-EsoM_t_g.webp" style="width:400px; margin: auto">
-				<div style="text-align:center; margin-top:10px;" >
-					<h5>뮤지컬 시카고</h5>
-	                <p>디큐브 링크아트센터</p>
-	                <p>2024.06.07 ~ 2024.06.13</p>
-				</div>
-				
-			</div>
-		</div>
-		<div class="d-flex" style="flex:1;">
-			<div id="right_contents" >
-				<div>
-					<img id="right_img" alt="" src="/Tget_mini_web/resources/image/detail_photos/이상한나라의앨리스.jpg">
-					<div id = "right_info">
-						<h5>이상한 나라의 앨리스</h5>
-		                <p>인스파이어 아레나</p>
-		                <p>2024.05.4 ~ 2024.05.06</p>
-					</div>
-					
-				</div>
-				<div>
-					<img id="right_img" alt="" src="https://timeticket.co.kr/wys2/file_attach_thumb/2024/04/18/1713408762-15-3_wonbon_N_7_255x357_70_2.jpg">
-					<div id = "right_info">
-						<h5>최현우 Answer</h5>
-		                <p>의정부예술의전당 대극장</p>
-		                <p>2024.05.11~2024.05.12</p>
-					</div>
-					
-				</div>
-				<div>
-					<img id="right_img" alt="" src="https://timeticket.co.kr/wys2/file_attach_thumb/2024/04/17/1713331750-56-3_wonbon_N_7_255x357_70_2.jpg">
-					<div id = "right_info">
-						<h5>진짜 나쁜 소녀</h5>
-		                <p>TN아트홀 1관</p>
-		                <p>2024.05.08~2024.10.31</p>
-					</div>
-					
-				</div>
-				<div>
-					<img id="right_img" alt="" src="https://timeticket.co.kr/wys2/file_attach_thumb/2024/03/21/1711010164-35-3_wonbon_N_7_255x357_70_2.jpg">
-					<div id = "right_info">
-						<h5>나, 옥분뎐</h5>
-		                <p>씨어터쿰</p>
-		                <p>2024.03.12 ~ 2024.06.02</p>
-					</div>
-					
-				</div>
-				
-			</div>
-			<div id="right_contents" >
-				<div>
-					<img id="right_img" alt="" src="https://timeticket.co.kr/wys2/file_attach_thumb/2024/03/12/1710205086-58-3_wonbon_N_7_255x357_70_2.jpg">
-					<div id = "right_info">
-						<h5>벚꽃동산</h5>
-		                <p>안똔체홉극장</p>
-		                <p>2024.04.05~2024.04.28</p>
-					</div>
-					
-				</div>
-				<div>
-					<img id="right_img" alt="" src="https://timeticket.co.kr/wys2/file_attach_thumb/2024/04/12/1712888138-99-3_wonbon_N_7_255x357_70_2.jpg">
-					<div id = "right_info">
-						<h5>로미오와 줄리엣</h5>
-		                <p>열린극장</p>
-		                <p>2024.05.15~2024.05.19</p>
-					</div>
-					
-				</div>
-				<div>
-					<img id="right_img" alt="" src="https://timeticket.co.kr/wys2/file_attach_thumb/2023/11/24/1700807605-86-3_wonbon_N_7_255x357_70_2.jpg">
-					<div id = "right_info">
-						<h5>미래상상마술쇼</h5>
-		                <p>파랑새극장</p>
-		                <p>2023.09.21~2024.04.28</p>
-					</div>
-					
-				</div>
-				<div>
-					<img id="right_img" alt="" src="https://timeticket.co.kr/wys2/file_attach_thumb/2024/01/31/1706684103-0-3_wonbon_N_7_255x357_70_2.jpg">
-					<div id = "right_info">
-						<h5>새벽부터 황혼까지 </h5>
-		                <p>마이아트뮤지엄</p>
-		                <p>2024.03.21~2024.08.25</p>
-					</div>
-					
-				</div>
-			</div>
-		
-		</div>
-		
-		
-	</div>
-	<!-- 베스트 관람 후기  -->
+   <!-- 추천? ...제목모름  이주의 공연·전시-->
+   <div class="container d-flex " >
+      <div id="left_content" style="flex:1;" >
+         <div id="left_img" class="d-flex">
+            <img id ="left_img_inner" alt="" src="https://i.namu.wiki/i/Tg9pV1JoPH4RU2sPOjq1iftIf10NWTT-Qygqc5ZFwnjc9GqlcbHf3xZZrLh-ObRL433oQn_Oba8NEVwS4cQ_dTcUkgbNexN-KGHxusjVi9z392t21bz5vWlkcC-wWzFCEb4IxmJdOuXqI-EsoM_t_g.webp" style="width:400px; margin: auto">
+            <div style="text-align:center; margin-top:10px;" >
+               <h5>뮤지컬 시카고</h5>
+                   <p>디큐브 링크아트센터</p>
+                   <p>2024.06.07 ~ 2024.06.13</p>
+            </div>
+            
+         </div>
+      </div>
+      <div class="d-flex" style="flex:1;">
+         <div id="right_contents" >
+            <div>
+               <img id="right_img" alt="" src="/Tget_mini_web/resources/image/detail_photos/이상한나라의앨리스.jpg">
+               <div id = "right_info">
+                  <h5>이상한 나라의 앨리스</h5>
+                      <p>인스파이어 아레나</p>
+                      <p>2024.05.4 ~ 2024.05.06</p>
+               </div>
+               
+            </div>
+            <div>
+               <img id="right_img" alt="" src="https://timeticket.co.kr/wys2/file_attach_thumb/2024/04/18/1713408762-15-3_wonbon_N_7_255x357_70_2.jpg">
+               <div id = "right_info">
+                  <h5>최현우 Answer</h5>
+                      <p>의정부예술의전당 대극장</p>
+                      <p>2024.05.11~2024.05.12</p>
+               </div>
+               
+            </div>
+            <div>
+               <img id="right_img" alt="" src="https://timeticket.co.kr/wys2/file_attach_thumb/2024/04/17/1713331750-56-3_wonbon_N_7_255x357_70_2.jpg">
+               <div id = "right_info">
+                  <h5>진짜 나쁜 소녀</h5>
+                      <p>TN아트홀 1관</p>
+                      <p>2024.05.08~2024.10.31</p>
+               </div>
+               
+            </div>
+            <div>
+               <img id="right_img" alt="" src="https://timeticket.co.kr/wys2/file_attach_thumb/2024/03/21/1711010164-35-3_wonbon_N_7_255x357_70_2.jpg">
+               <div id = "right_info">
+                  <h5>나, 옥분뎐</h5>
+                      <p>씨어터쿰</p>
+                      <p>2024.03.12 ~ 2024.06.02</p>
+               </div>
+               
+            </div>
+            
+         </div>
+         <div id="right_contents" >
+            <div>
+               <img id="right_img" alt="" src="https://timeticket.co.kr/wys2/file_attach_thumb/2024/03/12/1710205086-58-3_wonbon_N_7_255x357_70_2.jpg">
+               <div id = "right_info">
+                  <h5>벚꽃동산</h5>
+                      <p>안똔체홉극장</p>
+                      <p>2024.04.05~2024.04.28</p>
+               </div>
+               
+            </div>
+            <div>
+               <img id="right_img" alt="" src="https://timeticket.co.kr/wys2/file_attach_thumb/2024/04/12/1712888138-99-3_wonbon_N_7_255x357_70_2.jpg">
+               <div id = "right_info">
+                  <h5>로미오와 줄리엣</h5>
+                      <p>열린극장</p>
+                      <p>2024.05.15~2024.05.19</p>
+               </div>
+               
+            </div>
+            <div>
+               <img id="right_img" alt="" src="https://timeticket.co.kr/wys2/file_attach_thumb/2023/11/24/1700807605-86-3_wonbon_N_7_255x357_70_2.jpg">
+               <div id = "right_info">
+                  <h5>미래상상마술쇼</h5>
+                      <p>파랑새극장</p>
+                      <p>2023.09.21~2024.04.28</p>
+               </div>
+               
+            </div>
+            <div>
+               <img id="right_img" alt="" src="https://timeticket.co.kr/wys2/file_attach_thumb/2024/01/31/1706684103-0-3_wonbon_N_7_255x357_70_2.jpg">
+               <div id = "right_info">
+                  <h5>새벽부터 황혼까지 </h5>
+                      <p>마이아트뮤지엄</p>
+                      <p>2024.03.21~2024.08.25</p>
+               </div>
+               
+            </div>
+         </div>
+      
+      </div>
+      
+      
+   </div>
+   <!-- 베스트 관람 후기  -->
     <div class="container">
     <div id="review-title" style="margin-top: 150px;">
       <h3><b><a href="${pageContext.request.contextPath}/board">베스트 관람후기</a></b></h3>
