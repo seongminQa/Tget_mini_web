@@ -1,0 +1,69 @@
+@charset "UTF-8";
+
+#best_review_title {
+	font-size: 30px;
+	margin-top: 100px;
+}
+
+#review_img {
+	width: 305px;
+	height: 250px;
+	object-fit: cover;
+}
+
+#content_box_right {
+	margin-left: 20px;
+	border-radius: 20px;
+}
+
+#content_box_left {
+	margin-right: 20px;
+	border-radius: 20px;
+}
+
+#content_title {
+	font-size: 24px;
+	font-weight: bold;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+.table {
+	border-collapse: collapse;
+	width: 100%;
+	text-align: center;
+}
+
+.table thead th {
+	border: 1px solid #D95B96;
+	border-width: 1px 0;
+}
+
+.table tbody td:nth-child(2) {
+	text-align: left;
+}
+
+.table td:first-child, .table th:first-child {
+	width: 50%;
+}
+
+.table td:nth-child(3), .table th:nth-child(3) {
+	width: 20%;
+}
+
+.table td:nth-child(6), .table th:nth-child(4) {
+	width: 20%;
+}
+
+.table tbody tr:hover {
+	background-color: lightcyan;
+}
+
+.table tbody td a {
+	text-decoration: none;
+	color: black;
+}
+
+.table tbody td a:hover {
+	text-decoration: underline;
+}
