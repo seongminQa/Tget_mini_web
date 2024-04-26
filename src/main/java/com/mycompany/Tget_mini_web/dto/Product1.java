@@ -1,9 +1,5 @@
 package com.mycompany.Tget_mini_web.dto;
 
-import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
+public class Product1 {
 	private int pno; // 연극 or 뮤지컬의 고유 번호
 	private String pkind; // 연극 or 뮤지컬 분류
 	private String pimg; // 연극의 포스터 이미지
