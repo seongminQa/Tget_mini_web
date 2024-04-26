@@ -29,7 +29,7 @@ public class ShoppingCartController {
 	@RequestMapping("/productList")
 	public String productList(Model model) {
 		// 상품의 갯수 세기 (현재는 이미지 파일의 갯수만큼)
-		String path = "C:\\KosaCourse\\project-tget\\Tget_mini_web\\src\\main\\webapp\\resources\\image\\product_image";
+		String path = "C:\\Users\\COM\\git\\Tget_mini_web\\src\\main\\webapp\\resources\\image\\product_image";
 		
 		File dir = new File(path);
 		File[] files = dir.listFiles();
@@ -60,7 +60,7 @@ public class ShoppingCartController {
 	@RequestMapping("/cart")
 	public String cart(HttpSession session, Model model) {
 		// 상품의 갯수 세기 (현재는 이미지 파일의 갯수만큼 / 현재 32개)
-		String path = "C:\\KosaCourse\\project-tget\\Tget_mini_web\\src\\main\\webapp\\resources\\image\\product_image";
+		String path = "C:\\Users\\COM\\git\\Tget_mini_web\\src\\main\\webapp\\resources\\image\\product_image";
 		
 		File dir = new File(path);
 		File[] files = dir.listFiles();
