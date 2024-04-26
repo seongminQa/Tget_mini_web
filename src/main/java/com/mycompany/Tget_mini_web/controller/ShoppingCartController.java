@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.mycompany.Tget_mini_web.dto.CartItem;
-import com.mycompany.Tget_mini_web.dto.Product;
+import com.mycompany.Tget_mini_web.dto.Product1;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,13 +29,15 @@ public class ShoppingCartController {
 	@RequestMapping("/productList")
 	public String productList(Model model) {
 		// 상품의 갯수 세기 (현재는 이미지 파일의 갯수만큼)
-		String path = "C:\\Users\\COM\\git\\Tget_mini_web\\src\\main\\webapp\\resources\\image\\product_image";
+
+		String path = "D:\\KosaCourse\\firstproject\\Tget_mini_web\\src\\main\\webapp\\resources\\image\\product_image";
+
 		
 		File dir = new File(path);
 		File[] files = dir.listFiles();
 
 		// 상품 데이터 생성
-		List<Product> productList = new ArrayList<>();
+		List<Product1> productList = new ArrayList<>();
 		
 		// 날짜
 		LocalDate now = LocalDate.now();
@@ -47,7 +49,7 @@ public class ShoppingCartController {
 			// 가격 랜덤함수를 사용하여 각자 다르게 만들어 봄
 			double randomValue = Math.random();
 			int price = (int) (randomValue*10000) + 10000;
-			productList.add(new Product(i, "연극", "/Tget_mini_web/resources/image/product_image/image"+i+".jpg",
+			productList.add(new Product1(i, "연극", "/Tget_mini_web/resources/image/product_image/image"+i+".jpg",
 					"연극 제목"+i, "연극 장르"+i, "연극 장소"+i, formatedNow.toString(), price));
 		}
 
@@ -60,13 +62,15 @@ public class ShoppingCartController {
 	@RequestMapping("/cart")
 	public String cart(HttpSession session, Model model) {
 		// 상품의 갯수 세기 (현재는 이미지 파일의 갯수만큼 / 현재 32개)
-		String path = "C:\\Users\\COM\\git\\Tget_mini_web\\src\\main\\webapp\\resources\\image\\product_image";
+
+		String path = "D:\\KosaCourse\\firstproject\\Tget_mini_web\\src\\main\\webapp\\resources\\image\\product_image";
+
 		
 		File dir = new File(path);
 		File[] files = dir.listFiles();
 
 		// 상품 데이터 생성
-		List<Product> productList = new ArrayList<>();
+		List<Product1> productList = new ArrayList<>();
 		
 		// 날짜
 		LocalDate now = LocalDate.now();
@@ -78,7 +82,7 @@ public class ShoppingCartController {
 			// 가격 랜덤함수를 사용하여 각자 다르게 만들어 봄
 			double randomValue = Math.random();
 			int price = (int) (randomValue*10000) + 10000;
-			productList.add(new Product(i, "연극", "/Tget_mini_web/resources/image/product_image/image"+i+".jpg",
+			productList.add(new Product1(i, "연극", "/Tget_mini_web/resources/image/product_image/image"+i+".jpg",
 					"연극 제목"+i, "연극 장르"+i, "연극 장소"+i, formatedNow.toString(), price));
 		}
 
@@ -120,7 +124,7 @@ public class ShoppingCartController {
 		
 		if(isAmountUpdated == false) {
 			// 상품 상세 정보 얻기
-			Product product = new Product(pno, pkind, pimg, ptitle, pgenre, pplace, 
+			Product1 product = new Product1(pno, pkind, pimg, ptitle, pgenre, pplace, 
 					pperiod, pprice);
 			// 장바구니 아이템 생성
 			CartItem cartItem = new CartItem();
