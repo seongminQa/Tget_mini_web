@@ -16,7 +16,13 @@
 		<!-- jQuery -->
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 		
+		<!-- sign_up.js -->
+		<script src="${pageContext.request.contextPath}/resources/js/sign_up.js"></script>
+		
 		<!-- 사용자 정의 자바스크립트 -->
+		<script>
+			
+		</script>
 	<style>
         
         input { /* input 태그가 가진 기본적인 설정들을 지움 */
@@ -79,13 +85,13 @@
             </div>
             <div class="div_form row">
                 <label for="pw" class="col-3 pt-3"><strong>비밀번호</strong></label>
-                <input class="col-8" type="password" id="pw" name="pw" placeholder="8~12자 영문, 숫자">
-                <div class="col-1"><button type="button" style="border:none; background-color: transparent;"><img src="/Tget_mini_web/resources/image/project_image/eye.svg" style="width: 30px;"></button></div>
+                <input class="pwClazz col-8" type="password" id="pw" name="pw" placeholder="8~12자 영문, 숫자">
+                <div class="pwEye col-1"><button type="button" style="border:none; background-color: transparent;"><img src="/Tget_mini_web/resources/image/project_image/eye.svg" style="width: 30px;"></button></div>
             </div>
             <div class="div_form row">
                 <label for="pwcheck" class="col-3 pt-3"><strong>비밀번호 확인</strong></label>
-                <input class="col-8" type="password" id="pwcheck" name="pwcheck" placeholder="8~12자 영문, 숫자">
-                <div class="col-1"><button type="button" style="border:none; background-color: transparent;"><img src="/Tget_mini_web/resources/image/project_image/eye.svg" style="width: 30px;"></button></div>
+                <input class="pwClazzCheck col-8" type="password" id="pwcheck" name="pwcheck" placeholder="8~12자 영문, 숫자">
+                <div class="pwEyeCheck col-1"><button type="button" style="border:none; background-color: transparent;"><img src="/Tget_mini_web/resources/image/project_image/eye.svg" style="width: 30px;"></button></div>
             </div>
             <div class="div_form row">
                 <label for="name" class="col-3 pt-3"><strong>이름</strong></label>
