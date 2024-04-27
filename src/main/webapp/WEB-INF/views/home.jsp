@@ -65,7 +65,7 @@
                </a>
              </li>
              <li class="nav-item">
-               <a class="nav-link" href="${pageContext.request.contextPath}/member/shoppingcart" style="color: black;">
+               <a class="nav-link" href="${pageContext.request.contextPath}/shopping/cart" style="color: black;">
                  <span style="font-size: small; display: block;">장바구니</span>
                </a>
              </li>
