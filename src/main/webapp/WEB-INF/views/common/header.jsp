@@ -30,7 +30,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${pageContext.request.contextPath}/member/shoppingcart" style="color: black;">
+            <a class="nav-link" href="${pageContext.request.contextPath}/shopping/cart" style="color: black;">
               <img src="/Tget_mini_web/resources/image/project_image/cart.svg" style="height: 20px; width: 15px;" />
               <span style="font-size: small; display: block;">장바구니</span>
             </a>
