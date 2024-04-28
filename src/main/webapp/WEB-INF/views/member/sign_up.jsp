@@ -21,7 +21,7 @@
 		
 		<!-- 사용자 정의 자바스크립트 -->
 		<script>
-			
+
 		</script>
 	<style>
         
@@ -78,14 +78,14 @@
             <h4><strong>회원가입</strong></h4>
         </div> -->
 
-        <form method="post" class="row d-flex flex-column align-items-center ms-5" style="margin-top: 50px; margin-bottom: 50px;">
+        <form id="joinForm" name="joinForm" method="get" onsubmit="handleCheckData()" action="${pageContext.request.contextPath}" novalidate class="row d-flex flex-column align-items-center ms-5" style="margin-top: 50px; margin-bottom: 50px;">
             <div class="div_form row">
-                <label for="id" class="col-3 pt-3"><strong>아이디</strong></label>
-                <input class="col-9" type="text" id="id" name="id" placeholder="6~20자 영문, 숫자">
+                <label for="mid" class="col-3 pt-3"><strong>아이디</strong></label>
+                <input class="col-9" type="text" id="mid" name="mid" placeholder="6~20자 영문, 숫자">
             </div>
             <div class="div_form row">
-                <label for="pw" class="col-3 pt-3"><strong>비밀번호</strong></label>
-                <input class="pwClazz col-8" type="password" id="pw" name="pw" placeholder="8~12자 영문, 숫자">
+                <label for="mpassword" class="col-3 pt-3"><strong>비밀번호</strong></label>
+                <input class="pwClazz col-8" type="password" id="mpassword" name="mpassword" placeholder="8~12자 영문, 숫자">
                 <div class="pwEye col-1"><button type="button" style="border:none; background-color: transparent;"><img src="/Tget_mini_web/resources/image/project_image/eye.svg" style="width: 30px;"></button></div>
             </div>
             <div class="div_form row">
@@ -94,33 +94,39 @@
                 <div class="pwEyeCheck col-1"><button type="button" style="border:none; background-color: transparent;"><img src="/Tget_mini_web/resources/image/project_image/eye.svg" style="width: 30px;"></button></div>
             </div>
             <div class="div_form row">
-                <label for="name" class="col-3 pt-3"><strong>이름</strong></label>
-                <input class="col-9" type="text" id="name" name="name" placeholder="ex. 홍길동">
+                <label for="mname" class="col-3 pt-3"><strong>이름</strong></label>
+                <input class="col-9" type="text" id="mname" name="mname" placeholder="ex. 홍길동">
             </div>
             <div class="div_form row">
-                <label for="email" class="col-3 pt-3"><strong>이메일</strong></label>
-                <input class="col-9" type="text" id="email" name="email" placeholder="ex. tget0101@naver.com">
+                <label for="mssn" class="col-3 pt-3"><strong>주민등록번호</strong></label>
+                <input class="col-9" type="text" id="mssn" name="mssn" placeholder="숫자만 입력하세요" style="color:grey">
             </div>
             <div class="div_form row">
-                <label for="nickname" class="col-3 pt-3"><strong>닉네임</strong></label>
-                <input class="col-9" type="text" id="nickname" name="nickname" placeholder="ex. 연뮤덕">
+                <label for="memail" class="col-3 pt-3"><strong>이메일</strong></label>
+                <input class="col-9" type="text" id="memail" name="memail" placeholder="ex. tget0101@naver.com">
             </div>
             <div class="div_form row">
-                <label for="birth" class="col-3 pt-3"><strong>생년월일</strong></label>
-                <input class="col-9" type="date" id="birth" name="birth" placeholder="연도-월-일" style="color:grey">
-            </div>
-            <div class="div_form row">
-                <label for="address" class="col-3 pt-3"><strong>주소</strong></label>
-                <input class="col-7" type="text" id="address" name="address" placeholder="ex. 서울특별시 종로구 대학로">
+                <label for="maddress" class="col-3 pt-3"><strong>주소</strong></label>
+                <input class="col-7" type="text" id="maddress" name="maddress" placeholder="ex. 서울특별시 종로구 대학로">
                 <div class="col-2"><a><button type="button" class="btn" style="background-color: #D95B96; color: white;">우편번호</button></a></div>
             </div>
             <div class="div_form row">
-                <label for="detail_address" class="col-3 pt-3"><strong>상세 주소</strong></label>
-                <input class="col-9" type="text" id="detail_address" name="detail_address" placeholder="ex. 두산아트센터 연강홀 B1">
+                <label for="mdetail_address" class="col-3 pt-3"><strong>상세 주소</strong></label>
+                <input class="col-9" type="text" id="mdetail_address" name="mdetail_address" placeholder="ex. 두산아트센터 연강홀 B1">
             </div>
             <div class="div_form row"style="margin-bottom:15px">
-                <label for="phone" class="col-3 pt-3"><strong>전화번호</strong></label>
-                <input class="col-9" type="text" id="phone" name="phone" placeholder="ex. 010-1111-2222">
+                <label for="mphone" class="col-3 pt-3"><strong>전화번호</strong></label>
+                <input class="col-9" type="text" id="mphone" name="mphone" placeholder="숫자만 입력하세요">
+            </div>
+            <div class="div_form row">
+                <label for="mnickname" class="col-3 pt-3"><strong>닉네임</strong></label>
+                <input class="col-9" type="text" id="mnickname" name="mnickname" placeholder="ex. 연뮤덕">
+            </div>
+            
+
+            <div class="div_form row"style="margin-bottom:15px">
+                <label for="mprofileImg" class="col-3 pt-3"><strong>프로필 이미지</strong></label>
+                <input class="col-9"  type="file" id="mprofileImg" name="mprofileImg">
             </div>
             <div class="div_form_checkbox row">
                 <input class="col-1" type="checkbox" style="width: 20px;">
@@ -138,23 +144,23 @@
             <div class=" div_form_checkbox">
                 <div class="row">
                     <div class="col">
-                        <input type="radio" name="genre" value="romance">
+                        <input type="radio" name="mpreferGenre" value="romance">
                         <span>로맨스</span>
                     </div>
 	                <div class="col">
-	                    <input type="radio" name="genre" value="thrill">
+	                    <input type="radio" name="mpreferGenre" value="thrill">
 	                    <span>스릴</span>
 	                </div>
 	                <div class="col">
-	                    <input type="radio" name="genre" value="healing">
+	                    <input type="radio" name="mpreferGenre" value="healing">
 	                    <span>힐링</span>
 	                </div>
 	                <div class="col">
-	                    <input type="radio" name="genre" value="comic">
+	                    <input type="radio" name="mpreferGenre" value="comic">
 	                    <span>코믹</span>
 	                </div>
 	                <div class="col">
-	                    <input type="radio" name="genre" value="Immersive">
+	                    <input type="radio" name="mpreferGenre" value="Immersive">
 	                    <span>이머시브</span>
 	                </div>
                 </div>
