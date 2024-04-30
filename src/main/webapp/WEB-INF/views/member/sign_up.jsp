@@ -2,28 +2,28 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>회원가입</titale>
-		
-		<!-- Bootstrap 5를 위한 외부 라이브러리 설정 -->
-		<!-- Latest compiled and minified CSS -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-		<!-- Latest compiled JavaScript -->
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-		
-		<!-- jQuery -->
-		<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-		
-		<!-- sign_up.js -->
-		<script src="${pageContext.request.contextPath}/resources/js/sign_up.js"></script>
-		
-		<!-- 사용자 정의 자바스크립트 -->
-		<script>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>회원가입</title>
+      
+      <!-- Bootstrap 5를 위한 외부 라이브러리 설정 -->
+      <!-- Latest compiled and minified CSS -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Latest compiled JavaScript -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+      
+      <!-- jQuery -->
+      <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+      
+      <!-- sign_up.js -->
+      <script src="${pageContext.request.contextPath}/resources/js/sign_up.js"></script>
+      
+      <!-- 사용자 정의 자바스크립트 -->
+      <script>
 
-		</script>
-	<style>
+      </script>
+   <style>
         
         input { /* input 태그가 가진 기본적인 설정들을 지움 */
             outline: none;
@@ -68,7 +68,7 @@
                 <h4><strong>회원가입</strong></h4>
             </div>
             <div class="col-4">
-				
+            
             </div>
 
         </div>
@@ -147,30 +147,30 @@
                         <input type="radio" name="mpreferGenre" value="romance">
                         <span>로맨스</span>
                     </div>
-	                <div class="col">
-	                    <input type="radio" name="mpreferGenre" value="thrill">
-	                    <span>스릴</span>
-	                </div>
-	                <div class="col">
-	                    <input type="radio" name="mpreferGenre" value="healing">
-	                    <span>힐링</span>
-	                </div>
-	                <div class="col">
-	                    <input type="radio" name="mpreferGenre" value="comic">
-	                    <span>코믹</span>
-	                </div>
-	                <div class="col">
-	                    <input type="radio" name="mpreferGenre" value="Immersive">
-	                    <span>이머시브</span>
-	                </div>
+                   <div class="col">
+                       <input type="radio" name="mpreferGenre" value="thrill">
+                       <span>스릴</span>
+                   </div>
+                   <div class="col">
+                       <input type="radio" name="mpreferGenre" value="healing">
+                       <span>힐링</span>
+                   </div>
+                   <div class="col">
+                       <input type="radio" name="mpreferGenre" value="comic">
+                       <span>코믹</span>
+                   </div>
+                   <div class="col">
+                       <input type="radio" name="mpreferGenre" value="Immersive">
+                       <span>이머시브</span>
+                   </div>
                 </div>
             </div>
             <button type="submit" class="submit_btn btn" style="background-color: #D95B96; color: white;">가입 완료</button>
         </form>
 
 <!-- footer 하단고정-->
-	
-	<%@include file="/WEB-INF/views/common/footer.jsp"%>
+   
+   <%@include file="/WEB-INF/views/common/footer.jsp"%>
 
 
 
