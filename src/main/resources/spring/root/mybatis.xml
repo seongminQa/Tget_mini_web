@@ -16,7 +16,7 @@
 	
 	<!-- MyBatis를 이용하는 DAO(Data Access Object)를 생성하고, 관리객체로 생성 -->
 	<mybatis-spring:scan 
-      base-package="com.mycompany.Tget_mini_web.dao.mybatis"
+      base-package="com.mycompany.Tget_mini_web.dao"
       annotation="org.apache.ibatis.annotations.Mapper"/>
 
 </beans>
