@@ -112,7 +112,7 @@
                     style="background-color: #d95b96; color: white"
                     onclick="pwModify()"
                   >
-                    수정
+                   	 수정
                   </button>
                 </div>
               </div>
@@ -375,7 +375,7 @@
       </div>
     </div>
 
-    <!-- modal(addressname) -->
+    <!-- modal(회원가입) -->
     <div class="modal" tabindex="-1" id="addressModifyModal">
       <div class="modal-dialog modal-l">
         <div class="modal-content">
