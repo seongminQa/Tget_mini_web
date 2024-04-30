@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.mycompany.Tget_mini_web.dto.CartItem;
-import com.mycompany.Tget_mini_web.dto.Product1;
+import com.mycompany.Tget_mini_web.dto.Pre_product;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,7 +38,7 @@ public class ShoppingCartController {
 		File[] files = dir.listFiles();
 
 		// 상품 데이터 생성
-		List<Product1> productList = new ArrayList<>();
+		List<Pre_product> productList = new ArrayList<>();
 		
 		// 날짜
 		LocalDate now = LocalDate.now();
@@ -50,7 +50,7 @@ public class ShoppingCartController {
 			// 가격 랜덤함수를 사용하여 각자 다르게 만들어 봄
 			double randomValue = Math.random();
 			int price = (int) (randomValue*10000) + 10000;
-			productList.add(new Product1(i, "연극", "/Tget_mini_web/resources/image/product_image/image"+i+".jpg",
+			productList.add(new Pre_product(i, "연극", "/Tget_mini_web/resources/image/product_image/image"+i+".jpg",
 					"연극 제목"+i, "연극 장르"+i, "연극 장소"+i, formatedNow.toString(), price));
 		}
 
@@ -71,7 +71,7 @@ public class ShoppingCartController {
 		File[] files = dir.listFiles();
 
 		// 상품 데이터 생성
-		List<Product1> productList = new ArrayList<>();
+		List<Pre_product> productList = new ArrayList<>();
 		
 		// 날짜
 		LocalDate now = LocalDate.now();
@@ -83,7 +83,7 @@ public class ShoppingCartController {
 			// 가격 랜덤함수를 사용하여 각자 다르게 만들어 봄
 			double randomValue = Math.random();
 			int price = (int) (randomValue*10000) + 10000;
-			productList.add(new Product1(i, "연극", "/Tget_mini_web/resources/image/product_image/image"+i+".jpg",
+			productList.add(new Pre_product(i, "연극", "/Tget_mini_web/resources/image/product_image/image"+i+".jpg",
 					"연극 제목"+i, "연극 장르"+i, "연극 장소"+i, formatedNow.toString(), price));
 		}
 
@@ -125,7 +125,7 @@ public class ShoppingCartController {
 		
 		if(isAmountUpdated == false) {
 			// 상품 상세 정보 얻기
-			Product1 product = new Product1(pno, pkind, pimg, ptitle, pgenre, pplace, 
+			Pre_product product = new Pre_product(pno, pkind, pimg, ptitle, pgenre, pplace, 
 					pperiod, pprice);
 			// 장바구니 아이템 생성
 			CartItem cartItem = new CartItem();

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product1 {
+public class Pre_product {
 	private int pno; // 연극 or 뮤지컬의 고유 번호
 	private String pkind; // 연극 or 뮤지컬 분류
 	private String pimg; // 연극의 포스터 이미지
