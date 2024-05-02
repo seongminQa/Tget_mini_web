@@ -1,7 +1,8 @@
 package com.mycompany.Tget_mini_web.controller;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +28,33 @@ public class MemberController {
 	@RequestMapping("/login")
 	public String login() {
 		log.info("member.login() 실행");
-		return "member/log_in";
+		return "member/loginForm";
 	}
+	
+	@Secured("ROLE_ADMIN")
+	@GetMapping("/admin/page")
+	public String adminpage() {
+		return "ch17/admin/page";
+	}
+	
+	@Secured("ROLE_MANAGER")
+	@GetMapping("/manager/page")
+	public String managerpage() {
+		return "ch17/manager/page";
+	}
+	
+	@Secured("ROLE_USER")
+	@GetMapping("/user/page")
+	public String userpage() {
+		return "ch17/user/page";
+	}
+	
+	@RequestMapping("/error403")
+	public String error403() {
+		return "ch17/error403";
+	}
+	
+	
 
 	// member 회원가입 페이지 매핑
 	@RequestMapping("/sign_up")
@@ -36,13 +62,6 @@ public class MemberController {
 		log.info("member.sign_up() 실행");
 		return "member/sign_up";
 	}
-
-	// member 장바구니 페이지 매핑
-	/*@RequestMapping("/shoppingcart")
-	public String shoppingCart() {
-		log.info("member.shopping_cart() 실행");
-		return "member/shopping_cart";
-	}*/
 
 	// member 회원정보수정 페이지 매핑
 	@RequestMapping("/memberInfoModify")

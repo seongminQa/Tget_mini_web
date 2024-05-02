@@ -28,6 +28,33 @@
 
 <!-- 내부 css 적용 (테스트용) -->
 <style>
+input { /* input 태그가 가진 기본적인 설정들을 지움 */
+	outline: none;
+	border: none;
+	color: gray;
+}
+
+.div_form {
+	width: 80%; /* 창 크기가 변경되어도 비율을 유지 */
+	height: 50px;
+	border-bottom: 3px solid black;
+	margin-top: 20px;
+	white-space: nowrap; /* 창 크기가 변경되어도 줄바꿈을 하지 않는다. */
+}
+
+.div_form_checkbox, .submit_btn {
+	width: 40%;
+	height: 60px;
+}
+
+.span_radio {
+	display: inline;
+	margin-top: 15px;
+}
+
+header, form {
+	min-width: 822px; /* 최소 창 가로폭 지정(더 줄어들면 아래에 스크롤바가 생김) */
+}
 </style>
 </head>
 <body>
@@ -47,25 +74,17 @@
 						<div class="card-body">
 
 							<div class="content" style="background-color: white; width: 100%">
-								<div class="row justify-content-center ">
-									<div class="pt-3 pb-3 row align-items-stretch"
-										style="width: 45%">
-										<div class="col-3 mt-1">
-											<div style="background-color: white; border-radius: 10px;"
-												class="pt-3 pb-3">
-												<h4 class="ms-3">
-													<strong>홍길동</strong>님의 <br />마이페이지
-												</h4>
-												<hr />
-												<%@ include file="/WEB-INF/views/common/myPageList.jsp"%>
-											</div>
-										</div>
-										<div class="col-9 ps-5 pe-5"
+								<div class="row justify-content-center">
+									<div class="pt-3 pb-3 row align-items-stretch">
+
+										<div class="col ps-5 pe-5"
 											style="background-color: white; border-radius: 10px;">
 											<h5 class="ps-2 pt-5">
 												<strong>회원 정보 수정</strong>
 											</h5>
 											<hr style="border-top: 4px solid black" />
+											
+											
 											<form method="post"
 												class="row d-flex flex-column align-items-center ps-3 pe-3 pb-3">
 												<div class="div_form row">
@@ -123,8 +142,7 @@
 													<div class="col-2">
 														<button type="button" class="btn"
 															style="background-color: #d95b96; color: white"
-															onclick="addressModify()">
-															수정</button>
+															onclick="addressModify()">수정</button>
 													</div>
 												</div>
 

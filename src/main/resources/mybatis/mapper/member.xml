@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.mycompany.Tget_mini_web.dao.mybatis.Member">
-	
+<mapper namespace="com.mycompany.Tget_mini_web.dao.MemberDao">
+	<select id="selectByMid" parameterType="String" resultType="MemberDto">
+		select mid, mname, mpassword, mssn, memail, maddress,
+			mphone, msince, mprefergenre, mgrade, mprofileimg, mtotalpay 
+		from member
+		where mid = #{mid}
+	</select>
 </mapper>

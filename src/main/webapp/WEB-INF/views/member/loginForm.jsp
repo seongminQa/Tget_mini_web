@@ -53,11 +53,12 @@
       <div style="text-align : center;">  
          <!--  이미지 크기를 맟주기 위해 높이와 너비를 줌 -->
        <a class="navbar-brand" href="/Tget_mini_web"> <img src ="/Tget_mini_web/resources/image/project_image/t_get_logo.svg" style="width:200px ; height: 145px;"></a>   
-        <form method="post" action="#" id="login-form">
+        
+        <form method="post" action="${pageContext.request.contextPath}/login" id="login-form">
         	<!-- placeholder 사용한이유는 아이디와 비밀호를 입력을하는 필드라는것을 알려주기 위해 사용 -->
-            <input type="text" name="userName" placeholder="id">
+            <input type="text" id="mid" name="mid" placeholder="id" >
                
-            <input type="password" name="userPassword" placeholder="Password">
+            <input type="password" id="mpassword" name="mpassword" placeholder="Password">
               <!-- 체크박스를 가운데로 정렬하기 위하여 -->
              <label for="remember-check" class="d-flex justify-content-center">
              

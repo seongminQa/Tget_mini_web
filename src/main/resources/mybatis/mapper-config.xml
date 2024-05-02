@@ -4,6 +4,11 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+	<settings>
+		<!-- name은 마이바티스에서 찾아보고 지정해주었다. -->
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
 	<!-- insert into 문 개선하기위해 -->
 	<typeAliases>
 		<typeAlias type="com.mycompany.Tget_mini_web.dto.Actor" alias="Actor"/>
@@ -11,7 +16,7 @@
 		<typeAlias type="com.mycompany.Tget_mini_web.dto.Board" alias="Board"/>
 		<typeAlias type="com.mycompany.Tget_mini_web.dto.Cart" alias="Cart"/>
 		<typeAlias type="com.mycompany.Tget_mini_web.dto.CartDetail" alias="CartDetail"/>
-		<typeAlias type="com.mycompany.Tget_mini_web.dto.Member" alias="Member"/>
+		<typeAlias type="com.mycompany.Tget_mini_web.dto.MemberDto" alias="MemberDto"/>
 		<typeAlias type="com.mycompany.Tget_mini_web.dto.OrderDetail" alias="OrderDetail"/>
 		<typeAlias type="com.mycompany.Tget_mini_web.dto.OrderInfo" alias="OrderInfo"/>
 		<typeAlias type="com.mycompany.Tget_mini_web.dto.Product" alias="Product"/>
