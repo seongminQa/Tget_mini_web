@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class TgetUserDetailsService implements UserDetailsService {
 	private MemberDao memberDao;
 	
 	@Override
-	public TgetUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		log.info("실행");
 		
 		MemberDto memberDto = memberDao.selectByMid(username);
@@ -33,7 +34,7 @@ public class TgetUserDetailsService implements UserDetailsService {
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(new SimpleGrantedAuthority(memberDto.getMname()));
 		
-		TgetUserDetails userDetails = new TgetUserDetails(memberDto, authorities);
+		UserDetails userDetails = new TgetUserDetails(memberDto, authorities);
 		return userDetails;
 	}
 }
