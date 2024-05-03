@@ -6,7 +6,7 @@ import java.sql.Blob;
 import lombok.Data;
 
 @Data
-public class Actor {
+public class ActorDto {
 	private String aprofile;
 	private String aname;
 	private String arolename;

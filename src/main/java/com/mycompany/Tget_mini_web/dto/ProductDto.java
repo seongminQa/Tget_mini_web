@@ -6,7 +6,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class Product {
+public class ProductDto {
 	private int pno;
 	private String pkind;
 	private String ptitle;
