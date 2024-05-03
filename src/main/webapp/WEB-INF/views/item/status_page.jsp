@@ -170,7 +170,7 @@
 					 	<button type="button" onclick="location='/Tget_mini_web/member/purchase'" class="btn btn-secondary btn-lg">
 					     	 예매내역 목록
 					     </button>
-					     <button type="button" onclick="location='/Tget_mini_web/member/purchase'" class="btn btn-warning btn-lg">
+					     <button type="button" onclick="location='/Tget_mini_web/payment/payment_cancel'" class="btn btn-warning btn-lg">
 					     	 취소
 					     </button>
 					</div>	
