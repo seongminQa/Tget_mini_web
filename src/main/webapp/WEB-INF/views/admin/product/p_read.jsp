@@ -39,11 +39,11 @@
 		<%@include file="/WEB-INF/views/common/header.jsp"%>
 		<div class="flex-grow-1 m-2">
 			<div class="d-flex row">
-				<div class="col-md-3">
+				<div class="col-lg-2">
 					<%@include file="/WEB-INF/views/common/menu.jsp"%>				
 				</div>
 				
-				<div class="col-md-9">
+				<div class="col-lg-10">
 					<!-- #################################### -->
 					<div class="card">
 						<div class="card-header">상품 관리</div>
