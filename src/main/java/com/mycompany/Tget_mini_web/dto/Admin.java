@@ -3,7 +3,10 @@ package com.mycompany.Tget_mini_web.dto;
 import lombok.Data;
 
 @Data
-public class LoginForm {
+public class Admin {
 	private String mid;
-	private String mpassword;
+	private int pno;
+	private String cid;
+	private int bno;
+	
 }
