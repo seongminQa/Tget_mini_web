@@ -326,7 +326,7 @@
    <div class="container d-flex " >
       <div id="left_content" style="flex:1;" >
          <div id="left_img" class="d-flex">
-            <img id ="left_img_inner" alt="" src="https://i.namu.wiki/i/Tg9pV1JoPH4RU2sPOjq1iftIf10NWTT-Qygqc5ZFwnjc9GqlcbHf3xZZrLh-ObRL433oQn_Oba8NEVwS4cQ_dTcUkgbNexN-KGHxusjVi9z392t21bz5vWlkcC-wWzFCEb4IxmJdOuXqI-EsoM_t_g.webp" style="width:400px; margin: auto">
+            <img id ="left_img_inner" alt="" src="/Tget_mini_web/resources/image/detail_photos/시카고.jpg" style="width:400px; margin: auto">
             <div style="text-align:center; margin-top:10px;" >
                <h5>뮤지컬 시카고</h5>
                    <p>디큐브 링크아트센터</p>
