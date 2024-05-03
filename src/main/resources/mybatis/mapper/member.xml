@@ -8,4 +8,12 @@
 		from member
 		where mid = #{mid}
 	</select>
+	
+	<select id="insert" parameterType="MemberDto">
+		insert into member (mid, mname, mpassword, mssn, memail, maddress,
+			mphone, msince, mprefergenre, mgrade, mtotalpay, mrole)
+		values(#{mid}, #{mname}, #{mpassword}, #{mssn}, #{memail}, #{maddress},
+			#{mphone}, #{msince}, #{mprefergenre}, #{mgrade}, #{mtotalpay}, #{mrole})
+	</select>
+	
 </mapper>
