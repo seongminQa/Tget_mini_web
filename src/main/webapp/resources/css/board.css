@@ -1,16 +1,52 @@
 @charset "UTF-8";
-
-#best_review_title {
+#best_board{
+	justify-content: space-around;
+}
+#best_board_title {
 	font-size: 30px;
 	margin-top: 100px;
 }
-
-#review_img {
-	width: 305px;
-	height: 250px;
+#board{
+	width: 400px;
+}
+#board_text{
+	width: 350px;
+	margin: auto
+	
+}
+#board_img {
+	width: 400px;
+	height: 300px;
 	object-fit: cover;
 }
+#board_title{
+  font-size: 24px;
+  color: var(--color-secondary);
+  font-weight: 700;
+  transition: 0.3s;
+  margin-bottom: 15px;
+}
+#board_profile{
+	
+  font-size: 16px;
+  color: var(--color-primary);
+ 
+	
+}
+#profile_img{
+	width: 40px;
+    height: 40px; 
+    border-radius: 70%;
+    overflow: hidden;
+    object-fit: cover;
+    margin-left: auto;
+}
+#user_id{
+  display: flex;
+  flex-direction: row;
+  align-items: center; // 
 
+}
 #content_box_right {
 	margin-left: 20px;
 	border-radius: 20px;
