@@ -39,11 +39,11 @@
 		<%@include file="/WEB-INF/views/common/header.jsp"%>
 		<div class="flex-grow-1 m-2">
 			<div class="d-flex row">
-				<div class="col-md-3">
+				<div class="col-lg-2">
 					<%@include file="/WEB-INF/views/common/menu.jsp"%>				
 				</div>
 				
-				<div class="col-md-9">
+				<div class="col-lg-10">
 					<!-- 유저 1 -->
 					<div class="card">
 						<div class="card-header">회원 관리</div>
@@ -98,9 +98,21 @@
 					</div>
 					<!-- 등록/수정/삭제 버튼 -->
 					<div class="d-flex justify-content-end m-3">
-						<button type="button" class="btn btn-outline-secondary me-2">등록</button>
-						<button type="button" class="btn btn-outline-secondary me-2">수정</button>
-						<button type="button" class="btn btn-outline-secondary me-2">삭제</button>
+						<button type="button" class="btn btn-outline-secondary me-2"
+							data-bs-toggle="modal" data-bs-target="#">
+							조회
+						</button>
+						<button type="button" class="btn btn-outline-secondary me-2"
+							data-bs-toggle="modal" data-bs-target="#signupModal">
+							등록
+						</button>
+						<button type="button" class="btn btn-outline-secondary me-2"
+							 data-bs-toggle="modal" data-bs-target="#modifyModal">
+							수정
+						</button>
+						<button type="button" class="btn btn-outline-secondary me-2">
+							삭제
+						</button>
 					</div>
 					<!-- 페이지네이션 -->
 					<nav aria-label="Page navigation example">
@@ -125,6 +137,139 @@
 			</div>
 		</div> 
 	</div>
+	
+	<!-- 등록 버튼 -->
+	<!-- 관리자, 매니저, 회원 선택지 Modal -->
+	<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="exampleModalLabel">어떤 회원을 등록하시겠습니까?</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <button type="button" class="btn btn-dark me-2"
+	        	data-bs-toggle="modal" data-bs-target="#adminSignupModal">
+	        	관리자
+	        </button>
+	        <button type="button" class="btn btn-info me-2"
+	        	data-bs-toggle="modal" data-bs-target="#managerSignupModal">
+	        	매니저
+	        </button>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+	        <button type="button" class="btn btn-primary">생성</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- Admin 등록 Modal -->
+	<div class="modal" id="adminSignupModal">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header d-flex justify-content-center">
+	        <h4 class="modal-title">관리자 등록</h4>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+	      </div>
+
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+			<form method="post" action="#">
+				<!-- 시큐리티의 위조 방지를 위한 토큰번호. -->
+			   <%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
+			   <div class="form-group mb-2">
+			       <label for="mid">아이디</label>
+			       <input type="text" class="form-control" id="mid" name="mid">
+			   </div>
+			   <div class="form-group mb-2">
+			       <label for="mname">이름</label>
+			       <input type="text" class="form-control" id="mname" name="mname">
+			   </div>
+			   <div class="form-group mb-2">
+			      <label for="mpassword">비밀번호</label>
+			      <input type="password" class="form-control" id="mpassword" name="mpassword">
+			   </div>
+			   <div class="form-group mb-2">
+			      <label for="memail">이메일</label>
+			      <input type="email" class="form-control" id="memail" name="memail">
+			   </div>
+			   
+	           <!-- <div class="form-group">
+	              <label for="mrole">Member Role</label>
+	              <select class="form-control" id="mrole" name="mrole">
+	                 <option value="ROLE_ADMIN">Admin</option>
+	                 <option value="ROLE_MANAGER">Manager</option>
+	                 <option value="ROLE_USER" selected>User</option>
+	              </select>
+	           </div> -->
+			   
+			   <button type="submit" class="btn btn-info btn-sm mt-2">등록</button>
+			</form>
+			<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->		
+	      </div>
+		  
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+	      </div>
+	
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- Manager 등록 Modal -->
+	<div class="modal" id="managerSignupModal">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header d-flex justify-content-center">
+	        <h4 class="modal-title">매니저 등록</h4>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+			<form method="post" action="#">
+				<!-- 시큐리티의 위조 방지를 위한 토큰번호. -->
+			   <%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
+			   <div class="form-group mb-2">
+			       <label for="mid">아이디</label>
+			       <input type="text" class="form-control" id="mid" name="mid">
+			   </div>
+			   <div class="form-group mb-2">
+			       <label for="mname">이름</label>
+			       <input type="text" class="form-control" id="mname" name="mname">
+			   </div>
+			   <div class="form-group mb-2">
+			      <label for="mpassword">비밀번호</label>
+			      <input type="password" class="form-control" id="mpassword" name="mpassword">
+			   </div>
+			   <div class="form-group mb-2">
+			      <label for="memail">이메일</label>
+			      <input type="email" class="form-control" id="memail" name="memail">
+			   </div>
+
+			   <button type="submit" class="btn btn-info btn-sm mt-2">등록</button>
+			</form>
+			<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->		
+	      </div>
+		  
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+	      </div>
+	
+	    </div>
+	  </div>
+	</div>
+	
 
 </body>
 </html>
