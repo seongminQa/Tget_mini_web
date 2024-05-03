@@ -16,8 +16,9 @@ public class MemberDto {
 	private String mphone;
 	private String mnickname;
 	private Date msince;
-	private String mpreferGenre;
+	private String mprefergenre;
 	private String mgrade;
 	private Blob mprofileImg;
-	private int mtotalPay;
+	private int mtotalpay;
+	private String mrole;
 }
