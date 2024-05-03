@@ -115,8 +115,10 @@ table tr td {
 						  <td>2024.03.11</td>
 					      <td>2</td>
 					      <td>2024.03.10 | 23:59</td>
-					      <td>취소 | 
-					      <button type="button" class="btn btn-outline-dark btn-sm">상세</button>
+					      <td><a style="text-decoration:none; color:black;" href="/Tget_mini_web/">취소 |</a>
+					      <button type="button" onclick="location='/Tget_mini_web/item/status_page'" class="btn btn-outline-dark btn-sm">
+					      	상세
+					      </button>
 					      </td>
 					    </tr>
 
@@ -129,8 +131,10 @@ table tr td {
 						  <td>2024.04.04</td>
 					      <td>4</td>
 					      <td>2024.04.5 | 04:44</td>
-					      <td>취소 | 
-					      <button type="button" class="btn btn-outline-dark btn-sm">상세</button>
+					      <td><a style="text-decoration:none; color:black;" href="/Tget_mini_web/">취소 </a>| 
+					      <button type="button" onclick="location='/Tget_mini_web/item/status_page'" class="btn btn-outline-dark btn-sm">
+					      	상세
+					      </button>
 					      </td>
 					    </tr>
 
@@ -144,8 +148,10 @@ table tr td {
 						  <td>2024.07.25</td>
 					      <td>8</td>
 					      <td>2024.07.26 | 15:15</td>
-					      <td>취소 | 
-					      <button type="button" class="btn btn-outline-dark btn-sm">상세</button>
+					      <td><a style="text-decoration:none; color:black;" href="/Tget_mini_web/">취소 |</a>
+					      <button type="button" onclick="location='/Tget_mini_web/item/status_page'" class="btn btn-outline-dark btn-sm">
+					     	 상세
+					      </button>
 					      </td>
 					    </tr>
 
