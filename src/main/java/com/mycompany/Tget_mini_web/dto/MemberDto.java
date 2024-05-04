@@ -21,4 +21,5 @@ public class MemberDto {
 	private Blob mprofileImg;
 	private int mtotalpay;
 	private String mrole;
+	private int mno;
 }
