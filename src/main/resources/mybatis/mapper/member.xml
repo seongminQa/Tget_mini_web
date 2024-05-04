@@ -2,18 +2,47 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.mycompany.Tget_mini_web.dao.MemberDao">
+
 	<select id="selectByMid" parameterType="String" resultType="MemberDto">
 		select mid, mname, mpassword, mssn, memail, maddress,
-			mphone, msince, mprefergenre, mgrade, mprofileimg, mtotalpay 
+			mphone, msince, mprefergenre, mgrade, mprofileimg, mtotalpay, mno
 		from member
 		where mid = #{mid}
 	</select>
 	
-	<select id="insert" parameterType="MemberDto">
+	<insert id="insert" parameterType="MemberDto">
+		<selectKey keyProperty="mno" order="BEFORE" resultType="int">
+			select mno_seq.nextval from dual
+		</selectKey>
+		
 		insert into member (mid, mname, mpassword, mssn, memail, maddress,
-			mphone, msince, mprefergenre, mgrade, mtotalpay, mrole)
+			mphone, msince, mprefergenre, mgrade, mtotalpay, mrole, mno)
 		values(#{mid}, #{mname}, #{mpassword}, #{mssn}, #{memail}, #{maddress},
-			#{mphone}, #{msince}, #{mprefergenre}, #{mgrade}, #{mtotalpay}, #{mrole})
+			#{mphone}, #{msince}, #{mprefergenre}, #{mgrade}, #{mtotalpay}, #{mrole}, ${mno})
+	</insert>
+	
+	
+	<select id="count" resultType="int">
+		select count(*) from member
 	</select>
 	
+	
+ 	<select id="selectByPage" parameterType="PagerDto" resultType="MemberDto">
+		<!-- C는 캐릭터를 의미. 문자 그대로의 데이터를 받아들이는 구문 -->
+		<![CDATA[
+			select rnum, mid, mname, memail, mphone, mrole, mgrade, mno
+			from (
+			    select rownum as rnum, mid, mname, memail, mphone, mrole, mgrade, mno
+			    from (
+			        select mid, mname, memail, mphone, mrole, mgrade, mno
+			        from member
+			        order by mno desc
+			    )
+			    where rownum <= #{endRowNo}
+			)
+			where rnum >= #{startRowNo}
+		]]>
+	</select>
+	
+
 </mapper>
