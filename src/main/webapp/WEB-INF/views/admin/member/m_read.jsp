@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,46 +54,53 @@
 							<table class="table table-hover text-center">
 								<thead>
 									<tr style="font-size: 18px;">
-										<th>회원 번호</th>
 										<th>아이디</th>
 										<th>이름</th>
 										<th>Email</th>
+										<th>전화번호</th>
 										<th>권한</th>
 										<th>등급</th>
 									</tr>
 								</thead>
 								<tbody>
+								
+									<c:forEach var="member" items="${memberList}">
+										<tr>
+											<td><a href="#">${member.mid}</a></td>
+											<td>${member.mname}</td>
+											<td>${member.memail}</td>
+											<td>${member.mphone}</td>
+											<td>${member.mrole}</td>
+											<td>${member.mgrade}</td>
+										</tr>
+									</c:forEach>
+								
 									<tr>
-										<td>-</td>
-										<td>znznfltm</td>
-										<td>김성민</td>
-										<td>znznfltm@gmail.com</td>
-										<td>manager</td>
-										<td>-</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>SSooMin</td>
-										<td>홍수민</td>
-										<td>sooM@gmail.com</td>
-										<td>user</td>
-										<td>vvip</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>Meonghwan</td>
-										<td>김명환</td>
-										<td>Meonghwan@gmail.com</td>
-										<td>user</td>
-										<td>vip</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>JeawonLick</td>
-										<td>릭재원</td>
-										<td>JeawonLick@gmail.com</td>
-										<td>user</td>
-										<td>Very Important Person</td>
+										<td colspan="6" class="text-center">
+										
+							               <div>
+							                  <a class="btn btn-outline-primary btn-sm" href="memberReader?pageNo=1">처음</a>
+							                  <c:if test="${pager.groupNo>1}">
+							                     <a class="btn btn-outline-info btn-sm" href="memberReader?pageNo=${pager.startPageNo-1}">이전</a>
+							                  </c:if>
+							                  
+							                  <!-- 번호가 들어가는 부분 -->
+							                  <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+							                     <c:if test="${pager.pageNo != i}">
+							                        <a class="btn btn-outline-success btn-sm" href="memberReader?pageNo=${i}">${i}</a>
+							                     </c:if>
+							                     <c:if test="${pager.pageNo == i}">
+							                        <a class="btn btn-danger btn-sm" href="memberReader?pageNo=${i}">${i}</a>
+							                     </c:if>
+							                  </c:forEach>
+							                  
+							                  <c:if test="${pager.groupNo<pager.totalGroupNo}">
+							                     <a class="btn btn-outline-info btn-sm" href="memberReader?pageNo=${pager.endPageNo+1}">다음</a>
+							                  </c:if>
+							                  <a class="btn btn-outline-primary btn-sm" href="memberReader?pageNo=${pager.totalPageNo}">맨끝</a>
+							               </div>
+
+										</td>
 									</tr>
 								</tbody>
 							</table>
@@ -115,7 +125,7 @@
 						</button>
 					</div>
 					<!-- 페이지네이션 -->
-					<nav aria-label="Page navigation example">
+					<!-- <nav aria-label="Page navigation example">
 					  <ul class="pagination d-flex justify-content-center">
 					    <li class="page-item">
 					      <a class="page-link" href="#" aria-label="Previous">
@@ -131,7 +141,7 @@
 					      </a>
 					    </li>
 					  </ul>
-					</nav>
+					</nav> -->
 				</div>
 				
 			</div>
