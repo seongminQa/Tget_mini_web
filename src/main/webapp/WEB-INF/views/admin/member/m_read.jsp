@@ -60,6 +60,7 @@
 										<th>전화번호</th>
 										<th>권한</th>
 										<th>등급</th>
+										<th>-</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -72,11 +73,17 @@
 											<td>${member.mphone}</td>
 											<td>${member.mrole}</td>
 											<td>${member.mgrade}</td>
+											<td>
+												<button type="button" class="btn btn-outline-secondary"
+							 						data-bs-toggle="modal" data-bs-target="#modifyModal">
+													수정
+												</button>
+											</td>
 										</tr>
 									</c:forEach>
 								
 									<tr>
-										<td colspan="6" class="text-center">
+										<td colspan="7" class="text-center">
 										
 							               <div>
 							                  <a class="btn btn-outline-primary btn-sm" href="memberReader?pageNo=1">처음</a>
@@ -109,41 +116,12 @@
 					<!-- 등록/수정/삭제 버튼 -->
 					<div class="d-flex justify-content-end m-3">
 						<button type="button" class="btn btn-outline-secondary me-2"
-							data-bs-toggle="modal" data-bs-target="#">
-							조회
-						</button>
-						<button type="button" class="btn btn-outline-secondary me-2"
 							data-bs-toggle="modal" data-bs-target="#signupModal">
-							등록
-						</button>
-						<button type="button" class="btn btn-outline-secondary me-2"
-							 data-bs-toggle="modal" data-bs-target="#modifyModal">
-							수정
-						</button>
-						<button type="button" class="btn btn-outline-secondary me-2">
-							삭제
+							매니저 등록
 						</button>
 					</div>
-					<!-- 페이지네이션 -->
-					<!-- <nav aria-label="Page navigation example">
-					  <ul class="pagination d-flex justify-content-center">
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-					    </li>
-					    <li class="page-item"><a class="page-link" href="#">1</a></li>
-					    <li class="page-item"><a class="page-link" href="#">2</a></li>
-					    <li class="page-item"><a class="page-link" href="#">3</a></li>
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
-					  </ul>
-					</nav> -->
+
 				</div>
-				
 			</div>
 		</div> 
 	</div>
@@ -268,6 +246,40 @@
 
 			   <button type="submit" class="btn btn-info btn-sm mt-2">등록</button>
 			</form>
+			<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->		
+	      </div>
+		  
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+	      </div>
+	
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- 회원 수정 및 삭제 Modal -->
+	<div class="modal fade" id="modifyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header d-flex justify-content-center">
+	        <h4 class="modal-title">정보 수정 및 삭제 페이지</h4>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+	        <button type="button" class="btn btn-dark me-2"
+	        	data-bs-toggle="modal" data-bs-target="#memberModifyModal">
+	        	회원 정보 수정
+	        </button>
+	        <button type="button" class="btn btn-info me-2"
+	        	data-bs-toggle="modal" data-bs-target="#memberRemoveModal">
+	        	회원 삭제
+	        </button>
 			<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->		
 	      </div>
 		  
