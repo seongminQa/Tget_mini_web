@@ -21,5 +21,6 @@
 		<typeAlias type="com.mycompany.Tget_mini_web.dto.OrderInfoDto" alias="OrderInfoDto"/>
 		<typeAlias type="com.mycompany.Tget_mini_web.dto.ProductDto" alias="ProductDto"/>
 		<typeAlias type="com.mycompany.Tget_mini_web.dto.ReviewDto" alias="ReviewDto"/>
+		<typeAlias type="com.mycompany.Tget_mini_web.dto.PagerDto" alias="PagerDto"/>
 	</typeAliases>
 </configuration>
