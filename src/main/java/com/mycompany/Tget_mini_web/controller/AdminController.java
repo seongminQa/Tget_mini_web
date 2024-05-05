@@ -97,7 +97,7 @@ public class AdminController {
 			//memberDto.setMprofileImg(null); // 프로필 이미지 생략
 			memberDto.setMtotalpay(i*10000);
 			memberDto.setMrole("유저");
-			memberDao.insert(memberDto);
+			memberDao.insertmember(memberDto);
 		}
 		return "redirect:/";
 	}
