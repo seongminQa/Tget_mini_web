@@ -7,5 +7,5 @@ import com.mycompany.Tget_mini_web.dto.MemberDto;
 @Mapper
 public interface MemberDao {
 	MemberDto selectByMid(String username);
-	MemberDto insert(MemberDto memberdto);
+	MemberDto insertmember(MemberDto memberdto);
 }
