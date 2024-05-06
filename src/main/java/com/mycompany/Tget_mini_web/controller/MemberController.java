@@ -60,8 +60,6 @@ public class MemberController {
 		return "ch17/error403";
 	}
 	
-	
-
 	// member 회원가입 페이지
 	@RequestMapping("/sign_up")
 	public String sign_up() {

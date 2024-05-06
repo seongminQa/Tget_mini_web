@@ -21,7 +21,6 @@
 			#{mphone}, #{msince}, #{mprefergenre}, #{mgrade}, #{mtotalpay}, #{mrole}, ${mno})
 	</insert>
 	
-	
 	<select id="count" resultType="int">
 		select count(*) from member
 	</select>

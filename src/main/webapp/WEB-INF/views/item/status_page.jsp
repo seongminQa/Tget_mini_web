@@ -170,7 +170,11 @@
 					 	<button type="button" onclick="location='/Tget_mini_web/member/purchase'" class="btn btn-secondary btn-lg">
 					     	 예매내역 목록
 					     </button>
+<<<<<<< HEAD
 					     <button type="button" onclick="location='/Tget_mini_web/payment/payment_cancel'" class="btn btn-warning btn-lg">
+=======
+					     <button type="button" onclick="location='/Tget_mini_web/member/purchase'" class="btn btn-danger btn-lg">
+>>>>>>> branch 'master' of https://github.com/seongminQa/Tget_mini_web
 					     	 취소
 					     </button>
 					</div>	
