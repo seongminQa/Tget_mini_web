@@ -127,6 +127,8 @@ public class AdminController {
 			memberDto.setMrole("유저");
 			memberDto.setMno(i);
 			memberDao.insert(memberDto);
+
+			memberDao.insertmember(memberDto);
 		}
 		return "redirect:/";
 	}*/

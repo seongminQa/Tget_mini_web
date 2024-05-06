@@ -17,7 +17,7 @@
       <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
       
       <!-- sign_up.js -->
-      <script src="${pageContext.request.contextPath}/resources/js/sign_up.js"></script>
+     <%--  <script src="${pageContext.request.contextPath}/resources/js/sign_up.js"></script> --%>
       
       <!-- 사용자 정의 자바스크립트 -->
       <script>
@@ -78,19 +78,19 @@
             <h4><strong>회원가입</strong></h4>
         </div> -->
 
-        <form id="joinForm" name="joinForm" method="get" onsubmit="handleCheckData()" action="${pageContext.request.contextPath}" novalidate class="row d-flex flex-column align-items-center ms-5" style="margin-top: 50px; margin-bottom: 50px;">
+        <form id="joinForm" name="joinForm" method="post" onsubmit="handleCheckData()" enctype="multipart/form-data" action="${pageContext.request.contextPath}/member/join" novalidate class="row d-flex flex-column align-items-center ms-5" style="margin-top: 50px; margin-bottom: 50px;">
             <div class="div_form row">
                 <label for="mid" class="col-3 pt-3"><strong>아이디</strong></label>
                 <input class="col-9" type="text" id="mid" name="mid" placeholder="6~20자 영문, 숫자">
             </div>
             <div class="div_form row">
                 <label for="mpassword" class="col-3 pt-3"><strong>비밀번호</strong></label>
-                <input class="pwClazz col-8" type="password" id="mpassword" name="mpassword" placeholder="8~12자 영문, 숫자">
+                <input class="pwClazz col-8" type="password" id="mpassword" name="mpassword" placeholder="8~12자 영문 대소문자 숫자 포함">
                 <div class="pwEye col-1"><button type="button" style="border:none; background-color: transparent;"><img src="/Tget_mini_web/resources/image/project_image/eye.svg" style="width: 30px;"></button></div>
             </div>
             <div class="div_form row">
                 <label for="pwcheck" class="col-3 pt-3"><strong>비밀번호 확인</strong></label>
-                <input class="pwClazzCheck col-8" type="password" id="pwcheck" name="pwcheck" placeholder="8~12자 영문, 숫자">
+                <input class="pwClazzCheck col-8" type="password" id="pwcheck" name="pwcheck" placeholder="8~12자 영문 대소문자 숫자 포함">
                 <div class="pwEyeCheck col-1"><button type="button" style="border:none; background-color: transparent;"><img src="/Tget_mini_web/resources/image/project_image/eye.svg" style="width: 30px;"></button></div>
             </div>
             <div class="div_form row">
@@ -99,7 +99,7 @@
             </div>
             <div class="div_form row">
                 <label for="mssn" class="col-3 pt-3"><strong>주민등록번호</strong></label>
-                <input class="col-9" type="text" id="mssn" name="mssn" placeholder="숫자만 입력하세요" style="color:grey">
+                <input class="col-9" type="text" id="mssn" name="mssn" placeholder="하이픈을 포함해주세요" style="color:grey">
             </div>
             <div class="div_form row">
                 <label for="memail" class="col-3 pt-3"><strong>이메일</strong></label>
@@ -110,13 +110,13 @@
                 <input class="col-7" type="text" id="maddress" name="maddress" placeholder="ex. 서울특별시 종로구 대학로">
                 <div class="col-2"><a><button type="button" class="btn" style="background-color: #D95B96; color: white;">우편번호</button></a></div>
             </div>
-            <div class="div_form row">
+<!--             <div class="div_form row">
                 <label for="mdetail_address" class="col-3 pt-3"><strong>상세 주소</strong></label>
                 <input class="col-9" type="text" id="mdetail_address" name="mdetail_address" placeholder="ex. 두산아트센터 연강홀 B1">
-            </div>
+            </div> -->
             <div class="div_form row"style="margin-bottom:15px">
                 <label for="mphone" class="col-3 pt-3"><strong>전화번호</strong></label>
-                <input class="col-9" type="text" id="mphone" name="mphone" placeholder="숫자만 입력하세요">
+                <input class="col-9" type="text" id="mphone" name="mphone" placeholder="하이픈을 포함해주세요">
             </div>
             <div class="div_form row">
                 <label for="mnickname" class="col-3 pt-3"><strong>닉네임</strong></label>
@@ -144,23 +144,23 @@
             <div class=" div_form_checkbox">
                 <div class="row">
                     <div class="col">
-                        <input type="radio" name="mpreferGenre" value="romance">
+                        <input type="radio" name="mprefergenre" value="romance">
                         <span>로맨스</span>
                     </div>
                    <div class="col">
-                       <input type="radio" name="mpreferGenre" value="thrill">
+                       <input type="radio" name="mprefergenre" value="thrill">
                        <span>스릴</span>
                    </div>
                    <div class="col">
-                       <input type="radio" name="mpreferGenre" value="healing">
+                       <input type="radio" name="mprefergenre" value="healing">
                        <span>힐링</span>
                    </div>
                    <div class="col">
-                       <input type="radio" name="mpreferGenre" value="comic">
+                       <input type="radio" name="mprefergenre" value="comic">
                        <span>코믹</span>
                    </div>
                    <div class="col">
-                       <input type="radio" name="mpreferGenre" value="Immersive">
+                       <input type="radio" name="mprefergenre" value="Immersive">
                        <span>이머시브</span>
                    </div>
                 </div>

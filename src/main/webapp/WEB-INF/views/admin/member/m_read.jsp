@@ -67,7 +67,7 @@
 								
 									<c:forEach var="member" items="${memberList}">
 										<tr>
-											<td><a href="#">${member.mid}</a></td>
+											<td>${member.mid}</td>
 											<td>${member.mname}</td>
 											<td>${member.memail}</td>
 											<td>${member.mphone}</td>

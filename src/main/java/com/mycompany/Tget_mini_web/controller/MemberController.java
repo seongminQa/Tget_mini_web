@@ -1,9 +1,15 @@
 package com.mycompany.Tget_mini_web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.mycompany.Tget_mini_web.dto.MemberDto;
+import com.mycompany.Tget_mini_web.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -56,12 +62,26 @@ public class MemberController {
 	
 	
 
-	// member 회원가입 페이지 매핑
+	// member 회원가입 페이지
 	@RequestMapping("/sign_up")
 	public String sign_up() {
 		log.info("member.sign_up() 실행");
 		return "member/sign_up";
 	}
+	
+	@Autowired
+	private MemberService mservice;
+	
+	// member 회원가입 form DB저장 후 로그인 페이지로 redirect
+	@PostMapping("/join")
+	public String joinForm(@ModelAttribute MemberDto member) {
+		log.info("회원가입 form controller 도착");
+		//mservice.join(member);
+		log.info(member.toString());
+		return "redirect:/";
+	}
+	
+	 
 
 	// member 회원정보수정 페이지 매핑
 	@RequestMapping("/memberInfoModify")
