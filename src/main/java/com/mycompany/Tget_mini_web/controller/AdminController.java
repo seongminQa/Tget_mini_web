@@ -109,7 +109,7 @@ public class AdminController {
 		String nowStr = formatter.format(now);
 		Date nowDate = formatter.parse(nowStr);
 
-		for(int i=25; i<45; i++) {
+		for(int i=45; i<65; i++) {
 			MemberDto memberDto = new MemberDto();
 			memberDto.setMid("user" + Integer.toString(i));
 			memberDto.setMpassword("{noop}" + Integer.toString(12345));
@@ -126,7 +126,6 @@ public class AdminController {
 			memberDto.setMtotalpay(i*10000);
 			memberDto.setMrole("유저");
 			memberDto.setMno(i);
-			memberDao.insert(memberDto);
 
 			memberDao.insertmember(memberDto);
 		}
