@@ -3,6 +3,7 @@
 
 <mapper namespace="com.mycompany.Tget_mini_web.dao.MemberDao">
 
+	<!-- 회원정보 얻기 -->
 	<select id="selectByMid" parameterType="String" resultType="MemberDto">
 		select mid, mname, mpassword, mssn, memail, maddress,
 			mphone, msince, mprefergenre, mgrade, mprofileimg, mtotalpay, mno
@@ -10,7 +11,8 @@
 		where mid = #{mid}
 	</select>
 	
-	<insert id="insertmember" parameterType="MemberDto">
+	<!-- 회원 더미 집어넣기 테스트 -->
+	<insert id="insertMember" parameterType="MemberDto">
 		<selectKey keyProperty="mno" order="BEFORE" resultType="int">
 			select mno_seq.nextval from dual
 		</selectKey>
@@ -21,10 +23,12 @@
 			#{mphone}, #{msince}, #{mprefergenre}, #{mgrade}, #{mtotalpay}, #{mrole}, ${mno})
 	</insert>
 	
+	<!-- 회원의 수 얻기 -->
 	<select id="count" resultType="int">
 		select count(*) from member
 	</select>
 
+	<!-- 회원 수에 따라 페이징 처리하기 -->
  	<select id="selectByPage" parameterType="PagerDto" resultType="MemberDto">
 		<!-- C는 캐릭터를 의미. 문자 그대로의 데이터를 받아들이는 구문 -->
 		<![CDATA[
@@ -41,6 +45,23 @@
 			where rnum >= #{startRowNo}
 		]]>
 	</select>
+	
+	<!-- 회원 정보 수정하기 -->
+	<!-- 비밀번호는 어떻게 할 것인지??** -->
+	<update id="updateMember" parameterType="MemberDto">
+		update member set
+			mpassword = #{mpassword},
+			memail = #{memail},
+			mphone = #{mphone}
+		where mid = #{mid}
+	</update>
+	
+	<!-- 회원 삭제 -->
+	<delete id="deleteByMid" parameterType="String">
+		delete
+			from member
+			where mid = #{mid}
+	</delete>
 	
 
 </mapper>
