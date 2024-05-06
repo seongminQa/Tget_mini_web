@@ -72,7 +72,20 @@ public class MemberController {
 	
 	// member 회원가입 form DB저장 후 로그인 페이지로 redirect
 	@PostMapping("/join")
-	public String joinForm(@ModelAttribute MemberDto member) {
+	public String joinForm(MemberDto member) {
+		
+		// 첨부 파일이 있는지 여부 조사
+		if(member.getMprofileImg() != null && !member.getMprofileImg().isEmpty()) {// battach가 null이 아니거나 비어있지 않다면
+			//DTO 추가 설정(첨부 파일이 넘어 왔을 경우)
+			try {
+				member.setMprofileImgData(member.getMprofileImg().getBytes()); // 예외 처리 하라고 나옴
+			}catch(Exception e){
+				// 비즈니스 로직 때문에 생기는 예외는 아니라서 간단하게 처리 한다.
+			}
+			log.info("첨부파일 있음");
+		} else {
+			log.info("첨부파일 없음");
+		}
 		log.info("회원가입 form controller 도착");
 		//mservice.join(member);
 		log.info(member.toString());

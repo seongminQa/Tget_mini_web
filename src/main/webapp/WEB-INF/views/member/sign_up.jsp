@@ -17,7 +17,7 @@
       <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
       
       <!-- sign_up.js -->
-     <%--  <script src="${pageContext.request.contextPath}/resources/js/sign_up.js"></script> --%>
+      <script src="${pageContext.request.contextPath}/resources/js/sign_up.js"></script>
       
       <!-- 사용자 정의 자바스크립트 -->
       <script>
