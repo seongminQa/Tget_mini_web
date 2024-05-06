@@ -10,9 +10,9 @@ import com.mycompany.Tget_mini_web.dto.PagerDto;
 @Mapper
 public interface MemberDao {
 	MemberDto selectByMid(String username);
-//	public int insert(MemberDto memberDto);
-//	MemberDto insertmember(MemberDto memberdto);
-	public int insertmember(MemberDto memberdto);
+	public int insertMember(MemberDto memberdto);
 	List<MemberDto> selectByPage(PagerDto pager);
 	int count();
+	public int updateMember(MemberDto memberDto);
+	public int deleteByMid(String mid);
 }
