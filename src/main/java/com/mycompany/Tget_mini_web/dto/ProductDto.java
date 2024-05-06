@@ -6,7 +6,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class Product {
+public class ProductDto {
 	private int pno;
 	private String pkind;
 	private String ptitle;
@@ -15,8 +15,8 @@ public class Product {
 	private Blob pcontent;
 	private Blob pposter;
 	private Blob pactors;
-	private Date pdateStart;
-	private Date pdateEnd;
+	private Date pdatestart;
+	private Date pdateend;
 	private String pseatgrade;
 	private int pseatcnt;
 	private String paddress;

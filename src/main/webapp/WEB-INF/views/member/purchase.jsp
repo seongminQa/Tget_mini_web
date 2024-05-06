@@ -59,30 +59,33 @@ table tr td {
 					</div>
 				</div>
 					<!-- bg -->
-				<div class="col-9" style="background-color: white; ">
+				<div class="col-9" style="background-color: white;">
 					 <h4 class="ps-2 pt-5"></h4> 
 					 
 					 <div class="content-box">
 					 <div class="d-flex justify-content-center">
-					 <div class="me-2">
+					<!--  <div class="me-2">
 					 조회기간
 					 <button type="button" class="round gray">1개월</button>
 					 <button type="button" class="round gray">3개월</button>
 					 <button type="button" class="round gray">6개월</button>
-					 </div>
+					 </div> -->
 					 
 					 <p>
+					 <div style="height:30px;"><!-- class="me-2"  -->
 					 <label for="startdate">시작일 입력 </label>
 					 <input type="date" id="startdate" name="startdate" value="2024-03-22">
 					
 					 
 					 <label for="enddate">~끝나는일 입력 </label>
 					 <input type="date" id="enddate" name="enddate" value="2024-04-25">
-					 
+						  <button type="button" class="btn btn-secondary btn-sm">
+						  <span>조회하기</span>
+						  </button>
+					 </div> 
 					  
-					  <button type="button" class="btn btn-secondary btn-sm">
-					  <span>조회하기</span>
-					  </button>
+					<!--   <div style="width: 20%; height:80px;">
+					  </div> -->
 					 
 					 </p>
 					 </div>
@@ -115,8 +118,10 @@ table tr td {
 						  <td>2024.03.11</td>
 					      <td>2</td>
 					      <td>2024.03.10 | 23:59</td>
-					      <td>취소 | 
-					      <button type="button" class="btn btn-outline-dark btn-sm">상세</button>
+					      <td><span>예매|</span>
+					      <button type="button" onclick="location='/Tget_mini_web/item/status_page'" class="btn btn-outline-dark btn-sm">
+					      	상세
+					      </button>
 					      </td>
 					    </tr>
 
@@ -129,8 +134,10 @@ table tr td {
 						  <td>2024.04.04</td>
 					      <td>4</td>
 					      <td>2024.04.5 | 04:44</td>
-					      <td>취소 | 
-					      <button type="button" class="btn btn-outline-dark btn-sm">상세</button>
+					      <td><span>취소|</span> 
+					      <button type="button" onclick="location='/Tget_mini_web/item/status_page'" class="btn btn-outline-dark btn-sm">
+					      	상세
+					      </button>
 					      </td>
 					    </tr>
 
@@ -144,8 +151,10 @@ table tr td {
 						  <td>2024.07.25</td>
 					      <td>8</td>
 					      <td>2024.07.26 | 15:15</td>
-					      <td>취소 | 
-					      <button type="button" class="btn btn-outline-dark btn-sm">상세</button>
+					      <td><span>취소|</span>
+					      <button type="button" onclick="location='/Tget_mini_web/item/status_page'" class="btn btn-outline-dark btn-sm">
+					     	 상세
+					      </button>
 					      </td>
 					    </tr>
 
@@ -155,7 +164,7 @@ table tr td {
 					</div>  
 					</div> 
 					<!-- 중앙 예매 한 내역 -->					
-					
+					<!-- <a style="text-decoration:none; color:black;" href="/Tget_mini_web/">취소 |</a> --><
 				<!-- bg -->
 				</div>
 

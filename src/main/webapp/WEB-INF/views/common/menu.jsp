@@ -11,7 +11,7 @@
     <div id="collapseOne" class="accordion-collapse collapse ${admin=='member'?'show':''}" data-bs-parent="#accordionExample">
       <div class="accordion-body">
       	<ul>
-      		<li><a href="${pageContext.request.contextPath}/admin/member">회원 조회</a></li>
+      		<li><a href="${pageContext.request.contextPath}/admin/memberReader">회원 조회</a></li>
       	</ul>  
       </div>
     </div>
@@ -25,7 +25,7 @@
     <div id="collapseTwo" class="accordion-collapse collapse ${admin=='product'?'show':''}" data-bs-parent="#accordionExample">
       <div class="accordion-body">
         <ul>
-      		<li><a href="${pageContext.request.contextPath}/admin/product">상품 조회</a></li>
+      		<li><a href="${pageContext.request.contextPath}/admin/productReader">상품 조회</a></li>
       	</ul> 
       </div>
     </div>
@@ -39,7 +39,7 @@
     <div id="collapseThree" class="accordion-collapse collapse ${admin=='board'?'show':''}" data-bs-parent="#accordionExample">
       <div class="accordion-body">
         <ul>
-      		<li><a href="${pageContext.request.contextPath}/admin/board">게시글 조회</a></li>
+      		<li><a href="${pageContext.request.contextPath}/admin/boardReader">게시글 조회</a></li>
       	</ul> 
       </div>
     </div>

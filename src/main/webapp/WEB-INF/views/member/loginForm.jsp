@@ -25,22 +25,38 @@
 		
 		<link rel="stylesheet" href="/Tget_mini_web/resources/css/login.css">
 		
-		<!-- 사용자 정의 자바스크립트 -->
+	<!-- 사용자 정의 자바스크립트 -->
 		<script>
-/* 		function loginCheck(){
-			if (document.loginform.userid.value == ""){
-				alert("아이디를 입력해 주세요.");
-				document.loginform.userid.focus();
-				return false;
-			} else if (document.loginform.pwd.value == ""){
-				alert("비밀번호를 입력해주세요.");
-				document.loginform.pwd.focus();
-				return false;
-			} else {
-				return true;
-			}
-		}
-		 */
+	/* 	function handleCheckData() {
+            
+            event.preventDefault();
+            
+            //각 입력 양식의 데이터 검사
+            var totalResult = true;
+            //하나의 숫자와 하나의 소문자 알파벳을 포함하고, 총 7에서 11개의 문자로 이루어진 문자열을 나타냅니다.
+            var uidPattern =    /^(?=.*\d)(?=.*[a-z]).{7,11}$/; 
+            var uidResult = uidPattern.test( $("#uid").val());
+            if(!uidResult) {
+               totalResult = false;
+               alert('아이디를 다시 한 번 확인해주세요!')
+            }
+            
+               
+            //Password검사하기
+            //하나의 숫자, 소문자 알파벳, 대문자 알파벳, 특수문자를 포함하고, 총 10에서 15개의 문자로 이루어진 문자열을 나타야됨.
+            var passwordPattern =  /^(?=.*\d)(?=.*[a-z])(?=.*[!@#$%^&*?_])(?=.*[A-Z]).{10,15}$/; 
+            var passwordResult = passwordPattern.test($("#upassword").val());
+            if(!passwordResult) {
+               totalResult = false;
+               alert('비밀번호를 다시 한 번 확인해주세요!')
+            }
+            
+            //전체 유효성 검사결과가 true일 경우
+            if(totalResult) {
+               $("#login-form")[0].submit();
+               
+            }                                
+         } */
 		</script>
 	</head>
 	<body>

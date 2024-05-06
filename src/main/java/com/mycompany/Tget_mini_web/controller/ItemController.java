@@ -13,5 +13,12 @@ public class ItemController {
 		log.info("detail()실행");
 		return "item/detail";
 	}
+	//마이페이지 구매내역 상세페이지
+	@RequestMapping("/status_page")
+	public String status_page() {
+		log.info("item.status_page()실행");
+		return "item/status_page";
+	}
 
+	
 }

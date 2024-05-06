@@ -1,7 +1,8 @@
 package com.mycompany.Tget_mini_web.dto;
 
-import java.sql.Blob;
 import java.util.Date;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
@@ -16,8 +17,12 @@ public class MemberDto {
 	private String mphone;
 	private String mnickname;
 	private Date msince;
-	private String mpreferGenre;
+	private String mprefergenre;
 	private String mgrade;
-	private Blob mprofileImg;
-	private int mtotalPay;
+	private MultipartFile mprofileImg;
+	private int mtotalpay;
+	private String mrole;
+	private int mno;
+	private byte[] mprofileImgData;
+	
 }
