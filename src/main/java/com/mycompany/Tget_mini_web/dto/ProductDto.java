@@ -15,8 +15,8 @@ public class ProductDto {
 	private Blob pcontent;
 	private Blob pposter;
 	private Blob pactors;
-	private Date pdateStart;
-	private Date pdateEnd;
+	private Date pdatestart;
+	private Date pdateend;
 	private String pseatgrade;
 	private int pseatcnt;
 	private String paddress;
