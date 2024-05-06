@@ -75,9 +75,77 @@
 											<td>${member.mgrade}</td>
 											<td>
 												<button type="button" class="btn btn-outline-secondary"
-							 						data-bs-toggle="modal" data-bs-target="#modifyModal">
+							 						data-bs-toggle="modal" data-bs-target="#memberModify${member.mid}">
 													수정
 												</button>
+												
+												<!-- 회원 수정 및 삭제 Modal -->
+												<div class="modal fade" id="memberModify${member.mid}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												  <div class="modal-dialog modal-lg">
+												    <div class="modal-content">
+												
+												      <!-- Modal Header -->
+												      <div class="modal-header text-center">
+												        <h4 class="modal-title">정보 수정 및 삭제 페이지</h4>
+												        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+												      </div>
+												
+												      <!-- Modal body -->
+												      <div class="modal-body">
+												      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+														<form method="post" action="memberModify">
+															<!-- 시큐리티의 위조 방지를 위한 토큰번호. -->
+														   <%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
+														   <div class="container">
+														   
+															   <div class="form-group d-flex align-items-center mb-2">
+															       <label for="mid" style="width:30%">회원 아이디 : </label>
+															       <input type="text" class="form-control" id="mid" name="mid" style="width:50%"
+															       		value="${member.mid}" readOnly>
+															   </div>
+															   <div class="form-group d-flex align-items-center mb-2">
+															       <label for="mname" style="width:30%">회원 이름</label>
+															       <input type="text" class="form-control" id="mname" name="mname" style="width:50%"
+															       		value="${member.mname}" readOnly>
+															   </div>
+															   <div class="form-group d-flex align-items-center mb-2">
+															      <label for="mpassword" style="width:30%">회원 비밀번호</label>
+															      <!-- 비밀번호 부분 어떻게 할지?** -->
+															      <input type="password" class="form-control" id="mpassword" name="mpassword" style="width:50%">
+															   </div>
+															   <div class="form-group d-flex align-items-center mb-2">
+															      <label for="memail" style="width:30%">e-mail</label>
+															      <input type="email" class="form-control" id="memail" name="memail" style="width:50%"
+															      		value="${member.memail}">
+															   </div>
+															   
+															   <div class="form-group d-flex align-items-center mb-2">
+															      <label for="mphone" style="width:30%">전화번호</label>
+															      <input type="text" class="form-control" id="mphone" name="mphone" style="width:50%"
+															      		value="${member.mphone}">
+															   </div>
+															   
+													           <div class="form-group d-flex align-items-center mb-2">
+													              <label for="mgrade" style="width:30%">회원 등급</label>
+													              <select class="form-control" id="mgrade" name="mgrade" style="width:50%">
+													                 <option value="GRADE_1" selected>일반</option>
+													                 <option value="GRADE_2">골드</option>
+													                 <option value="GRADE_3">플래티넘</option>
+													              </select>
+													           </div>
+															</div>
+															<button type="submit" class="btn btn-outline-secondary mt-2">수정</button>
+															<!-- <button type="submit" class="btn btn-outline-danger mt-2" data-bs-dismiss="modal">삭제</button> -->
+														    <%-- <a href="memberModify?mid=${member.mid}" class="btn btn-outline-secondary mt-2">수정</a> --%>
+														    <a href="memberDelete?mid=${member.mid}" class="btn btn-outline-danger mt-2">삭제</a>
+														</form>
+														<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->		
+												      </div>
+												
+												    </div>
+												  </div>
+												</div>
+
 											</td>
 										</tr>
 									</c:forEach>
@@ -114,13 +182,14 @@
 						</div>
 					</div>
 					<!-- 등록/수정/삭제 버튼 -->
-					<div class="d-flex justify-content-end m-3">
+					<!-- 대기** -->
+					<!-- <div class="d-flex justify-content-end m-3">
 						<button type="button" class="btn btn-outline-secondary me-2"
 							data-bs-toggle="modal" data-bs-target="#signupModal">
 							매니저 등록
 						</button>
 					</div>
-
+ -->
 				</div>
 			</div>
 		</div> 
@@ -246,40 +315,6 @@
 
 			   <button type="submit" class="btn btn-info btn-sm mt-2">등록</button>
 			</form>
-			<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->		
-	      </div>
-		  
-	      <!-- Modal footer -->
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-	      </div>
-	
-	    </div>
-	  </div>
-	</div>
-	
-	<!-- 회원 수정 및 삭제 Modal -->
-	<div class="modal fade" id="modifyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-lg">
-	    <div class="modal-content">
-	
-	      <!-- Modal Header -->
-	      <div class="modal-header d-flex justify-content-center">
-	        <h4 class="modal-title">정보 수정 및 삭제 페이지</h4>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-	      </div>
-	
-	      <!-- Modal body -->
-	      <div class="modal-body">
-	      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-	        <button type="button" class="btn btn-dark me-2"
-	        	data-bs-toggle="modal" data-bs-target="#memberModifyModal">
-	        	회원 정보 수정
-	        </button>
-	        <button type="button" class="btn btn-info me-2"
-	        	data-bs-toggle="modal" data-bs-target="#memberRemoveModal">
-	        	회원 삭제
-	        </button>
 			<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->		
 	      </div>
 		  
