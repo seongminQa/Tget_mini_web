@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,34 +61,42 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>내일은 내일에게</td>
-										<td>혜화</td>
-										<td>2024.04.23 ~ 2024.06.19</td>
-										<td>16000원</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>옥탑방 고양이</td>
-										<td>디큐브 링크아트센터</td>
-										<td>2024.04.23 ~ 2024.06.19</td>
-										<td>18000원</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>쉬어매드니스</td>
-										<td>아트팩토리</td>
-										<td>2024.04.23 ~ 2024.06.19</td>
-										<td>16000원</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>오마이갓</td>
-										<td>르 스페이스</td>
-										<td>2024.04.23 ~ 2024.06.19</td>
-										<td>19000원</td>
-									</tr>
+									<c:forEach var="product" items="${productList}">
+										<tr>
+											<td>${product.pno}</td>
+											<td>${product.ptitle}</td>
+											<td>${product.paddress}</td>
+											<td>${product.pdatestart} ~ 2024.06.19</td>
+											<td>${product.pprice}</td>
+										</tr>
+									</c:forEach>
+									
+							         <tr>
+							            <td colspan="5" class="text-center">
+							               <div>
+							                  <a class="btn btn-outline-primary btn-sm" href="boardList?pageNo=1">처음</a>
+							                  <c:if test="${pager.groupNo>1}">
+							                     <a class="btn btn-outline-info btn-sm" href="boardList?pageNo=${pager.startPageNo-1}">이전</a>
+							                  </c:if>
+							                  
+							                  <!-- 번호가 들어가는 부분 -->
+							                  <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+							                     <c:if test="${pager.pageNo != i}">
+							                        <a class="btn btn-outline-success btn-sm" href="boardList?pageNo=${i}">${i}</a>
+							                     </c:if>
+							                     <c:if test="${pager.pageNo == i}">
+							                        <a class="btn btn-danger btn-sm" href="boardList?pageNo=${i}">${i}</a>
+							                     </c:if>
+							                  </c:forEach>
+							                  
+							                  <c:if test="${pager.groupNo<pager.totalGroupNo}">
+							                     <a class="btn btn-outline-info btn-sm" href="boardList?pageNo=${pager.endPageNo+1}">다음</a>
+							                  </c:if>
+							                  <a class="btn btn-outline-primary btn-sm" href="boardList?pageNo=${pager.totalPageNo}">맨끝</a>
+							               </div>
+							            </td>
+							         </tr>
+									
 								</tbody>
 							</table>
 						</div>
