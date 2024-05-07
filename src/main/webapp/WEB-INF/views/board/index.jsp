@@ -291,7 +291,7 @@
 										<c:forEach var="board" items="${boardList}">
 											<tr>
 												<td>${board.bno}</td>
-												<td><a href="#!">${board.btitle}</a></td>
+												<td><a href="board/detailBoard?bno=${board.bno}">${board.btitle}</a></td>
 												<td>${board.mid}</td>
 												<td><fmt:formatDate value="${board.bdate}"
 														pattern="yyyy-MM-dd" /></td>
@@ -300,6 +300,30 @@
 										</c:forEach>
 
 									</tbody>
+									<tr>
+                           <td colspan="4" class="text-center">
+                              <div>
+                                 <a class="btn btn-outline-primary btn-sm" href="?pageNo=1#board-list">처음</a>
+                                 <c:if test="${pagerDto.groupNo>1}">
+                                    <a class="btn btn-outline-info btn-sm" href="?pageNo=${pagerDto.startPageNo-1}#board-list">이전</a>
+                                 </c:if>
+                                 
+                                 <c:forEach var="i" begin="${pagerDto.startPageNo}" end="${pagerDto.endPageNo}">
+                                    <c:if test="${pagerDto.pageNo != i}">
+                                       <a class="btn btn-outline-success btn-sm" href="?pageNo=${i}#board-list">${i}</a>
+                                    </c:if>
+                                    <c:if test="${pagerDto.pageNo == i}">
+                                       <a class="btn btn-danger btn-sm" href="?pageNo=${i}#board-list">${i}</a>
+                                    </c:if>
+                                 </c:forEach>
+                                 
+                                 <c:if test="${pagerDto.groupNo<pagerDto.totalGroupNo}">
+                                    <a class="btn btn-outline-info btn-sm" href="?pageNo=${pagerDto.endPageNo+1}#board-list">다음</a>
+                                 </c:if>
+                                 <a class="btn btn-outline-primary btn-sm" href="?pageNo=${pagerDto.totalPageNo}#board-list">맨끝</a>
+                              </div>
+                           </td>
+                        </tr>
 								</table>
 							</div>
 							<button class="btn"
