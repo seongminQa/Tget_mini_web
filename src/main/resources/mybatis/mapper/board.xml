@@ -9,18 +9,23 @@
 			select seq_bno.nextval from dual
 		</selectKey>
 		insert into board(
-		bno, btitle, bcontent, mid, bdate, bhitcount, bimg
+		bno, btitle, bcontent, mid, bdate, bhitcount, bimg,
+		bimgoname, bimgtype 
 		)
 		values(
-		#{bno}, #{btitle}, #{bcontent}, #{mid}, sysdate, 0, #{bimgdata}
+		#{bno}, #{btitle}, #{bcontent}, #{mid}, sysdate, 0, #{bimg},
+		#{bimgoname},
+        #{bimgtype}
+       
 
 		)
 	</insert>
 	<select id="count" resultType="int">
 		select count(*) from board
 	</select>
-	
-	<select id="selectByPage" parameterType="PagerDto" resultType="BoardDto">
+
+	<select id="selectByPage" parameterType="PagerDto"
+		resultType="BoardDto">
          <![CDATA[
          select rnum, bno ,btitle, bcontent, mid, bdate,bhitcount
          from (
@@ -34,6 +39,16 @@
          )
          where rnum >= #{startRowNo}
          ]]>
+	</select>
+	<select id="selectByBno" parameterType="int"
+		resultType="BoardDto">
+		select bno ,btitle, bcontent, mid, bdate,bhitcount,bimgoname, bimgtype
+		from board
+		where bno= #{bno}
+	</select>
+	<select id="selectAttachData" parameterType="int" resultType="BoardDto">
+      	select bimg from board where bno = #{bno}
+      
       </select>
 
 </mapper>    
