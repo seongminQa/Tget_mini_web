@@ -15,4 +15,5 @@ public interface MemberDao {
 	int count();
 	public int updateMember(MemberDto memberDto);
 	public int deleteByMid(String mid);
+	public int insertJoin(MemberDto memberdto);
 }

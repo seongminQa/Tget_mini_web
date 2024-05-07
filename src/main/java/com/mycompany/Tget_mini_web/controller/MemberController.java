@@ -68,7 +68,7 @@ public class MemberController {
 	}
 	
 	@Autowired
-	private MemberService mservice;
+	private MemberService memberservice;
 	
 	// member 회원가입 form DB저장 후 로그인 페이지로 redirect
 	@PostMapping("/join")
@@ -87,9 +87,9 @@ public class MemberController {
 			log.info("첨부파일 없음");
 		}
 		log.info("회원가입 form controller 도착");
-		//mservice.join(member);
+		memberservice.join(member);
 		log.info(member.toString());
-		return "redirect:/";
+		return "redirect:/member/login";
 	}
 	
 	 
