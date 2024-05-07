@@ -38,8 +38,9 @@
           </div>
       
         </div>
+      
         <div class="col-9" style="background-color: white">
-         <!--  <h4 class="ps-2 pt-5"></h4>  -->
+        
           
          
           <!--#########  -->
@@ -57,26 +58,6 @@
 			 </div>
 		</nav>
 	
-<!-- 	    <div class="card" style="margin-top:0px">
-  			<div class="card-header">티켓</div>
-  			<div class="card-body"></div>
-  			
-  			     <table class="table table-striped">
-				  <thead class="table">
-				  <tr style="height:10px;">
-				      <th>번호</th>
-			 	      <th>제목</th>
-				        <th>내용</th>
-				        <th>글쓴이</th>
-				        <th>조회수</th>
-				        <th>날짜</th>
-			     </tr>
-			    </thead>
-			
-			    </tbody>
-			  </table>
-  			</div> 
-  			 -->
   			 	<!-- 공연 후기 -->
   			 	<div style="margin-top:27px;">
   			 	<div style="text-align : center;">  
@@ -92,21 +73,21 @@
 					  </thead>
 					  <tbody class="table-group-divider">
 					    <tr>
-					      <th scope="row">뮤지컬</th>
+					      <th scope="row" class="table-active" style="border:1px solid white">뮤지컬</th>
 					      <td>너무재밋어요</td>
 					      <td>2024-02-03</td>
 					      <td>15</td>
 					    </tr>
 					    
 					    <tr>
-					      <th scope="row">연극</th>
+					      <th scope="row" class="table-active" style="border:1px solid white;">연극</th>
 					      <td>가족끼리 보기 좋아요</td>
 					      <td>2024-02-15</td>
 					      <td>20</td>
 					    </tr>
 					    
 					    <tr>
-					      <th scope="row">뮤지컬</th>
+					      <th scope="row" class="table-active" style="border:1px solid white">뮤지컬</th>
 					      <td>배우가 멋있어요</td>
 					      <td>2024-02-20</td>
 					      <td>5</td>
@@ -118,28 +99,27 @@
   				</div>
   			<!-- 공연 후기 -->
   			
-			
-  		
   		<!-- 페이지 네이션 -->
-  		<div class="d-flex justify-content-center">
-  		<nav aria-label="Page navigation example">
-		  <ul class="pagination">
-		    <li class="page-item">
-		      <a class="page-link" href="#" aria-label="Previous">
-		        <span aria-hidden="true">&laquo;</span>
-		      </a>
-		    </li>
-		    <li class="page-item"><a class="page-link" href="#">1</a></li>
-		    <li class="page-item"><a class="page-link" href="#">2</a></li>
-		    <li class="page-item"><a class="page-link" href="#">3</a></li>
-		    <li class="page-item">
-		      <a class="page-link" href="#" aria-label="Next">
-		        <span aria-hidden="true">&raquo;</span>
-		      </a>
-		    </li>
- 		 </ul>
-	</nav>
-	</div>
+			<div class="center">
+			  	<nav aria-label="Page navigation example">
+					  <ul class="pagination d-flex justify-content-center">
+					    <li class="page-item">
+					      <a class="page-link" href="#" aria-label="Previous">
+					        <span aria-hidden="true">&laquo;</span>
+					      </a>
+					    </li>
+					    <li class="page-item"><a class="page-link" href="#">1</a></li>
+					    <li class="page-item"><a class="page-link" href="#">2</a></li>
+					    <li class="page-item"><a class="page-link" href="#">3</a></li>
+					    <li class="page-item">
+					      <a class="page-link" href="#" aria-label="Next">
+					        <span aria-hidden="true">&raquo;</span>
+					      </a>
+					    </li>
+			 		 </ul>
+				</nav>
+			</div> 
+
   		<!-- 페이지 네이션 -->
   	</div>
 
