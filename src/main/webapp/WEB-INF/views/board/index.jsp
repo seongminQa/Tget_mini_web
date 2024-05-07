@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -281,20 +283,27 @@
 											<th scope="col" class="th-num">번호</th>
 											<th scope="col" class="th-title">제목</th>
 											<th scope="col" class="th-date">등록일</th>
+											<th scope="col" class="th-date">날짜</th>
+											<th scope="col" class="th-date">조회수</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>1</td>
-											<th><a href="#!">[공지사항] 개인정보 처리방침 변경안내처리방침</a>
-												<p>테스트</p></th>
-											<td>2017.07.13</td>
-										</tr>
+										<c:forEach var="board" items="${boardList}">
+											<tr>
+												<td>${board.bno}</td>
+												<td><a href="#!">${board.btitle}</a></td>
+												<td>${board.mid}</td>
+												<td><fmt:formatDate value="${board.bdate}"
+														pattern="yyyy-MM-dd" /></td>
+												<td>${board.bhitcount}</td>
+											</tr>
+										</c:forEach>
 
 									</tbody>
 								</table>
 							</div>
-							<button class="btn" onclick = "location.href = '${pageContext.request.contextPath}/board/writeBoardForm'">글쓰기</button>
+							<button class="btn"
+								onclick="location.href = '${pageContext.request.contextPath}/board/writeBoardForm'">글쓰기</button>
 						</div>
 					</section>
 				</div>
@@ -307,7 +316,8 @@
 										<tr>
 											<th scope="col" class="th-num">번호</th>
 											<th scope="col" class="th-title">제목</th>
-											<th scope="col" class="th-date">등록일</th>
+											<th scope="col" class="th-date">작성자</th>
+
 										</tr>
 									</thead>
 									<tbody>
