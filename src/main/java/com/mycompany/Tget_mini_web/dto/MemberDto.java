@@ -13,7 +13,6 @@ public class MemberDto {
 	private String mname;
 	private String mssn;
 	private String memail;
-	private String maddress;
 	private String mphone;
 	private String mnickname;
 	private Date msince;
