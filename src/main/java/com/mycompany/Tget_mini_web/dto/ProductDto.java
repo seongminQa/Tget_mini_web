@@ -20,4 +20,5 @@ public class ProductDto {
 	private String pseatgrade;
 	private int pseatcnt;
 	private String paddress;
+	private String pgenre;
 }
