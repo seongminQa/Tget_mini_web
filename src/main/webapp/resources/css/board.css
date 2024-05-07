@@ -14,6 +14,7 @@
 	
 }
 #board{
+	border-radius: 0px 0px 20px 20px;
 	width: 300px;
 	margin-top : 15px;
 	margin-bottom : 15px;
@@ -27,11 +28,11 @@
 	
 }
 #board:hover{
-	transform: scale(1.1);
-	-webkit-transform: scale(1.1);
-	-moz-transform: scale(1.1);
-	-ms-transform: scale(1.1);
-	-o-transform: scale(1.1);
+	transform: scale(1.05);
+	-webkit-transform: scale(1.05);
+	-moz-transform: scale(1.05);
+	-ms-transform: scale(1.05);
+	-o-transform: scale(1.05);
 }
 #board:hover #board_title{
 	color:#D95B96
@@ -45,9 +46,11 @@
 	width: 300px;
 	height: 200px;
 	object-fit: cover;
+	border-radius: 20px 20px 0px 0px;
 }
 #board_2{
 	height: 250px;
+	
 
 }
 #board_title{
@@ -113,6 +116,7 @@
 }
 
 .tab {
+	margin-top: 50px;
 	float: left;
 	height: 290px;
 }
