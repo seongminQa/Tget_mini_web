@@ -71,6 +71,7 @@ table tr td {
 					 <button type="button" class="round gray">6개월</button>
 					 </div> -->
 					 
+					 
 					 <p>
 					 <div style="height:30px;"><!-- class="me-2"  -->
 					 <label for="startdate">시작일 입력 </label>
@@ -164,7 +165,7 @@ table tr td {
 					</div>  
 					</div> 
 					<!-- 중앙 예매 한 내역 -->					
-					<!-- <a style="text-decoration:none; color:black;" href="/Tget_mini_web/">취소 |</a> --><
+					<!-- <a style="text-decoration:none; color:black;" href="/Tget_mini_web/">취소 |</a> -->
 				<!-- bg -->
 				</div>
 
