@@ -25,7 +25,7 @@
 	<body>
 	
 	<!-- header(헤더) -->
-	<%@include file="/WEB-INF/views/common/header.jsp"%>
+	 <%@include file="/WEB-INF/views/common/header.jsp"%> 
 	
 	   	<div class="container" style="height: 100px; width: 100%;  margin-top:30px; ">
   	  		<h2 >예매내역 확인 * 취소</h2>
