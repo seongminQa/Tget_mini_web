@@ -19,7 +19,9 @@
 <!-- 반응형 제거 코드 -->
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- 반응형 제거 코드 -->
-<style >
+ <style >
+
+ 
 
 table tr td {
 	text-overflow: ellipsis;
@@ -27,7 +29,7 @@ table tr td {
 	max-width: 140px;
 }
 
-</style>
+</style> 
 </head>
 
 <body>
@@ -50,55 +52,49 @@ table tr td {
 						  <h4 class="ms-3"><strong>홍길동</strong>님의 <br />마이페이지</h4>
 						<hr />
 						<%@include file="/WEB-INF/views/common/myPageList.jsp"%>
-						<!-- <ul>
-							<a href="#"><li>회원정보 수정</li></a>
-							<a href="#"><li>내가 쓴 후기</li></a>
-							<a href="#"><li>구매 내역</li></a>
-							<a href="#"><li>회원 탈퇴</li></a>
-						</ul> -->
+					
 					</div>
 				</div>
-					<!-- bg -->
+					<!-- 달력 -->
 				<div class="col-9" style="background-color: white;">
 					 <h4 class="ps-2 pt-5"></h4> 
 					 
-					 <div class="content-box">
-					 <div class="d-flex justify-content-center">
-					<!--  <div class="me-2">
-					 조회기간
-					 <button type="button" class="round gray">1개월</button>
-					 <button type="button" class="round gray">3개월</button>
-					 <button type="button" class="round gray">6개월</button>
+					 <div class="content-box ">
+						 <div class="d-flex">
+						 		 
+						 	<div style="height:30px; width:100%; margin-top:25px">
+					 			<h2 style="border-bottom: 4px solid #D95B96">최근 예매 내역</h2>					 
+						 
+							 
+							 <div style="height:50px; width:100%; boder:1px solid blue;" class="text-end" > <!-- class="me-2"  -->
+							
+							 <label for="startdate">시작일 입력 </label>
+							 <input type="date" id="startdate" name="startdate" value="2024-03-22">
+							
+							 <label for="enddate">~끝나는일 입력 </label>
+							 <input type="date" id="enddate" name="enddate" value="2024-04-25">
+								  <button type="button" class="btn btn-secondary btn-sm">
+								  	조회하기
+								  </button>
+							 </div> 
+							</div>
+ 
+						 </div>
+					 </div>
+					 <!--달력  -->
+					 
+				<!-- 	 <div style="height:30px; width:100%; margin-top:10px">
+					 <h4 style="border-bottom: 2px solid #D95B96">최근 예매 내역</h4>
+					 
 					 </div> -->
-					 
-					 
-					 <p>
-					 <div style="height:30px;"><!-- class="me-2"  -->
-					 <label for="startdate">시작일 입력 </label>
-					 <input type="date" id="startdate" name="startdate" value="2024-03-22">
-					
-					 
-					 <label for="enddate">~끝나는일 입력 </label>
-					 <input type="date" id="enddate" name="enddate" value="2024-04-25">
-						  <button type="button" class="btn btn-secondary btn-sm">
-						  <span>조회하기</span>
-						  </button>
-					 </div> 
-					  
-					<!--   <div style="width: 20%; height:80px;">
-					  </div> -->
-					 
-					 </p>
-					 </div>
-					 </div>
 		
 						
 					<!-- 중앙 예매 한 내역 -->
 					
-				 <div class="sub"style="margin-top:10px;" >
+				 <div class="sub"style="margin-top:80px; /* border:1px solid red; */" >
 					<div style="text-align : center; ">  
-					<table class="table">
-					  <thead class="table">
+					<table class="table" >
+					  <thead class="table"style="border-bottom: 3px solid #D95B96">
 					    <tr>
 					      <th scope="col">예매일</th>
 					      <th scope="col">예약번호</th>
@@ -111,11 +107,11 @@ table tr td {
 					    </tr>
 					  </thead>
 					   
-					  <tbody class="table-group-divider" >
+					  <tbody class="table-group-divider" style="border-bottom: 3px solid #e8e1e4" >
 					    <tr>
 					      <th scope="row">2024.02.20</th>
 					      <td>11223322</td>
-					      <td>창작가무극</td>
+					      <td >창작가무극</td>
 						  <td>2024.03.11</td>
 					      <td>2</td>
 					      <td>2024.03.10 | 23:59</td>
@@ -127,7 +123,7 @@ table tr td {
 					    </tr>
 
 					  </tbody>
-					   <tbody class="table-group-divider" >
+					   <tbody class="table-group-divider" style="border-bottom: 3px solid #e8e1e4">
 					    <tr>
 					      <th scope="row">2024.02.21</th>
 					      <td>1155522</td>
