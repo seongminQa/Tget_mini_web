@@ -294,8 +294,8 @@
 									</tbody>
 								</table>
 							</div>
+							<button class="btn" onclick = "location.href = '${pageContext.request.contextPath}/board/writeBoardForm'">글쓰기</button>
 						</div>
-
 					</section>
 				</div>
 				<div id="tab02">
