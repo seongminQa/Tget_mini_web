@@ -31,6 +31,8 @@
 			a:hover {
 			  color : red;
 			}
+			
+			
 		</style>
 </head>
 <body>
@@ -45,12 +47,73 @@
 				
 				<div class="col-lg-10">
 					<!-- #################################### -->
-					<div class="card">
-						<div class="card-header">관리자 페이지</div>
-						<div class="card-body">
-							안녕하세요?
+						<div class="container" style=" height: 50px; width: 100%;margin-top:10px">
+						<h4> <li>전체 주문 통계</li></h4>
 						</div>
-					</div>
+					
+					
+						<div class="d-flex justify-content-center" style=" width: 50%; height:30px; float: left; margin-top:10px;"><!-- border:1px solid black; -->
+							<h4 >주문상태 현황</h4>
+						</div>
+						
+						<div class="d-flex justify-content-center" style=" width: 50%; height:30px;float: right; margin-top:10px; ">
+							<h4>전체 주문 현황</h4>
+						</div>
+						
+						
+						<div style=" width: 50%; height:100px; float: left; margin-top:10px;">
+							<table class="table"  style="text-align: center;">
+						  		<thead >
+								    <tr>
+								      <th scope="col" class="table-active" style="border:1px solid white; ">총 주문건수</th>				     
+								      <th scope="col" class="table-active" style="border:1px solid white; ">총 주문액</th>
+								    </tr>
+								    <tr>
+								      <td style="border:1px solid white; height:50px; background-color:#F6F6F6;" >34</td>
+								      <td style="border:1px solid white; height:50px; background-color:#F6F6F6;">2,459,700</td>
+								      </tr>
+								</thead>
+							</table>
+						</div>
+						
+						<div style="width: 50%; height:100px; float: right; margin-top:10px;">
+							<table class="table" style="text-align: center;">
+						  		<thead>
+								    <tr>
+								      <th scope="col" class="table-active" style="border:1px solid white;">입금대기</th>				     
+								      <th scope="col" class="table-active" style="border:1px solid white;">입금완료</th>
+								      <th scope="col" class="table-active" style="border:1px solid white;">구매확정</th>
+								    </tr>
+								    <tr>
+								      <td style="border:1px solid white; height:50px; background-color:#F6F6F6;">0</td>
+								      <td style="border:1px solid white; height:50px; background-color:#F6F6F6; ">0</td>
+								      <td style="border:1px solid white; height:50px; background-color:#F6F6F6;">0</td>
+								      </tr>
+								</thead>
+							</table>
+						</div>
+						
+						
+						
+						<div class="d-flex justify-content-center" style=" width: 50%; height:30px;margin-top:20%">
+							<h4>문의 및 게시판</h4>
+						</div>
+						
+						<div style=" width: 50%; height:100px;  margin-top:10px;">
+							<table class="table"  style="text-align: center;">
+						  		<thead>
+								    <tr>
+								      <th scope="col" class="table-active" style="border:1px solid white;">미답변 문의</th>				     
+								      <th scope="col" class="table-active" style="border:1px solid white;">신고가 들어온 게시물</th>
+								    </tr>
+								    <tr>
+								      <td style="border:1px solid white;height:50px;background-color:#F6F6F6;">34</td>
+								      <td style="border:1px solid white;height:50px;background-color:#F6F6F6;">2,437,700</td>    
+								      </tr>
+								</thead>
+							</table>
+						</div>
+						
 					<!-- #################################### -->
 				</div>
 				
