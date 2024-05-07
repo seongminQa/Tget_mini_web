@@ -9,11 +9,10 @@ import com.mycompany.Tget_mini_web.dto.PagerDto;
 
 @Mapper
 public interface BoardDao {
-
 	public int insert(BoardDto boardDto);
-
 	public int count();
-
 	public List<BoardDto> selectByPage(PagerDto pagerDto);
+	public BoardDto selectByBno(int bno);
+	public BoardDto selectAttachData(int bno);
 
 }

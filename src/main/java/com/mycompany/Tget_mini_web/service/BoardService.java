@@ -35,5 +35,16 @@ public class BoardService {
 		return boardList;
 		
 	}
+	public BoardDto getBoard(int bno) {
+		BoardDto board = boardDao.selectByBno(bno);
+		return board;
+	}
+
+	public byte[] getAttachData(int bno) {
+		BoardDto boardDto = boardDao.selectAttachData(bno);
+		return boardDto.getBimg();
+	}
+
+	
 
 }

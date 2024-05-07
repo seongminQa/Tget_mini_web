@@ -1,7 +1,9 @@
 package com.mycompany.Tget_mini_web.controller;
 
+import java.io.OutputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.mycompany.Tget_mini_web.dto.BoardDto;
 import com.mycompany.Tget_mini_web.dto.PagerDto;
 import com.mycompany.Tget_mini_web.service.BoardService;
-
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,10 +47,12 @@ public class BoardController {
 
 	@PostMapping("/writeBoard")
 	public String writeBoard(BoardDto boardDto) {
-		if (boardDto.getBimg() != null && !boardDto.getBimg().isEmpty()) {
+		if (boardDto.getBattach() != null && !boardDto.getBattach().isEmpty()) {
 			// DTO 추가 설정
+			boardDto.setBimgoname(boardDto.getBattach().getOriginalFilename());
+			boardDto.setBimgtype(boardDto.getBattach().getOriginalFilename());
 			try {
-				boardDto.setBimgdata(boardDto.getBimg().getBytes());
+				boardDto.setBimg(boardDto.getBattach().getBytes());
 			} catch (Exception e) {
 			}
 		}
@@ -81,10 +84,35 @@ public class BoardController {
 		// Service에서 게시물 목록 요청
 		List<BoardDto> boardList = service.getBoardList(pagerDto);
 
-		model.addAttribute("pagerDto",  pagerDto);
+		model.addAttribute("pagerDto", pagerDto);
 		model.addAttribute("boardList", boardList);
 		return "board/index";
 
+	}
+
+	@GetMapping("/detailBoard")
+	public String detailBoard(int bno, Model model) {
+		BoardDto boardDto = service.getBoard(bno);
+		model.addAttribute("boardDto", boardDto);
+		log.info(boardDto.toString());
+		return "board/detailBoard";
+
+	}
+
+	@GetMapping("/attachDownload")
+	public void attachDownload(int bno, HttpServletResponse response) throws Exception {
+		
+		BoardDto boardDto = service.getBoard(bno);
+		byte[] data = service.getAttachData(bno);
+		response.setContentType(boardDto.getBimgtype());
+		String fileName = new String(boardDto.getBimgoname().getBytes());
+		response.setHeader("Content-Disposition", "attachment; filename=\""+fileName+"\"");
+		
+
+		OutputStream os = response.getOutputStream();
+		os.write(data);
+		os.flush();
+		os.close();
 	}
 
 }

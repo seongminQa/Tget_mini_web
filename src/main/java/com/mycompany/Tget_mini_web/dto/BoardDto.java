@@ -15,8 +15,13 @@ public class BoardDto {
 	private Date bdate;
 	private int bhitcount;
 	
-	private MultipartFile bimg;
-	private byte[] bimgdata;
+	
+	private String bimgoname;
+	private String bimgsname;
+	private String bimgtype;
+	private byte[] bimg;
+	
+	private MultipartFile battach;
 	
 	
 }
