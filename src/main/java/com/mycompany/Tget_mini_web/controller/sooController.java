@@ -11,6 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/payment")
 public class sooController {
 	
+	@GetMapping("/paymentdetail")
+	public String paymentdetail() {
+		return "payment/payment";
+	}
+	
 	@GetMapping("/payment_cancel")
 	public String payment_cancel() {
 		return "payment/payment_cancel";
