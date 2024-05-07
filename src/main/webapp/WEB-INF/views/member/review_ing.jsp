@@ -30,7 +30,7 @@
       <div class="pb-3 row" style="width: 70%">
         <div class="col-3">
           <div style="background-color: white" class="pt-5 pb-5">
-             <h4 class="ms-3"><strong>홍길동</strong>님의 <br />마이페이지</h4>
+             <h4 class="ms-3" ><strong>홍길동</strong>님의 <br />마이페이지</h4>
             <hr/>
           
              <%@include file="/WEB-INF/views/common/myPageList.jsp"%>
@@ -62,7 +62,7 @@
   			 	<div style="margin-top:27px;">
   			 	<div style="text-align : center;">  
 					<table class="table">
-					  <thead class="table">
+					  <thead class="table" style="border-bottom: 3px solid #D95B96">
 					    <tr>
 					      <th scope="col">공연명</th>
 					      <th scope="col">제목</th>
