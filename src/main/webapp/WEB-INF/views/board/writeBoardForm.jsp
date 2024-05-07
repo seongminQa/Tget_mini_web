@@ -41,7 +41,7 @@
                         
                         <div class="input-group">
                            <div class="input-group-prepend"><span class="input-group-text">bimgdata</span></div>
-                           <input id="bimg" type="file" name="bimg" class="form-control">
+                           <input id="battach" type="file" name="battach" class="form-control">
                         </div>
                            
                         <div class="mt-3">
