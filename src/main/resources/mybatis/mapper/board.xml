@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.mycompany.Tget_mini_web.dao.mybatis.Board">
+<mapper namespace="com.mycompany.Tget_mini_web.dao.BoardDao">
 	
-</mapper>
+
+	<insert id="insert" parameterType="BoardDto">
+	<selectKey keyProperty="bno" order="BEFORE" resultType="int">
+         select seq_bno.nextval from dual
+      </selectKey>
+         insert into board(
+         bno, btitle, bcontent, mid, bdate, bhitcount, bimg
+      	)
+      	values(
+         #{bno}, #{btitle}, #{bcontent}, #{mid}, sysdate, 0, #{bimgdata}
+
+      	)   
+    </insert>
+    
+</mapper>    
