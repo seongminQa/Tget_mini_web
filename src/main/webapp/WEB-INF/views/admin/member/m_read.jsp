@@ -104,29 +104,29 @@
 															       		value="${member.mid}" readOnly>
 															   </div>
 															   <div class="form-group d-flex align-items-center mb-2">
-															       <label for="mname" style="width:30%">회원 이름</label>
+															       <label for="mname" style="width:30%">회원 이름 : </label>
 															       <input type="text" class="form-control" id="mname" name="mname" style="width:50%"
 															       		value="${member.mname}" readOnly>
 															   </div>
 															   <div class="form-group d-flex align-items-center mb-2">
-															      <label for="mpassword" style="width:30%">회원 비밀번호</label>
+															      <label for="mpassword" style="width:30%">회원 비밀번호 : </label>
 															      <!-- 비밀번호 부분 어떻게 할지?** -->
 															      <input type="password" class="form-control" id="mpassword" name="mpassword" style="width:50%">
 															   </div>
 															   <div class="form-group d-flex align-items-center mb-2">
-															      <label for="memail" style="width:30%">e-mail</label>
+															      <label for="memail" style="width:30%">e-mail : </label>
 															      <input type="email" class="form-control" id="memail" name="memail" style="width:50%"
 															      		value="${member.memail}">
 															   </div>
 															   
 															   <div class="form-group d-flex align-items-center mb-2">
-															      <label for="mphone" style="width:30%">전화번호</label>
+															      <label for="mphone" style="width:30%">전화번호 : </label>
 															      <input type="text" class="form-control" id="mphone" name="mphone" style="width:50%"
 															      		value="${member.mphone}">
 															   </div>
 															   
 													           <div class="form-group d-flex align-items-center mb-2">
-													              <label for="mgrade" style="width:30%">회원 등급</label>
+													              <label for="mgrade" style="width:30%">회원 등급 : </label>
 													              <select class="form-control" id="mgrade" name="mgrade" style="width:50%">
 													                 <option value="GRADE_1" selected>일반</option>
 													                 <option value="GRADE_2">골드</option>
@@ -135,9 +135,9 @@
 													           </div>
 															</div>
 															<button type="submit" class="btn btn-outline-secondary mt-2">수정</button>
+														    <a href="memberDelete?mid=${member.mid}" class="btn btn-outline-danger mt-2">삭제</a>
 															<!-- <button type="submit" class="btn btn-outline-danger mt-2" data-bs-dismiss="modal">삭제</button> -->
 														    <%-- <a href="memberModify?mid=${member.mid}" class="btn btn-outline-secondary mt-2">수정</a> --%>
-														    <a href="memberDelete?mid=${member.mid}" class="btn btn-outline-danger mt-2">삭제</a>
 														</form>
 														<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->		
 												      </div>
