@@ -1,6 +1,8 @@
 package com.mycompany.Tget_mini_web.controller;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +20,7 @@ import com.mycompany.Tget_mini_web.dao.MemberDao;
 import com.mycompany.Tget_mini_web.dao.ProductDao;
 import com.mycompany.Tget_mini_web.dto.MemberDto;
 import com.mycompany.Tget_mini_web.dto.PagerDto;
+import com.mycompany.Tget_mini_web.dto.Pre_product;
 import com.mycompany.Tget_mini_web.dto.ProductDto;
 import com.mycompany.Tget_mini_web.service.MemberService;
 import com.mycompany.Tget_mini_web.service.ProductService;
@@ -177,11 +180,13 @@ public class AdminController {
 	// 회원 등록 더미 집어넣기
 	@GetMapping("/signupProductTest")
 	public String signupProductTest() throws Exception {
-
 		Date now = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String nowStr = formatter.format(now);
 		Date nowDate = formatter.parse(nowStr);
+		
+		
+		
 
 		/*for(int i=45; i<65; i++) {
 			ProductDto productDto = new ProductDto();
@@ -206,9 +211,16 @@ public class AdminController {
 	
 	// 상품 등록
 	@RequestMapping("/productSignUp")
-	public String productSignUp(Model model) {
+	public String productSignUp(ProductDto productDto) {
 		log.info("admin.productSignup() 실행");
-		model.addAttribute("admin", "product");
+		
+		
+		
+		
+		
+		
+		
+
 		return "/admin/product/p_sign";
 	}
 	
@@ -219,6 +231,9 @@ public class AdminController {
 		model.addAttribute("admin", "product");
 		return "/admin/product/p_modify";
 	}
+	
+	
+	
 	
 	// 게시판 조회
 	@RequestMapping("/boardReader")
