@@ -65,6 +65,7 @@
 		<!--  중앙에 가로로 정렬시키기 위해(화면창을 줄이건 늘려도 가운대로 하기위해) 스타일은 너무 위로 치우쳐 있어서 마진탑 10%로 줌 -->
 	 	<div class="d-flex justify-content-center"style="margin-top:5%;">  
          <div class="login-wrapper">
+         
          <!-- 가운데 이미지 티겟을 설정하기위해 text-align -->
       <div style="text-align : center;">  
          <!--  이미지 크기를 맟주기 위해 높이와 너비를 줌 -->
@@ -76,6 +77,7 @@
                
             <input type="password" id="mpassword" name="mpassword" placeholder="Password">
               <!-- 체크박스를 가운데로 정렬하기 위하여 -->
+             		 
              <label for="remember-check" class="d-flex justify-content-center">
              
              	<!-- m-5를 준이유는 체크박스의 간격을 띄우기 위해서 -->
@@ -100,6 +102,7 @@
               <a href="/Tget_mini_web/member/sign_up">회원가입</a> 
               </p>
             </div>
+              		
         </form>
         </div>
     </div>
