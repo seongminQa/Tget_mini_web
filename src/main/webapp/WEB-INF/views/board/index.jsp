@@ -176,7 +176,7 @@
 				<!-- 게시글 타이틀, 작성자, 글-->
 				<div id="board_2">
 					<div id="board_text">
-						<div id="board_title">게시글의 타이틀asdfdasfasdfsdfasdfsad</div>
+						<div id="board_title">${boardDto.btitle}</div>
 						<div id="board_profile" class="d-flex">
 							<img id="profile_img"
 								src="/Tget_mini_web/resources/image/board/리뷰1.jpg">
