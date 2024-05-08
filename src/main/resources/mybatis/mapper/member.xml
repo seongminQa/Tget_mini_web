@@ -5,7 +5,7 @@
 
 	<!-- 회원정보 얻기 -->
 	<select id="selectByMid" parameterType="String" resultType="MemberDto">
-		select mid, mname, mpassword, mssn, memail, 
+		select mid, mname, mpassword, mssn, memail, mrole,
 			mphone, msince, mprefergenre, mgrade, mprofileimg, mtotalpay, mno
 		from member
 		where mid = #{mid}
