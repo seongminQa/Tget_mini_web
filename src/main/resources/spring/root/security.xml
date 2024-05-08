@@ -48,16 +48,19 @@
    <!-- 로그인 성공했을 때 실행하는 핸들러 -->
   <bean id="tAuthenticationSuccessHandler"
   		class="com.mycompany.Tget_mini_web.security.TAuthenticationSuccessHandler">
+  		<property name="defaultTargetUrl" value="/"/>
   </bean>      
      
      <!-- 로그인 실패했을 때 실행하는 핸들러 -->
   <bean id="tAuthenticationFailureHandler"
   		class="com.mycompany.Tget_mini_web.security.TAuthenticationFailureHandler">
+  		<property name="defaultFailureUrl" value="/member/login"/>
   </bean>   
   
   <!-- 로그아웃 성공했을 때 실행하는 핸들러 -->
   <bean id="tLogoutSuccessHandler"
   		class="com.mycompany.Tget_mini_web.security.TLogoutSuccessHandler">
+  		<property name="defaultTargetUrl" value="/member/login"/>
   </bean>  
    
    <!-- 
