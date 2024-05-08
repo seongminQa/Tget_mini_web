@@ -17,6 +17,7 @@ import com.mycompany.Tget_mini_web.dto.BoardDto;
 import com.mycompany.Tget_mini_web.dto.PagerDto;
 import com.mycompany.Tget_mini_web.service.BoardService;
 
+
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -101,13 +102,12 @@ public class BoardController {
 
 	@GetMapping("/attachDownload")
 	public void attachDownload(int bno, HttpServletResponse response) throws Exception {
-		
+
 		BoardDto boardDto = service.getBoard(bno);
 		byte[] data = service.getAttachData(bno);
 		response.setContentType(boardDto.getBimgtype());
 		String fileName = new String(boardDto.getBimgoname().getBytes());
-		response.setHeader("Content-Disposition", "attachment; filename=\""+fileName+"\"");
-		
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
 
 		OutputStream os = response.getOutputStream();
 		os.write(data);
@@ -115,4 +115,32 @@ public class BoardController {
 		os.close();
 	}
 
+	@GetMapping("/updateBoardForm")
+	public String updateBoardForm(int bno, Model model) {
+		BoardDto boardDto = service.getBoard(bno);
+		model.addAttribute("boardDto", boardDto);
+		return "board/updateBoardForm";
+	}
+
+	@PostMapping("/updateBoard")
+	public String updateBoard(BoardDto boardDto) {
+		if (boardDto.getBattach() != null && !boardDto.getBattach().isEmpty()) {
+
+			boardDto.setBimgoname(boardDto.getBattach().getOriginalFilename());
+			boardDto.setBimgtype(boardDto.getBattach().getOriginalFilename());
+			try {
+				boardDto.setBimg(boardDto.getBattach().getBytes());
+			} catch (Exception e) {
+			}
+		}
+		service.updateBoard(boardDto);
+
+		return "redirect:/board/detailBoard?bno=" + boardDto.getBno();
+
+	}
+	@GetMapping("/deleteBoard")
+	   public String deleteBoard(int bno) {
+		   service.removeBoard(bno);
+		   return"redirect:/board";
+	   }
 }
