@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 
@@ -93,8 +95,7 @@
 	<!-- navar -->
 	<nav class="container">
 
-
-
+		
 		<div class="row d-flex align-items-start">
 			<div class="row justify-content-between">
 				<div class="col-8 mt-2" style="width:100%;">
@@ -103,14 +104,19 @@
 							style="color: grey;">연극</a></li>
 						<li class="nav-item"><a class="menu nav-link"
 							style="color: grey;">뮤지컬</a></li>
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<li class="nav-item" ><a class="menu nav-link" href="/Tget_mini_web/admin"
+							style="color: grey;">관리자</a></li>
+							</sec:authorize>
 					</ul>
 					
-					<div class="text-end">
+					
+	 	 	<%-- 	<div class="text-end">
 						<h2 class="text-black me-2">
    							<sec:authentication property="principal.username"/>님 환영합니다
    						</h2>
-					
-					</div>
+					</div> --%>
+				
 				</div>
 				
 				<div>
