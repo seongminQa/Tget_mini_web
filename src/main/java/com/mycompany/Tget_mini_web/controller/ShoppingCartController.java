@@ -11,6 +11,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,6 +62,7 @@ public class ShoppingCartController {
 	}
 	
 	@RequestMapping("/cart")
+	@Secured("ROLE_USER")
 	public String cart(HttpSession session, Model model) {
 		// 상품의 갯수 세기 (현재는 이미지 파일의 갯수만큼 / 현재 32개)
 

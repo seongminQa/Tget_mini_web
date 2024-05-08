@@ -40,24 +40,24 @@ public class MemberController {
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/admin/page")
 	public String adminpage() {
-		return "ch17/admin/page";
+		return "Secret/admin/page";
 	}
 	
 	@Secured("ROLE_MANAGER")
 	@GetMapping("/manager/page")
 	public String managerpage() {
-		return "ch17/manager/page";
+		return "Secret/manager/page";
 	}
 	
 	@Secured("ROLE_USER")
 	@GetMapping("/user/page")
 	public String userpage() {
-		return "ch17/user/page";
+		return "Secret/user/page";
 	}
 	
 	@RequestMapping("/error403")
 	public String error403() {
-		return "ch17/error403";
+		return "Secret/error403";
 	}
 	
 	// member 회원가입 페이지
@@ -97,6 +97,7 @@ public class MemberController {
 	 
 
 	// member 회원정보수정 페이지 매핑
+	@Secured("ROLE_USER")
 	@RequestMapping("/memberInfoModify")
 	public String memberInfoModify() {
 		log.info("member.shopping_cart() 실행");
@@ -104,6 +105,7 @@ public class MemberController {
 	}
 
 	// member 회원정보수정 페이지 매핑
+	@Secured("ROLE_USER")
 	@RequestMapping("/memberInfoWithdrawal")
 	public String memberInfoWithdrawal() {
 		log.info("member.shopping_cart() 실행");
@@ -111,6 +113,7 @@ public class MemberController {
 	}
 
 	// 리뷰
+	@Secured("ROLE_USER")
 	@RequestMapping("/review_ing")
 	public String review_ing() {
 		log.info("member.review_ing() 실행");
@@ -118,6 +121,7 @@ public class MemberController {
 	}
 
 	// 구매내역
+	@Secured("ROLE_USER")
 	@RequestMapping("/purchase")
 	public String purchase() {
 		log.info("member.purchase() 실행");
@@ -137,5 +141,6 @@ public class MemberController {
 		log.info("member.lost_pw() 실행");
 		return "member/lost_pw";
 	}
+
 
 }

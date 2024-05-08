@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 	백엔드 부분,, 아직 미정
 
 */
-
+@Secured({"ROLE_ADMIN"})
 @Slf4j
 @Controller
 @RequestMapping("/admin")
