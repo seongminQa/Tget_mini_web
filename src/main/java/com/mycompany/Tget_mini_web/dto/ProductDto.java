@@ -1,7 +1,8 @@
 package com.mycompany.Tget_mini_web.dto;
 
-import java.sql.Blob;
 import java.util.Date;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
@@ -12,12 +13,17 @@ public class ProductDto {
 	private String ptitle;
 	private String pplace;
 	private int pprice;
-	private Blob pcontent;
-	private Blob pposter;
-	private Blob pactors;
+	private byte[] pcontent;
+	private byte[] pposter;
+	private byte[] pactors;
 	private Date pdatestart;
 	private Date pdateend;
 	private String pseatgrade;
 	private int pseatcnt;
 	private String paddress;
+	private String pgenre;
+	
+	private MultipartFile pcontentattach;
+	private MultipartFile pposterattach;
+	private MultipartFile pactorsattach;
 }
