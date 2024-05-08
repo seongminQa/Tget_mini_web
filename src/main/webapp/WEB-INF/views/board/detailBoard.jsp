@@ -42,7 +42,12 @@
                    <p>글쓴이 : ${boardDto.mid}</p>
                    <p>날짜 : <fmt:formatDate value="${boardDto.bdate}" pattern="yyyy-MM-dd"/></p>
                    <p>조회수 : ${boardDto.bhitcount}</p>
-                   <img src="attachDownload?bno=${boardDto.bno}" width="150"/>
+                    <c:if test="${boardDto.bimgoname != null}">  
+                     <div class="mb-2">
+                         <p>첨부파일 :<a href="attachDownload?bno=${boardDto.bno}">${boardDto.bimgoname}</a> </p>
+                        <img src="attachDownload?bno=${boardDto.bno}" width="150"/>
+                     </div>                
+                  </c:if>
                    <p>내용 : ${boardDto.bcontent}</p>
                    
                    <hr/>
