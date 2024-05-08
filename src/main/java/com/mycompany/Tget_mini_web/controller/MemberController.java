@@ -77,6 +77,8 @@ public class MemberController {
 		// 첨부 파일이 있는지 여부 조사
 		if(member.getMprofileImg() != null && !member.getMprofileImg().isEmpty()) {// battach가 null이 아니거나 비어있지 않다면
 			//DTO 추가 설정(첨부 파일이 넘어 왔을 경우)
+			member.setMprofileImgType(member.getMprofileImg().getContentType());
+			member.setMprofileImgName(member.getMprofileImg().getOriginalFilename());
 			try {
 				member.setMprofileImgData(member.getMprofileImg().getBytes()); // 예외 처리 하라고 나옴
 			}catch(Exception e){
