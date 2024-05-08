@@ -24,19 +24,20 @@
         </sec:authorize>
 
         <sec:authorize access="isAuthenticated()">
-       		<%-- <div style="margin-top:15px">
+       		 <div style="margin-top:15px">
           	<h4 class="text-black me-2">
    				<sec:authentication property="principal.username"/>님 환영합니다
    			</h4>
-        	</div>    --%>			
+        	</div>    			
           <li class="nav-item">
             <a class="nav-link" href="${pageContext.request.contextPath}/logout" style="color: black;">
               <img src="/Tget_mini_web/resources/image/project_image/login.svg" style="height: 20px; width: 15px;" />
               <span style="font-size: small; display: block;">로그아웃</span>
             </a>
           </li>
-        </sec:authorize>        	
+        </sec:authorize>     
         
+         				
           <li class="nav-item">
             <a class="nav-link" href="${pageContext.request.contextPath}/member/sign_up" style="color: black;">
               <img src="/Tget_mini_web/resources/image/project_image/sign-up.svg" style="height: 20px; width: 15px;" />
