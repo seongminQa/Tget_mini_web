@@ -45,6 +45,14 @@ public class BoardService {
 		return boardDto.getBimg();
 	}
 
+	public void updateBoard(BoardDto boardDto) {
+		int rowNum = boardDao.update(boardDto);
+	}
+
+	public void removeBoard(int bno) {
+		boardDao.deleteByBno(bno);
+	}
+
 	
 
 }
