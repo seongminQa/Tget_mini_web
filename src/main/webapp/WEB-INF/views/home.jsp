@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -49,10 +49,10 @@
 
 	<!-- header -->
 	<header class="container">
-
-		<div class="">
+		<%@include file="/WEB-INF/views/common/header.jsp"%>
+		<%-- <div class="">
 			<div class="d-flex justify-content-end">
-
+				
 				<ul class="nav justify-content-center">
 					<li class="nav-item"><a class="nav-link"
 						href="${pageContext.request.contextPath}/member/login"
@@ -85,7 +85,7 @@
 			</div>
 
 
-		</div>
+		</div> --%>
 
 	</header>
 
