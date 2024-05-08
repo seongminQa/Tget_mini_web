@@ -97,14 +97,22 @@
 
 		<div class="row d-flex align-items-start">
 			<div class="row justify-content-between">
-				<div class="col-8 mt-2">
+				<div class="col-8 mt-2" style="width:100%;">
 					<ul class="nav">
 						<li class="nav-item"><a class="menu nav-link"
 							style="color: grey;">연극</a></li>
 						<li class="nav-item"><a class="menu nav-link"
 							style="color: grey;">뮤지컬</a></li>
 					</ul>
+					
+					<div class="text-end">
+						<h2 class="text-black me-2">
+   							<sec:authentication property="principal.username"/>님 환영합니다
+   						</h2>
+					
+					</div>
 				</div>
+				
 				<div>
 					<div class="col-4 mt-2">
 						<div class="row d-flex mb-3"
