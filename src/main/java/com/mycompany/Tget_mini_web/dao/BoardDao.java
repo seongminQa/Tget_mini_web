@@ -14,5 +14,7 @@ public interface BoardDao {
 	public List<BoardDto> selectByPage(PagerDto pagerDto);
 	public BoardDto selectByBno(int bno);
 	public BoardDto selectAttachData(int bno);
+	public int update(BoardDto boardDto);
+	public void deleteByBno(int bno);
 
 }
