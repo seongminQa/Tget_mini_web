@@ -12,7 +12,7 @@
    <security:http>
       <!-- 인증 방식 설정: Form 인증 방식 -->         
       <security:form-login
-         login-page="/member/loginForm"
+         login-page="/member/login"
          username-parameter="mid"
          password-parameter="mpassword"
          login-processing-url="/login" 
@@ -30,20 +30,35 @@
       <!-- logout도 post 방식으로 요청(_csrf의 토큰을 전달해야함) -->
       <security:csrf disabled="true"/>
       
-      <!-- 요청 URL 권한 설정 방법1 식별-->
-      <security:intercept-url pattern="/ch17/admin/**" access="hasRole('ROLE_ADMIN')"/>
-      <security:intercept-url pattern="/ch17/manager/**" access="hasRole('ROLE_MANAGER')"/> 
-      <security:intercept-url pattern="/ch17/user/**" access="isAuthenticated()"/>
-      
       <!-- 로그인을 하지 안항도 처리해준다. -->
       <security:intercept-url pattern="/**" access="permitAll"/>
       
       <!-- 권한 없음일 경우 보여줄 페이지 설정  // 403 권한이 없을 때 나오는 에러-->
-      <security:access-denied-handler error-page="/ch17/error403"/>
+      <security:access-denied-handler error-page="/Secret/error403"/>
 
       <!-- 위의 방식으로 한다면 요청 매핑이 들어갈 때 마다 인증 또는 권한을 받아야 한다. 그렇게 되면 위의 코드를 항상 새로 붙여주어야 한다는 것
        그것을 방지하려면 어노테이션을 사용할 수 있다. 컨트롤러 위에 @Secured("ROLE_ADMIN") 이런식으로 붙여주면 된다는 것-->
    </security:http>
+   
+    <!-- 
+	   요청 URL 권한 설정 방법2
+	   클래스 또는 메소드에 @Secured("ROLE_ADMIN")을 붙일 수 있도록 설정
+	   [의존 설정]
+	   1)14_aop.xml: <aop:aspectj-autoproxy/>
+	   2)pom.xml: 
+	   <dependency>
+	      <groupId>org.aspectj</groupId>
+	      <artifactId>aspectjweaver</artifactId>
+	      <version>1.9.19</version>
+	      <scope>runtime</scope>
+	   </dependency>
+   -->
+   <!-- 
+	   요청 URL 권한 설정 방법2
+	   클래스 또는 메소드에 @Secured("ROLE_ADMIN")을 붙일 수 있도록 설정 
+	   controller에서 확인
+    -->
+   <security:global-method-security secured-annotations="enabled"/>
    
    <!-- 로그인 성공했을 때 실행하는 핸들러 -->
   <bean id="tAuthenticationSuccessHandler"
@@ -63,12 +78,6 @@
   		<property name="defaultTargetUrl" value="/member/login"/>
   </bean>  
    
-   <!-- 
-	   요청 URL 권한 설정 방법2
-	   클래스 또는 메소드에 @Secured("ROLE_ADMIN")을 붙일 수 있도록 설정 
-	   controller에서 확인
-    -->
-   <security:global-method-security secured-annotations="enabled"/>
 
    
    <!-- 인증 관리자 설정(아이디와 패스워드를 DB와 비교해서 로그인 처리 관리) -->
@@ -83,6 +92,8 @@
       <property name="authoritiesMapper" ref="roleHierarchyAuthoritiesMapper"/>
    </bean> 
    
+   <bean id="tgetUserDetailsService"
+   		 class="com.mycompany.Tget_mini_web.security.TgetUserDetailsService"/>
    
    <!-- 권한 계층 설정 -->
    <bean id="roleHierarchyAuthoritiesMapper"
@@ -92,11 +103,11 @@
    <bean id="roleHierarchyImpl" 
         class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl">
       <property name="hierarchy">
-         <value> <!-- 권한의 정도 // hierarchy : 포함의 관계라고 이해  -->
-            ROLE_ADMIN >  ROLE_USER
+         <value>
+            ROLE_ADMIN > ROLE_USER
          </value>
       </property>
-   </bean>
+   </bean>   
 
 
 
