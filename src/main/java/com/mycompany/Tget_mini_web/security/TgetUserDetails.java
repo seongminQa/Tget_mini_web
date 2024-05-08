@@ -7,13 +7,12 @@ import org.springframework.security.core.userdetails.User;
 
 import com.mycompany.Tget_mini_web.dto.MemberDto;
 
-public class TgetUserDetails extends User{
+public class TgetUserDetails extends User {
 	private MemberDto memberDto;
 	
 	public TgetUserDetails(MemberDto memberDto, List<GrantedAuthority> authorities) {
-		super(memberDto.getMname(), 
-				memberDto.getMpassword(), 
-				true, true, true, true, 
+		super(memberDto.getMid(), 
+				memberDto.getMpassword(), true, true, true, true, 
 				authorities);
 		this.memberDto = memberDto;
 	}
