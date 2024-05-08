@@ -32,7 +32,7 @@ public class TgetUserDetailsService implements UserDetailsService {
 		}
 		
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority(memberDto.getMname()));
+		authorities.add(new SimpleGrantedAuthority(memberDto.getMrole()));
 		
 		UserDetails userDetails = new TgetUserDetails(memberDto, authorities);
 		return userDetails;
