@@ -28,9 +28,9 @@
 			select mno_seq.nextval from dual
 		</selectKey>
 		
-		insert into member (mid, mname, mpassword, mssn, memail, mnickname,
+		insert into member (mid, mname, mpassword, mssn, memail, mnickname, mprofileimgtype, mprofileimgname,
         	mphone, msince, mprefergenre, mgrade, mtotalpay, mrole, mno, MPROFILEIMG)
-    	values(#{mid}, #{mname}, #{mpassword}, #{mssn}, #{memail}, #{mnickname},
+    	values(#{mid}, #{mname}, #{mpassword}, #{mssn}, #{memail}, #{mnickname}, #{mprofileImgType}, #{mprofileImgName},
         	#{mphone}, sysdate, #{mprefergenre}, #{mgrade}, #{mtotalpay}, #{mrole}, #{mno}, #{mprofileImgData})
 	</insert>
 	
