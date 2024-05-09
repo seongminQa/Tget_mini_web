@@ -73,13 +73,14 @@
        <a class="navbar-brand" href="/Tget_mini_web"> <img src ="/Tget_mini_web/resources/image/project_image/t_get_logo.svg" style="width:200px ; height: 145px;"></a>   
         
         <form method="post" action="${pageContext.request.contextPath}/login" id="login-form">
-           <c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
+     
+      <%--      <c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
              <div class="alert alert-danger mb-2" role="alert">
                 <c:if test="${SPRING_SECURITY_LAST_EXCEPTION.message == 'Bad credentials'}">
                      	 아이디 또는 비밀번호가 틀립니다.
                 </c:if>
              </div>
-          </c:if>
+          </c:if> --%>
         	<!-- placeholder 사용한이유는 아이디와 비밀호를 입력을하는 필드라는것을 알려주기 위해 사용 -->
               <!-- 체크박스를 가운데로 정렬하기 위하여 -->
             <input type="text" id="mid" name="mid" placeholder="id">
