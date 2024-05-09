@@ -64,30 +64,33 @@
 					<table class="table">
 					  <thead class="table" style="border-bottom: 3px solid #D95B96">
 					    <tr>
-					      <th scope="col">공연명</th>
-					      <th scope="col">제목</th>
-					      <th scope="col">작성일</th>
-					      <th scope="col">조회수</th>
+					      <th scope="col" class="j-title">제목</th>
+					      <th scope="col" class="j-date">작성일</th>
+					      <th scope="col" class="j-date">조회수</th>
 					     
 					    </tr>
 					  </thead>
 					  <tbody class="table-group-divider">
+			 		  <c:if test="${board.mid == member.mid}">
+					  <c:forEach var="board" items="${boradList}">
 					    <tr>
-					      <th scope="row" class="table-active" style="border:1px solid white">뮤지컬</th>
-					      <td>너무재밋어요</td>
-					      <td>2024-02-03</td>
-					      <td>15</td>
+				<!-- 	      <th scope="row" class="table-active" style="border:1px solid white"></th> -->
+					      <td><a href="board/detailBoard?bno=${board.bno}">${board.btitle}</a></td>
+					      <td><fmt:formatDate value="${board.bdate}" pattern="yyyy-MM-dd" /></td>
+					      <td>${board.bhitcount}</td>
 					    </tr>
+					  </c:forEach>
+					  </c:if>
 					    
 					    <tr>
-					      <th scope="row" class="table-active" style="border:1px solid white;">연극</th>
+					      <th scope="row" class="table-active" style="border:1px solid white;"></th>
 					      <td>가족끼리 보기 좋아요</td>
 					      <td>2024-02-15</td>
 					      <td>20</td>
 					    </tr>
 					    
 					    <tr>
-					      <th scope="row" class="table-active" style="border:1px solid white">뮤지컬</th>
+					      <th scope="row" class="table-active" style="border:1px solid white"></th>
 					      <td>배우가 멋있어요</td>
 					      <td>2024-02-20</td>
 					      <td>5</td>

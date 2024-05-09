@@ -78,6 +78,7 @@ public class MemberService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	
 	// 게시물 첨부파일 보기 메소드
 	/*public byte[] getAttachData(int bno) {

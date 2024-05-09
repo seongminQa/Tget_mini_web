@@ -33,6 +33,10 @@
 	        const pwModal = new bootstrap.Modal("#pwModifyModal");
 	        pwModal.show();		
 	}
+	
+
+
+		
 		
 		
 		</script>
@@ -88,7 +92,7 @@
 					<div class="modal-content">
 						<!-- modal header -->
 						<div class="modal-header">
-							<h5 class="modal-title">비밀번호 수정</h5>
+							<h5 class="modal-title">비밀번호  변경</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal"
 								aria-label="Close"></button>
 						</div>
@@ -96,7 +100,7 @@
 						<div class="modal-body">
 							<form class="p-3" method="post">
 								<div class="div_form row">
-									<label for="pw" class="col-3"><strong>비밀번호</strong></label> <input
+									<label for="pw" class="col-3"><strong>새 비밀번호</strong></label> <input
 										class="col-7 mb-5" type="password" id="pw" name="pw"
 										placeholder="8~12자 영문, 숫자" />
 								
@@ -109,7 +113,7 @@
 									</div>
 								</div>
 								<div class="div_form row">
-									<label for="pwcheck" class="col-3"><strong>비밀번호
+									<label for="pwcheck" class="col-3"><strong>새 비밀번호
 											확인</strong></label> <input class="col-7 mb-5" type="password" id="pwcheck"
 										name="pwcheck" placeholder="8~12자 영문, 숫자" />
 									<div class="col-2">

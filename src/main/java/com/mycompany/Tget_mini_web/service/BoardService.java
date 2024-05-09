@@ -52,6 +52,13 @@ public class BoardService {
 	public void removeBoard(int bno) {
 		boardDao.deleteByBno(bno);
 	}
+	
+	public void myBoardPage(PagerDto pagerDto) {
+		// 비즈니스 로직 처리
+		boardDao.selectByMyPage(pagerDto);
+		log.info("myBoardPage 실행");
+		
+	}
 
 	
 

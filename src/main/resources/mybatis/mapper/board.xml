@@ -41,6 +41,26 @@
          where rnum >= #{startRowNo}
          ]]>
 	</select>
+	
+	<!-- 한 유저가 쓴 구매 리뷰 정보 데이터베이스에서 가져오기 -->
+	<select id="selectByMyPage" parameterType="PagerDto"
+		resultType="BoardDto">
+         <![CDATA[
+         select rnum, bno ,btitle, bdate, bhitcount
+         from (
+             select rownum as rnum, bno ,btitle, bdate, bhitcount
+             from (
+                 select bno ,btitle, bdate, bhitcount
+                 from board inner join member on member.mid = board.mid 
+                 order by  bno desc
+             )
+             where rownum <= #{endRowNo}
+         )
+         where rnum >= #{startRowNo}
+         ]]>
+	</select>
+	
+	
 	<select id="selectByBno" parameterType="int"
 		resultType="BoardDto">
 		select bno ,btitle, bcontent, mid,
