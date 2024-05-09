@@ -1,14 +1,22 @@
 package com.mycompany.Tget_mini_web.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mycompany.Tget_mini_web.dao.BoardDao;
+import com.mycompany.Tget_mini_web.dto.BoardDto;
 import com.mycompany.Tget_mini_web.dto.MemberDto;
+import com.mycompany.Tget_mini_web.dto.PagerDto;
+import com.mycompany.Tget_mini_web.service.BoardService;
 import com.mycompany.Tget_mini_web.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +31,10 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
+	BoardService boardService;
+	BoardDao boardDao;
+	BoardDto boardDto;
+	
 	// member 기본 인덱스 페이지 매핑
 	@RequestMapping("")
 	public String index() {
@@ -115,8 +127,33 @@ public class MemberController {
 	// 리뷰
 	@Secured("ROLE_USER")
 	@RequestMapping("/review_ing")
-	public String review_ing() {
+	public String review_ing(Model model, String pageNo, HttpSession session) {
 		log.info("member.review_ing() 실행");
+		
+/*		// pageNo를 받지 못했을 경우, 세션에 저장되어 있는지 확인
+		if (pageNo == null) {
+			pageNo = (String) session.getAttribute("pageNo");
+			// 세션에 저장되어 있지 않을 경우"1"로 강제 세팅
+			if (pageNo == null) {
+				pageNo = "1";
+			}
+		}
+		// 세션에 pageNo 저장
+		session.setAttribute("pageNo", pageNo);
+		// 문자열을 정수로 반환
+		int intPageNo = Integer.parseInt(pageNo);
+
+		// Pager 객체 생성
+		int rowsPagingTarget = boardService.getTotalRows();
+		PagerDto pager = new PagerDto(10, 10, rowsPagingTarget, intPageNo);
+
+		// Service에서 게시물 목록 요청
+		List<BoardDto> boardList = boardService.getBoardList(pager);
+
+		// JSP에서 사용할 수 있도록 설정
+		model.addAttribute("pager", pager);
+		model.addAttribute("boardList", boardList);*/
+		
 		return "member/review_ing";
 	}
 
@@ -134,6 +171,8 @@ public class MemberController {
 		log.info("member.lost_id() 실행");
 		return "member/lost_id";
 	}
+
+	
 
 	// 비밀번호 찾기
 	@RequestMapping("/lost_pw")
