@@ -74,16 +74,18 @@ public class MemberService {
 	}
 
 
-	public List<ProductDto> getProductList(PagerDto pager) {
-		// TODO Auto-generated method stub
-		return null;
+	public int getCount(String mid) {
+		int count = 0;
+		log.info("service 진입"+mid);
+		
+		// DB에서 중복값의 행을 반환했을 때 0이 나오면 
+		if(memberDao.selectByMidIsUnique(mid) != 0) {
+			count = 1; // 유일한 아이디이고
+		} 
+		log.info(memberDao.selectByMidIsUnique(mid)+"");
+		log.info(count+"");
+		
+		return count;
 	}
-
-	
-	// 게시물 첨부파일 보기 메소드
-	/*public byte[] getAttachData(int bno) {
-		Ch13Board board = boardDao.selectAttachData(bno);
-		return board.getBattachdata();
-	}*/
 
 }

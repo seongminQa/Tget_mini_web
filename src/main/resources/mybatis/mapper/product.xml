@@ -3,5 +3,86 @@
 
 <mapper namespace="com.mycompany.Tget_mini_web.dao.ProductDao">
 	
+	<!-- 상품 정보 얻기 -->
+	<select id="selectByPno" parameterType="int" resultType="ProductDto">
+		select pno, pkind, ptitle, pplace, pprice, 
+			pcontent, pposter, pactors, pdatestart, pdateend, pseatgrade, pseatscnt,
+			paddress, pgenre, pcontentattachtype, pposterattachtype, pactorsattachtype
+		from product
+		where pno = #{pno}
+	</select>
+	
+	<!-- 상품 더미 집어넣기 테스트 -->
+	<insert id="insertProduct" parameterType="ProductDto">
+		<selectKey keyProperty="pno" order="BEFORE" resultType="int">
+			select pno_seq.nextval from dual
+		</selectKey>
+		
+		insert into product (pno, pkind, ptitle, pplace, pprice, 
+			pcontent, pposter, pactors, pdatestart, pdateend, pseatgrade, pseatscnt,
+			paddress, pgenre, pcontentattachtype, pposterattachtype, pactorsattachtype)
+		values(#{pno}, #{pkind}, #{ptitle}, #{pplace}, #{pprice}, #{pcontent}, #{pposter},
+			#{pactors}, #{pdatestart}, #{pdateend}, #{pseatgrade}, #{pseatscnt}, #{paddress}, ${pgenre}, #{pcontentattachtype},
+			#{pposterattachtype}, #{pactorsattachtype})
+	</insert>
+	
+	<!-- 상품의 수 얻기 -->
+	<select id="count" resultType="int">
+		select count(*) from product
+	</select>
+	
+	<!-- 상품 포스터 이미지 보기 -->
+	<select id="selectAttachProductData" parameterType="int" resultType="ProductDto">
+		select pposter from product
+		where pno = #{pno}
+	</select>
+	
+	<!-- 상품 수에 따라 페이징 처리하기 -->
+ 	<select id="selectByPage" parameterType="PagerDto" resultType="ProductDto">
+		<!-- C는 캐릭터를 의미. 문자 그대로의 데이터를 받아들이는 구문 -->
+		<![CDATA[
+			select rnum, pno, pkind, ptitle, pplace, pprice, 
+				pcontent, pposter, pactors, pdatestart, pdateend, pseatgrade, pseatscnt,
+				paddress, pgenre, pcontentattachtype, pposterattachtype, pactorsattachtype
+			from (
+			    select rownum as rnum, pno, pkind, ptitle, pplace, pprice, 
+					pcontent, pposter, pactors, pdatestart, pdateend, pseatgrade, pseatscnt,
+					paddress, pgenre, pcontentattachtype, pposterattachtype, pactorsattachtype
+			    from (
+			        select *
+			        from product
+			        order by pno desc
+			    )
+			    where rownum <= #{endRowNo}
+			)
+			where rnum >= #{startRowNo}
+		]]>
+	</select>
+	
+	<!-- 상품 정보 수정하기 -->
+	<update id="updateProduct" parameterType="ProductDto">
+		update product set
+			pkind = #{pkind},
+			ptitle = #{ptitle},
+			pplace = #{pplace},
+			pprice = #{pprice},
+			pcontent = #{pcontent},
+			pposter = #{pposter},
+			pactors = #{pactors},
+			pdatestart = #{pdatestart},
+			pdateend = #{pdateend},
+			pseatgrade = #{pseatgrade},
+			pseatscnt = #{pseatscnt},
+			paddress = #{paddress},
+			pgenre = #{pgenre}
+		where pno = #{pno}
+	</update>
+	
+	<!-- 회원 삭제 -->
+	<delete id="deleteByPno" parameterType="int">
+		delete
+			from product
+			where pno = #{pno}
+	</delete>
 	
 </mapper>

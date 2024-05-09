@@ -35,6 +35,43 @@
 			  color : red;
 			}
 		</style>
+		
+		<script>
+			// 파일 선택 시 바로 화면에 보여주기
+			function previewFile(kind, pno) {
+				if(kind == "new") {
+					var input = event.target;
+					console.log(input);
+					var reader = new FileReader();
+					if(input.files && input.files[0]) {
+						reader.onload = function() {
+							var imgTag = document.getElementById('repimg-container');
+							imgTag.setAttribute("src", reader.result);
+							console.log(imgTag);
+						};
+						reader.readAsDataURL(input.files[0]);
+					} else {
+						document.getElementById('repimg-container').src = "";
+					}
+				} 
+				
+				if(kind == "update"){
+					var input = event.target;
+					console.log(input);
+					var reader = new FileReader();
+					if(input.files && input.files[0]) {
+						reader.onload = function() {
+							var imgTag = document.getElementById('repimg-container-update-'+pno);
+							imgTag.setAttribute("src", reader.result);
+							console.log(imgTag);
+						};
+						reader.readAsDataURL(input.files[0]);
+					} else {
+						document.getElementById('repimg-container-update-'+pno).src = "";
+					}
+				}
+			}
+		</script>
 </head>
 <body>
 
@@ -49,12 +86,13 @@
 				<div class="col-lg-10">
 					<!-- 유저 1 -->
 					<div class="card">
-						<div class="card-header">회원 관리</div>
+						<div class="card-header">상품 관리</div>
 						<div class="card-body">
 							<table class="table table-hover text-center">
 								<thead>
 									<tr style="font-size: 18px;">
-										<th>연극 번호</th>
+										<th>상품 번호</th>
+										<th>분류</th>
 										<th>포스터</th>
 										<th>제목</th>
 										<th>장소</th>
@@ -68,10 +106,16 @@
 									<c:forEach var="product" items="${productList}">
 										<tr>
 											<td>${product.pno}</td>
-											<td>${product.pposter}</td>
+											<td>${product.pkind}</td>
+											<td><img src="attachProduct?pno=${product.pno}" width="90" height="54"></td>
 											<td>${product.ptitle}</td>
-											<td>${product.paddress}</td>
-											<td>${product.pdatestart} ~ 2024.06.19</td>
+											<td>${product.pplace}</td>
+											<td>
+												<fmt:formatDate value="${product.pdatestart}" pattern="yyyy-MM-dd"/> ~ <br> 
+												<fmt:formatDate value="${product.pdateend}" pattern="yyyy-MM-dd"/>
+												<%-- ${product.pdatestart} ~ <br> 
+												${product.pdateend} --%>
+											</td>
 											<td>${product.pprice}</td>
 											<td>
 												<button type="button" class="btn btn-outline-secondary"
@@ -79,8 +123,8 @@
 													수정
 												</button>
 												
-												<!-- 회원 수정 및 삭제 Modal -->
-												<div class="modal fade" id="boardModify${product.pno}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<!-- 상품 수정 및 삭제 Modal -->
+												 <div class="modal fade" id="productModify${product.pno}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 												  <div class="modal-dialog modal-lg">
 												    <div class="modal-content">
 												
@@ -93,60 +137,168 @@
 												      <!-- Modal body -->
 												      <div class="modal-body">
 												      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-														<form method="post" action="productModify">
+														<form method="post" action="productModify" enctype="multipart/form-data">
 															<!-- 시큐리티의 위조 방지를 위한 토큰번호. -->
-														   <%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
-														   <div class="container">
+														   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 														   
-															   <div class="form-group d-flex align-items-center mb-2">
-															       <label for="mid" style="width:30%">회원 아이디 : </label>
-															       <input type="text" class="form-control" id="mid" name="mid" style="width:50%"
-															       		value="${member.mid}" readOnly>
-															   </div>
-															   
-															   <div class="form-group d-flex align-items-center mb-2">
-															       <label for="mid" style="width:30%">회원 아이디 : </label>
-															       <input type="text" class="form-control" id="mid" name="mid" style="width:50%"
-															       		value="${member.mid}" readOnly>
-															   </div>
-															   
-															   <div class="form-group d-flex align-items-center mb-2">
-															       <label for="mname" style="width:30%">회원 이름</label>
-															       <input type="text" class="form-control" id="mname" name="mname" style="width:50%"
-															       		value="${member.mname}" readOnly>
-															   </div>
-															   
-															   <div class="form-group d-flex align-items-center mb-2">
-															      <label for="mpassword" style="width:30%">회원 비밀번호</label>
-															      <!-- 비밀번호 부분 어떻게 할지?** -->
-															      <input type="password" class="form-control" id="mpassword" name="mpassword" style="width:50%">
-															   </div>
-															   
-															   <div class="form-group d-flex align-items-center mb-2">
-															      <label for="memail" style="width:30%">e-mail</label>
-															      <input type="email" class="form-control" id="memail" name="memail" style="width:50%"
-															      		value="${member.memail}">
-															   </div>
-															   
-															   <div class="form-group d-flex align-items-center mb-2">
-															      <label for="mphone" style="width:30%">전화번호</label>
-															      <input type="text" class="form-control" id="mphone" name="mphone" style="width:50%"
-															      		value="${member.mphone}">
-															   </div>
-															   
-													           <div class="form-group d-flex align-items-center mb-2">
-													              <label for="mgrade" style="width:30%">회원 등급</label>
-													              <select class="form-control" id="mgrade" name="mgrade" style="width:50%">
-													                 <option value="GRADE_1" selected>일반</option>
-													                 <option value="GRADE_2">골드</option>
-													                 <option value="GRADE_3">플래티넘</option>
-													              </select>
-													           </div>
-															</div>
-															<button type="submit" class="btn btn-outline-secondary mt-2">수정</button>
-														    <a href="memberDelete?mid=${member.mid}" class="btn btn-outline-danger mt-2">삭제</a>
-															<!-- <button type="submit" class="btn btn-outline-danger mt-2" data-bs-dismiss="modal">삭제</button> -->
-														    <%-- <a href="memberModify?mid=${member.mid}" class="btn btn-outline-secondary mt-2">수정</a> --%>
+															    <div class="container fluid" style="width:100%">
+															      <div class="row" style="height: 100%;">
+															        <div id="pictures" class="col" style="width:40%">
+															          	<img id="repimg-container-update-${product.pno}" src="attachProduct?pno=${product.pno}" alt="" style="width:100%; height:100%">
+															        </div>
+															        <div class="col d-flex flex-column" style="width:60%">
+															            <div class="input-group">
+															              <div class="input-group-prepend">
+															                <span class="input-group-text">상품 번호 :
+															                </span>
+															              </div>
+															              <input id="pno" type="number" name="pno" class="form-control"
+															              	value="${product.pno}" readOnly>
+															            </div>
+															
+															            <div class="input-group">
+															              <div class="input-group-prepend">
+															                <span class="input-group-text">분류 : 
+															                </span>
+															              </div>
+															              <select class="form-control" id="" name="pkind">
+															              	<c:if test="${product.pkind == '연극'}">
+															              		<option value="${product.pkind}" selected="selected">${product.pkind}</option>
+															              		<option value="뮤지컬">뮤지컬</option>
+															              	</c:if>
+															              	<c:if test="${product.pkind == '뮤지컬'}">
+															              		<option value="${product.pkind}" selected="selected">${product.pkind}</option>
+															                	<option value="연극">연극</option>
+															              	</c:if>
+															              </select>
+															            </div>
+															            
+															
+															            <div class="input-group">
+															              <div class="input-group-prepend">
+															                <span class="input-group-text">제목 :
+															                </span>
+															              </div>
+															              <input id="ptitle" type="text" name="ptitle" class="form-control"
+															              	value="${product.ptitle}">
+															            </div>
+															
+															            <div class="input-group">
+															              <div class="input-group-prepend">
+															                <span class="input-group-text">장소 :
+															                </span>
+															              </div>
+															              <input id="pplace" type="text" name="pplace" class="form-control"
+															              	value="${product.pplace}">
+															            </div>
+															
+															            <div class="input-group">
+															              <div class="input-group-prepend">
+															                <span class="input-group-text">가격 :
+															                </span>
+															              </div>
+															              <input id="pprice" type="number" name="pprice" class="form-control"
+															              	value="${product.pprice}">
+															            </div>
+															
+															            <div class="input-group">
+															              <div class="input-group-prepend">
+															                <span class="input-group-text">상품 컨텐츠 :
+															                </span>
+															              </div>
+															              <%-- <input id="pcontent" type="file" name="pcontentattach" class="form-control"
+															              	value="${product.pcontent}"> --%>
+															              <input id="pcontent" type="file" name="pcontentattach" class="form-control">
+															            </div>
+															
+															            <div class="input-group">
+															              <div class="input-group-prepend">
+															                <span class="input-group-text">상품 포스터 :
+															                </span>
+															              </div>
+															              <input id="pposter" type="file" name="pposterattach" class="form-control" accept="image/*" onchange="previewFile('update', ${product.pno})">
+															            </div>
+															
+															            <div class="input-group">
+															              <div class="input-group-prepend">
+															                <span class="input-group-text">배우 :
+															                </span>
+															              </div>
+															              <%-- <input id="pactors" type="file" name="pactorsattach" class="form-control"
+															              	value="${product.pactors}"> --%>
+															              <input id="pactors" type="file" name="pactorsattach" class="form-control">
+															            </div>
+															
+															            <div class="input-group">
+															              <div class="input-group-prepend">
+															                <span class="input-group-text">상품 판매 시작일 :
+															                </span>
+															              </div>
+															              <input type="date" id="pdatestart" name="pdatestart" 
+															              	value="<fmt:formatDate value="${product.pdatestart}" pattern="yyyy-MM-dd"/>"/>
+															            </div>
+															
+															            <div class="input-group">
+															              <div class="input-group-prepend">
+															                <span class="input-group-text">상품 판매 종료일 :
+															                </span>
+															              </div>
+															              <input type="date" id="pdateend" name="pdateend"
+															              	value="<fmt:formatDate value="${product.pdateend}" pattern="yyyy-MM-dd"/>"/>
+															            </div>
+															
+															            <div class="input-group">
+															              <div class="input-group-prepend">
+															                <span class="input-group-text">좌석 등급 :
+															                </span>
+															              </div>
+															              <select class="form-control" id="pseatgrade" name="pseatgrade">
+															              	<c:if test="${product.pseatgrade eq '일반석'}">
+															              		<option value="${product.pseatgrade}" selected="selected">${product.pseatgrade}</option>
+															              		<option value="로얄석">로얄석</option>
+															              	</c:if>
+															              	<c:if test="${product.pseatgrade eq '로얄석'}">
+															              		<option value="${product.pseatgrade}" selected="selected">${product.pseatgrade}</option>
+															                	<option value="일반석">일반석</option>
+															              	</c:if>
+															              </select>
+															            </div>
+															
+															            <div class="input-group">
+															              <div class="input-group-prepend">
+															                <span class="input-group-text">좌석 수 :
+															                </span>
+															              </div>
+															              <input id="pseatscnt" type="number" name="pseatscnt" class="form-control"
+															              	value="${product.pseatscnt}">
+															            </div>
+															
+															            <div class="input-group">
+															              <div class="input-group-prepend">
+															                <span class="input-group-text">공연장 상세주소 :
+															                </span>
+															              </div>
+															              <input id="paddress" type="text" name="paddress" class="form-control"
+															              	value="${product.paddress}">
+															            </div>
+															            
+															            <div class="input-group">
+															              <div class="input-group-prepend">
+															                <span class="input-group-text">상품 장르 :
+															                </span>
+															              </div>
+															              <input id="pgenre" type="text" name="pgenre" class="form-control"
+															              	value="${product.pgenre}">
+															            </div>
+																										
+															            <div class="mt-3 text-end">
+															              <button type="submit" class="btn btn-outline-secondary mt-2">수정</button>
+															              <a href="productDelete?pno=${product.pno}" class="btn btn-outline-danger mt-2">삭제</a>
+															            </div>
+															        </div>
+															      </div>
+															    </div>
+															    
 														</form>
 														<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->		
 												      </div>
@@ -160,182 +312,208 @@
 									</c:forEach>
 								
 									<tr>
-										<td colspan="7" class="text-center">
+										<td colspan="8" class="text-center">
 										
 							               <div>
-							                  <a class="btn btn-outline-primary btn-sm" href="memberReader?pageNo=1">처음</a>
+							                  <a class="btn btn-outline-primary btn-sm" href="productReader?pageNo=1">처음</a>
 							                  <c:if test="${pager.groupNo>1}">
-							                     <a class="btn btn-outline-info btn-sm" href="memberReader?pageNo=${pager.startPageNo-1}">이전</a>
+							                     <a class="btn btn-outline-info btn-sm" href="productReader?pageNo=${pager.startPageNo-1}">이전</a>
 							                  </c:if>
 							                  
 							                  <!-- 번호가 들어가는 부분 -->
 							                  <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 							                     <c:if test="${pager.pageNo != i}">
-							                        <a class="btn btn-outline-success btn-sm" href="memberReader?pageNo=${i}">${i}</a>
+							                        <a class="btn btn-outline-success btn-sm" href="productReader?pageNo=${i}">${i}</a>
 							                     </c:if>
 							                     <c:if test="${pager.pageNo == i}">
-							                        <a class="btn btn-danger btn-sm" href="memberReader?pageNo=${i}">${i}</a>
+							                        <a class="btn btn-danger btn-sm" href="productReader?pageNo=${i}">${i}</a>
 							                     </c:if>
 							                  </c:forEach>
 							                  
 							                  <c:if test="${pager.groupNo<pager.totalGroupNo}">
-							                     <a class="btn btn-outline-info btn-sm" href="memberReader?pageNo=${pager.endPageNo+1}">다음</a>
+							                     <a class="btn btn-outline-info btn-sm" href="productReader?pageNo=${pager.endPageNo+1}">다음</a>
 							                  </c:if>
-							                  <a class="btn btn-outline-primary btn-sm" href="memberReader?pageNo=${pager.totalPageNo}">맨끝</a>
+							                  <a class="btn btn-outline-primary btn-sm" href="productReader?pageNo=${pager.totalPageNo}">맨끝</a>
 							               </div>
 
 										</td>
 									</tr>
 								</tbody>
 							</table>
+							
 						</div>
 					</div>
-					<!-- 등록/수정/삭제 버튼 -->
+					<!-- 등록 버튼 -->
 					<!-- 대기** -->
-					<!-- <div class="d-flex justify-content-end m-3">
+					<div class="d-flex justify-content-end m-3">
 						<button type="button" class="btn btn-outline-secondary me-2"
-							data-bs-toggle="modal" data-bs-target="#signupModal">
-							매니저 등록
+							data-bs-toggle="modal" data-bs-target="#productSignUpModal">
+							상품 등록
 						</button>
 					</div>
- -->
+ 
 				</div>
 			</div>
 		</div> 
 	</div>
-	
-	<!-- 등록 버튼 -->
-	<!-- 관리자, 매니저, 회원 선택지 Modal -->
-	<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h1 class="modal-title fs-5" id="exampleModalLabel">어떤 회원을 등록하시겠습니까?</h1>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      </div>
-	      <div class="modal-body">
-	        <button type="button" class="btn btn-dark me-2"
-	        	data-bs-toggle="modal" data-bs-target="#adminSignupModal">
-	        	관리자
-	        </button>
-	        <button type="button" class="btn btn-info me-2"
-	        	data-bs-toggle="modal" data-bs-target="#managerSignupModal">
-	        	매니저
-	        </button>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-	        <button type="button" class="btn btn-primary">생성</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	
-	<!-- Admin 등록 Modal -->
-	<div class="modal" id="adminSignupModal">
-	  <div class="modal-dialog modal-lg">
-	    <div class="modal-content">
-	
-	      <!-- Modal Header -->
-	      <div class="modal-header d-flex justify-content-center">
-	        <h4 class="modal-title">관리자 등록</h4>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-	      </div>
 
-	      <!-- Modal body -->
-	      <div class="modal-body">
-	      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-			<form method="post" action="#">
-				<!-- 시큐리티의 위조 방지를 위한 토큰번호. -->
-			   <%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
-			   <div class="form-group mb-2">
-			       <label for="mid">아이디</label>
-			       <input type="text" class="form-control" id="mid" name="mid">
-			   </div>
-			   <div class="form-group mb-2">
-			       <label for="mname">이름</label>
-			       <input type="text" class="form-control" id="mname" name="mname">
-			   </div>
-			   <div class="form-group mb-2">
-			      <label for="mpassword">비밀번호</label>
-			      <input type="password" class="form-control" id="mpassword" name="mpassword">
-			   </div>
-			   <div class="form-group mb-2">
-			      <label for="memail">이메일</label>
-			      <input type="email" class="form-control" id="memail" name="memail">
-			   </div>
-			   
-	           <!-- <div class="form-group">
-	              <label for="mrole">Member Role</label>
-	              <select class="form-control" id="mrole" name="mrole">
-	                 <option value="ROLE_ADMIN">Admin</option>
-	                 <option value="ROLE_MANAGER">Manager</option>
-	                 <option value="ROLE_USER" selected>User</option>
-	              </select>
-	           </div> -->
-			   
-			   <button type="submit" class="btn btn-info btn-sm mt-2">등록</button>
-			</form>
-			<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->		
-	      </div>
-		  
-	      <!-- Modal footer -->
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-	      </div>
-	
-	    </div>
-	  </div>
-	</div>
-	
-	<!-- Manager 등록 Modal -->
-	<div class="modal" id="managerSignupModal">
+	<!-- 상품 등록 Modal -->
+	<div class="modal fade" id="productSignUpModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-lg">
 	    <div class="modal-content">
 	
 	      <!-- Modal Header -->
-	      <div class="modal-header d-flex justify-content-center">
-	        <h4 class="modal-title">매니저 등록</h4>
+	      <div class="modal-header text-center">
+	        <h4 class="modal-title">상품 등록</h4>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 	      </div>
 	
 	      <!-- Modal body -->
 	      <div class="modal-body">
 	      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-			<form method="post" action="#">
+			<form method="post" action="productSignUp" enctype="multipart/form-data">
 				<!-- 시큐리티의 위조 방지를 위한 토큰번호. -->
 			   <%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
-			   <div class="form-group mb-2">
-			       <label for="mid">아이디</label>
-			       <input type="text" class="form-control" id="mid" name="mid">
-			   </div>
-			   <div class="form-group mb-2">
-			       <label for="mname">이름</label>
-			       <input type="text" class="form-control" id="mname" name="mname">
-			   </div>
-			   <div class="form-group mb-2">
-			      <label for="mpassword">비밀번호</label>
-			      <input type="password" class="form-control" id="mpassword" name="mpassword">
-			   </div>
-			   <div class="form-group mb-2">
-			      <label for="memail">이메일</label>
-			      <input type="email" class="form-control" id="memail" name="memail">
-			   </div>
-
-			   <button type="submit" class="btn btn-info btn-sm mt-2">등록</button>
+			   
+				    <div class="container fluid" style="width:100%">
+				      <div class="row" style="height: 100%;">
+				        <div id="pictures" class="col" style="width:40%">
+				          <img id="repimg-container" src="" alt="" style="width:100%; height:100%">
+				        </div>
+				        <div class="col d-flex flex-column" style="width:60%">
+				            <%-- <div class="input-group">
+				              <div class="input-group-prepend">
+				                <span class="input-group-text">상품 번호 :
+				                </span>
+				              </div>
+				              <input id="pno" type="number" name="pno" class="form-control" value="${product.pno}">
+				            </div> --%>
+				
+				            <div class="input-group mt-2">
+				              <div class="input-group-prepend">
+				                <span class="input-group-text">상품 분류 :
+				                </span>
+				              </div>
+				              <select class="form-control" id="pkind" name="pkind">
+				              	<option value="" selected disabled hidden>카테고리</option>
+				                <option value="연극">연극</option>
+				                <option value="뮤지컬">뮤지컬</option>
+				              </select>
+				            </div>
+				
+				            <div class="input-group">
+				              <div class="input-group-prepend">
+				                <span class="input-group-text">제목 :
+				                </span>
+				              </div>
+				              <input id="ptitle" type="text" name="ptitle" class="form-control">
+				            </div>
+				
+				            <div class="input-group">
+				              <div class="input-group-prepend">
+				                <span class="input-group-text">장소 :
+				                </span>
+				              </div>
+				              <input id="pplace" type="text" name="pplace" class="form-control">
+				            </div>
+				
+				            <div class="input-group">
+				              <div class="input-group-prepend">
+				                <span class="input-group-text">가격 :
+				                </span>
+				              </div>
+				              <input id="pprice" type="number" name="pprice" class="form-control">
+				            </div>
+				
+				            <div class="input-group">
+				              <div class="input-group-prepend">
+				                <span class="input-group-text">상품 컨텐츠 :
+				                </span>
+				              </div>
+				              <input id="pcontent" type="file" name="pcontentattach" class="form-control">
+				            </div>
+				
+				            <div class="input-group">
+				              <div class="input-group-prepend">
+				                <span class="input-group-text">상품 포스터 :
+				                </span>
+				              </div>
+				              <input id="pposter" type="file" name="pposterattach" class="form-control" accept="image/*" onchange="previewFile('new')">
+				            </div>
+				
+				            <div class="input-group">
+				              <div class="input-group-prepend">
+				                <span class="input-group-text">배우 :
+				                </span>
+				              </div>
+				              <input id="pactors" type="file" name="pactorsattach" class="form-control">
+				            </div>
+				
+				            <div class="input-group">
+				              <div class="input-group-prepend">
+				                <span class="input-group-text">상품 판매 시작일 :
+				                </span>
+				              </div>
+				              <input type="date" id="pdatestart" name="pdatestart"/>
+				            </div>
+				
+				            <div class="input-group">
+				              <div class="input-group-prepend">
+				                <span class="input-group-text">상품 판매 종료일 :
+				                </span>
+				              </div>
+				              <input type="date" id="pdateend" name="pdateend"/>
+				            </div>
+				
+				            <div class="input-group">
+				              <div class="input-group-prepend">
+				                <span class="input-group-text">좌석 등급 :
+				                </span>
+				              </div>
+				              <select class="form-control" id="pseatgrade" name="pseatgrade">
+				                <option value="일반석" selected="selected">일반석</option>
+				                <option value="로얄석">로얄석</option>
+				              </select>
+				            </div>
+				
+				            <div class="input-group">
+				              <div class="input-group-prepend">
+				                <span class="input-group-text">좌석 수 :
+				                </span>
+				              </div>
+				              <input id="pseatscnt" type="number" name="pseatscnt" class="form-control">
+				            </div>
+				
+				            <div class="input-group">
+				              <div class="input-group-prepend">
+				                <span class="input-group-text">공연장 상세주소 :
+				                </span>
+				              </div>
+				              <input id="paddress" type="text" name="paddress" class="form-control">
+				            </div>
+				            
+				            <div class="input-group">
+				              <div class="input-group-prepend">
+				                <span class="input-group-text">상품 장르 :
+				                </span>
+				              </div>
+				              <input id="pgenre" type="text" name="pgenre" class="form-control">
+				            </div>
+				
+				            <div class="mt-3 text-end">
+				              <button type="submit" class="btn btn-outline-secondary mt-2">등록</button>
+				            </div>
+				        </div>
+				      </div>
+				    </div>
+				    
 			</form>
 			<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->		
-	      </div>
-		  
-	      <!-- Modal footer -->
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
 	      </div>
 	
 	    </div>
 	  </div>
 	</div>
-	
 
 </body>
 </html>

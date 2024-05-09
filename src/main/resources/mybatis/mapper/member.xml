@@ -5,8 +5,8 @@
 
 	<!-- 회원정보 얻기 -->
 	<select id="selectByMid" parameterType="String" resultType="MemberDto">
-		select mid, mname, mpassword, mssn, memail, mrole,
-			mphone, msince, mprefergenre, mgrade, mprofileimg, mtotalpay, mno
+		select mid, mname, mpassword, mssn, memail, mrole, mnickname, mprofileimgtype, mprofileimgname,
+			mphone, msince, mprefergenre, mgrade, mprofileimg as mprofileimgdata, mtotalpay, mno
 		from member
 		where mid = #{mid}
 	</select>
@@ -22,6 +22,7 @@
 		values(#{mid}, #{mname}, #{mpassword}, #{mssn}, #{memail},
 			#{mphone}, #{msince}, #{mprefergenre}, #{mgrade}, #{mtotalpay}, #{mrole}, ${mno})
 	</insert>
+	
 	<!-- 회원가입 form DB연동 -->
 	<insert id="insertJoin" parameterType="MemberDto">
 		<selectKey keyProperty="mno" order="BEFORE" resultType="int">
@@ -74,6 +75,11 @@
 			where mid = #{mid}
 	</delete>
 	
-
+	<!-- 회원가입 할 아이디가 중복값인지 int으로 가져오기 -->
+	<select id="selectByMidIsUnique" parameterType="String" resultType="int">
+		select COUNT(mid)
+		from member
+		where mid = #{mid}
+	</select>
 
 </mapper>

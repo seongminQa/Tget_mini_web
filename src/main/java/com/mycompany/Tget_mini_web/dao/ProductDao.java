@@ -13,7 +13,8 @@ public interface ProductDao {
 	public List<ProductDto> selectByPage(PagerDto pager);
 	public int count();
 	public int updateProduct(ProductDto productDto);
-	public void deleteByPno(int pno);
+	public int deleteByPno(int pno);
 	public ProductDto selectByPno(int pno);
-	public int deleteByMid(int pno);
+	//
+	public ProductDto selectAttachProductData(int pno);
 }

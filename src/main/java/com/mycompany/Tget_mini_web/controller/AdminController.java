@@ -1,11 +1,12 @@
 package com.mycompany.Tget_mini_web.controller;
 
-import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,6 @@ import com.mycompany.Tget_mini_web.dao.MemberDao;
 import com.mycompany.Tget_mini_web.dao.ProductDao;
 import com.mycompany.Tget_mini_web.dto.MemberDto;
 import com.mycompany.Tget_mini_web.dto.PagerDto;
-import com.mycompany.Tget_mini_web.dto.Pre_product;
 import com.mycompany.Tget_mini_web.dto.ProductDto;
 import com.mycompany.Tget_mini_web.service.MemberService;
 import com.mycompany.Tget_mini_web.service.ProductService;
@@ -58,6 +58,8 @@ public class AdminController {
 		log.info("admin.index() 실행");
 		return "/admin/index";
 	}
+	
+	// ==================================================================
 	
 	// 회원
 	// 회원 조회 화면 (회원들의 리스트 보여주기)
@@ -143,9 +145,11 @@ public class AdminController {
 		return "redirect:/admin/memberReader";
 	}
 	
+	// ==================================================================
+	
 	// 상품
 	// 상품 조회
-	@RequestMapping("/productReader")
+	@GetMapping("/productReader")
 	public String productReader(Model model, String pageNo, HttpSession session) {
 		log.info("admin.productReader() 실행");
 		
@@ -170,35 +174,38 @@ public class AdminController {
 		
 		// 페이징 정보를 얻어서 서비스쪽으로 넘기고  Service에서 게시물 목록 요청
 		List<ProductDto> productList = productService.getProductList(pager);
+//		log.info("pkind : " + productList.get(0).getPkind());
 		
 		// jsp에서 사용할 수 있도록 설정.
 		model.addAttribute("pager", pager);
+		log.info("pager.getTotalRows() : " + pager.getTotalRows());
+		log.info("pager.getEndPageNo() : " + pager.getEndPageNo());
+		log.info("pager.getStartPageNo() : " + pager.getStartPageNo());
+		
 		model.addAttribute("productList", productList);
 
 		return "/admin/product/p_read";
 	}
 	
-	// 회원 등록 더미 집어넣기
+	// 상품 등록 더미 집어넣기
 	@GetMapping("/signupProductTest")
 	public String signupProductTest() throws Exception {
 		Date now = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String nowStr = formatter.format(now);
 		Date nowDate = formatter.parse(nowStr);
-		
-		
-		
 
 		/*for(int i=45; i<65; i++) {
 			ProductDto productDto = new ProductDto();
+			byte[] data = productService.getAttachData(bno);
 			productDto.setPno(i);
 			productDto.setPkind("연극");
 			productDto.setPtitle("제목" + i);
 			productDto.setPplace("공연 "+i+"장");
 			productDto.setPprice(i*1000);
-			productDto.setPcontent("");
-			productDto.setPposter("");
-			productDto.setPactors("");
+			productDto.setPcontent();
+			productDto.setPposter();
+			productDto.setPactors();
 			productDto.setPdatestart(nowDate);
 			productDto.setPdateend(nowDate);
 			productDto.setPseatgrade("일반석");
@@ -213,27 +220,81 @@ public class AdminController {
 	// 상품 등록
 	@RequestMapping("/productSignUp")
 	public String productSignUp(ProductDto productDto) {
-		log.info("admin.productSignup() 실행");
+		/*log.info("admin.productSignUp() 실행");
+		log.info(productDto.getPplace());*/
 		
+		// 상품 등록 폼에서 파일을 첨부하고, 그 첨부한 파일(attach data)을 바이트 형식으로 바꾸어
+		// Dto 필드에 저장하고, DB 형식에 맞추어 저장한다.
+		try {
+			productDto.setPposter(productDto.getPposterattach().getBytes());
+			productDto.setPcontent(productDto.getPcontentattach().getBytes());
+			productDto.setPactors(productDto.getPactorsattach().getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		
-		
-		
-		
-		
+		productService.productSignUp(productDto);
 
-		return "/admin/product/p_sign";
+		return "redirect:/admin/productReader";
+	}
+	
+	// 상품 리스트 포스터 이미지
+	@GetMapping("/attachProduct")
+	public void attachProduct(int pno, HttpServletResponse response) throws Exception {
+		// 다운로드할 데이터를 준비
+		ProductDto productDto = productService.getProduct(pno);
+		byte[] data = productService.getAttachProductData(pno);
+		
+		// 응답 헤더 구성
+		response.setContentType(productDto.getPcontentattachtype()); // void메소드. 직접 응답을 생성해서 값을 반환
+		response.setContentType(productDto.getPposterattachtype()); // void메소드. 직접 응답을 생성해서 값을 반환
+		response.setContentType(productDto.getPactorsattachtype()); // void메소드. 직접 응답을 생성해서 값을 반환
+//		String fileName = new String(productDto.getPattachname().getBytes("UTF-8"), "ISO-8859-1");
+//		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+		
+		// 응답 본문에 파일 데이터 출력
+		OutputStream os = response.getOutputStream();
+		os.write(data);
+		os.flush();
+		os.close();
 	}
 	
 	// 상품 정보 수정
-	@RequestMapping("/productModify")
-	public String productModify(Model model) {
+	@PostMapping("/productModify")
+	public String productModify(Model model, ProductDto productDto) {
 		log.info("admin.productModify() 실행");
-		model.addAttribute("admin", "product");
-		return "/admin/product/p_modify";
+		// 첨부 파일이 있는지 여부 조사
+		if( (productDto.getPcontentattach() != null && !productDto.getPcontentattach().isEmpty()) 
+				&& (productDto.getPposterattach() != null && !productDto.getPposterattach().isEmpty()) 
+				&& (productDto.getPactorsattach() != null && !productDto.getPactorsattach().isEmpty())) {
+			// 첨부파일 타입 저장
+			productDto.setPcontentattachtype(productDto.getPcontentattach().getContentType());
+			productDto.setPposterattachtype(productDto.getPposterattach().getContentType());
+			productDto.setPactorsattachtype(productDto.getPactorsattach().getContentType());
+			try {
+				// 바이트 형식으로 pposter, pcontent, pactors 변수에 값 저장
+				productDto.setPposter(productDto.getPposterattach().getBytes());
+				productDto.setPcontent(productDto.getPcontentattach().getBytes());
+				productDto.setPactors(productDto.getPactorsattach().getBytes());
+			} catch (Exception e) {}			
+		}
+		
+		// 비즈니스 로직 처리를 서비스로 위임
+		productService.updateProduct(productDto);
+		
+		return "redirect:/admin/productReader";  // 수정한 상품이 있던 페이지로 이동해보자**
 	}
 	
+	// 상품 정보 삭제
+	@RequestMapping("/productDelete")
+	public String productDelete(int pno) {
+		log.info("삭제 실행");
+		productService.removeProduct(pno);
+		return "redirect:/admin/productReader";
+	}	
 	
+	// ========================================================================
 	
 	
 	// 게시판 조회

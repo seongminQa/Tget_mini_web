@@ -4,12 +4,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.Tget_mini_web.dao.ProductDao;
-import com.mycompany.Tget_mini_web.dto.MemberDto;
 import com.mycompany.Tget_mini_web.dto.PagerDto;
 import com.mycompany.Tget_mini_web.dto.ProductDto;
 
@@ -40,7 +37,7 @@ public class ProductService {
 		return totalRows;
 	}
 
-	// 멤버 객체를 pno으로 구분
+	// DB에 들어있는 상품의 정보 얻어오기 (상품 객체를 pno으로 구분)
 	public ProductDto getProduct(int pno) {
 		ProductDto productDto = productDao.selectByPno(pno);
 		return productDto;
@@ -53,15 +50,13 @@ public class ProductService {
 	
 	// 상품 삭제 메소드
 	public void removeProduct(int pno) {
-		int rowNum = productDao.deleteByMid(pno); // rowNum은 삭제된 행수를 얻고싶을 때 넣어주고, 필요없으면 안써도 된다.
+		int rowNum = productDao.deleteByPno(pno); // rowNum은 삭제된 행수를 얻고싶을 때 넣어주고, 필요없으면 안써도 된다.
 		productDao.deleteByPno(pno);
 	}
-
 	
-	// 게시물 첨부파일 보기 메소드
-	/*public byte[] getAttachData(int bno) {
-		Ch13Board board = boardDao.selectAttachData(bno);
-		return board.getBattachdata();
-	}*/
-
+	// 상품의 포스터 데이터 받기
+	public byte[] getAttachProductData(int pno) {
+		ProductDto productDto = productDao.selectAttachProductData(pno);
+		return productDto.getPposter();
+	}
 }
