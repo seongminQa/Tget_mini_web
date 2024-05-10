@@ -75,11 +75,32 @@
 			where mid = #{mid}
 	</delete>
 	
-	<!-- 회원가입 할 아이디가 중복값인지 int으로 가져오기 -->
+<!-- 회원가입 할 아이디가 중복값인지 int으로 가져오기 -->
 	<select id="selectByMidIsUnique" parameterType="String" resultType="int">
 		select COUNT(mid)
 		from member
 		where mid = #{mid}
+	</select>
+	
+	<!-- 회원가입 할 주민번호가 중복값인지 int으로 가져오기 -->
+	<select id="selectByMssnIsUnique" parameterType="String" resultType="int">
+		select COUNT(mssn)
+		from member
+		where mssn = #{mssn}
+	</select>
+	
+	<!-- 회원가입 할 휴대폰 번호가 중복값인지 int으로 가져오기 -->
+	<select id="selectByMphoneIsUnique" parameterType="String" resultType="int">
+		select COUNT(mphone)
+		from member
+		where mphone = #{mphone}
+	</select>
+	
+		<!-- 회원가입 할 휴대폰 번호가 중복값인지 int으로 가져오기 -->
+	<select id="selectByMnicknameIsUnique" parameterType="String" resultType="int">
+		select COUNT(mnickname)
+		from member
+		where mnickname = #{mnickname}
 	</select>
 	
 	<!--아이디 찾기  기능-->
