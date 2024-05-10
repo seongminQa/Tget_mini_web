@@ -29,11 +29,10 @@ public class MemberService {
 		log.info(passwordEncoder.encode(member.getMpassword()));
 		member.setMpassword(passwordEncoder.encode(member.getMpassword()));
 		member.setMgrade("일반"); // 처음 등급(not null이라서 일단 지정 함)
-		member.setMrole("user"); // 기본적으로 t-get 홈페이지를 통해 회원가입을 하는 사람들은 user로 지정
+		member.setMrole("ROLE_USER"); // 기본적으로 t-get 홈페이지를 통해 회원가입을 하는 사람들은 user로 지정
 		member.setMtotalpay(0); // 기본 값 0원으로 지정
 		member.setMssn(member.getMssn().replace("-", ""));
 		memberDao.insertJoin(member);
-		
 	}
 	
 	/*public void memberSignup(MemberDto memberDto) {
