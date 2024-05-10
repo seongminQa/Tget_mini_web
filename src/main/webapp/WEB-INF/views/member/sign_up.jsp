@@ -37,6 +37,7 @@
             margin-top: 20px;
             white-space: nowrap; /* 창 크기가 변경되어도 줄바꿈을 하지 않는다. */
         }
+        
         .div_form_checkbox,
         .submit_btn{
             width: 40%;
@@ -81,15 +82,16 @@
         <form id="joinForm" name="joinForm" method="post" onsubmit="handleCheckData()" enctype="multipart/form-data" action="${pageContext.request.contextPath}/member/join" novalidate class="row d-flex flex-column align-items-center ms-5" style="margin-top: 50px; margin-bottom: 50px;">
             <div class="div_form row">
                 <label for="mid" class="col-3 pt-3"><strong>아이디</strong></label>
-                <input class="col-7" type="text" id="mid" name="mid" placeholder="6~20자 영문 숫자 포함" oninput="idUniqueCheck()">
-                <button id="IdUniqueCheck" class="col-2 btn" type="button" style="border:none; background-color:#D95B96; color:white; height:40px; text-align: center;">중복체크 </button>
+                <!-- <input class="col-7" type="text" id="mid" name="mid" placeholder="6~20자 영문 숫자 포함" oninput="idUniqueCheck()"> -->
+                <input class="col-9" type="text" id="mid" name="mid" oninput="idUniqueCheck()" placeholder="6~20자 영문 숫자 포함"/>
+                
             </div>
             <div class="row" style="width: 40%;">
                 <span id="spanId" style="display: inline;" class="d-flex mt-3"></span>
             </div>
             <div class="div_form row">
                 <label for="mpassword" class="col-3 pt-3"><strong>비밀번호</strong></label>
-                <input class="pwClazz col-8" type="password" id="mpassword" name="mpassword" placeholder="8~12자 영문 대소문자 숫자 포함">
+                <input class="pwClazz col-8" type="password" oninput="pwPatternCheck()" id="mpassword" name="mpassword" placeholder="8~12자 영문 대소문자 숫자 포함">
                 <div class="pwEye col-1"><button type="button" style="border:none; background-color: transparent;"><img src="/Tget_mini_web/resources/image/project_image/eye.svg" style="width: 30px;"></button></div>
             </div>
             <div class="row" style="width: 40%;">
@@ -97,7 +99,7 @@
             </div>
             <div class="div_form row">
                 <label for="pwcheck" class="col-3 pt-3"><strong>비밀번호 확인</strong></label>
-                <input class="pwClazzCheck col-8" type="password" id="pwcheck" name="pwcheck" placeholder="8~12자 영문 대소문자 숫자 포함">
+                <input class="pwClazzCheck col-8" type="password" oninput="pwCheck()" id="pwcheck" name="pwcheck" placeholder="8~12자 영문 대소문자 숫자 포함">
                 <div class="pwEyeCheck col-1"><button type="button" style="border:none; background-color: transparent;"><img src="/Tget_mini_web/resources/image/project_image/eye.svg" style="width: 30px;"></button></div>
             </div>
             <div class="row" style="width: 40%;">
@@ -105,21 +107,21 @@
             </div>
             <div class="div_form row">
                 <label for="mname" class="col-3 pt-3"><strong>이름</strong></label>
-                <input class="col-9" type="text" id="mname" name="mname" placeholder="ex. 홍길동">
+                <input class="col-9" type="text" id="mname" oninput="nameCheck()" name="mname" placeholder="ex. 홍길동">
             </div>
             <div class="row" style="width: 40%;">
                 <span id="spanName" style="display: inline;" class="d-flex mt-3"></span>
             </div>
             <div class="div_form row">
                 <label for="mssn" class="col-3 pt-3"><strong>주민등록번호</strong></label>
-                <input class="col-9" type="text" id="mssn" name="mssn" placeholder="하이픈을 포함해주세요" style="color:grey">
+                <input class="col-9" type="text" id="mssn" oninput="ssnUniqueCheck()" name="mssn" placeholder="하이픈을 포함해주세요" style="color:grey">
             </div>
             <div class="row" style="width: 40%;">
                 <span id="spanSsn" style="display: inline;" class="d-flex mt-3"></span>
             </div>
             <div class="div_form row">
                 <label for="memail" class="col-3 pt-3"><strong>이메일</strong></label>
-                <input class="col-9" type="text" id="memail" name="memail" placeholder="ex. tget0101@naver.com">
+                <input class="col-9" type="text" id="memail" oninput="emailCheck()" name="memail" placeholder="ex. tget0101@naver.com">
             </div>
             <div class="row" style="width: 40%;">
                 <span id="spanEmail" style="display: inline;" class="d-flex mt-3"></span>
@@ -135,14 +137,14 @@
             </div> -->
             <div class="div_form row">
                 <label for="mphone" class="col-3 pt-3"><strong>전화번호</strong></label>
-                <input class="col-9" type="text" id="mphone" name="mphone" placeholder="하이픈을 포함해주세요">
+                <input class="col-9" type="text" id="mphone" oninput="phoneUniqueCheck()" name="mphone" placeholder="하이픈을 포함해주세요">
             </div>
             <div class="row" style="width: 40%;">
                 <span id="spanPhone" style="display: inline;" class="d-flex mt-3"></span>
             </div>
             <div class="div_form row">
                 <label for="mnickname" class="col-3 pt-3"><strong>닉네임(선택)</strong></label>
-                <input class="col-9" type="text" id="mnickname" name="mnickname" placeholder="ex. 연뮤덕">
+                <input class="col-9" type="text" id="mnickname" oninput="nicknameUniqueCheck()" name="mnickname" placeholder="ex. 연뮤덕">
             </div>
             <div class="row" style="width: 40%;">
                 <span id="spanNickname" style="display: inline;" class="d-flex mt-3"></span>
@@ -194,7 +196,6 @@
 <!-- footer 하단고정-->
    
    <%@include file="/WEB-INF/views/common/footer.jsp"%>
-
 
 
 
