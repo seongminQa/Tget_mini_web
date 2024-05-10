@@ -178,24 +178,20 @@ public class AdminController {
 		
 		// jsp에서 사용할 수 있도록 설정.
 		model.addAttribute("pager", pager);
-		log.info("pager.getTotalRows() : " + pager.getTotalRows());
-		log.info("pager.getEndPageNo() : " + pager.getEndPageNo());
-		log.info("pager.getStartPageNo() : " + pager.getStartPageNo());
-		
 		model.addAttribute("productList", productList);
 
 		return "/admin/product/p_read";
 	}
 	
 	// 상품 등록 더미 집어넣기
-	@GetMapping("/signupProductTest")
+	/*@GetMapping("/signupProductTest")
 	public String signupProductTest() throws Exception {
 		Date now = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String nowStr = formatter.format(now);
 		Date nowDate = formatter.parse(nowStr);
 
-		/*for(int i=45; i<65; i++) {
+		for(int i=45; i<65; i++) {
 			ProductDto productDto = new ProductDto();
 			byte[] data = productService.getAttachData(bno);
 			productDto.setPno(i);
@@ -213,9 +209,9 @@ public class AdminController {
 			productDto.setPaddress("대학로"+i);
 			
 			productDao.insertProduct(productDto);
-		}*/
+		}
 		return "redirect:/admin/productReader";
-	}
+	}*/
 	
 	// 상품 등록
 	@RequestMapping("/productSignUp")
