@@ -72,15 +72,57 @@ public class MemberService {
 	}
 
 
-	public int getCount(String mid) {
+	public int getMidCount(String mid) {
 		int count = 0;
 		log.info("service 진입"+mid);
 		
 		// DB에서 중복값의 행을 반환했을 때 0이 나오면 
 		if(memberDao.selectByMidIsUnique(mid) != 0) {
-			count = 1; // 유일한 아이디이고
+			count = 1; // 유일한 아이디이고 1을 반환한다.
 		} 
 		log.info(memberDao.selectByMidIsUnique(mid)+"");
+		log.info(count+"");
+		
+		return count;
+	}
+
+	public int getMssnCount(String mssn) {
+		int count = 0;
+		log.info("service 진입"+mssn);
+		
+		// DB에서 중복값의 행을 반환했을 때 0이 나오면 
+		if(memberDao.selectByMssnIsUnique(mssn) != 0) {
+			count = 1; // 유일한 주민번호이고 1을 반환한다.
+		} 
+		log.info(memberDao.selectByMssnIsUnique(mssn)+"");
+		log.info(count+"");
+		
+		return count;
+	}
+
+	public int getMphoneCount(String mphone) {
+		int count = 0;
+		log.info("service 진입"+mphone);
+		
+		// DB에서 중복값의 행을 반환했을 때 0이 나오면 
+		if(memberDao.selectByMphoneIsUnique(mphone) != 0) {
+			count = 1; // 유일한 휴대폰 번호이고 1을 반환한다.
+		} 
+		log.info(memberDao.selectByMphoneIsUnique(mphone)+"");
+		log.info(count+"");
+		
+		return count;
+	}
+
+	public int getMnicknameCount(String mnickname) {
+		int count = 0;
+		log.info("service 진입"+mnickname);
+		
+		// DB에서 중복값의 행을 반환했을 때 0이 나오면 
+		if(memberDao.selectByMnicknameIsUnique(mnickname) != 0) {
+			count = 1; // 유일한 닉네임이고 1을 반환한다.
+		} 
+		log.info(memberDao.selectByMnicknameIsUnique(mnickname)+"");
 		log.info(count+"");
 		
 		return count;
