@@ -120,7 +120,7 @@ public class MemberController {
        
        JSONObject jsonObject = new JSONObject();
         //jsonObject.put("result", "success");
-        //jsonObject.put("mid", mid);
+        jsonObject.put("mid", mid);
         jsonObject.put("count", count);
         return jsonObject.toString();
    }
