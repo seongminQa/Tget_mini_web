@@ -17,4 +17,5 @@ public interface ProductDao {
 	public ProductDto selectByPno(int pno);
 	//
 	public ProductDto selectAttachProductData(int pno);
+	public List<ProductDto> selectByProductList();
 }

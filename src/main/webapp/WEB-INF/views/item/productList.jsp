@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -129,16 +130,20 @@
 		    </div>
 		</div>
 		<hr/>
+		
         <div class="product_grid">
           <ul class="product_grid_list">
+          
             <!-- 상품 리스트 있는 만큼 반복 -->
             <c:forEach var="product" items="${productList}">
               <li class="product_grid_item m-3" style="display: inline-block">
                 <div class="product_grid_unit">
+                
                   <!-- 해당 상품 클릭시 상품 상세페이지로 전환 -->
                   <a href="detail?pno=${product.pno}" class="product_link">
                     <div class="product_imgbox">
-                      <img src="${product.pimg}" alt="" class="product_img">
+                      <img src="attachProduct?pno=${product.pno}" alt="" class="product_img"
+                      	style="width:257px; height:318px;">
                     </div>
                     <div class="product_info">
                       <span class="product_region"></span>
@@ -148,7 +153,9 @@
                           ${product.pplace}
                         </span>
                         <br>
-                        <span class="period">기간 ${product.pperiod} ~ 2024.4.24</span>
+                        <span class="period">
+							<fmt:formatDate value="${product.pdatestart}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${product.pdateend}" pattern="yyyy-MM-dd"/>
+                        </span>
                         <br>
                         <span class="price">가격: ${product.pprice}</span>
                       </div>

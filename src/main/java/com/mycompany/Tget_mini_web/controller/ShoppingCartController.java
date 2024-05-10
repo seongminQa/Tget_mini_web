@@ -1,40 +1,40 @@
 package com.mycompany.Tget_mini_web.controller;
 
-import java.io.File;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.io.OutputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
-import com.mycompany.Tget_mini_web.dto.CartItem;
-import com.mycompany.Tget_mini_web.dto.Pre_product;
+import com.mycompany.Tget_mini_web.dao.ProductDao;
+import com.mycompany.Tget_mini_web.dto.ProductDto;
+import com.mycompany.Tget_mini_web.service.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
 
+@Secured({"ROLE_ADMIN", "ROLE_USER"})
 @Controller
 @Slf4j
 @RequestMapping("/shopping")
 public class ShoppingCartController {
+	@Autowired
+	private ProductDao productDao;
+	
+	@Autowired
+	private ProductService productService;
 	
 	@RequestMapping("/productList")
-	public String productList(Model model) {
+	public String productList(Model model, HttpSession session) {
+/*		
 		// 상품의 갯수 세기 (현재는 이미지 파일의 갯수만큼)
-
 		String path = "D:\\KosaCourse\\projects-Tget\\Tget_mini_web\\src\\main\\webapp\\resources\\image\\product_image";
-
-		
 		File dir = new File(path);
 		File[] files = dir.listFiles();
 
@@ -46,7 +46,6 @@ public class ShoppingCartController {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String formatedNow = now.format(formatter);
 		
-
 		for(int i=1; i<=files.length; i++) {
 			// 가격 랜덤함수를 사용하여 각자 다르게 만들어 봄
 			double randomValue = Math.random();
@@ -56,12 +55,44 @@ public class ShoppingCartController {
 		}
 
 		// request 범위에 저장
+		model.addAttribute("productList", productList);*/
+		
+		// 5월 10일
+		log.info("/productList 실행");
+		
+		// 세션에 분류별 화면(연극/뮤지컬) 저장
+//		session.setAttribute("", );
+		
+		// 페이징 정보를 얻어서 서비스쪽으로 넘기고  Service에서 게시물 목록 요청
+		List<ProductDto> productList = productService.getShoppingProductList();
 		model.addAttribute("productList", productList);
+		log.info(productList.get(0).getPtitle());
 		
 		return "/item/productList";
 	}
 	
-	@RequestMapping("/cart")
+	// 상품 리스트 포스터 이미지
+	@GetMapping("/attachProduct")
+	public void attachProduct(int pno, HttpServletResponse response) throws Exception {
+		// 다운로드할 데이터를 준비
+		ProductDto productDto = productService.getProduct(pno);
+		byte[] data = productService.getAttachProductData(pno);
+		
+		// 응답 헤더 구성
+		response.setContentType(productDto.getPcontentattachtype()); // void메소드. 직접 응답을 생성해서 값을 반환
+		response.setContentType(productDto.getPposterattachtype()); // void메소드. 직접 응답을 생성해서 값을 반환
+		response.setContentType(productDto.getPactorsattachtype()); // void메소드. 직접 응답을 생성해서 값을 반환
+//		String fileName = new String(productDto.getPattachname().getBytes("UTF-8"), "ISO-8859-1");
+//		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+		
+		// 응답 본문에 파일 데이터 출력
+		OutputStream os = response.getOutputStream();
+		os.write(data);
+		os.flush();
+		os.close();
+	}
+	
+	/*@RequestMapping("/cart")
 	@Secured("ROLE_USER")
 	public String cart(HttpSession session, Model model) {
 		// 상품의 갯수 세기 (현재는 이미지 파일의 갯수만큼 / 현재 32개)
@@ -175,5 +206,5 @@ public class ShoppingCartController {
 			}
 		}
 		return "redirect:/member/shoppingCart";
-	}
+	}*/
 }
