@@ -1,21 +1,26 @@
 package com.mycompany.Tget_mini_web.controller;
 
-import java.util.List;
+import java.io.OutputStream;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.Tget_mini_web.dao.BoardDao;
 import com.mycompany.Tget_mini_web.dto.BoardDto;
 import com.mycompany.Tget_mini_web.dto.MemberDto;
-import com.mycompany.Tget_mini_web.dto.PagerDto;
+import com.mycompany.Tget_mini_web.security.TgetUserDetails;
 import com.mycompany.Tget_mini_web.service.BoardService;
 import com.mycompany.Tget_mini_web.service.MemberService;
 
@@ -106,15 +111,53 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 	
-	 
+   //id 중복 검사
+   @PostMapping(value="/uniqueid", produces="application/json; charset=UTF-8")
+   @ResponseBody
+   public String idUniqueCheck(@RequestParam("mid") String mid) {
+       log.info("아이디 중복체크 컨트롤러 진입");
+       int count = memberservice.getCount(mid);
+       
+       JSONObject jsonObject = new JSONObject();
+        //jsonObject.put("result", "success");
+        //jsonObject.put("mid", mid);
+        jsonObject.put("count", count);
+        return jsonObject.toString();
+   }
 
-	// member 회원정보수정 페이지 매핑
-	@Secured("ROLE_USER")
-	@RequestMapping("/memberInfoModify")
-	public String memberInfoModify() {
-		log.info("member.shopping_cart() 실행");
-		return "member/memberInfoModify";
-	}
+// member 회원정보수정 페이지 매핑
+   @GetMapping("/memberInfoModify")
+   public String memberInfoModify(Authentication authentication, Model model) {
+      if (authentication == null || !authentication.isAuthenticated()) {
+           return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
+       }
+      TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
+      MemberDto memberDto = userDetails.getMember();
+      model.addAttribute(memberDto);
+      
+      return "member/memberInfoModify";
+   }
+   
+    // 게시물 첨부파일 보기 메소드
+    @GetMapping("/imgProfileDownload")
+    public void imgProfileDownload(String mid, HttpServletResponse response) throws Exception {
+       log.info("실행");
+       //다운로드할 데이터를 준비
+       MemberDto memberDto = memberservice.getMember(mid);
+       log.info(memberDto.toString());
+       byte[] data = memberDto.getMprofileImgData();
+       log.info(data.toString());
+       //응답 헤더 구성
+       response.setContentType(memberDto.getMprofileImgType());
+       String fileName= new String(memberDto.getMprofileImgName().getBytes("UTF-8"), "ISO-8859-1");
+         
+       response.setHeader("content-disposition", "attachment; fielname=\""+fileName+"\""); 
+       //응답 본문에 파일 데이터 출력
+       OutputStream os = response.getOutputStream();
+       os.write(data);
+       os.flush();
+       os.close();
+     }
 
 	// member 회원정보수정 페이지 매핑
 	@Secured("ROLE_USER")
