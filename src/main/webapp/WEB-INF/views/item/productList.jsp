@@ -140,24 +140,24 @@
                 <div class="product_grid_unit">
                 
                   <!-- 해당 상품 클릭시 상품 상세페이지로 전환 -->
-                  <a href="detail?pno=${product.pno}" class="product_link">
+                  <a href="${pageContext.request.contextPath}/item/detail?pno=${product.pno}" class="product_link">
                     <div class="product_imgbox">
                       <img src="attachProduct?pno=${product.pno}" alt="" class="product_img"
                       	style="width:257px; height:318px;">
                     </div>
                     <div class="product_info">
                       <span class="product_region"></span>
-                      <span class="product_title"><b>${product.ptitle}</b></span>
+                      <span class="product_title"><b>제목 : ${product.ptitle}</b></span>
                       <div class="product_sideinfo">
                         <span class="product_place">
-                          ${product.pplace}
+                          	공연장 : ${product.pplace}
                         </span>
                         <br>
                         <span class="period">
-							<fmt:formatDate value="${product.pdatestart}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${product.pdateend}" pattern="yyyy-MM-dd"/>
+							기간 : <fmt:formatDate value="${product.pdatestart}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${product.pdateend}" pattern="yyyy-MM-dd"/>
                         </span>
                         <br>
-                        <span class="price">가격: ${product.pprice}</span>
+                        <span class="price">가격 : ${product.pprice}</span>
                       </div>
                       <!-- 상품 플래그가 필요할까? -->
                       <div class="product_flag">

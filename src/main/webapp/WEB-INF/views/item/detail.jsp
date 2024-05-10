@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -220,6 +223,8 @@
 							style="color: grey;">공연장</a></li>
 						<li class="nav-item"><a class="menu nav-link"
 							style="color: grey;">예매</a></li>
+						<li class="nav-item"><a class="menu nav-link"
+							style="color: grey;"></a></li>
 					</ul>
 				</div>
 				<div class="col mt-2">
@@ -234,32 +239,32 @@
 			</div>
 		</div>
 	</nav>
+	
+	
 	<div id="detail_container" class="container" style="heigth: 100%;">
 		<div class="d-flex" style="height: 100%;">
 			<div style="flex: 2; border: soild">
-
-				<h2>연극 &lt존경하는 엘레나 선생님&gt</h2>
+			
+			<c:if test="">
+			</c:if>
+				
+				<h2>${productDto.pkind}&lt${productDto.ptitle}&gt</h2>
 				<div class="d-flex" style="justify-content: space-between;">
 					<div>
 						<img
-							src="/Tget_mini_web/resources/image/detail_photos/존경하는 선생님 엘레나.gif" />
+							src="attachProduct?pno=${productDto.pno}" />
 					</div>
 					<div class="d-flex" style="width: 500px; align-items: center">
 						<div style="height: 300px; margin-right: 30px;">
 							<p>장소</p>
 							<p>공연기간</p>
-							<p>공연시간</p>
-							<p>관람연령</p>
 							<p>가격</p>
-							<p>혜택</p>
 						</div>
 						<div style="height: 300px;">
-							<p>상명 아트홀 1관</p>
-							<p>2024.06.01~2024.06.30</p>
-							<p>110분</p>
-							<p>중학생 이상 관람가</p>
-							<p>전체 가격보기</p>
-							<p>무이자 할부</p>
+							<p>producDto : ${productDto.pplace}</p>
+							<p><fmt:formatDate value="${productDto.pdatestart}" pattern="yyyy-MM-dd"/> producDto ~ 
+								<fmt:formatDate value="${productDto.pdateend}" pattern="yyyy-MM-dd"/></p>
+							<p>producDto : ${productDto.pprice}</p>
 						</div>
 					</div>
 				</div>

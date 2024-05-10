@@ -15,7 +15,8 @@ public interface ProductDao {
 	public int updateProduct(ProductDto productDto);
 	public int deleteByPno(int pno);
 	public ProductDto selectByPno(int pno);
-	//
 	public ProductDto selectAttachProductData(int pno);
+	// 상품 리스트 페이지 작성 중
 	public List<ProductDto> selectByProductList();
+	public ProductDto selectByProductPno(int pno);
 }

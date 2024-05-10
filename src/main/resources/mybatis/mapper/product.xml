@@ -99,4 +99,11 @@
 		order by pno desc
 	</select>
 	
+	<!-- 상품 정보 얻기 -->
+	<select id="selectByProductPno" parameterType="int" resultType="ProductDto">
+		select *
+		from product
+		where pno = #{pno}
+	</select>
+	
 </mapper>

@@ -37,6 +37,12 @@ public class ProductService {
 		return productList;
 	}
 	
+	// pno에 맞는 상품 정보 가져오기
+	public ProductDto getShoppingProductDetail(int pno) {
+		ProductDto productDto = productDao.selectByProductPno(pno);
+		return productDto;
+	}
+	
 	// 리스트들의 총 행의 수를 반환하는 메소드
 	public int getTotalRows() {
 		int totalRows = productDao.count();

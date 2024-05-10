@@ -1,25 +1,35 @@
 package com.mycompany.Tget_mini_web.controller;
 
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.mycompany.Tget_mini_web.dao.MemberDao;
 import com.mycompany.Tget_mini_web.dao.ProductDao;
+import com.mycompany.Tget_mini_web.dto.CartItem;
+import com.mycompany.Tget_mini_web.dto.MemberDto;
+import com.mycompany.Tget_mini_web.dto.PagerDto;
+import com.mycompany.Tget_mini_web.dto.Pre_product;
 import com.mycompany.Tget_mini_web.dto.ProductDto;
+import com.mycompany.Tget_mini_web.service.MemberService;
 import com.mycompany.Tget_mini_web.service.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Secured({"ROLE_ADMIN", "ROLE_USER"})
 @Controller
 @Slf4j
 @RequestMapping("/shopping")
@@ -28,7 +38,13 @@ public class ShoppingCartController {
 	private ProductDao productDao;
 	
 	@Autowired
+	private MemberDao memberDao;
+	
+	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@RequestMapping("/productList")
 	public String productList(Model model, HttpSession session) {
@@ -66,10 +82,12 @@ public class ShoppingCartController {
 		// 페이징 정보를 얻어서 서비스쪽으로 넘기고  Service에서 게시물 목록 요청
 		List<ProductDto> productList = productService.getShoppingProductList();
 		model.addAttribute("productList", productList);
-		log.info(productList.get(0).getPtitle());
+//		log.info(productList.get(0).getPtitle());
 		
 		return "/item/productList";
 	}
+	
+	// ==================================================================
 	
 	// 상품 리스트 포스터 이미지
 	@GetMapping("/attachProduct")
@@ -92,14 +110,14 @@ public class ShoppingCartController {
 		os.close();
 	}
 	
-	/*@RequestMapping("/cart")
+	// ==================================================================
+	
+	@RequestMapping("/cart")
 	@Secured("ROLE_USER")
-	public String cart(HttpSession session, Model model) {
-		// 상품의 갯수 세기 (현재는 이미지 파일의 갯수만큼 / 현재 32개)
-
+	public String cart(HttpSession session, Model model, String pageNo) {
+		/*// 상품의 갯수 세기 (현재는 이미지 파일의 갯수만큼 / 현재 32개)
 		String path = "D:\\KosaCourse\\projects-Tget\\Tget_mini_web\\src\\main\\webapp\\resources\\image\\product_image";
 
-		
 		File dir = new File(path);
 		File[] files = dir.listFiles();
 
@@ -130,7 +148,38 @@ public class ShoppingCartController {
 		if(cart == null) {
 			cart = new ArrayList<CartItem>();
 			session.setAttribute("cart", cart);
+		}*/
+		
+		// pageNo를 받지 못했을 경우
+		if(pageNo == null) {
+			pageNo = (String) session.getAttribute("pageNo");
+			// 세션에 저장되어 있지 않을 경우 "1"로 강제 세팅
+			if(pageNo == null) {
+				pageNo = "1";
+			}
 		}
+		
+		// 세션에 pageNo 저장
+		session.setAttribute("pageNo", pageNo);
+		// 문자열을 정수로 변환
+		int intPageNo = Integer.parseInt(pageNo);
+		
+		// Pager 객체 생성
+		// 사용자가 제일 처음에는 페이지의 번호를 입력하지 않는다. --> 사용자에 의해 요청한 페이지가 아닌 것을 보여주어야 한다(초기화면)
+		int rowsPagingTarget = memberService.getTotalRows();
+		PagerDto pager = new PagerDto(10, 10, rowsPagingTarget, intPageNo); // 페이지 객체 만들기
+		
+		// 페이징 정보를 얻어서 서비스쪽으로 넘기고  Service에서 게시물 목록 요청
+		List<MemberDto> memberList = memberService.getMemberList(pager);
+		
+		// jsp에서 사용할 수 있도록 설정.
+		model.addAttribute("pager", pager);
+		model.addAttribute("memberList", memberList);
+		
+		
+		
+		
+		
 		return "member/shopping_cart";
 	}
 	
@@ -206,5 +255,5 @@ public class ShoppingCartController {
 			}
 		}
 		return "redirect:/member/shoppingCart";
-	}*/
+	}
 }

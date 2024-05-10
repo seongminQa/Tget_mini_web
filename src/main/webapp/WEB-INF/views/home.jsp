@@ -44,7 +44,8 @@
 }
 </style>
 
-<link rel="stylesheet" href="/Tget_mini_web/resources/css/home.css">
+<link rel="stylesheet" 
+="/Tget_mini_web/resources/css/home.css">
 </head>
 
 <body>
@@ -211,7 +212,8 @@
 							</div>
 							<div class="col">
 								<div id="card h-100">
-									<a href="${pageContext.request.contextPath}/item"><img
+									<!-- pno수정** -->
+									<a href="${pageContext.request.contextPath}/item/detail"><img
 										src="https://tickets.interpark.com/contents/_next/image?url=http%3A%2F%2Fticketimage.interpark.com%2FTCMS3.0%2FGMain%2FPlay%2F2404%2F240402033345_24004955.gif&w=1920&q=75"
 										class="card-img-top" alt="..."></a>
 
