@@ -119,16 +119,61 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 	
-   //id 중복 검사
-   @PostMapping(value="/uniqueid", produces="application/json; charset=UTF-8")
+	//id 중복 검사
+	   @PostMapping(value="/uniqueid", produces="application/json; charset=UTF-8")
+	   @ResponseBody
+	   public String idUniqueCheck(@RequestParam("mid") String mid) {
+	       log.info("아이디 중복체크 컨트롤러 진입");
+	       int count = memberservice.getMidCount(mid);
+	       
+	       JSONObject jsonObject = new JSONObject();
+	        //jsonObject.put("result", "success");
+	        jsonObject.put("mid", mid);
+	        jsonObject.put("count", count);
+	        return jsonObject.toString();
+	   }
+   
+ //ssn 중복 검사
+   @PostMapping(value="/uniquessn", produces="application/json; charset=UTF-8")
    @ResponseBody
-   public String idUniqueCheck(@RequestParam("mid") String mid) {
-       log.info("아이디 중복체크 컨트롤러 진입");
-       int count = memberservice.getCount(mid);
+   public String ssnUniqueCheck(@RequestParam("mssn") String mssn) {
+       log.info("주민번호 중복체크 컨트롤러 진입");
+       
+       // db에 들어가면서 하이픈이 빠지기 때문에 올바른 검사를 위해 하이픈이 빠진 데이터로 중복 검사를 해야 한다.
+       mssn = mssn.replace("-", "");
+       
+       int count = memberservice.getMssnCount(mssn);
        
        JSONObject jsonObject = new JSONObject();
-        //jsonObject.put("result", "success");
-        jsonObject.put("mid", mid);
+        jsonObject.put("mssn", mssn);
+        jsonObject.put("count", count);
+        return jsonObject.toString();
+   }
+   
+   //phone 중복 검사
+   @PostMapping(value="/uniquephone", produces="application/json; charset=UTF-8")
+   @ResponseBody
+   public String phoneUniqueCheck(@RequestParam("mphone") String mphone) {
+       log.info("휴대폰 번호 중복체크 컨트롤러 진입");
+       
+       int count = memberservice.getMphoneCount(mphone);
+       
+       JSONObject jsonObject = new JSONObject();
+        jsonObject.put("mphone", mphone);
+        jsonObject.put("count", count);
+        return jsonObject.toString();
+   }
+   
+   //닉네임 중복 검사
+   @PostMapping(value="/uniquenickname", produces="application/json; charset=UTF-8")
+   @ResponseBody
+   public String nicknameUniqueCheck(@RequestParam("mnickname") String mnickname) {
+       log.info("닉네임 중복체크 컨트롤러 진입");
+       
+       int count = memberservice.getMnicknameCount(mnickname);
+       
+       JSONObject jsonObject = new JSONObject();
+        jsonObject.put("mnickname", mnickname);
         jsonObject.put("count", count);
         return jsonObject.toString();
    }
