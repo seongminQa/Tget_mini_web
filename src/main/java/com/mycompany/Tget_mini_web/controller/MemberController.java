@@ -1,7 +1,12 @@
 package com.mycompany.Tget_mini_web.controller;
 
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.activation.CommandMap;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -14,8 +19,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.Tget_mini_web.dao.BoardDao;
 import com.mycompany.Tget_mini_web.dto.BoardDto;
@@ -36,6 +43,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
+	
 	BoardService boardService;
 	BoardDao boardDao;
 	BoardDto boardDto;
@@ -210,12 +218,36 @@ public class MemberController {
 
 	// 아이디 찾기
 	@RequestMapping("/lost_id")
-	public String lost_id() {
+	public String lost_id() {	
 		log.info("member.lost_id() 실행");
 		return "member/lost_id";
 	}
+	//아이디 찾기 기능
+/*		@Resource(name="loginService")
+		private LoginService loginService;
+		//
+	@RequestMapping(value="findId", method = RequestMethod.POST)
+	public String searchId(HttpServletRequest request, CommandMap commandMap) throws Exception {
+		  ModelAndView mav = new ModelAndView();
+		   Map<String, Object> memberMap=new HashMap<String, Object>();
+		   memberMap=commandMap.getMap();
+		   
+		   Map<String, Object> chk = loginService.findFail0(memberMap);
+		      if (chk == null) {	//아이디 값이 없으면
+		         mav.setViewName("findForm");
+		         mav.addObject("message", "조회된 정보가 없습니다. 다시 입력해주세요.");
+		         return mav;
+		      }else {
+		   
+		   Map<String, Object> findId = loginService.findId(memberMap);
 
-	
+		   mav.addObject("findId", findId);
+		   mav.setViewName("findForm1");
+		   return mav;
+		      }
+		}
+*/
+
 
 	// 비밀번호 찾기
 	@RequestMapping("/lost_pw")

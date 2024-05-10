@@ -27,50 +27,7 @@
 		
 		<!-- 사용자 정의 자바스크립트 -->
 		<script>
-		function handleCheckData() {
-			console.log("입력 데이터를 검사합니다.");
-			
-			//form 태그의 action 기능을 수행하지 않도록 함
-			event.preventDefault();
-			
-			//각 입력 양식의 데이터 검사
-			var totalResult = true;
-			
-			//6)이름 검사 ---------------------------------------------------
-			var mnamePattern = /^[가-힣]{2,12}$/;
-			var mnameResult = mnamePattern.test($("#mname").val());
-			if(mnameResult) {
-				$("#mname").removeClass("border border-danger");
-			} else {	
-				$("#mname").addClass("border border-danger");
-				totalResult = false;
-			}
-			
-			 //4)주민등록번호 검사 -------------------------------------------------
-			var mssnPattern = /^\d{6}\-\d{7}$/;
-			var mssnResult = mssnPattern.test($("#mssn").val());
-			if(mssnResult) {
-				$("#mssn").removeClass("border border-danger");
-			} else {	
-				$("#mssn").addClass("border border-danger");
-				totalResult = false;
-			}
-					
-		//6)Phone 검사 ---------------------------------------------------
-		var mphonePattern = /^010-\d{3,4}-\d{4}$/;
-		var mphoneResult = mphonePattern.test($("#mphone").val());
-		if(mphoneResult) {
-			$("#mphone").removeClass("border border-danger");
-		} else {	
-			$("#mphone").addClass("border border-danger");
-			console.log("실행");
-			totalResult = false;
-		}
-			if(totalResult) {
-				//수동으로 action 기능을 수행하도록 함
-				$("#joinForm")[0].submit();
-			}
-		};
+
 		
 		</script>
 	</head>
@@ -88,16 +45,28 @@
        <a class="navbar-brand" href="/Tget_mini_web">
        
       <h1 class="mb-5"><b>Find ID</b></h1> 
+      
+      
        </a>   
         <form method="post" action="#" id="login-form" novalidate>
         	<!-- placeholder 사용한이유는 아이디와 비밀호를 입력을하는 필드라는것을 알려주기 위해 사용 -->
-            <input class="" type="text" name="userName" placeholder="name" id="#mname">        
-            <input class="" type="text" name="userName" placeholder="ex)00xxxx" id="#mssn">
-            <input class="" type="text" name="userName" placeholder="phone number" id="#mphone">
-              
-
+            <input class="" type="text" name="mname" placeholder="name" id="mname">        
+            <!-- <input class="" type="text" name="#mssn" placeholder="ex)00xxxx" id="#mssn"> -->
+            <input class="" type="text" name="mphone" placeholder="phone number" id="mphone">
+       			<!--아이디찾기  기능 -->
+     <%--   			<div class="result-box">
+					<c:choose>
+						<c:when test="${empty findId}">
+						<p class="inquiry">조회결과가 없습니다.</p>
+						</c:when>
+				        <c:otherwise>
+				            <p>${findId.mid}</p>
+				        </c:otherwise>
+					</c:choose>
+				</div> --%>
+       <!--아이디 찾기  -->
        
-            <input type="submit" value="아이디 찾기" onclick="handleCheckData()" >
+            <input type="submit" value="아이디 찾기" >
             <div class="link">
               <p>	
               <!-- 링크는 각각 아이디찾기, 비밀번호 찾기, 회원가입 페이지로 이동할수 있도록 구현한 링크이다. -->

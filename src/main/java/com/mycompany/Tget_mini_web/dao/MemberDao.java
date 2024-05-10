@@ -17,4 +17,8 @@ public interface MemberDao {
 	public int deleteByMid(String mid);
 	public int insertJoin(MemberDto memberdto);
 	public int selectByMidIsUnique(String mid);
+	
+	
+	/*//아이디찾기 기능	
+	MemberDto findId(String mid); */
 }
