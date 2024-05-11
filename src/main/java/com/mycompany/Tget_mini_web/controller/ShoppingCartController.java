@@ -10,11 +10,13 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -48,44 +50,26 @@ public class ShoppingCartController {
 	
 	@RequestMapping("/productList")
 	public String productList(Model model, HttpSession session) {
-/*		
-		// 상품의 갯수 세기 (현재는 이미지 파일의 갯수만큼)
-		String path = "D:\\KosaCourse\\projects-Tget\\Tget_mini_web\\src\\main\\webapp\\resources\\image\\product_image";
-		File dir = new File(path);
-		File[] files = dir.listFiles();
-
-		// 상품 데이터 생성
-		List<Pre_product> productList = new ArrayList<>();
-		
-		// 날짜
-		LocalDate now = LocalDate.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		String formatedNow = now.format(formatter);
-		
-		for(int i=1; i<=files.length; i++) {
-			// 가격 랜덤함수를 사용하여 각자 다르게 만들어 봄
-			double randomValue = Math.random();
-			int price = (int) (randomValue*10000) + 10000;
-			productList.add(new Pre_product(i, "연극", "/Tget_mini_web/resources/image/product_image/image"+i+".jpg",
-					"연극 제목"+i, "연극 장르"+i, "연극 장소"+i, formatedNow.toString(), price));
-		}
-
-		// request 범위에 저장
-		model.addAttribute("productList", productList);*/
-		
-		// 5월 10일
-		log.info("/productList 실행");
-		
 		// 세션에 분류별 화면(연극/뮤지컬) 저장
 //		session.setAttribute("", );
 		
 		// 페이징 정보를 얻어서 서비스쪽으로 넘기고  Service에서 게시물 목록 요청
 		List<ProductDto> productList = productService.getShoppingProductList();
 		model.addAttribute("productList", productList);
-//		log.info(productList.get(0).getPtitle());
 		
 		return "/item/productList";
 	}
+	
+	/*@RequestMapping("/productList")
+	public String productList(Model model, 
+				HttpSession session,
+				ResponseEntity<List<ProductDto>> productDto,
+				@RequestParam String pkind) {
+		List<ProductDto> productList = productService.findProductsByCategory(pkind);
+		model.addAttribute("productList", productList);
+		
+        return "/item/productList";
+	}*/
 	
 	// ==================================================================
 	
@@ -167,7 +151,7 @@ public class ShoppingCartController {
 		// Pager 객체 생성
 		// 사용자가 제일 처음에는 페이지의 번호를 입력하지 않는다. --> 사용자에 의해 요청한 페이지가 아닌 것을 보여주어야 한다(초기화면)
 		int rowsPagingTarget = memberService.getTotalRows();
-		PagerDto pager = new PagerDto(10, 10, rowsPagingTarget, intPageNo); // 페이지 객체 만들기
+		PagerDto pager = new PagerDto(5, 5, rowsPagingTarget, intPageNo); // 페이지 객체 만들기
 		
 		// 페이징 정보를 얻어서 서비스쪽으로 넘기고  Service에서 게시물 목록 요청
 		List<MemberDto> memberList = memberService.getMemberList(pager);
@@ -185,7 +169,7 @@ public class ShoppingCartController {
 	
 	@RequestMapping("/addCartItem")
 	public String addCartItem(int pno, String pkind, String pimg, String ptitle, 
-			String pgenre, String pplace, String pperiod, int pprice, 
+			String pgenre, String pplace, String pperiod, int pprice,
 			int amount, HttpSession session) {
 		// 장바구니에서 세션 가져오기
 		List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
