@@ -25,7 +25,7 @@
 			pcontent, pposter, pactors, pdatestart, pdateend, pseatgrade, pseatscnt,
 			paddress, pgenre, pcontentattachtype, pposterattachtype, pactorsattachtype)
 		values(#{pno}, #{pkind}, #{ptitle}, #{pplace}, #{pprice}, #{pcontent}, #{pposter},
-			#{pactors}, #{pdatestart}, #{pdateend}, #{pseatgrade}, #{pseatscnt}, #{paddress}, ${pgenre}, #{pcontentattachtype},
+			#{pactors}, #{pdatestart}, #{pdateend}, #{pseatgrade}, #{pseatscnt}, #{paddress}, #{pgenre}, #{pcontentattachtype},
 			#{pposterattachtype}, #{pactorsattachtype})
 	</insert>
 	
