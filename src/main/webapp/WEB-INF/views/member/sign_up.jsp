@@ -99,8 +99,8 @@
             </div>
             <div class="div_form row">
                 <label for="pwcheck" class="col-3 pt-3"><strong>비밀번호 확인</strong></label>
-                <input class="pwClazzCheck col-8" type="password" oninput="pwCheck()" id="pwcheck" name="pwcheck" placeholder="8~12자 영문 대소문자 숫자 포함">
-                <div class="pwEyeCheck col-1"><button type="button" style="border:none; background-color: transparent;"><img src="/Tget_mini_web/resources/image/project_image/eye.svg" style="width: 30px;"></button></div>
+                <input class="pwCheckClazz col-8" type="password" oninput="pwCheck()" id="pwcheck" name="pwcheck" placeholder="8~12자 영문 대소문자 숫자 포함">
+                <div class="pwCheckEye col-1"><button type="button" style="border:none; background-color: transparent;"><img src="/Tget_mini_web/resources/image/project_image/eye.svg" style="width: 30px;"></button></div>
             </div>
             <div class="row" style="width: 40%;">
                 <span id="spanPwCheck" style="display: inline;" class="d-flex mt-3"></span>

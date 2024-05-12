@@ -24,12 +24,12 @@ $(function() { // html 문서 로드 이후 로드하는 스크립트
 
 $(function() {
    // 버튼을 누르면 비밀번호확인 보여주는 함수 실행
-   $(".pwEyeCheck").click(function() {
+   $(".pwCheckEye").click(function() {
       toggleView();
    });
 
-   const pwType = document.querySelector(".pwClazzCheck");
-   const pwEye = document.querySelector(".pwEyeCheck");
+   const pwType = document.querySelector(".pwCheckClazz");
+   const pwEye = document.querySelector(".pwCheckEye");
 
    function toggleView() {
       if (pwType.type === "password") {

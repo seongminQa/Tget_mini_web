@@ -16,7 +16,8 @@
    <!-- jQuery -->
    <script
       src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-   
+   <!-- memberInfoModify.js -->
+      <script src="${pageContext.request.contextPath}/resources/js/memberInfoModify.js"></script>
    
    <script>
          function pwModify() {
@@ -25,22 +26,22 @@
          }
    
          function nickModify() {
-           const pwModal = new bootstrap.Modal("#nickModifyModal");
-           pwModal.show();
+           const nickModal = new bootstrap.Modal("#nickModifyModal");
+           nickModal.show();
          }
    
          function emailModify() {
-           const pwModal = new bootstrap.Modal("#emailModifyModal");
-           pwModal.show();
+           const emailModal = new bootstrap.Modal("#emailModifyModal");
+           emailModal.show();
          }
-         function addressModify() {
-           const pwModal = new bootstrap.Modal("#addressModifyModal");
-           pwModal.show();
+         function mprofileImgModify() {
+           const mprofileImgModal = new bootstrap.Modal("#mprofileImgModifyModal");
+           mprofileImgModal.show();
          }
    
          function phoneModify() {
-           const pwModal = new bootstrap.Modal("#phoneModifyModal");
-           pwModal.show();
+           const phoneModal = new bootstrap.Modal("#phoneModifyModal");
+           phoneModal.show();
          }
        </script>
    
@@ -156,19 +157,7 @@
                               onclick="emailModify()">수정</button>
                         </div>
                      </div>
-   
-<!--                      <div class="div_form row">
-                        <div class="col-3">
-                           <strong>주소</strong>
-                        </div>
-                        <div class="col-7">대학로 유니 플렉스</div>
-                        <div class="col-2">
-                           <button type="button" class="btn"
-                              style="background-color: #d95b96; color: white"
-                              onclick="addressModify()">수정</button>
-                        </div>
-                     </div> -->
-   
+      
                      <div class="div_form row" style="margin-bottom: 15px">
                         <div class="col-3">
                            <strong>전화번호</strong>
@@ -178,6 +167,17 @@
                            <button type="button" class="btn"
                               style="background-color: #d95b96; color: white"
                               onclick="phoneModify()">수정</button>
+                        </div>
+                     </div>
+                     <div class="div_form row">
+                        <div class="col-3">
+                           <strong>프로필 사진</strong>
+                        </div>
+                        <div class="col-7">${memberDto.mprofileImgName}</div>
+                        <div class="col-2">
+                           <button type="button" class="btn"
+                              style="background-color: #d95b96; color: white"
+                              onclick="mprofileImgModify()">수정</button>
                         </div>
                      </div>
                   </form>
@@ -191,7 +191,7 @@
    
       <!-- modal(pw) -->
       <div class="modal" tabindex="-1" id="pwModifyModal">
-         <div class="modal-dialog">
+         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                <!-- modal header -->
                <div class="modal-header">
@@ -201,12 +201,12 @@
                </div>
                <!-- modal body -->
                <div class="modal-body">
-                  <form class="p-3" method="post">
+                  <form class="p-3" method="post" onsubmit="pwSubmit()" action="pwModify">
                      <div class="div_form row">
-                        <label for="pw" class="col-3"><strong>비밀번호</strong></label> <input
-                           class="col-7 mb-5" type="password" id="pw" name="pw"
+                        <label for="mpassword" class="col-3"><strong>비밀번호</strong></label> 
+                        <input class="pwClazz col-8 mb-5" oninput="pwPatternCheck()" type="password" id="mpassword" name="mpassword"
                            placeholder="8~12자 영문, 숫자" />
-                        <div class="col-2">
+                        <div class="pwEye col-1">
                            <button type="button"
                               style="border: none; background-color: transparent">
                               <img src="/Tget_mini_web/resources/image/project_image/eye.svg"
@@ -214,11 +214,14 @@
                            </button>
                         </div>
                      </div>
+                     <div class="row" style="width: 40%;">
+		                <span id="spanPw" style="display: inline;" class="d-flex mt-3"></span>
+		            </div>
                      <div class="div_form row">
-                        <label for="pwcheck" class="col-3"><strong>비밀번호
-                              확인</strong></label> <input class="col-7 mb-5" type="password" id="pwcheck"
+                        <label for="pwcheck" class="col-3"><strong>비밀번호 확인</strong></label> 
+                              <input class="pwCheckClazz col-8 mb-5" oninput="pwCheck()" type="password" id="pwcheck"
                            name="pwcheck" placeholder="8~12자 영문, 숫자" />
-                        <div class="col-2">
+                        <div class="pwCheckEye col-1">
                            <button type="button"
                               style="border: none; background-color: transparent">
                               <img src="/Tget_mini_web/resources/image/project_image/eye.svg"
@@ -226,6 +229,9 @@
                            </button>
                         </div>
                      </div>
+                     <div class="row" style="width: 40%;">
+		                <span id="spanPwCheck" style="display: inline;" class="d-flex mt-3"></span>
+		            </div>
                   </form>
                </div>
                <!-- modal footer -->
@@ -251,12 +257,15 @@
                </div>
                <!-- modal body -->
                <div class="modal-body">
-                  <form class="p-3" method="post">
+                  <form class="p-3" method="post" onsubmit="nicknameSubmit()" action="nicknameModify">
                      <div class="div_form row">
-                        <label for="nickname" class="col-3"><strong>닉네임</strong></label>
-                        <input class="col-9 mb-5" type="text" id="nickname"
-                           name="nickname" placeholder="닉네임 중복 불가능" />
+                        <label for="mnickname" class="col-3"><strong>닉네임</strong></label>
+                        <input class="col-9 mb-5" type="text" id="mnickname" oninput="nicknameUniqueCheck()"
+                           name="mnickname" placeholder="닉네임 중복 불가능" />
                      </div>
+		            <div class="row" style="width: 40%;">
+		                <span id="spanNickname" style="display: inline;" class="d-flex mt-3"></span>
+		            </div>                     
                   </form>
                </div>
                <!-- modal footer -->
@@ -282,19 +291,22 @@
                </div>
                <!-- modal body -->
                <div class="modal-body">
-                  <form class="p-3" method="post">
+                  <form class="p-3" method="post" id="emailForm" onsubmit="emailSubmit()" action="emailModify">
                      <div class="div_form row">
-                        <label for="email" class="col-3"><strong>이메일</strong></label> <input
-                           class="col-9 mb-5" type="text" id="email" name="email"
+                        <label for="memail" class="col-3"><strong>이메일</strong></label> <input
+                           class="col-9 mb-5" type="text" id="memail" oninput="emailCheck()" name="memail"
                            placeholder="ex. tget0101@naver.com" />
                      </div>
+                     <div class="row" style="width: 40%;">
+		                <span id="spanEmail" style="display: inline;" class="d-flex mt-3"></span>
+		            </div>
                   </form>
                </div>
                <!-- modal footer -->
                <div class="modal-footer">
                   <button type="button" class="btn btn-secondary"
                      data-bs-dismiss="modal">닫기</button>
-                  <button type="submit" class="btn"
+                  <button type="submit" form="emailForm" class="btn"
                      style="background-color: #d95b96; color: white">수정 완료</button>
                </div>
             </div>
@@ -302,38 +314,30 @@
       </div>
    
       <!-- modal(addressname) -->
-      <div class="modal" tabindex="-1" id="addressModifyModal">
-         <div class="modal-dialog modal-l">
+      <div class="modal" tabindex="-1" id="mprofileImgModifyModal">
+         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                <!-- modal header -->
                <div class="modal-header">
-                  <h5 class="modal-title">주소 수정</h5>
+                  <h5 class="modal-title">프로필 사진 수정</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal"
                      aria-label="Close"></button>
                </div>
                <!-- modal body -->
                <div class="modal-body">
-                  <form class="p-3" method="post">
+                  <form class="p-3" method="post" enctype="multipart/form-data" id="mprofileImgForm" action="mprofileImgModify">
                      <div class="div_form row">
-                        <label for="address" class="col-3"><strong>주소</strong></label> <input
-                           class="col-9 mb-5" type="text" id="address" name="address"
-                           placeholder="ex. 대학로 예그린씨어터" />
+                        <label for="mprofileImg" class="col-3"><strong>프로필 사진</strong></label> <input
+                           class="col-9 mb-5" type="file" id="mprofileImg" name="mprofileImg"/>
                      </div>
-                     <div class="div_form row">
-                        <label for="address" class="col-3"><strong>상세주소</strong></label>
-                        <input class="col-9 mb-5" type="text" id="address" name="address"
-                           placeholder="ex. 1층" />
-                     </div>
-                     <button type="button" class="btn mt-2"
-                        style="background-color: #d95b96; color: white; width: 100%">
-                        주소입력</button>
+                     
                   </form>
                </div>
                <!-- modal footer -->
                <div class="modal-footer">
                   <button type="button" class="btn btn-secondary"
                      data-bs-dismiss="modal">닫기</button>
-                  <button type="submit" class="btn"
+                  <button type="submit" class="btn" form="mprofileImgForm"
                      style="background-color: #d95b96; color: white">수정 완료</button>
                </div>
             </div>
@@ -352,12 +356,15 @@
                </div>
                <!-- modal body -->
                <div class="modal-body">
-                  <form class="p-3" method="post">
+                  <form class="p-3" method="post" onsubmit="emailSubmit()" action="emailModify">
                      <div class="div_form row">
-                        <label for="phone" class="col-3"><strong>전화번호</strong></label> <input
-                           class="col-9 mb-5" type="text" id="phone" name="phone"
+                        <label for="mphone" class="col-3"><strong>전화번호</strong></label> <input
+                           class="col-9 mb-5" type="text" id="mphone" name="mphone" oninput="phoneUniqueCheck()"
                            placeholder="ex. 010-1111-2222" />
                      </div>
+                     <div class="row" style="width: 40%;">
+		                <span id="spanPhone" style="display: inline;" class="d-flex mt-3"></span>
+		            </div>
                   </form>
                </div>
                <!-- modal footer -->
