@@ -20,8 +20,13 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 
     <!-- 사용자 정의 자바스크립트 -->
-    <script>
-
+    <script defer="defer">
+    	const productListObject = [[${productList}]];
+    	
+    	function productListObject.foreach(function(pkind) {
+    		console.log(pkind);
+    	});
+    
     </script>
     <style>
     	.container {
@@ -120,11 +125,16 @@
       <section class="productList_section">
         <div class="grid d-flex justify-content-between align-items-center">
 		    <div class="g-col-4 p-3 ms-5">
-		      <h3>연극</h3>
+		      <h3>
+		      	  <button onclick="displayProductAll()" type="button" class="btn btn-outline-secondary">전체보기</button>
+			      <span> / </span>     
+			      <button onclick="displayProducttheater()" type="button" class="btn btn-outline-secondary">연극</button>
+			      <span> / </span>    		
+		    	  <button onclick="displayProductMusical()" type="button" class="btn btn-outline-secondary">뮤지컬</button>
+		      </h3>
 		    </div>
 		    <div class="g-col-8 p-3 me-5">
 		      <button onclick="" type="button" class="btn btn-outline-secondary">인기순</button>    		
-	    	  <button onclick="" type="button" class="btn btn-outline-secondary">별점순</button>
 	          <button onclick="" type="button" class="btn btn-outline-secondary">최저가순</button>    		
 	    	  <button onclick="" type="button" class="btn btn-outline-secondary">최고가순</button>
 		    </div>
@@ -136,37 +146,47 @@
           
             <!-- 상품 리스트 있는 만큼 반복 -->
             <c:forEach var="product" items="${productList}">
-              <li class="product_grid_item m-3" style="display: inline-block">
-                <div class="product_grid_unit">
-                
-                  <!-- 해당 상품 클릭시 상품 상세페이지로 전환 -->
-                  <a href="${pageContext.request.contextPath}/item/detail?pno=${product.pno}" class="product_link">
-                    <div class="product_imgbox">
-                      <img src="attachProduct?pno=${product.pno}" alt="" class="product_img"
-                      	style="width:257px; height:318px;">
-                    </div>
-                    <div class="product_info">
-                      <span class="product_region"></span>
-                      <span class="product_title"><b>제목 : ${product.ptitle}</b></span>
-                      <div class="product_sideinfo">
-                        <span class="product_place">
-                          	공연장 : ${product.pplace}
-                        </span>
-                        <br>
-                        <span class="period">
-							기간 : <fmt:formatDate value="${product.pdatestart}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${product.pdateend}" pattern="yyyy-MM-dd"/>
-                        </span>
-                        <br>
-                        <span class="price">가격 : ${product.pprice}</span>
-                      </div>
-                      <!-- 상품 플래그가 필요할까? -->
-                      <div class="product_flag">
-                        <div class="flag_area"></div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </li>
+				
+            	<%-- <c:if test="${product.pkind eq '연극'}"> --%>
+            	
+	              <li class="product_grid_item m-3" style="display: inline-block">
+	                <div class="product_grid_unit">
+	                
+	                  <!-- 해당 상품 클릭시 상품 상세페이지로 전환 -->
+	                  <a href="${pageContext.request.contextPath}/item/detail?pno=${product.pno}" class="product_link">
+	                    <div class="product_imgbox">
+	                      <img src="attachProduct?pno=${product.pno}" alt="" class="product_img"
+	                      	style="width:257px; height:318px;">
+	                    </div>
+	                    <div class="product_info">
+	                      <span class="product_region"></span>
+	                      <span class="product_title"><b>제목 : ${product.ptitle}</b></span>
+	                      <div class="product_sideinfo">
+		                    <span class="product_genre">
+		                         	장르 : ${product.pgenre}
+		                    </span>
+		                    <br>
+	                        <span class="product_place">
+	                          	공연장 : ${product.pplace}
+	                        </span>
+	                        <br>
+	                        <span class="period">
+								기간 : <fmt:formatDate value="${product.pdatestart}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${product.pdateend}" pattern="yyyy-MM-dd"/>
+	                        </span>
+	                        <br>
+	                        <span class="price">가격 : ${product.pprice}</span>
+	                      </div>
+	                      <!-- 상품 플래그가 필요할까? -->
+	                      <div class="product_flag">
+	                        <div class="flag_area"></div>
+	                      </div>
+	                    </div>
+	                  </a>
+	                </div>
+	              </li>
+	              
+              	<%-- </c:if> --%>
+              	
             </c:forEach>
           </ul>
         </div>
