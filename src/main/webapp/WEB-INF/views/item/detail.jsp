@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -45,81 +45,16 @@
 		 */
 	});
 </script>
-<script type="text/javascript">
-	var today = new Date();
-	function buildCalendar() {
-		var row = null
-		var cnt = 0;
-		var calendarTable = document.getElementById("calendar");
-		var calendarTableTitle = document.getElementById("calendarTitle");
-		calendarTableTitle.innerHTML = today.getFullYear() + "년"
-				+ (today.getMonth() + 1) + "월";
-
-		var firstDate = new Date(today.getFullYear(), today.getMonth(), 1);
-		var lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-		while (calendarTable.rows.length > 2) {
-			calendarTable.deleteRow(calendarTable.rows.length - 1);
-		}
-
-		row = calendarTable.insertRow();
-		for (i = 0; i < firstDate.getDay(); i++) {
-			cell = row.insertCell();
-			cnt += 1;
-		}
-
-		row = calendarTable.insertRow();
-
-		for (i = 1; i <= lastDate.getDate(); i++) {
-			cell = row.insertCell();
-			cnt += 1;
-
-			cell.setAttribute('id', i);
-			cell.innerHTML = i;
-			cell.align = "center";
-
-			cell.onclick = function() {
-				clickedYear = today.getFullYear();
-				clickedMonth = (1 + today.getMonth());
-				clickedDate = this.getAttribute('id');
-
-				clickedDate = clickedDate >= 10 ? clickedDate : '0'
-						+ clickedDate;
-				clickedMonth = clickedMonth >= 10 ? clickedMonth : '0'
-						+ clickedMonth;
-				clickedYMD = clickedYear + "-" + clickedMonth + "-"
-						+ clickedDate;
-
-				opener.document.getElementById("date").value = clickedYMD;
-				self.close();
-			}
-
-			if (cnt % 7 == 1) {
-				cell.innerHTML = "<font color=#F79DC2>" + i + "</font>";
-			}
-
-			if (cnt % 7 == 0) {
-				cell.innerHTML = "<font color=skyblue>" + i + "</font>";
-				row = calendar.insertRow();
-			}
-		}
-
-		if (cnt % 7 != 0) {
-			for (i = 0; i < 7 - (cnt % 7); i++) {
-				cell = row.insertCell();
-			}
-		}
-	}
-
-	function prevCalendar() {
-		today = new Date(today.getFullYear(), today.getMonth() - 1, today
-				.getDate());
-		buildCalendar();
-	}
-
-	function nextCalendar() {
-		today = new Date(today.getFullYear(), today.getMonth() + 1, today
-				.getDate());
-		buildCalendar();
+<script defer="defer" type="text/javascript">
+	window.onload = function() {
+		today = new Date();
+		console.log("today.toISOString() >>>" + today.toISOString());
+		today = today.toISOString().slice(0, 10);
+		console.log("today >>>> " + today);
+		day = document.getElementById("today");
+		day.value = today;
+		day.min = today;
+		/* day.max = ${productDto.pdateend}; */
 	}
 </script>
 
@@ -239,20 +174,19 @@
 			</div>
 		</div>
 	</nav>
-	
-	
+
+
 	<div id="detail_container" class="container" style="heigth: 100%;">
 		<div class="d-flex" style="height: 100%;">
 			<div style="flex: 2; border: soild">
-			
-			<c:if test="">
-			</c:if>
-				
+
+				<c:if test="">
+				</c:if>
+
 				<h2>${productDto.pkind}&lt${productDto.ptitle}&gt</h2>
 				<div class="d-flex" style="justify-content: space-between;">
 					<div>
-						<img
-							src="attachProduct?pno=${productDto.pno}" />
+						<img src="attachProduct?pno=${productDto.pno}" />
 					</div>
 					<div class="d-flex" style="width: 500px; align-items: center">
 						<div style="height: 300px; margin-right: 30px;">
@@ -262,8 +196,13 @@
 						</div>
 						<div style="height: 300px;">
 							<p>producDto : ${productDto.pplace}</p>
-							<p><fmt:formatDate value="${productDto.pdatestart}" pattern="yyyy-MM-dd"/> producDto ~ 
-								<fmt:formatDate value="${productDto.pdateend}" pattern="yyyy-MM-dd"/></p>
+							<p>
+								<fmt:formatDate value="${productDto.pdatestart}"
+									pattern="yyyy-MM-dd" />
+								producDto ~
+								<fmt:formatDate value="${productDto.pdateend}"
+									pattern="yyyy-MM-dd" />
+							</p>
 							<p>producDto : ${productDto.pprice}</p>
 						</div>
 					</div>
@@ -466,26 +405,32 @@
 			</div>
 			<div id="sticky_cal" style="flex: 1; height: 100%;">
 				<div class="wrapper" style="height: 100%;">
-					<table id="calendar" align="center">
-						<tr>
-							<td align="center"><label onclick="prevCalendar()">
-									◀ </label></td>
-							<td colspan="5" align="center" id="calendarTitle">yyyy년 m월</td>
-							<td align="center"><label onclick="nextCalendar()">
-									▶ </label></td>
-						</tr>
-						<tr>
-							<td align="center"><font color="#F79DC2">일</font></td>
-							<td align="center">월</td>
-							<td align="center">화</td>
-							<td align="center">수</td>
-							<td align="center">목</td>
-							<td align="center">금</td>
-							<td align="center"><font color="skyblue">토</font></td>
-						</tr>
-					</table>
-
-
+					주문하기
+					<form action="addCartItem">
+						<!-- form 태그에서 히든으로 넘기는것들  -->
+						<input type="hidden" name="pno" value="${productDto.pno}"/>
+						<input type="hidden" name="pkind" value="${productDto.pkind}"/>
+						<input type="hidden" name="ptitle" value="${productDto.ptitle}"/>
+						<input type="hidden" name="pplace" value="${productDto.pplace}"/>
+						<input type="hidden" name="pprice" value="${productDto.pprice}"/>
+						<input type="hidden" name="pposter" value="${productDto.pposter}"/>
+						<input type="hidden" name="pgenre" value="${productDto.pgenre}"/>
+						
+						
+						<!-- 사용자가 시각적으로 볼수 있는 정보와 사용자 선택할수 있는 정보 -->
+						
+						<input id="today" name="poderdate" type="date"/>
+						<!-- pseatscnt 는 해당 상품의 남은 좌석 수로 실시간으로 변경됨. -->
+		                <select class="form-control" id="" name="pseatgrade">
+		                	<option value="일반석" selected="selected">일반석</option>
+		              		<option value="로얄석">로얄석</option>
+		                </select>
+						<input type="number" name="pamount" value="1" min="1" max="${productDto.pseatscnt}"/>
+						
+						<!-- max="<fmt:formatDate value="${product.pdateend}" pattern="yyyy-MM-dd"/>" -->
+						
+						 <button type="submit" class="btn btn-outline-secondary mt-2">주문</button>
+					</form>
 				</div>
 			</div>
 		</div>
