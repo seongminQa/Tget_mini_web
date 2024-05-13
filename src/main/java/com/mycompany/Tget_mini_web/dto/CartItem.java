@@ -1,9 +1,11 @@
 package com.mycompany.Tget_mini_web.dto;
 
+import com.mycompany.Tget_mini_web.dao.ProductDao;
+
 import lombok.Data;
 
 @Data
 public class CartItem {
-	private Pre_product product;  // 객체 불러오기
-	private int amount;  // 매수 양
+   private ProductDto productDto;  // 객체 불러오기
+   private int amount;  // 매수 양
 }

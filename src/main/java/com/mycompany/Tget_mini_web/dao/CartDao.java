@@ -10,14 +10,14 @@ import com.mycompany.Tget_mini_web.dto.PagerDto;
 @Mapper
 public interface CartDao {
 
-	List<CartDto> selectByPage(PagerDto pager);
+   List<CartDto> selectByPage(PagerDto pager);
 
-	int count();
+   int count();
 
-	public CartDto selectByMid(String mid);
+   public CartDto selectByMid(String mid);
 
-	public int updateCart(CartDto cartDto);
+   public int updateCart(CartDto cartDto);
 
-	public void deleteByCno(String cno);
+   public void deleteByCno(String cno);
 
 }
