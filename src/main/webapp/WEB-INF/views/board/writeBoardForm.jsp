@@ -30,12 +30,12 @@
                       
                       <form id="writeBoardForm" method="post" action="writeBoard" enctype="multipart/form-data">
                         <div class="input-group">
-                           <div class="input-group-prepend"><span class="input-group-text">btitle</span></div>
+                           <div class="input-group-prepend"><span class="input-group-text">제목</span></div>
                            <input id="btitle" type="text" name="btitle" class="form-control">
                         </div>
                         
                         <div class="input-group">
-                           <div class="input-group-prepend"><span class="input-group-text">bcontent</span></div>
+                           <div class="input-group-prepend"><span class="input-group-text">내용</span></div>
                            <textarea id="bcontent" name="bcontent" class="form-control"></textarea>
                         </div>
                         
