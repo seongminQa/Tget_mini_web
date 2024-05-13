@@ -13,34 +13,34 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDto {
-	private int pno;
-	private String pkind;
-	private String ptitle;
-	private String pplace;
-	private int pprice;
-	private byte[] pcontent;
-	private byte[] pposter;
-	private byte[] pactors;
-	
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date pdatestart;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date pdateend;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date porderdate;
-	
-	private String pseatgrade;
-	private int pseatscnt;
-	private String paddress;
-	private String pgenre;
-	
-	private MultipartFile pcontentattach;
-	private MultipartFile pposterattach;
-	private MultipartFile pactorsattach;
-	
-//	private String pattachname;
-	private String pcontentattachtype;
-	private String pposterattachtype;
-	private String pactorsattachtype;
-	
+   private int pno;
+   private String pkind;
+   private String ptitle;
+   private String pplace;
+   private int pprice;
+   private byte[] pcontent;
+   private byte[] pposter;
+   private byte[] pactors;
+   
+   @DateTimeFormat(pattern="yyyy-MM-dd")
+   private Date pdatestart;
+   @DateTimeFormat(pattern="yyyy-MM-dd")
+   private Date pdateend;
+   @DateTimeFormat(pattern="yyyy-MM-dd")
+   private Date porderdate;
+   
+   private String pseatgrade;
+   private int pseatscnt;
+   private String paddress;
+   private String pgenre;
+   
+   private MultipartFile pcontentattach;
+   private MultipartFile pposterattach;
+   private MultipartFile pactorsattach;
+   
+//   private String pattachname;
+   private String pcontentattachtype;
+   private String pposterattachtype;
+   private String pactorsattachtype;
+   
 }

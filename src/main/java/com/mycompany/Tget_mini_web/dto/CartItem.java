@@ -6,6 +6,6 @@ import lombok.Data;
 
 @Data
 public class CartItem {
-	private ProductDto productDto;  // 객체 불러오기
-	private int amount;  // 매수 양
+   private ProductDto productDto;  // 객체 불러오기
+   private int amount;  // 매수 양
 }
