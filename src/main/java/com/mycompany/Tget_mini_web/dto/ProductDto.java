@@ -5,9 +5,13 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductDto {
 	private int pno;
 	private String pkind;
@@ -22,6 +26,8 @@ public class ProductDto {
 	private Date pdatestart;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date pdateend;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date porderdate;
 	
 	private String pseatgrade;
 	private int pseatscnt;

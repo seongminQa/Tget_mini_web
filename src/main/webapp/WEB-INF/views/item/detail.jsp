@@ -429,7 +429,7 @@
 						
 						<!-- max="<fmt:formatDate value="${product.pdateend}" pattern="yyyy-MM-dd"/>" -->
 						
-						 <button type="submit" class="btn btn-outline-secondary mt-2">주문</button>
+						 <a href="addCartItem" type="submit" class="btn btn-outline-secondary mt-2">주문</a>
 					</form>
 				</div>
 			</div>
