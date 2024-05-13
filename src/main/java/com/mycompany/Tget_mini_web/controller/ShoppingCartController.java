@@ -10,23 +10,23 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.mycompany.Tget_mini_web.dao.CartDao;
 import com.mycompany.Tget_mini_web.dao.MemberDao;
 import com.mycompany.Tget_mini_web.dao.ProductDao;
+import com.mycompany.Tget_mini_web.dto.CartDto;
 import com.mycompany.Tget_mini_web.dto.CartItem;
-import com.mycompany.Tget_mini_web.dto.MemberDto;
 import com.mycompany.Tget_mini_web.dto.PagerDto;
 import com.mycompany.Tget_mini_web.dto.Pre_product;
 import com.mycompany.Tget_mini_web.dto.ProductDto;
+import com.mycompany.Tget_mini_web.service.CartService;
 import com.mycompany.Tget_mini_web.service.MemberService;
 import com.mycompany.Tget_mini_web.service.ProductService;
 
@@ -43,10 +43,16 @@ public class ShoppingCartController {
 	private MemberDao memberDao;
 	
 	@Autowired
+	private CartDao cartDao;
+	
+	@Autowired
 	private ProductService productService;
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private CartService cartService;
 	
 	@RequestMapping("/productList")
 	public String productList(Model model, HttpSession session) {
@@ -96,6 +102,7 @@ public class ShoppingCartController {
 	
 	// ==================================================================
 	
+	// 장바구니 리스트 화면
 	@RequestMapping("/cart")
 	@Secured("ROLE_USER")
 	public String cart(HttpSession session, Model model, String pageNo) {
@@ -150,27 +157,22 @@ public class ShoppingCartController {
 		
 		// Pager 객체 생성
 		// 사용자가 제일 처음에는 페이지의 번호를 입력하지 않는다. --> 사용자에 의해 요청한 페이지가 아닌 것을 보여주어야 한다(초기화면)
-		int rowsPagingTarget = memberService.getTotalRows();
+		int rowsPagingTarget = cartService.getTotalRows();
 		PagerDto pager = new PagerDto(5, 5, rowsPagingTarget, intPageNo); // 페이지 객체 만들기
 		
 		// 페이징 정보를 얻어서 서비스쪽으로 넘기고  Service에서 게시물 목록 요청
-		List<MemberDto> memberList = memberService.getMemberList(pager);
+		List<CartDto> cartList = cartService.getCartList(pager);
 		
 		// jsp에서 사용할 수 있도록 설정.
 		model.addAttribute("pager", pager);
-		model.addAttribute("memberList", memberList);
-		
-		
-		
-		
-		
+		model.addAttribute("cartList", cartList);
+
 		return "member/shopping_cart";
 	}
 	
+	// 장바구니에 하나의 리스트를 추가
 	@RequestMapping("/addCartItem")
-	public String addCartItem(int pno, String pkind, String pimg, String ptitle, 
-			String pgenre, String pplace, String pperiod, int pprice,
-			int amount, HttpSession session) {
+	public String addCartItem(int mid, int pno, int amount, HttpSession session) {
 		// 장바구니에서 세션 가져오기
 		List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
 		
@@ -228,7 +230,7 @@ public class ShoppingCartController {
 	@RequestMapping("/removeCartItem")
 	public String removeCartItem(int pno, @SessionAttribute("cart") List<CartItem> cart) {
 
-		// 위의 방식처럼 for문을 돌리면 지웠는데, 길이는 남아있어서 에러가 난다.
+		// 위의 방식처럼 for문을 돌리면 지웠는데,길이는 남아있어서 에러가 난다.
 		// 따라서 이터레이터를 사용해야한다.
 		Iterator<CartItem> iterator = cart.iterator();
 		while(iterator.hasNext()) {
