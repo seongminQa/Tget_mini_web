@@ -122,7 +122,6 @@ public class AdminController {
 			//memberDto.setMprofileImg(null); // 프로필 이미지 생략
 			memberDto.setMtotalpay(i*10000);
 			memberDto.setMrole("유저");
-			memberDto.setMno(i);
 
 			memberDao.insertmember(memberDto);
 		}
@@ -224,7 +223,6 @@ public class AdminController {
 		try {
 			productDto.setPposter(productDto.getPposterattach().getBytes());
 			productDto.setPcontent(productDto.getPcontentattach().getBytes());
-			productDto.setPactors(productDto.getPactorsattach().getBytes());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -245,7 +243,6 @@ public class AdminController {
 		// 응답 헤더 구성
 		response.setContentType(productDto.getPcontentattachtype()); // void메소드. 직접 응답을 생성해서 값을 반환
 		response.setContentType(productDto.getPposterattachtype()); // void메소드. 직접 응답을 생성해서 값을 반환
-		response.setContentType(productDto.getPactorsattachtype()); // void메소드. 직접 응답을 생성해서 값을 반환
 //		String fileName = new String(productDto.getPattachname().getBytes("UTF-8"), "ISO-8859-1");
 //		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
 		
@@ -262,17 +259,14 @@ public class AdminController {
 		log.info("admin.productModify() 실행");
 		// 첨부 파일이 있는지 여부 조사
 		if( (productDto.getPcontentattach() != null && !productDto.getPcontentattach().isEmpty()) 
-				&& (productDto.getPposterattach() != null && !productDto.getPposterattach().isEmpty()) 
-				&& (productDto.getPactorsattach() != null && !productDto.getPactorsattach().isEmpty())) {
+				&& (productDto.getPposterattach() != null && !productDto.getPposterattach().isEmpty())) {
 			// 첨부파일 타입 저장
 			productDto.setPcontentattachtype(productDto.getPcontentattach().getContentType());
 			productDto.setPposterattachtype(productDto.getPposterattach().getContentType());
-			productDto.setPactorsattachtype(productDto.getPactorsattach().getContentType());
 			try {
 				// 바이트 형식으로 pposter, pcontent, pactors 변수에 값 저장
 				productDto.setPposter(productDto.getPposterattach().getBytes());
 				productDto.setPcontent(productDto.getPcontentattach().getBytes());
-				productDto.setPactors(productDto.getPactorsattach().getBytes());
 			} catch (Exception e) {}			
 		}
 		
