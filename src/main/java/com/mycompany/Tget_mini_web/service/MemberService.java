@@ -34,12 +34,6 @@ public class MemberService {
 		memberDao.insertJoin(member);
 	}
 	
-	/*public void memberSignup(MemberDto memberDto) {
-		// 비즈니스 로직 처리
-		int rowNum = memberDao.insert(memberDto);
-		log.info("rowNum: " + rowNum + ", mno: " + memberDto.getMno());
-	}*/
-	
 	// 페이지 당 리스트를 보여주는 메소드
 	public List<MemberDto> getMemberList(PagerDto pager) {
 		List<MemberDto> memberList = memberDao.selectByPage(pager);

@@ -21,7 +21,6 @@ public class MemberDto {
 	private MultipartFile mprofileImg;
 	private int mtotalpay;
 	private String mrole;
-	private int mno;
 	
 	// 프로필 이미지 받는 필드
 	private byte[] mprofileImgData;

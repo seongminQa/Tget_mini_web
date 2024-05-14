@@ -6,33 +6,25 @@
 	<!-- 회원정보 얻기 -->
 	<select id="selectByMid" parameterType="String" resultType="MemberDto">
 		select mid, mname, mpassword, mssn, memail, mrole, mnickname, mprofileimgtype, mprofileimgname,
-			mphone, msince, mprefergenre, mgrade, mprofileimg as mprofileimgdata, mtotalpay, mno
+			mphone, msince, mprefergenre, mgrade, mprofileimg as mprofileimgdata, mtotalpay
 		from member
 		where mid = #{mid}
 	</select>
 	
 	<!-- 회원 더미 집어넣기 테스트 -->
 	<insert id="insertMember" parameterType="MemberDto">
-		<selectKey keyProperty="mno" order="BEFORE" resultType="int">
-			select mno_seq.nextval from dual
-		</selectKey>
-		
 		insert into member (mid, mname, mpassword, mssn, memail,
-			mphone, msince, mprefergenre, mgrade, mtotalpay, mrole, mno)
+			mphone, msince, mprefergenre, mgrade, mtotalpay, mrole)
 		values(#{mid}, #{mname}, #{mpassword}, #{mssn}, #{memail},
-			#{mphone}, #{msince}, #{mprefergenre}, #{mgrade}, #{mtotalpay}, #{mrole}, ${mno})
+			#{mphone}, #{msince}, #{mprefergenre}, #{mgrade}, #{mtotalpay}, #{mrole})
 	</insert>
 	
 	<!-- 회원가입 form DB연동 -->
 	<insert id="insertJoin" parameterType="MemberDto">
-		<selectKey keyProperty="mno" order="BEFORE" resultType="int">
-			select mno_seq.nextval from dual
-		</selectKey>
-		
 		insert into member (mid, mname, mpassword, mssn, memail, mnickname, mprofileimgtype, mprofileimgname,
-        	mphone, msince, mprefergenre, mgrade, mtotalpay, mrole, mno, MPROFILEIMG)
+        	mphone, msince, mprefergenre, mgrade, mtotalpay, mrole, MPROFILEIMG)
     	values(#{mid}, #{mname}, #{mpassword}, #{mssn}, #{memail}, #{mnickname}, #{mprofileImgType}, #{mprofileImgName},
-        	#{mphone}, sysdate, #{mprefergenre}, #{mgrade}, #{mtotalpay}, #{mrole}, #{mno}, #{mprofileImgData})
+        	#{mphone}, sysdate, #{mprefergenre}, #{mgrade}, #{mtotalpay}, #{mrole}, #{mprofileImgData})
 	</insert>
 	
 	<!-- 회원의 수 얻기 -->
@@ -44,13 +36,12 @@
  	<select id="selectByPage" parameterType="PagerDto" resultType="MemberDto">
 		<!-- C는 캐릭터를 의미. 문자 그대로의 데이터를 받아들이는 구문 -->
 		<![CDATA[
-			select rnum, mid, mname, memail, mphone, mrole, mgrade, mno
+			select rnum, mid, mname, memail, mphone, mrole, mgrade
 			from (
-			    select rownum as rnum, mid, mname, memail, mphone, mrole, mgrade, mno
+			    select rownum as rnum, mid, mname, memail, mphone, mrole, mgrade
 			    from (
-			        select mid, mname, memail, mphone, mrole, mgrade, mno
+			        select mid, mname, memail, mphone, mrole, mgrade
 			        from member
-			        order by mno desc
 			    )
 			    where rownum <= #{endRowNo}
 			)
