@@ -33,13 +33,13 @@ public class MemberService {
 		member.setMssn(member.getMssn().replace("-", ""));
 		memberDao.insertJoin(member);
 	}
-	
+
 	// 페이지 당 리스트를 보여주는 메소드
 	public List<MemberDto> getMemberList(PagerDto pager) {
 		List<MemberDto> memberList = memberDao.selectByPage(pager);
 		return memberList;
 	}
-	
+
 	// 리스트들의 총 행의 수를 반환하는 메소드
 	public int getTotalRows() {
 		int totalRows = memberDao.count();
@@ -51,75 +51,86 @@ public class MemberService {
 		MemberDto memberDto = memberDao.selectByMid(mid);
 		return memberDto;
 	}
-	
+
 	// 회원 정보 수정 메소드
 	public void updateMember(MemberDto memberDto) {
 		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		memberDto.setMpassword(passwordEncoder.encode(memberDto.getMpassword()));
 		int rowNum = memberDao.updateMember(memberDto);
 	}
-	
+
 	// 회원 삭제 메소드
 	public void removeMember(String mid) {
-		// int rowNum = memberDao.deleteByMid(mid); // rowNum은 삭제된 행수를 얻고싶을 때 넣어주고, 필요없으면 안써도 된다.
+		// int rowNum = memberDao.deleteByMid(mid); // rowNum은 삭제된 행수를 얻고싶을 때 넣어주고,
+		// 필요없으면 안써도 된다.
 		memberDao.deleteByMid(mid);
 	}
 
-
 	public int getMidCount(String mid) {
 		int count = 0;
-		log.info("service 진입"+mid);
-		
-		// DB에서 중복값의 행을 반환했을 때 0이 나오면 
-		if(memberDao.selectByMidIsUnique(mid) != 0) {
+		log.info("service 진입" + mid);
+
+		// DB에서 중복값의 행을 반환했을 때 0이 나오면
+		if (memberDao.selectByMidIsUnique(mid) != 0) {
 			count = 1; // 유일한 아이디이고 1을 반환한다.
-		} 
-		log.info(memberDao.selectByMidIsUnique(mid)+"");
-		log.info(count+"");
-		
+		}
+		log.info(memberDao.selectByMidIsUnique(mid) + "");
+		log.info(count + "");
+
 		return count;
 	}
 
 	public int getMssnCount(String mssn) {
 		int count = 0;
-		log.info("service 진입"+mssn);
-		
-		// DB에서 중복값의 행을 반환했을 때 0이 나오면 
-		if(memberDao.selectByMssnIsUnique(mssn) != 0) {
+		log.info("service 진입" + mssn);
+
+		// DB에서 중복값의 행을 반환했을 때 0이 나오면
+		if (memberDao.selectByMssnIsUnique(mssn) != 0) {
 			count = 1; // 유일한 주민번호이고 1을 반환한다.
-		} 
-		log.info(memberDao.selectByMssnIsUnique(mssn)+"");
-		log.info(count+"");
-		
+		}
+		log.info(memberDao.selectByMssnIsUnique(mssn) + "");
+		log.info(count + "");
+
 		return count;
 	}
 
 	public int getMphoneCount(String mphone) {
 		int count = 0;
-		log.info("service 진입"+mphone);
-		
-		// DB에서 중복값의 행을 반환했을 때 0이 나오면 
-		if(memberDao.selectByMphoneIsUnique(mphone) != 0) {
+		log.info("service 진입" + mphone);
+
+		// DB에서 중복값의 행을 반환했을 때 0이 나오면
+		if (memberDao.selectByMphoneIsUnique(mphone) != 0) {
 			count = 1; // 유일한 휴대폰 번호이고 1을 반환한다.
-		} 
-		log.info(memberDao.selectByMphoneIsUnique(mphone)+"");
-		log.info(count+"");
-		
+		}
+		log.info(memberDao.selectByMphoneIsUnique(mphone) + "");
+		log.info(count + "");
+
 		return count;
 	}
 
 	public int getMnicknameCount(String mnickname) {
 		int count = 0;
-		log.info("service 진입"+mnickname);
-		
-		// DB에서 중복값의 행을 반환했을 때 0이 나오면 
-		if(memberDao.selectByMnicknameIsUnique(mnickname) != 0) {
+		log.info("service 진입" + mnickname);
+
+		// DB에서 중복값의 행을 반환했을 때 0이 나오면
+		if (memberDao.selectByMnicknameIsUnique(mnickname) != 0) {
 			count = 1; // 유일한 닉네임이고 1을 반환한다.
-		} 
-		log.info(memberDao.selectByMnicknameIsUnique(mnickname)+"");
-		log.info(count+"");
-		
+		}
+		log.info(memberDao.selectByMnicknameIsUnique(mnickname) + "");
+		log.info(count + "");
+
 		return count;
+	}
+
+	public String findId(MemberDto memberDto) {
+		String mid = memberDao.findId(memberDto);
+		return mid;
+	}
+
+	public String findPw(MemberDto memberDto) {
+		String mpassword = memberDao.findPw(memberDto);
+		return mpassword;
+		
 	}
 
 }
