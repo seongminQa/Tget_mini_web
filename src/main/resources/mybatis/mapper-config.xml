@@ -14,7 +14,6 @@
 		<typeAlias type="com.mycompany.Tget_mini_web.dto.AdminDto" alias="AdminDto"/>
 		<typeAlias type="com.mycompany.Tget_mini_web.dto.BoardDto" alias="BoardDto"/>
 		<typeAlias type="com.mycompany.Tget_mini_web.dto.CartDto" alias="CartDto"/>
-		<typeAlias type="com.mycompany.Tget_mini_web.dto.CartDetailDto" alias="CartDetailDto"/>
 		<typeAlias type="com.mycompany.Tget_mini_web.dto.MemberDto" alias="MemberDto"/>
 		<typeAlias type="com.mycompany.Tget_mini_web.dto.OrderDetailDto" alias="OrderDetailDto"/>
 		<typeAlias type="com.mycompany.Tget_mini_web.dto.OrderInfoDto" alias="OrderInfoDto"/>

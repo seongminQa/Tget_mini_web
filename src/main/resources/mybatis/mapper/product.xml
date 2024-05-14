@@ -21,10 +21,10 @@
 		
 		insert into product (pno, pkind, ptitle, pplace, pprice, 
 			pcontent, pposter, pdatestart, pdateend, pseatgrade, pseatscnt,
-			paddress, pgenre, pcontentattachtype, pposterattachtype, porderdate)
+			paddress, pgenre, pcontentattachtype, pposterattachtype)
 		values(#{pno}, #{pkind}, #{ptitle}, #{pplace}, #{pprice}, #{pcontent}, #{pposter},
 			#{pdatestart}, #{pdateend}, #{pseatgrade}, #{pseatscnt}, #{paddress}, #{pgenre}, #{pcontentattachtype},
-			#{pposterattachtype}, #{porderdate})
+			#{pposterattachtype})
 	</insert>
 	
 	<!-- 상품의 수 얻기 -->

@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.Tget_mini_web.dao.CartDao;
-import com.mycompany.Tget_mini_web.dto.CartDetailDto;
 import com.mycompany.Tget_mini_web.dto.CartDto;
 import com.mycompany.Tget_mini_web.dto.PagerDto;
 
@@ -18,10 +17,15 @@ import lombok.extern.slf4j.Slf4j;
 public class CartService {
    @Resource // @Autowired 받아도 됨.
    private CartDao cartDao; // Dao 주입받기
+   
+   // 장바구니에 아이템 추가하기
+   public void addCartItem(CartDto cartDto) {
+	   cartDao.insertCartItem(cartDto);
+   }
 
    // 카트 리스트 페이지 당 리스트를 보여주는 메소드
-   public List<CartDetailDto> getCartList(PagerDto pager) {
-      List<CartDetailDto> cart = cartDao.selectByPage(pager);
+   public List<CartDto> getCartList(PagerDto pager) {
+      List<CartDto> cart = cartDao.selectByPage(pager);
       return cart;
    }
    
@@ -43,9 +47,11 @@ public class CartService {
       int rowNum = cartDao.updateCart(cartDto);
    }
    
-   // 카트 리스트 삭제 메소드
-   public void removeMember(String cno) {
-      cartDao.deleteByCno(cno);
-   }
+	// 카트 리스트 삭제 메소드
+	public void removeMember(String cno) {
+	   cartDao.deleteByCno(cno);
+	}
+	
+	
 
 }

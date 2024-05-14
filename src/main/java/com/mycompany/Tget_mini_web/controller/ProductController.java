@@ -1,30 +1,29 @@
 package com.mycompany.Tget_mini_web.controller;
 
 import java.io.OutputStream;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycompany.Tget_mini_web.dao.CartDao;
-import com.mycompany.Tget_mini_web.dao.CartDetailDao;
 import com.mycompany.Tget_mini_web.dao.ProductDao;
-import com.mycompany.Tget_mini_web.dto.CartDetailDto;
 import com.mycompany.Tget_mini_web.dto.CartDto;
-import com.mycompany.Tget_mini_web.dto.CartItem;
 import com.mycompany.Tget_mini_web.dto.MemberDto;
 import com.mycompany.Tget_mini_web.dto.PagerDto;
 import com.mycompany.Tget_mini_web.dto.ProductDto;
 import com.mycompany.Tget_mini_web.security.TgetUserDetails;
-import com.mycompany.Tget_mini_web.service.CartDetailService;
 import com.mycompany.Tget_mini_web.service.CartService;
 import com.mycompany.Tget_mini_web.service.ProductService;
 
@@ -42,7 +41,7 @@ public class ProductController {
 	
 	// 상품 리스트
 	@RequestMapping("")
-		public String productList(Model model, HttpSession session) {
+		public String productList(Model model) {
 		 
 		// 페이징 정보를 얻어서 서비스쪽으로 넘기고  Service에서 게시물 목록 요청
 		List<ProductDto> productList = productService.getShoppingProductList();
@@ -72,9 +71,18 @@ public class ProductController {
    
    // 상품 상세 페이지
    @GetMapping("/detail")
-   public String detail(Model model, int pno) {
-	   log.info("detail()실행");
-	   log.info(Integer.toString(pno));
+   public String detail(Model model, int pno, Authentication authentication) {
+      if (authentication == null || !authentication.isAuthenticated()) {
+           return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
+       }      
+      
+      TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
+      MemberDto memberDto = userDetails.getMember();
+      String mid = memberDto.getMid();
+      
+	  log.info("detail()실행");
+	  log.info(Integer.toString(pno));
+	  log.info("mid : " + mid);
 		
 	   ProductDto productDto = productService.getProductDetail(pno);
 	   log.info(productDto.getPplace());
@@ -93,13 +101,7 @@ public class ProductController {
    
    @Autowired
    CartService cartService;
-   
-   @Autowired
-   CartDetailDao cartDetailDao;
-   
-   @Autowired
-   CartDetailService cartDetailService;
-   
+
    // 장바구니 리스트(cart)
    //@Secured("ROLE_USER")
    @RequestMapping("/cart")
@@ -131,62 +133,37 @@ public class ProductController {
        MemberDto memberDto = userDetails.getMember();
        model.addAttribute("memberDto", memberDto);
        
-       List<CartDetailDto> cart = cartService.getCartList(pager);
+       //List<CartDetailDto> cart = cartService.getCartList(pager);
        
        // 현재 로그인한 Mid 콘솔로 확인하기
-       log.info("authentication 테스트 : " , memberDto.getMid());
+       log.info("authentication 테스트 : " + memberDto.getMid());
        
        // jsp에서 사용할 수 있도록 설정.
        model.addAttribute("pager", pager);
        //model.addAttribute("currentMid", currentMid);
        //log.info(currentMid);
-       model.addAttribute("cartList", cart);
+       //model.addAttribute("cartList", cart);
        
        
        return "/member/shopping_cart";
 	}
 	
    
-   @RequestMapping("/addCartItem")
-   public String addCartItem(int pno, int pamount, 
+//   @RequestMapping(value="/addCartItem/${pno}", method=RequestMethod.GET)
+   @PostMapping("/addCartItem")
+   /*public String addCartItem(@RequestParam(defaultValue="0") Integer cno, int pno, int oamount, String oseatgrade, @DateTimeFormat(pattern="yyyy-MM-dd") Date odate,
+		   Authentication authentication) {*/
+   public String addCartItem(CartDto cartDto,
 		   Authentication authentication) {
-	   
+
 	  TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
 	  MemberDto memberDto = userDetails.getMember();
-       
-      // 장바구니에서 세션 가져오기
-      //List<CartDetailDto> cart = (List<CartDetailDto>) session.getAttribute("cart");
-	  CartDetailDto cartDetailDto = new CartDetailDto(memberDto.getMid(), pno);
-	  cartDetailService.cartDetailSignUp(cartDetailDto);
-      
-	  CartDto cart = (List<CartItem>) session.getAttribute("cart");
+	  String mid = memberDto.getMid();
+
+	  cartDto.setMid(memberDto.getMid());
+	  cartService.addCartItem(cartDto);
 	  
-      // 가져온 장바구니가 없을 경우 새로 장바구니를 생성해서 session 범위에 저장
-      if(cart == null) { // 가져왔는데 만약 없다면? 장바구니를 세션에 만들어야 함!
-         cart = new ArrayList<CartItem>();
-         session.setAttribute("cart", cart);
-      }
-      
-      // pno가 같은 아이템이 있으면 장바구니의 수량을 수정함
-      boolean isAmountUpdated = false;
-      for(CartItem cartItem : cart) {
-         if(cartItem.getProductDto().getPno() == pno) {
-            cartItem.setAmount(cartItem.getAmount() + pamount);
-            isAmountUpdated = true;
-         }
-      }
-      
-      if(isAmountUpdated == false) {
-         // 상품 상세 정보 얻기
-         ProductDto productDto = productService.getProduct(pno); 
-         // 장바구니 아이템 생성
-         CartItem cartItem = new CartItem();
-         cartItem.setProductDto(productDto);
-         cartItem.setAmount(pamount);
-         // 장바구니에 장바구니 아이템을 추가
-         cart.add(cartItem);
-      }
-      return "/shopping/cart";
+      return "/member/shopping_cart";
    }
 	
 	// 업데이트 방법 2  // get을 사용한 경우에는 이렇게 가능하다. set을 사용한 경우는 못함!

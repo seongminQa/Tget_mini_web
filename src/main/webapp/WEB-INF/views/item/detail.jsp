@@ -405,34 +405,36 @@
          </div>
          <div id="sticky_cal" style="flex: 1; height: 100%;">
             <div class="wrapper" style="height: 100%;">
-               주문하기
-               <form action="addCartItem" method="get">
+               	주문하기
+               	
+               <form action="addCartItem" method="post">
                   <!-- form 태그에서 히든으로 넘기는것들  -->
-                  <input type="hidden" name="pno" value="${productDto.pno}"/>
-                  <input type="hidden" name="pkind" value="${productDto.pkind}"/>
+                  <input type="number" name="pno" value="${productDto.pno}" readonly="readonly"/>
+                  <%-- <input type="hidden" name="pkind" value="${productDto.pkind}"/>
                   <input type="hidden" name="ptitle" value="${productDto.ptitle}"/>
                   <input type="hidden" name="pplace" value="${productDto.pplace}"/>
                   <input type="hidden" name="pprice" value="${productDto.pprice}"/>
                   <input type="hidden" name="pposter" value="${productDto.pposter}"/>
-                  <input type="hidden" name="pgenre" value="${productDto.pgenre}"/>
+                  <input type="hidden" name="pgenre" value="${productDto.pgenre}"/> --%>
                   
                   
                   <!-- 사용자가 시각적으로 볼수 있는 정보와 사용자 선택할수 있는 정보 -->
                   
-                  <input id="today" name="poderdate" type="date"/>
+                  <input id="today" name="odate" type="date"/>
                   <!-- pseatscnt 는 해당 상품의 남은 좌석 수로 실시간으로 변경됨. -->
-                      <select class="form-control" id="" name="pseatgrade">
+                      <select name="oseatgrade">
                          <option value="일반석" selected="selected">일반석</option>
                           <option value="로얄석">로얄석</option>
                       </select>
-                  <input type="number" name="pamount" value="1" 
-                  	id="pamount" min="1" max="${productDto.pseatscnt}"/>
+                  <input type="number" name="oamount"  value="1" min="1"
+                  	id="oamount"  max="${productDto.pseatscnt}"/>
                   
                   <!-- max="<fmt:formatDate value="${product.pdateend}" pattern="yyyy-MM-dd"/>" -->
                   
                    <!-- <a href="addCartItem" type="submit" class="btn btn-outline-secondary mt-2">주문</a> -->
-                   <button type="submit" class="btn btn-outline-secondary mt-2">주문</button>
+                   <button type="submit" class="btn btn-outline-secondary mt-2">장바구니 넣기</button>
                </form>
+               
             </div>
          </div>
       </div>

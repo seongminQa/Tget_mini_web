@@ -25,8 +25,6 @@ public class ProductDto {
    private Date pdatestart;
    @DateTimeFormat(pattern="yyyy-MM-dd")
    private Date pdateend;
-   @DateTimeFormat(pattern="yyyy-MM-dd")
-   private Date porderdate;
    
    private String pseatgrade;
    private int pseatscnt;
