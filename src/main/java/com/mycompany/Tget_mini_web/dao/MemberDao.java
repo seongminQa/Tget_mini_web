@@ -20,8 +20,9 @@ public interface MemberDao {
 	public int selectByMssnIsUnique(String mssn);
 	public int selectByMphoneIsUnique(String mphone);
 	public int selectByMnicknameIsUnique(String mnickname);
+	public String findId(MemberDto memberDto);
+	public String findPw(MemberDto memberDto);
 	
 	
-	/*//아이디찾기 기능	
-	MemberDto findId(String mid); */
+
 }
