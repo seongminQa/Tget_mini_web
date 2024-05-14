@@ -38,7 +38,7 @@ public class ProductService {
 	}
 	
 	// pno에 맞는 상품 정보 가져오기
-	public ProductDto getShoppingProductDetail(int pno) {
+	public ProductDto getProductDetail(int pno) {
 		ProductDto productDto = productDao.selectByProductPno(pno);
 		return productDto;
 	}

@@ -20,7 +20,6 @@ public class ProductDto {
    private int pprice;
    private byte[] pcontent;
    private byte[] pposter;
-   private byte[] pactors;
    
    @DateTimeFormat(pattern="yyyy-MM-dd")
    private Date pdatestart;
@@ -36,11 +35,9 @@ public class ProductDto {
    
    private MultipartFile pcontentattach;
    private MultipartFile pposterattach;
-   private MultipartFile pactorsattach;
    
 //   private String pattachname;
    private String pcontentattachtype;
    private String pposterattachtype;
-   private String pactorsattachtype;
    
 }

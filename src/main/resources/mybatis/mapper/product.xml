@@ -8,9 +8,7 @@
 	 -->
 	<!-- 상품 정보 얻기 -->
 	<select id="selectByPno" parameterType="int" resultType="ProductDto">
-		select pno, pkind, ptitle, pplace, pprice, 
-			pcontent, pposter, pactors, pdatestart, pdateend, pseatgrade, pseatscnt,
-			paddress, pgenre, pcontentattachtype, pposterattachtype, pactorsattachtype
+		select *
 		from product
 		where pno = #{pno}
 	</select>
@@ -22,11 +20,11 @@
 		</selectKey>
 		
 		insert into product (pno, pkind, ptitle, pplace, pprice, 
-			pcontent, pposter, pactors, pdatestart, pdateend, pseatgrade, pseatscnt,
-			paddress, pgenre, pcontentattachtype, pposterattachtype, pactorsattachtype)
+			pcontent, pposter, pdatestart, pdateend, pseatgrade, pseatscnt,
+			paddress, pgenre, pcontentattachtype, pposterattachtype, porderdate)
 		values(#{pno}, #{pkind}, #{ptitle}, #{pplace}, #{pprice}, #{pcontent}, #{pposter},
-			#{pactors}, #{pdatestart}, #{pdateend}, #{pseatgrade}, #{pseatscnt}, #{paddress}, #{pgenre}, #{pcontentattachtype},
-			#{pposterattachtype}, #{pactorsattachtype})
+			#{pdatestart}, #{pdateend}, #{pseatgrade}, #{pseatscnt}, #{paddress}, #{pgenre}, #{pcontentattachtype},
+			#{pposterattachtype}, #{porderdate})
 	</insert>
 	
 	<!-- 상품의 수 얻기 -->
@@ -45,12 +43,12 @@
 		<!-- C는 캐릭터를 의미. 문자 그대로의 데이터를 받아들이는 구문 -->
 		<![CDATA[
 			select rnum, pno, pkind, ptitle, pplace, pprice, 
-				pcontent, pposter, pactors, pdatestart, pdateend, pseatgrade, pseatscnt,
-				paddress, pgenre, pcontentattachtype, pposterattachtype, pactorsattachtype
+				pcontent, pposter, pdatestart, pdateend, pseatgrade, pseatscnt,
+				paddress, pgenre, pcontentattachtype, pposterattachtype
 			from (
 			    select rownum as rnum, pno, pkind, ptitle, pplace, pprice, 
-					pcontent, pposter, pactors, pdatestart, pdateend, pseatgrade, pseatscnt,
-					paddress, pgenre, pcontentattachtype, pposterattachtype, pactorsattachtype
+					pcontent, pposter, pdatestart, pdateend, pseatgrade, pseatscnt,
+					paddress, pgenre, pcontentattachtype, pposterattachtype
 			    from (
 			        select *
 			        from product
@@ -71,7 +69,6 @@
 			pprice = #{pprice},
 			pcontent = #{pcontent},
 			pposter = #{pposter},
-			pactors = #{pactors},
 			pdatestart = #{pdatestart},
 			pdateend = #{pdateend},
 			pseatgrade = #{pseatgrade},

@@ -21,11 +21,11 @@
 
     <!-- 사용자 정의 자바스크립트 -->
     <script defer="defer">
-    	const productListObject = [[${productList}]];
+    	/* const productListObject = [[${productList}]];
     	
     	function productListObject.foreach(function(pkind) {
     		console.log(pkind);
-    	});
+    	}); */
     
     </script>
     <style>
@@ -153,9 +153,9 @@
 	                <div class="product_grid_unit">
 	                
 	                  <!-- 해당 상품 클릭시 상품 상세페이지로 전환 -->
-	                  <a href="${pageContext.request.contextPath}/item/detail?pno=${product.pno}" class="product_link">
+	                  <a href="${pageContext.request.contextPath}/product/detail?pno=${product.pno}" class="product_link">
 	                    <div class="product_imgbox">
-	                      <img src="attachProduct?pno=${product.pno}" alt="" class="product_img"
+	                      <img src="product/attachProduct?pno=${product.pno}" alt="" class="product_img"
 	                      	style="width:257px; height:318px;">
 	                    </div>
 	                    <div class="product_info">

@@ -221,16 +221,6 @@
 															
 															            <div class="input-group">
 															              <div class="input-group-prepend">
-															                <span class="input-group-text">배우 :
-															                </span>
-															              </div>
-															              <%-- <input id="pactors" type="file" name="pactorsattach" class="form-control"
-															              	value="${product.pactors}"> --%>
-															              <input id="pactors" type="file" name="pactorsattach" class="form-control">
-															            </div>
-															
-															            <div class="input-group">
-															              <div class="input-group-prepend">
 															                <span class="input-group-text">상품 판매 시작일 :
 															                </span>
 															              </div>
@@ -439,14 +429,6 @@
 				                </span>
 				              </div>
 				              <input id="pposter" type="file" name="pposterattach" class="form-control" accept="image/*" onchange="previewFile('new')">
-				            </div>
-				
-				            <div class="input-group">
-				              <div class="input-group-prepend">
-				                <span class="input-group-text">배우 :
-				                </span>
-				              </div>
-				              <input id="pactors" type="file" name="pactorsattach" class="form-control">
 				            </div>
 				
 				            <div class="input-group">

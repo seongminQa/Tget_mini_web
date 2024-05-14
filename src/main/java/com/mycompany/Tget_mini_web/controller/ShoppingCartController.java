@@ -81,7 +81,6 @@ public class ShoppingCartController {
       // 응답 헤더 구성
       response.setContentType(productDto.getPcontentattachtype()); // void메소드. 직접 응답을 생성해서 값을 반환
       response.setContentType(productDto.getPposterattachtype()); // void메소드. 직접 응답을 생성해서 값을 반환
-      response.setContentType(productDto.getPactorsattachtype()); // void메소드. 직접 응답을 생성해서 값을 반환
 //      String fileName = new String(productDto.getPattachname().getBytes("UTF-8"), "ISO-8859-1");
 //      response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
       
