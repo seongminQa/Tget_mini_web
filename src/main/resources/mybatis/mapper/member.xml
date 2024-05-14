@@ -4,36 +4,46 @@
 <mapper namespace="com.mycompany.Tget_mini_web.dao.MemberDao">
 
 	<!-- 회원정보 얻기 -->
-	<select id="selectByMid" parameterType="String" resultType="MemberDto">
-		select mid, mname, mpassword, mssn, memail, mrole, mnickname, mprofileimgtype, mprofileimgname,
-			mphone, msince, mprefergenre, mgrade, mprofileimg as mprofileimgdata, mtotalpay
+	<select id="selectByMid" parameterType="String"
+		resultType="MemberDto">
+		select mid, mname, mpassword, mssn, memail, mrole,
+		mnickname, mprofileimgtype, mprofileimgname,
+		mphone, msince, mprefergenre, mgrade, mprofileimg as mprofileimgdata,
+		mtotalpay
 		from member
 		where mid = #{mid}
 	</select>
-	
+
 	<!-- 회원 더미 집어넣기 테스트 -->
 	<insert id="insertMember" parameterType="MemberDto">
-		insert into member (mid, mname, mpassword, mssn, memail,
-			mphone, msince, mprefergenre, mgrade, mtotalpay, mrole)
-		values(#{mid}, #{mname}, #{mpassword}, #{mssn}, #{memail},
-			#{mphone}, #{msince}, #{mprefergenre}, #{mgrade}, #{mtotalpay}, #{mrole})
+		insert into member (mid,
+		mname, mpassword, mssn, memail,
+		mphone, msince, mprefergenre, mgrade, mtotalpay, mrole)
+		values(#{mid},
+		#{mname}, #{mpassword}, #{mssn}, #{memail},
+		#{mphone}, #{msince}, #{mprefergenre}, #{mgrade}, #{mtotalpay}, #{mrole})
 	</insert>
-	
+
 	<!-- 회원가입 form DB연동 -->
 	<insert id="insertJoin" parameterType="MemberDto">
-		insert into member (mid, mname, mpassword, mssn, memail, mnickname, mprofileimgtype, mprofileimgname,
-        	mphone, msince, mprefergenre, mgrade, mtotalpay, mrole, MPROFILEIMG)
-    	values(#{mid}, #{mname}, #{mpassword}, #{mssn}, #{memail}, #{mnickname}, #{mprofileImgType}, #{mprofileImgName},
-        	#{mphone}, sysdate, #{mprefergenre}, #{mgrade}, #{mtotalpay}, #{mrole}, #{mprofileImgData})
+		insert into member (mid,
+		mname, mpassword, mssn, memail, mnickname, mprofileimgtype,
+		mprofileimgname,
+		mphone, msince, mprefergenre, mgrade, mtotalpay, mrole, MPROFILEIMG)
+		values(#{mid}, #{mname}, #{mpassword}, #{mssn}, #{memail},
+		#{mnickname}, #{mprofileImgType}, #{mprofileImgName},
+		#{mphone}, sysdate, #{mprefergenre}, #{mgrade}, #{mtotalpay}, #{mrole},
+		#{mprofileImgData})
 	</insert>
-	
+
 	<!-- 회원의 수 얻기 -->
 	<select id="count" resultType="int">
 		select count(*) from member
 	</select>
 
 	<!-- 회원 수에 따라 페이징 처리하기 -->
- 	<select id="selectByPage" parameterType="PagerDto" resultType="MemberDto">
+	<select id="selectByPage" parameterType="PagerDto"
+		resultType="MemberDto">
 		<!-- C는 캐릭터를 의미. 문자 그대로의 데이터를 받아들이는 구문 -->
 		<![CDATA[
 			select rnum, mid, mname, memail, mphone, mrole, mgrade
@@ -48,61 +58,75 @@
 			where rnum >= #{startRowNo}
 		]]>
 	</select>
-	
+
 	<!-- 회원 정보 수정하기 -->
 	<!-- 비밀번호는 어떻게 할 것인지??** -->
 	<update id="updateMember" parameterType="MemberDto">
 		update member set
-			mpassword = #{mpassword},
-			memail = #{memail},
-			mphone = #{mphone}
+		mpassword = #{mpassword},
+		memail = #{memail},
+		mphone = #{mphone}
 		where mid = #{mid}
 	</update>
-	
+
 	<!-- 회원 삭제 -->
 	<delete id="deleteByMid" parameterType="String">
 		delete
-			from member
-			where mid = #{mid}
+		from member
+		where mid = #{mid}
 	</delete>
-	
-<!-- 회원가입 할 아이디가 중복값인지 int으로 가져오기 -->
-	<select id="selectByMidIsUnique" parameterType="String" resultType="int">
+
+	<!-- 회원가입 할 아이디가 중복값인지 int으로 가져오기 -->
+	<select id="selectByMidIsUnique" parameterType="String"
+		resultType="int">
 		select COUNT(mid)
 		from member
 		where mid = #{mid}
 	</select>
-	
+
 	<!-- 회원가입 할 주민번호가 중복값인지 int으로 가져오기 -->
-	<select id="selectByMssnIsUnique" parameterType="String" resultType="int">
+	<select id="selectByMssnIsUnique" parameterType="String"
+		resultType="int">
 		select COUNT(mssn)
 		from member
 		where mssn = #{mssn}
 	</select>
-	
+
 	<!-- 회원가입 할 휴대폰 번호가 중복값인지 int으로 가져오기 -->
-	<select id="selectByMphoneIsUnique" parameterType="String" resultType="int">
+	<select id="selectByMphoneIsUnique" parameterType="String"
+		resultType="int">
 		select COUNT(mphone)
 		from member
 		where mphone = #{mphone}
 	</select>
-	
-		<!-- 회원가입 할 휴대폰 번호가 중복값인지 int으로 가져오기 -->
-	<select id="selectByMnicknameIsUnique" parameterType="String" resultType="int">
+
+	<!-- 회원가입 할 휴대폰 번호가 중복값인지 int으로 가져오기 -->
+	<select id="selectByMnicknameIsUnique" parameterType="String"
+		resultType="int">
 		select COUNT(mnickname)
 		from member
-		where mnickname = #{mnickname}
+		where mnickname =
+		#{mnickname}
+	</select>
+
+	<!--아이디 찾기 기능 -->
+	<select id="findId" parameterType="MemberDto"
+		resultType="String">
+
+		select mid
+		from member
+		where mname = #{mname}
+		and mssn=#{mssn}
+		and mphone=#{mphone}
 	</select>
 	
-	<!--아이디 찾기  기능-->
-<!-- 	<select  id="findId_fail"  parameterType="hashmap" resultType="hashmap" >     
-			<![CDATA[
-			select mid
-			from member
-			where mname = #{mname} 
-			and  mssn=#{mssn} 
-			and  mphone=#{mphone}
-			]]>
+	<!--비밀번호 찾기 기능  -->
+	<select id="findPw" parameterType="MemberDto" resultType="String">
+	
+		select mpassword
+		from member
+		where mid = #{mid}
+		and mssn=#{mssn}
+	
 	</select>
- -->
 </mapper>
