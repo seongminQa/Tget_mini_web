@@ -3,25 +3,27 @@
 
 <mapper namespace="com.mycompany.Tget_mini_web.dao.mybatis.Cart">
 
-
-
-
 	<!-- 장바구니 리스트에 수에 따라 페이징 처리하기 -->
- 	<select id="selectByPage" parameterType="PagerDto" resultType="CartDto">
+ 	<select id="selectByPage" parameterType="PagerDto" resultType="CartDetailDto">
 		<!-- C는 캐릭터를 의미. 문자 그대로의 데이터를 받아들이는 구문 -->
 		<![CDATA[
-			select rnum, cno, mid
+			select rnum, cno, mid, pno
 			from (
-			    select rownum as rnum, cno, mid
+			    select rownum as rnum, cno, mid, pno
 			    from (
 			        select *
-			        from cart
+			        from cartdetail
 			        order by cno desc
 			    )
 			    where rownum <= #{endRowNo}
 			)
 			where rnum >= #{startRowNo}
 		]]>
+	</select>
+	
+	<!-- 해당 mid와 해당 pno를 연결하는 조인문 작성 -->
+	<select id="selectByCartDetail">
+		
 	</select>
 	
 	

@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class CartDto {
 	private int cno;
-	private String mid;
+	private CartDetailDto cartDetailDto;
 }

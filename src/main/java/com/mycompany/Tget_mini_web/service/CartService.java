@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.Tget_mini_web.dao.CartDao;
+import com.mycompany.Tget_mini_web.dto.CartDetailDto;
 import com.mycompany.Tget_mini_web.dto.CartDto;
 import com.mycompany.Tget_mini_web.dto.PagerDto;
 
@@ -19,9 +20,9 @@ public class CartService {
    private CartDao cartDao; // Dao 주입받기
 
    // 카트 리스트 페이지 당 리스트를 보여주는 메소드
-   public List<CartDto> getCartList(PagerDto pager) {
-      List<CartDto> cartList = cartDao.selectByPage(pager);
-      return cartList;
+   public List<CartDetailDto> getCartList(PagerDto pager) {
+      List<CartDetailDto> cart = cartDao.selectByPage(pager);
+      return cart;
    }
    
    // 리스트들의 총 행의 수를 반환하는 메소드

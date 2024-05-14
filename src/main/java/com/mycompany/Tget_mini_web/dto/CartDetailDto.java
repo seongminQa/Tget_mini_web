@@ -1,7 +1,13 @@
 package com.mycompany.Tget_mini_web.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CartDetailDto {
-	private int cno;
+	private String mid;
 	private int pno;
-	private int camount;
 }

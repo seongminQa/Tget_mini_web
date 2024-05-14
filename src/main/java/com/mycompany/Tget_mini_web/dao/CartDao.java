@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.mycompany.Tget_mini_web.dto.CartDetailDto;
 import com.mycompany.Tget_mini_web.dto.CartDto;
 import com.mycompany.Tget_mini_web.dto.PagerDto;
 
 @Mapper
 public interface CartDao {
 
-   List<CartDto> selectByPage(PagerDto pager);
+   List<CartDetailDto> selectByPage(PagerDto pager);
 
    int count();
 
