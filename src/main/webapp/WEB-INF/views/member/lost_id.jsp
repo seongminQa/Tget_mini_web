@@ -28,6 +28,45 @@
 		<!-- 사용자 정의 자바스크립트 -->
 		<script>
 
+		function ssnCheck(){
+			// ssn이 빈문자면 아무것도 출력하지 않는다.
+			if($("#mssn").val() === ""){
+				$("#Sssn").removeClass("text-danger").html("");
+			}else{
+				// 빈문자가 아니면 유효성 검사 실행
+				var mssnPattern = /^\d{13}$/;
+				   var mssnResult = mssnPattern.test($("#mssn").val());
+				   if(mssnResult) {
+					   $("#Sssn").removeClass("text-danger").html("주민등록번호가 양식에 맞습니다.");
+				   } else {   
+				      $("#Sssn").addClass("text-danger").html("주민등록번호가 양식에 맞지 않습니다.");
+				      
+				   }
+			}
+			
+			
+		}
+		function PhCheck(){
+			// ssn이 빈문자면 아무것도 출력하지 않는다.
+			if($("#mphone").val() === ""){
+				$("#Ph").removeClass("text-danger").html("");
+			}else{
+				// 빈문자가 아니면 유효성 검사 실행
+				var mssnPattern = /^010-\d{3,4}-\d{4}$/;
+				   var mssnResult = mssnPattern.test($("#mphone").val());
+				   if(mssnResult) {
+					   $("#Ph").removeClass("text-danger").html("전화번호가 양식에 맞습니다.");
+				   } else {   
+				      $("#Ph").addClass("text-danger").html("전화번호가 양식에 맞지 않습니다.");
+				      
+				   }
+			}
+			
+			
+		}
+		
+		
+		
 		
 		</script>
 	</head>
@@ -37,8 +76,8 @@
 	
 	
 		<!--  중앙에 가로로 정렬시키기 위해(화면창을 줄이건 늘려도 가운대로 하기위해) 스타일은 너무 위로 치우쳐 있어서 마진탑 10%로 줌 -->
-	 	<div class="d-flex justify-content-center"style="margin-top:5%;">  
-         <div class="login-wrapper">
+	 	<div class="d-flex justify-content-center">  
+         <div class="login-wrapper"  >
          <!-- 가운데 이미지 티겟을 설정하기위해 text-align -->
       <div style="text-align : center;">  
          <!--  이미지 크기를 맟주기 위해 높이와 너비를 줌 -->
@@ -48,11 +87,13 @@
       
       
        </a>   
-        <form method="post" action="#" id="login-form" novalidate>
+        <form method="post" action="${pageContext.request.contextPath}/member/findId" id="login-form"  novalidate="novalidate" >
         	<!-- placeholder 사용한이유는 아이디와 비밀호를 입력을하는 필드라는것을 알려주기 위해 사용 -->
-            <input class="" type="text" name="mname" placeholder="name" id="mname">        
-            <!-- <input class="" type="text" name="#mssn" placeholder="ex)00xxxx" id="#mssn"> -->
-            <input class="" type="text" name="mphone" placeholder="phone number" id="mphone">
+            <input  type="text" name="mname" placeholder="name" id="mname">
+              <input  oninput="ssnCheck()"  type="text" name="mssn" placeholder="(-)없는전체 주민번호" id="mssn" >
+              <span id="Sssn"></span>       
+            <input  oninput="PhCheck()" type="text" name="mphone" placeholder="phone number" id="mphone">
+             <span id="Ph"></span>
        			<!--아이디찾기  기능 -->
      <%--   			<div class="result-box">
 					<c:choose>
@@ -65,8 +106,8 @@
 					</c:choose>
 				</div> --%>
        <!--아이디 찾기  -->
-       
-            <input type="submit" value="아이디 찾기" >
+       <%-- method="post" action="${pageContext.request.contextPath}/member/findId" --%>
+            <input type="submit" value="아이디 찾기"  style="background-color:  #D95B96; color:white;">
             <div class="link">
               <p>	
               <!-- 링크는 각각 아이디찾기, 비밀번호 찾기, 회원가입 페이지로 이동할수 있도록 구현한 링크이다. -->
@@ -85,7 +126,9 @@
 	     <div class="fixed-bottom"> 
     <%@include file="/WEB-INF/views/common/footer.jsp"%>	
 	    </div>
-		
+	    
+	    
+
 
 
 		
