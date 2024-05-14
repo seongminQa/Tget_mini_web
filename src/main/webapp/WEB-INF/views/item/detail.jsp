@@ -406,7 +406,7 @@
          <div id="sticky_cal" style="flex: 1; height: 100%;">
             <div class="wrapper" style="height: 100%;">
                주문하기
-               <form action="addCartItem">
+               <form action="addCartItem" method="get">
                   <!-- form 태그에서 히든으로 넘기는것들  -->
                   <input type="hidden" name="pno" value="${productDto.pno}"/>
                   <input type="hidden" name="pkind" value="${productDto.pkind}"/>
@@ -425,11 +425,13 @@
                          <option value="일반석" selected="selected">일반석</option>
                           <option value="로얄석">로얄석</option>
                       </select>
-                  <input type="number" name="pamount" value="1" min="1" max="${productDto.pseatscnt}"/>
+                  <input type="number" name="pamount" value="1" 
+                  	id="pamount" min="1" max="${productDto.pseatscnt}"/>
                   
                   <!-- max="<fmt:formatDate value="${product.pdateend}" pattern="yyyy-MM-dd"/>" -->
                   
-                   <a href="addCartItem" type="submit" class="btn btn-outline-secondary mt-2">주문</a>
+                   <!-- <a href="addCartItem" type="submit" class="btn btn-outline-secondary mt-2">주문</a> -->
+                   <button type="submit" class="btn btn-outline-secondary mt-2">주문</button>
                </form>
             </div>
          </div>
