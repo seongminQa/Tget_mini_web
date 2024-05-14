@@ -42,7 +42,7 @@ body{
     color: black;
 }
 	/* 로그인 폼의 제출 버튼 스타일 */
-#login-form > input[type="submit"]{
+#login-form > input[type="button"]{
     color: #fff;
     font-size: 16px;
     background-color:  #D95B96;
