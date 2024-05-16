@@ -59,7 +59,9 @@ public class BoardService {
 		log.info("myBoardPage 실행");
 		
 	}
-
+	public void plusHitCnt(int bno) {
+		boardDao.plusCnt(bno);
+	}
 	
 
 }
