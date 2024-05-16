@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
    <head>
@@ -20,29 +20,7 @@
       <script src="${pageContext.request.contextPath}/resources/js/memberInfoModify.js"></script>
    
    <script>
-         function pwModify() {
-           const pwModal = new bootstrap.Modal("#pwModifyModal");
-           pwModal.show();
-         }
-   
-         function nickModify() {
-           const nickModal = new bootstrap.Modal("#nickModifyModal");
-           nickModal.show();
-         }
-   
-         function emailModify() {
-           const emailModal = new bootstrap.Modal("#emailModifyModal");
-           emailModal.show();
-         }
-         function mprofileImgModify() {
-           const mprofileImgModal = new bootstrap.Modal("#mprofileImgModifyModal");
-           mprofileImgModal.show();
-         }
-   
-         function phoneModify() {
-           const phoneModal = new bootstrap.Modal("#phoneModifyModal");
-           phoneModal.show();
-         }
+         
        </script>
    
    <style>
@@ -79,7 +57,7 @@
    /* 나중에 수정하기 */
    </style>
    
-   <link rel="stylesheet" href="/resources/css/home.css" />
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/home.css" />
    
    </head>
 
@@ -94,7 +72,12 @@
                   <div style="background-color: white; border-radius: 10px;"
                      class="pt-3 pb-3">
                      <div>
-                        <img src="imgProfileDownload?mid=${memberDto.mid}" width="150" />
+                     	 <c:if test="${empty memberDto.mprofileImgData}">
+	                        <img src="${pageContext.request.contextPath}/resources/image/project_image/circle_user.svg" width="150" style="margin-bottom: 20px"/>
+	                     </c:if>
+	                     <c:if test="${not empty memberDto.mprofileImgData}">
+	                        <img src="imgProfileDownload?mid=${memberDto.mid}" width="150" style="border-radius: 70%; margin-bottom: 20px; border:3px solid black;" />
+	                     </c:if>
                      </div>
                      <h4 class="ms-3">
                         <strong>${memberDto.mname}</strong>님의 <br />마이페이지
@@ -201,48 +184,43 @@
                </div>
                <!-- modal body -->
                <div class="modal-body">
-                  <form class="p-3" method="post" onsubmit="pwSubmit()" action="pwModify">
-                     <div class="div_form row">
-                        <label for="mpassword" class="col-3"><strong>비밀번호</strong></label> 
-                        <input class="pwClazz col-8 mb-5" oninput="pwPatternCheck()" type="password" id="mpassword" name="mpassword"
-                           placeholder="8~12자 영문, 숫자" />
-                        <div class="pwEye col-1">
-                           <button type="button"
-                              style="border: none; background-color: transparent">
-                              <img src="/Tget_mini_web/resources/image/project_image/eye.svg"
-                                 style="width: 30px" />
-                           </button>
-                        </div>
-                     </div>
-                     <div class="row" style="width: 40%;">
-		                <span id="spanPw" style="display: inline;" class="d-flex mt-3"></span>
-		            </div>
-                     <div class="div_form row">
-                        <label for="pwcheck" class="col-3"><strong>비밀번호 확인</strong></label> 
-                              <input class="pwCheckClazz col-8 mb-5" oninput="pwCheck()" type="password" id="pwcheck"
-                           name="pwcheck" placeholder="8~12자 영문, 숫자" />
-                        <div class="pwCheckEye col-1">
-                           <button type="button"
-                              style="border: none; background-color: transparent">
-                              <img src="/Tget_mini_web/resources/image/project_image/eye.svg"
-                                 style="width: 30px" />
-                           </button>
-                        </div>
-                     </div>
-                     <div class="row" style="width: 40%;">
-		                <span id="spanPwCheck" style="display: inline;" class="d-flex mt-3"></span>
-		            </div>
-                  </form>
-               </div>
-               <!-- modal footer -->
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary"
-                     data-bs-dismiss="modal">닫기</button>
-                  <button type="submit" class="btn"
-                     style="background-color: #d95b96; color: white">수정 완료</button>
-               </div>
+                  <form class="p-3" method="post" onsubmit="pwSubmit()" action="${pageContext.request.contextPath}/member/pwModify" id="pwModify">
+			    <!-- 폼의 입력 필드들 -->
+			    <div class="div_form row">
+			        <label for="mpassword" class="col-3"><strong>비밀번호</strong></label> 
+			        <input class="pwClazz col-8 mb-5" oninput="pwPatternCheck()" type="password" id="mpassword" name="mpassword" placeholder="8~12자 영문, 숫자" />
+			        <div class="pwEye col-1">
+			            <button type="button" style="border: none; background-color: transparent">
+			                <img src="/Tget_mini_web/resources/image/project_image/eye.svg" style="width: 30px" />
+			            </button>
+			        </div>
+			    </div>
+			    <div class="row mb-2" style="width: 40%;">
+			        <span id="spanPw" style="display: inline;" class="d-flex mt-3"></span>
+			    </div>
+			    <div class="div_form row">
+			        <label for="pwcheck" class="col-3"><strong>비밀번호 확인</strong></label> 
+			        <input class="pwCheckClazz col-8 mb-5" oninput="pwCheck()" type="password" id="pwcheck" name="pwcheck" placeholder="8~12자 영문, 숫자" />
+			        <div class="pwCheckEye col-1">
+			            <button type="button" style="border: none; background-color: transparent">
+			                <img src="/Tget_mini_web/resources/image/project_image/eye.svg" style="width: 30px" />
+			            </button>
+			        </div>
+			    </div>
+			    <div class="row mb-2" style="width: 40%;">
+			        <span id="spanPwCheck" style="display: inline;" class="d-flex mt-3"></span>
+			    </div>
+			    <!-- 폼의 제출 버튼 -->
+			    <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+			        <button type="submit" class="btn" style="background-color: #d95b96; color: white" form="pwModify">수정 완료</button>
+			    </div>
+			</form>
+
+               
             </div>
          </div>
+      </div>
       </div>
    
       <!-- modal(nickname) -->
@@ -257,23 +235,23 @@
                </div>
                <!-- modal body -->
                <div class="modal-body">
-                  <form class="p-3" method="post" onsubmit="nicknameSubmit()" action="nicknameModify">
+                  <form id="nicknameModify" class="p-3" method="post" onsubmit="nicknameSubmit()" action="${pageContext.request.contextPath}/member/nicknameModify">
                      <div class="div_form row">
                         <label for="mnickname" class="col-3"><strong>닉네임</strong></label>
                         <input class="col-9 mb-5" type="text" id="mnickname" oninput="nicknameUniqueCheck()"
                            name="mnickname" placeholder="닉네임 중복 불가능" />
                      </div>
-		            <div class="row" style="width: 40%;">
+		            <div class="row mb-2" style="width: 40%;">
 		                <span id="spanNickname" style="display: inline;" class="d-flex mt-3"></span>
 		            </div>                     
-                  </form>
-               </div>
                <!-- modal footer -->
                <div class="modal-footer">
                   <button type="button" class="btn btn-secondary"
                      data-bs-dismiss="modal">닫기</button>
                   <button type="submit" class="btn"
                      style="background-color: #d95b96; color: white">수정 완료</button>
+               </div>
+                  </form>
                </div>
             </div>
          </div>
@@ -291,29 +269,29 @@
                </div>
                <!-- modal body -->
                <div class="modal-body">
-                  <form class="p-3" method="post" id="emailForm" onsubmit="emailSubmit()" action="emailModify">
+                  <form class="p-3" method="post" id="emailModify" onsubmit="emailSubmit()" action="${pageContext.request.contextPath}/member/emailModify">
                      <div class="div_form row">
                         <label for="memail" class="col-3"><strong>이메일</strong></label> <input
                            class="col-9 mb-5" type="text" id="memail" oninput="emailCheck()" name="memail"
                            placeholder="ex. tget0101@naver.com" />
                      </div>
-                     <div class="row" style="width: 40%;">
+                     <div class="row mb-2" style="width: 40%;">
 		                <span id="spanEmail" style="display: inline;" class="d-flex mt-3"></span>
 		            </div>
-                  </form>
-               </div>
                <!-- modal footer -->
                <div class="modal-footer">
                   <button type="button" class="btn btn-secondary"
                      data-bs-dismiss="modal">닫기</button>
-                  <button type="submit" form="emailForm" class="btn"
+                  <button type="submit" class="btn"
                      style="background-color: #d95b96; color: white">수정 완료</button>
+               </div>
+                  </form>
                </div>
             </div>
          </div>
       </div>
    
-      <!-- modal(addressname) -->
+      <!-- modal(mprofileImg) -->
       <div class="modal" tabindex="-1" id="mprofileImgModifyModal">
          <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -325,20 +303,20 @@
                </div>
                <!-- modal body -->
                <div class="modal-body">
-                  <form class="p-3" method="post" enctype="multipart/form-data" id="mprofileImgForm" action="mprofileImgModify">
+                  <form class="p-3" method="post" enctype="multipart/form-data" id="mprofileImgForm" action="${pageContext.request.contextPath}/member/mprofileImgModify">
                      <div class="div_form row">
                         <label for="mprofileImg" class="col-3"><strong>프로필 사진</strong></label> <input
                            class="col-9 mb-5" type="file" id="mprofileImg" name="mprofileImg"/>
                      </div>
                      
-                  </form>
-               </div>
                <!-- modal footer -->
                <div class="modal-footer">
                   <button type="button" class="btn btn-secondary"
                      data-bs-dismiss="modal">닫기</button>
-                  <button type="submit" class="btn" form="mprofileImgForm"
+                  <button type="submit" class="btn"
                      style="background-color: #d95b96; color: white">수정 완료</button>
+               </div>
+                  </form>
                </div>
             </div>
          </div>
@@ -356,23 +334,23 @@
                </div>
                <!-- modal body -->
                <div class="modal-body">
-                  <form class="p-3" method="post" onsubmit="emailSubmit()" action="emailModify">
+                  <form id="phoneModify" class="p-3" method="post" onsubmit="phoneSubmit()" action="${pageContext.request.contextPath}/member/phoneModify">
                      <div class="div_form row">
                         <label for="mphone" class="col-3"><strong>전화번호</strong></label> <input
                            class="col-9 mb-5" type="text" id="mphone" name="mphone" oninput="phoneUniqueCheck()"
                            placeholder="ex. 010-1111-2222" />
                      </div>
-                     <div class="row" style="width: 40%;">
+                     <div class="row mb-2" style="width: 40%;">
 		                <span id="spanPhone" style="display: inline;" class="d-flex mt-3"></span>
 		            </div>
-                  </form>
-               </div>
                <!-- modal footer -->
                <div class="modal-footer">
                   <button type="button" class="btn btn-secondary"
                      data-bs-dismiss="modal">닫기</button>
                   <button type="submit" class="btn"
                      style="background-color: #d95b96; color: white">수정 완료</button>
+               </div>
+                  </form>
                </div>
             </div>
          </div>
