@@ -68,6 +68,23 @@ public class ProductController {
       os.flush();
       os.close();
    }
+   @GetMapping("/attachProductContent")
+   public void attachProductContent(int pno, HttpServletResponse response) throws Exception {
+      // 다운로드할 데이터를 준비
+      ProductDto productDto = productService.getProduct(pno); // 선택한 pno에 해당하는 인스턴스의 정보를 가져와 productDto 필드에 저장
+      byte[] data = productService.getAttachProductContent(pno);// 선택한 pno에 해당하는 포스터 데이터를 가져와 byte[] 형식으로 저장
+      
+      // 응답 헤더 구성
+      // 콘텐츠의 타입을 응답컨텐츠 타입으로 저장
+      response.setContentType(productDto.getPcontentattachtype());
+      response.setContentType(productDto.getPposterattachtype());
+      
+      // 응답 본문에 파일 데이터 출력
+      OutputStream os = response.getOutputStream();
+      os.write(data);
+      os.flush();
+      os.close();
+   }
    
    // 상품 상세 페이지
    @GetMapping("/detail")
