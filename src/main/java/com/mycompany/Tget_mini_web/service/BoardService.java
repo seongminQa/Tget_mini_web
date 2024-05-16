@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.mycompany.Tget_mini_web.dao.BoardDao;
 import com.mycompany.Tget_mini_web.dto.BoardDto;
 import com.mycompany.Tget_mini_web.dto.PagerDto;
-
+import com.mycompany.Tget_mini_web.dto.ProductDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -61,6 +61,11 @@ public class BoardService {
 	}
 	public void plusHitCnt(int bno) {
 		boardDao.plusCnt(bno);
+	}
+
+	public List<BoardDto> getBoardList() {
+		List<BoardDto> boardList = boardDao.selectByBoardList();
+		return boardList;
 	}
 	
 
