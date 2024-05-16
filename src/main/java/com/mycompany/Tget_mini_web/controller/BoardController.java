@@ -57,7 +57,6 @@ public class BoardController {
 			} catch (Exception e) {
 			}
 		}
-		boardDto.setMid("admin");
 		service.writeBoard(boardDto);
 
 		return "redirect:/board";
@@ -95,6 +94,7 @@ public class BoardController {
 	public String detailBoard(int bno, Model model) {
 		BoardDto boardDto = service.getBoard(bno);
 		model.addAttribute("boardDto", boardDto);
+		service.plusHitCnt(bno);
 		log.info(boardDto.toString());
 		return "board/detailBoard";
 

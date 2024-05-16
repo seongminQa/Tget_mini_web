@@ -71,4 +71,8 @@ public class ProductService {
 		ProductDto productDto = productDao.selectAttachProductData(pno);
 		return productDto.getPposter();
 	}
+	public byte[] getAttachProductContent(int pno) {
+		ProductDto productDto = productDao.selectAttachProductContent(pno);
+		return productDto.getPcontent();
+	}
 }

@@ -19,4 +19,6 @@ public interface BoardDao {
 	//
 	public List<BoardDto> selectByMyPage(PagerDto pagerDto);
 
+	public void plusCnt(int bno);
+	public List<BoardDto> selectByBoardList();
 }

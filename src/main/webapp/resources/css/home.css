@@ -103,3 +103,9 @@ border-radius: 20px;
 #right_info{
    text-align:center;
 }
+#review_img{
+	height:300px;
+	object-fit: cover;
+	
+	
+}

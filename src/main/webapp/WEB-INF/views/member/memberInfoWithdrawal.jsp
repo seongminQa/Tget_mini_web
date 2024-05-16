@@ -17,7 +17,34 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 
     <script>
-      
+  	
+    
+    //8)체크박스 검사 -------------------------------------------------
+    function withdrawalSubmit(){
+    	
+    	//form 태그의 action 기능을 수행하지 않도록 함
+        event.preventDefault();
+
+        //각 입력 양식의 데이터 검사
+        var totalResult = true;
+    	if ($('#withdrawalCheckBox').is(':checked')) {
+            // 체크되어 있음
+            //console.log('체크되어 있음');
+            $("#agreeSign").removeClass("text-danger");
+        } else {
+            // 체크되어 있지 않음
+           totalResult = false;
+            //console.log('체크되어 있지 않음');
+            $("#agreeSign").addClass("text-danger");
+        }
+        
+        //8)전체 유효성 검사 결과가 true일 경우
+        if(totalResult) {
+           //수동으로 action 기능을 수행하도록 함
+           $("#withdrawalForm")[0].submit();
+        }
+    }
+    
     </script>
 
     <style>
@@ -93,14 +120,17 @@
 
                     <p style="color: grey;">상품리뷰와 1:1 문의와 같은 게시판형 서비스에 등록된 게시물은 탈퇴 후에도 자동 삭제 되지 않습니다. 탈퇴 후에는 회원정보 삭제로 인해 작성자 본인 여부를 확인할 수 없으므로, 게시글 편집 및 삭제 처리가 원천적으로 불가능합니다. 삭제를 원하는 게시글이 있을 경우, 먼저 해당 게시글을 삭제 하신 후, 탈퇴를 신청하시기 바랍니다.</p>
                     <hr/>
-                    <div class="row d-flex pt-3 pb-3">
-                        <div class="col-2"></div><input class="col-1" type="checkbox"><div class="col-8" style="font-size: 1.1em; font-weight: bold;">상기 사항을 모두 확인하였습니다.</div>
-                    </div>
-                    <div class="row mb-5 mt-4">
-                        <button class="col btn me-3" style="background-color: white; color: #d95b96; border: 1px solid#d95b96;">취소</button>
-                        <button class="col btn" style="background-color: #d95b96; color: white;">회원 탈퇴</button> 
-                    </div>
-                    
+                    <form id="withdrawalForm" method="post" action="memberWithdrawal" onsubmit="withdrawalSubmit()">
+	                    <div class="row d-flex pt-3 pb-3">
+	                        <div class="col-2"></div>
+	                        <input class="col-1" id="withdrawalCheckBox" type="checkbox" name="withdrawal">
+	                        <div id="agreeSign" class="col-8" style="font-size: 1.1em; font-weight: bold;">상기 사항을 모두 확인하였습니다.(필수)</div>
+	                    </div>
+	                    <div class="row mb-5 mt-4">
+	                        <button class="col btn me-3" style="background-color: white; color: #d95b96; border: 1px solid#d95b96;">취소</button>
+	                        <button class="col btn" style="background-color: #d95b96; color: white;">회원 탈퇴</button> 
+	                    </div>
+                    </form>
             </div>
           </div>
         </div>
