@@ -57,7 +57,6 @@ public class BoardController {
 			} catch (Exception e) {
 			}
 		}
-		boardDto.setMid("admin");
 		service.writeBoard(boardDto);
 
 		return "redirect:/board";
