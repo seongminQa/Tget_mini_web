@@ -95,6 +95,7 @@ public class BoardController {
 	public String detailBoard(int bno, Model model) {
 		BoardDto boardDto = service.getBoard(bno);
 		model.addAttribute("boardDto", boardDto);
+		service.plusHitCnt(bno);
 		log.info(boardDto.toString());
 		return "board/detailBoard";
 
