@@ -83,6 +83,7 @@
 			
 			// 이 카트 아이템의 값 계산하기
 			var currentValue = pprice*oamountValue;
+			selectBox.value = currentValue;
 			
 			// 선택한 체크박스가 체크된다면
 			if(selectBox.checked){
@@ -105,7 +106,6 @@
 				ch.checked = false;
 				console.log(cno + "번 체크 풀림");
 			}
-			
 			getTotalPrice();
 		}
 
