@@ -1,6 +1,8 @@
 package com.mycompany.Tget_mini_web.controller;
 
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -277,6 +279,7 @@ public class MemberController {
 
 	// 비밀번호 찾기 기능
 	@PostMapping("/findPw")
+
 	public String findPw(MemberDto memberDto, Model model) {
 		log.info("member.findPw()실행");
 		memberservice.findPw(memberDto);
@@ -285,8 +288,19 @@ public class MemberController {
 			return "member/lost_pw";
 		}
 		model.addAttribute("mpassword", memberservice.findPw(memberDto));
-
+		 model.addAttribute("mid", memberDto.getMid()); 
 		return "member/findPw";
+	}
+
+	// 비밀번호 찾기 변경기능
+	@PostMapping("/ChangePw")
+	public String ChangePw(MemberDto memberDto) {
+		log.info("Mpassword:" + memberDto.getMpassword());
+		log.info("Mid:" + memberDto.getMid());
+		memberservice.ChangePw(memberDto);
+		return "redirect:/member/login";
+		
+		
 	}
 
 }

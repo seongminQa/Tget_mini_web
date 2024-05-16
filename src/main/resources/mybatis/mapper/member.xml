@@ -127,6 +127,14 @@
 		from member
 		where mid = #{mid}
 		and mssn=#{mssn}
-	
 	</select>
+	
+	<!-- 비밀번호 찾기에서 새비밀번호 정보변경 -->
+	<update id="ChangePw" parameterType="MemberDto">
+		update member 
+		set
+		mpassword=#{mpassword}
+		where mid= #{mid}
+	</update>	
+	
 </mapper>
