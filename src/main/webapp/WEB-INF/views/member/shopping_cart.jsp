@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <!DOCTYPE html>
 <html>
@@ -27,61 +28,148 @@
     
     <!-- 사용자 정의 자바스크립트 -->
     <script>
-		 // 체크박스 전체 선택 or 전체 선택 해제 (자바스크립트)
-		 function checkedAll() {
-			 // 아이디 값이 checkAll인 것을 찾아 ch 변수에 저장
-			 const ch = document.querySelector('#checkAll');
-			 // ch 가 클릭 되었을 때 이벤트 함수 발생
-			
+    	// 총 결제금액을 계산하는 함수
+    	function getTotalPrice() {
+    		//체크되어 있는 놈의 금액을 누적
+    		//누적된 금액을
+    		//총 금액을 나타내는 span 태그에 넣기
+    		console.log("getTotalPrice() 실행");
+    		const checkboxes = document.querySelectorAll('input[name=tiket]:checked');
+    	    var totalPrice = 0;
+    	    
+    	    checkboxes.forEach(checkbox => {
+    	        totalPrice += parseInt(checkbox.value);
+    	    });
+
+    	    // 총 결제 금액을 화면에 표시
+    	    document.getElementById('totalPrice').innerText = '총 결제 금액 : ' + totalPrice + '원';
+    	}
+		
+		function updateTotalPrice() {
+			const ch = document.querySelector('#checkAll');
 			const checkboxes = document.querySelectorAll('input[name=tiket]');
+			
 			if(ch.checked){
 				console.log("체크박스 전체 선택")
 				for(const checkbox of checkboxes){
-					checkbox.checked = true;
+					if(checkbox.checked == false){
+						checkbox.checked = true;
+						totalPrice += parseInt(checkbox.value);
+					}
 				}
 			}
 			else{
 				console.log("체크박스 전체 선택 해제")
 				for(const checkbox of checkboxes){
 					checkbox.checked = false;
+					totalPrice = 0;
 				}
 			}
+			
+			getTotalPrice();
+		}
+		
+		// 선택 체크박스에 대한 결제금액 보여주기
+		function updateSelectPrice(cno, pprice) {
+			// 전체 체크박스 태그 찾기
+			const ch = document.querySelector('#checkAll');
+			const checkboxes = document.querySelectorAll('input[name=tiket]');
+			
+			// 선택한 체크 박스 찾기
+			const selectBox = document.getElementById('cartitem-'+cno);
+			
+			// 수량을 나타내는 input태그의 수량 값
+			var oamountValue = document.getElementById('oamount-'+cno).value;
+			
+			// 이 카트 아이템의 값 계산하기
+			var currentValue = pprice*oamountValue;
+			
+			// 선택한 체크박스가 체크된다면
+			if(selectBox.checked){
+				console.log(cno + "번 체크 됨");
+				// 현재 체크박스를 선택했을 때, 전체 체크박스가 선택되어 있다면 전체 체크박스 상태를 true로 바꾸어주기
+				var allChecked = true;
+			    for (const checkbox of checkboxes) {
+			        if (!checkbox.checked) {
+			            allChecked = false;
+			            break;
+			        }
+			    }
+			    if (allChecked) {
+			        ch.checked = true;
+			    }
+			}
+			
+			if(!selectBox.checked){
+				// 전체 체크박스 체크 상태 해제하기
+				ch.checked = false;
+				console.log(cno + "번 체크 풀림");
+			}
+			
+			getTotalPrice();
+		}
+
+		// -, + 클릭 시 ${cartItem.oamount}값 변경하기
+		function amountPlus(cno, pprice) {
+			// 수량을 나타내는 input태그 찾기
+			var oamountTag = document.getElementById('oamount-'+cno);
+			// 플러스 버튼을 누를 시 해당 input 태그의 수량 값을 +1 더하고, value 속성의 값을 변경시킨다.
+			var oamountValue = parseInt(oamountTag.value) + 1;
+			oamountTag.value = oamountValue;
+			// 콘솔로 확인
+			console.log("cno : " + cno, "oamountTag.value :" + oamountTag.value);
+			// 체크 박스의 태그 찾기
+			const inputbox = document.getElementById('cartitem-'+cno);
+			// 수량만큼 상품의 결제값을 변경
+			var itemResultPrice = pprice*oamountValue;
+			inputbox.value = itemResultPrice;
+			
+			document.getElementById('itemResultPrice-'+cno).innerText = itemResultPrice + '원';
+
+			getTotalPrice();
+		}
+		
+		function amountMinus(cno, pprice) {
+			// 수량을 나타내는 태그 찾기
+			var oamountTag = document.getElementById('oamount-'+cno);
+			// 체크박스 찾기
+			const inputbox = document.getElementById('cartitem-'+cno);
+			
+			// 수량이 1보다 클 때만 마이너스 할 수 있음.
+			if(oamountTag.value > 1) {
+				// 수량이 1보다 클 때 버튼을 클릭한다면 (원래의 수량 - 1)
+				var oamountValue = parseInt(oamountTag.value) - 1;
+				// 변경된 수량을 '수량을 나타내는 태그의 value 속성값에 적용'
+				oamountTag.value = oamountValue;
+				// 콘솔로 확인
+				console.log("cno : " + cno, "oamountTag.value :" + oamountTag.value);
+				// 수량만큼 상품의 결제값을 변경
+				var itemResultPrice = pprice*oamountValue;
+				// 해당 체크박스의 value 속성값을 변경
+				inputbox.value = itemResultPrice;
+				//totalPrice -= itemResultPrice;
+				document.getElementById('itemResultPrice-'+cno).innerText = itemResultPrice + '원';
+			} else {
+				alert("수량은 1보다 작을 수 없습니다.");
+			}
+
+			getTotalPrice();
 		}
 
 		
-		// 체크된 상품들의 가격 정보 받아오기
-		function priceSum() {
-			const checkboxes = document.querySelectorAll('input[name=tiket]');
-			console.log(checkboxes);
-			console.log(checkboxes.length);
-
-			var totalSum = 0;
-			for(var i=0; i<checkboxes.length; i++){
-				if(checkboxes[i].checked){
-					totalSum = totalSum + parseInt(checkboxes[i].value);
-				}
-			}
-			if(totalSum === 0){
-				console.log("총 합계: " + totalSum);
-				alert("구매할 상품을 체크해주세요!");
-			} else {
-				console.log("총 합계: " + totalSum);				
-				alert("총 합계: " + totalSum);
-			}
-		};
-		
+		// CartItem 업데이트  
 		function updateCartItem(pno) {
 			var amount = $("#amount"+pno).val();
 			
 			$.ajax({
-				url: "updateCartItem",  // 요청 경로
+				url: "updateCartItem",
 				method: "post",
-				data: {pno:pno, amount:amount},
+				data: {pno:pno, oamount:amount},
 				success: function(data) {
 					console.log(data);
 				}
 			});
-		}		
+		}
 
       </script>
     
@@ -125,7 +213,7 @@
     <section class="container text-center mt-3 mb-5">
       <div class="cart_title">
         <div class="d-flex justify-content-start " style="color: #d95b96;">
-          <input onclick="checkedAll()" id="checkAll" type="checkbox" name="" class="ms-2" style="zoom: 2;"/>
+          <input onchange="updateTotalPrice()" id="checkAll" type="checkbox" name="" class="ms-2" style="zoom: 2;"/>
           <h1 class="m-3">장바구니</h1>
         </div>
       </div>
@@ -144,156 +232,72 @@
           </thead>
           <!-- 장바구니 목록 리스트 시작 -->
           <tbody>
-            <!-- 첫번째 목록 -->
-            <tr class="cart_list_detail">
-              <td style="width: 3%">
-                <input onclick="" type="checkbox" name="tiket" value="40000" style="zoom: 1.4;"/>
-              </td>
-              <td style="width: 10%">
-                <img
-                  src="https://timeticket.co.kr/wys2/file_attach_thumb/2024/02/28/1709101716-39-3_wonbon_N_7_255x357_70_2.jpg"
-                  alt="내일은 내일에게" style="width: 80%;"
-                />
-              </td>
-              <td style="text-align: start;">
-                <div><a href="#">대학로 혜화역 코미디 연극 예매</a></div>
-                <div class="cart__list__smartstore">대학로인기연극</div>
-                <div><a>내일은 내일에게</a></div>
-
-                <span>20%</span>
-                <!-- 가격 할인 표현하기 -->
-                <span style="text-decoration: line-through; color: lightgray"
-                  >50,000원</span
-                >
-                <div class="price" style="text-align: start">40,000원</div>
-              </td>
-              <td class="cart__list__option" style="width: 27%">
-                <span>>날짜 : 4월13일</span><br />
-                <span>>시간 : 1시50분 특가</span><br />
-                <span>>수량 : 1매</span><br />
-				
-				<!-- 주문 수정 버튼 미구현 // 추후 어떻게 기능을 구현할 지 미정 -->
-                <button class="cart_list_optionbtn">주문 수정</button>
-              </td>
-              <!-- 상품 금액 표시 셀 -->
-              <td>
-                <span class="price">40,000원</span><br />
-              </td>
-              <!-- 취소 버튼 표시 // 미구현 -->
-              <td style="width: 15%">
-              	<button class="cart__list__cansel" style="border:none; background-color:transparent;">
-              		<img style="width:140%; height: 140%;" src="/Tget_mini_web/resources/image/shoppingcart/trash.svg"/>
-              	</button>
-              </td>
-            </tr>
-            <!-- 두번째 목록 -->
-            <tr class="cart_list_detail">
-              <td style="width: 2%">
-                <input type="checkbox" name="tiket" value=32000 style="zoom: 1.4;"/>
-              </td>
-              <td style="width: 13%">
-                <img
-                  src="https://timeticket.co.kr/wys2/file_attach_thumb/2021/05/21/1621550193-67-0_wonbon_N_7_255x357_70_2.jpg"
-                  alt="너의 목소리가 들려" style="width: 80%;"
-                />
-              </td>
-              <td style="text-align: start;">
-                <div><a href="#">대학로 혜화역 코미디 연극 예매</a></div>
-                <div class="cart__list__smartstore">대학로인기연극</div>
-                <div><a>너의 목소리가 들려</a></div>
-
-                <span>20% </span>
-                <span style="text-decoration: line-through; color: lightgray"
-                  >40,000원</span
-                >
-                <div class="price" style="text-align: start">32,000원</div>
-              </td>
-              <td class="cart_list_option" style="width: 27%">
-                <span>>날짜 : 4월13일</span><br />
-                <span>>시간 : 1시50분 특가</span><br />
-                <span>>수량 : 1매</span><br />
-
-                <button class="cart_list_optionbtn">주문 수정</button>
-              </td>
-              <td>
-                <span class="price">32,000원</span><br/>
-              </td>
-              <td style="width: 15%"><button class="cart__list__cansel" style="border:none; background-color:transparent;"><img style="width:140%; height: 140%;" src="/Tget_mini_web/resources/image/shoppingcart/trash.svg"/></button></td>
-            </tr>
-            <!-- 세번째 목록 -->
-            <tr class="cart_list_detail">
-              <td style="width: 2%">
-                <input type="checkbox" name="tiket" value=30800 style="zoom: 1.4;"/>
-              </td>
-              <td style="width: 13%">
-                <img
-                  src="https://timeticket.co.kr/wys2/file_attach_thumb/2024/02/08/1707371922-53-3_wonbon_N_7_255x357_70_2.jpg"
-                  alt="내일은 내일에게" style="width: 80%;"
-                />
-              </td>
-              <td style="text-align: start;">
-                <div><a href="#">대학로 혜화역 코미디 연극 예매</a></div>
-                <div class="cart__list__smartstore">대학로인기연극</div>
-                <div><a>내일은 내일에게</a></div>
-
-                <span>20% </span>
-                <span style="text-decoration: line-through; color: lightgray"
-                  >38,000원</span
-                >
-                <div class="price">30,800원</div>
-              </td>
-              <td class="cart_list_option" style="width: 27%">
-                <span>>날짜 : 4월13일</span><br />
-                <span>>시간 : 1시50분 특가</span><br />
-                <span>>수량 : 1매</span><br />
-
-                <button class="cart_list_optionbtn">주문 수정</button>
-              </td>
-              <td>
-                <span class="price">30,800원</span><br />
-              </td>
-              <td style="width: 15%"><button class="cart__list__cansel" style="border:none; background-color:transparent;"><img style="width:140%; height: 140%;" src="/Tget_mini_web/resources/image/shoppingcart/trash.svg"/></button></td>
-            </tr>
+            	<!-- 목록 -->
+            <c:forEach var="cartitem" items="${cartList}">
+	            <tr class="cart_list_detail">
+	              <td style="width: 3%">
+	                <input id="cartitem-${cartitem.cno}" onchange="updateSelectPrice(${cartitem.cno}, ${cartitem.pprice})" type="checkbox" 
+	                name="tiket" value="${cartitem.pprice}" style="zoom: 1.4;"/>
+	              </td>
+	              <td style="width: 10%">
+	                <img src="attachProduct?pno=${cartitem.pno}" width="90" height="54">
+	              </td>
+	              <td style="text-align: start;">
+	                <div>
+	                <a href="${pageContext.request.contextPath}/product/detail?pno=${cartitem.pno}">주소 : ${cartitem.paddress} / ${cartitem.pplace}</a>
+	                </div>
+	                <div class="cart__list__smartstore">${cartitem.pkind}</div>
+	                <div>제목 : ${cartitem.ptitle}</div>
+	
+	                <span>20%</span>
+	                <!-- 가격 할인 표현하기 -->
+	                <span style="text-decoration: line-through; color: lightgray"
+	                  >가격 : <fmt:formatNumber value="${cartitem.pprice}" pattern="#,###" />원</span>
+	                <div class="price" style="text-align: start">할인 후 가격 : <fmt:formatNumber value="${cartitem.pprice}" pattern="#,###" />원</div>
+	              </td>
+	              <td class="cart__list__option" style="width: 27%">
+	                <span>>날짜 : <fmt:formatDate value="${cartitem.odate}" pattern="yyyy-MM-dd"/></span><br />
+	                
+	                <span>>시간 : 1시50분 특가</span><br />
+	                <span>
+	                	<span>${cartitem.cno}</span>
+	                	<button type="button" onclick="amountMinus(${cartitem.cno}, ${cartitem.pprice})" class="btn btn-outline-secondary btn-sm">-</button>
+	                	<%-- >수량 : ${cartitem.oamount}매 --%>
+	                	<input type="text" id="oamount-${cartitem.cno}" value="${cartitem.oamount}" style="width:30px;" readonly="readonly"/>
+	                	<button type="button" onclick="amountPlus(${cartitem.cno}, ${cartitem.pprice})" class="btn btn-outline-secondary btn-sm">+</button>
+	                	<%-- <button onclick="amountPlus('plus', ${cartitem.cno})" class="btn btn-outline-secondary btn-sm">+</button> --%>
+	                	<%-- <input type="number" id="amount${cartItem.pno}" value="${cartItem.oamount}" style="width:60px;" /> --%>
+	                </span>
+	                <br />
+					<span class="seatGrade">${cartitem.oseatgrade}</span><br />
+					<!-- 주문 수정 버튼 미구현 // 추후 어떻게 기능을 구현할 지 미정 -->
+	                <a href="${pageContext.request.contextPath}/product/detail?pno=${cartitem.pno}" class="cart_list_optionbtn">주문 수정</a>
+	              </td>
+	              <!-- 상품 금액 표시 셀 -->
+	              <td>
+	                <span id="itemResultPrice-${cartitem.cno}" class="price"><fmt:formatNumber value="${cartitem.resultprice}" pattern="#,###" />원</span><br />
+	              </td>
+	              <!-- 취소 버튼 표시 // 미구현 -->
+	              <td style="width: 15%">
+	              		<a href="removeCartItem?cno=${cartitem.cno}">
+	              			<img style="width:30%; height: 30%;" src="/Tget_mini_web/resources/image/shoppingcart/trash.svg"/>
+	              		</a>
+	              	<!-- <div class="cart__list__cansel" style="border:none; background-color:transparent;">
+	              	</div> -->
+	              </td>
+	            </tr>
+           </c:forEach>
+            
             <tr style="font-size: 20px;">
               <td colspan="6">
-                	총 결제 금액 : ????
+              		<!-- 자바스크립트로 구현** AJAX? -->
+                	<span id="totalPrice">총 결제 금액 : ????</span>
               </td>
             </tr>
-            <!-- 연습 -->
-            <%-- <c:forEach var="cartItem" items="${cart}">
-
-				<tr class="cart__list__detail">
-					<td style="width: 2%">
-	                	<input type="checkbox" name="tiket" value=${cartItem.product.pprice} />
-					</td>
-					<td style="width: 13%">
-						<img src="${cartItem.product.pimg}" alt="${cartItem.product.ptitle}"/>
-					</td>
-					<td>
-						<div><a href="#">대학로 혜화역 코미디 연극 예매</a></div>
-	                	<div class="cart__list__smartstore">대학로인기연극</div>
-	                	<div><a>${cartItem.product.ptitle}</a></div>
-	                	<span>20% </span>
-	                	<span style="text-decoration: line-through; color: lightgray">38,000원</span>
-	                	<div class="price" style="text-align: start">30,800원</div>
-              		</td>
-              		<td class="cart__list__option" style="width: 27%">
-		                <span>>날짜 : 4월13일</span><br />
-		                <span>>시간 : 1시50분 특가</span><br />
-		                <span>>수량 : 1매</span><br />
-						<input type="number" id="amount${cartItem.product.pno}" value="${cartItem.amount}" style="width:60px;" />
-		                <button onclick="updateCartItem(${cartItem.cartItem.product.pno})" class="cart__list__optionbtn">주문 수정</button>
-					</td>
-					<td>
-						<span class="price">${cartItem.product.pprice}원</span><br />
-					</td>
-					<td style="width: 15%"><button href="removeCartItem?pno=${cartItem.product.pno}" class="cart__list__cansel" style="border:none; background-color:transparent;"><img style="width:140%; height: 140%;" src="/Tget_mini_web/resources/image/shoppingcart/trash.svg"/></button></td>
-				</tr>						    	
-	    	</c:forEach> --%>
             
           </tbody>
-
         </form>
+
       </table>
       <!-- 장바구니 사용 유의점 안내 -->
         <div class="cart_info" style="text-align: start; margin-top: 20px;">
@@ -323,6 +327,7 @@
 	      <h3>다른 상품 둘러보기</h3>
 		</div>
 		<hr/>
+		
         <div class="grid other_product">
           <ul class="product_list">
             <!-- 상품 리스트 있는 만큼 반복 -->
@@ -330,10 +335,10 @@
               <li class="product_grid_item text-center m-2" style="display: inline-block;">
                 <div class="product_grid_unit">
                   <!-- 해당 상품 클릭시 상품 상세페이지로 전환 -->
-                  <%-- <a href="detail?pno=${product.pno}" class="product_link" style="padding: 0px; margin: 0px;"> --%>
+                  <a href="detail?pno=${product.pno}" class="product_link" style="padding: 0px; margin: 0px;">
                   <a href="#" class="product_link" style="padding: 0px; margin: 0px;">
                     <div class="product_imgbox">
-                      <img src="${product.pimg}" alt="" class="product_img" style="width: 60%; height: 80%">
+                      <img src="attachProduct?pno=${product.pno}" alt="" class="product_img" style="width: 60%; height: 80%">
                     </div>
                     <div class="cart_product_info">
                       <div class="list_price">
@@ -354,7 +359,8 @@
                       </div>
                     </div>
                   </a>
-                  <button onclick="priceSort()" class="btn btn-outline-secondary">장바구니 추가</button>
+                  <!-- <button onclick="priceSort()" class="btn btn-outline-secondary">장바구니 추가</button> -->
+                  <button onclick="updateCartItem(${product.pno})" class="btn btn-outline-secondary">장바구니 추가</button>
                 </div>
               </li>
             </c:forEach>
@@ -364,5 +370,8 @@
     </section>
     <!-- footer -->
     <%@include file="/WEB-INF/views/common/footer.jsp"%>
+    
+    <!-- 주문 모달 -->
+    
   </body>
 </html>
