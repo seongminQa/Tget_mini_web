@@ -21,11 +21,11 @@
                </a></li>
             </sec:authorize>
             <sec:authorize access="isAuthenticated()">
-               <div style="margin-top: 15px">
-                  <h4 class="text-black me-2">
+               <div style="margin-top: 5px">
+                  <h5 class="text-black me-2">
                      <sec:authentication property="principal.username" />
                      님 환영합니다
-                  </h4>
+                  </h5>
                </div>
                <li class="nav-item"><a class="nav-link"
                   href="${pageContext.request.contextPath}/logout"

@@ -28,12 +28,6 @@
 		<!-- 사용자 정의 자바스크립트 -->
 		<script>		
 		
-	
-/* 		function pwModify() {
-	        const pwModal = new bootstrap.Modal("#pwModifyModal");
-	        pwModal.show();		
-	}
-	  */
 		
 		/* ----------------------유효성 검사------------------------- */
 		function IDCheck(){
@@ -95,6 +89,9 @@
         	<!-- placeholder 사용한이유는 아이디와 비밀호를 입력을하는 필드라는것을 알려주기 위해 사용 -->
             <input oninput="IDCheck()"  type="text" name="mid" placeholder="ID" id="mid">
             <span id="idfpw"></span>
+            
+           	<input  type="text" name="mname" placeholder="name" id="mname">
+            
              <input oninput="ssnPwCheck()" type="text" name="mssn" placeholder="(-)없는 전체 주민번호" id="mssn"> 
              <span id="ssnPw"></span>
                
@@ -104,6 +101,7 @@
        		
             <input type="submit" value="비밀번호 찾기"  style="background-color:  #D95B96; color:white;">
             <div class="link">
+            
            <!--   <button type="button" onclick="pwModify()"class="btn btn-outline-dark btn-sm">
 					  상세    </button>  -->
               <p>	
@@ -123,57 +121,7 @@
     <%@include file="/WEB-INF/views/common/footer.jsp"%>	
 	   </div> 
 	   
-	   <!-- modal(pw) -->
-			<div class="modal" tabindex="-1" id="pwModifyModal">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<!-- modal header -->
-						<div class="modal-header">
-							<h5 class="modal-title">비밀번호  변경</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal"
-								aria-label="Close"></button>
-						</div>
-						<!-- modal body -->
-						<div class="modal-body">
-							<form class="p-3" method="post">
-								<div class="div_form row">
-									<label for="pw" class="col-3"><strong>새 비밀번호</strong></label> <input
-										class="col-7 mb-5" type="password" id="pw" name="pw"
-										placeholder="8~12자 영문, 숫자" />
-								
-									<div class="col-2">
-										<button type="button"
-											style="border: none; background-color: transparent">
-											<img src="/Tget_mini_web/resources/image/project_image/eye.svg"
-												style="width: 30px" />
-										</button>
-									</div>
-								</div>
-								<div class="div_form row">
-									<label for="pwcheck" class="col-3"><strong>새 비밀번호
-											확인</strong></label> <input class="col-7 mb-5" type="password" id="pwcheck"
-										name="pwcheck" placeholder="8~12자 영문, 숫자" />
-									<div class="col-2">
-										<button type="button"
-											style="border: none; background-color: transparent">
-											<img src="/Tget_mini_web/resources/image/project_image/eye.svg"
-												style="width: 30px" />
-										</button>
-									</div>
-								</div>
-							</form>
-						</div>
-						<!-- modal footer -->
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-bs-dismiss="modal">닫기</button>
-							<button type="submit" class="btn"
-								style="background-color: #d95b96; color: white" onclick="location='/Tget_mini_web'" >수정 완료</button>
-						</div>
-					</div>
-				</div>
-			</div>		
-		<!--ㅡmodal  -->
+	 
 		
 	</body>
 </html>

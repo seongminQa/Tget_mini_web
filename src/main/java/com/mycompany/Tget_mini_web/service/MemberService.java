@@ -1,9 +1,12 @@
 package com.mycompany.Tget_mini_web.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.json.JSONObject;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -122,15 +125,26 @@ public class MemberService {
 		return count;
 	}
 
+	// 아이디 찾기
 	public String findId(MemberDto memberDto) {
 		String mid = memberDao.findId(memberDto);
 		return mid;
 	}
 
+	// 비밀번호 찾기
 	public String findPw(MemberDto memberDto) {
 		String mpassword = memberDao.findPw(memberDto);
 		return mpassword;
-		
+
+	}
+
+	// 비밀번호 찾기 기능
+	public void ChangePw(MemberDto memberDto) {
+
+		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		memberDto.setMpassword(passwordEncoder.encode(memberDto.getMpassword()));
+		memberDao.ChangePw(memberDto);
+
 	}
 
 }

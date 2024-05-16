@@ -28,14 +28,87 @@
 		<!-- 사용자 정의 자바스크립트 -->
 		<script>
 		
-		
+		/*----모달창을 띄우기 위한 함수--- */
 		function pwModify() {
 	        const pwModal = new bootstrap.Modal("#pwModifyModal");
 	        pwModal.show();		
-	}
-	 
+		}
+/*)--------------------------------유효성 검사-------------------------------------------------------  */
+
+/*1)--------------------------------사용자 출력용-------------------------------------------------------  */
+		function PWCheck(){
+			var mpasswordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/;
+			var mpasswordResult = mpasswordPattern.test($("#mpassword").val());
+			
+			//비밀번호가 빈 문자이면 span에 아무 글씨도 안 넣는다.
+			if($("#mpassword").val() === ""){
+				$("#spanPWL").removeClass("text-danger").html("");
+			}else{
+				// 빈문자가 아니면 유효성 검사에 따른 결과값 출력
+				if(mpasswordResult) {
+					   $("#spanPWL").removeClass("text-danger").html("알맞은 비밀번호 입니다.");
+					} else {   
+					   $("#spanPWL").addClass("text-danger").html("비밀번호가 양식에 맞지 않습니다.");
+					   
+					}
+			}
+			
+		}
 		
-          
+/*2)--------------------------------유효한 값을 제출 출력용-------------------------------------------------------  */
+		//비밀번호 재확인
+		function OkpwCheck(){
+			// 비밀번호 확인이나  비밀번호 둘 중 하나가 빈 문자이면 span에 아무 글씨도 안 넣는다.
+			if($("#okpwcheck").val()=== "" || $("#mpassword").val()=== ""){
+				$("#spanokPwCheck").removeClass("text-danger").html("");
+			}else {
+				// null이 아니라면 비밀번호와 비교하여 일치하지 않는지를 확인한다.
+				if($("#mpassword").val()===$("#okpwcheck").val()) {
+					   $("#spanokPwCheck").removeClass("text-danger").html("비밀번호가 일치합니다.");
+					} else {   
+					   $("#spanokPwCheck").addClass("text-danger").html("비밀번호가 일치하지 않습니다.");
+					}
+				}
+			}
+/*)--------------------------------전체 제출방법 버튼이다 이자식아-------------------------------------------------------  */
+		function lastCheckData() {
+			   console.log("입력 데이터를 검사합니다.");
+			   
+			   //form 태그의 action 기능을 수행하지 않도록 함
+			   event.preventDefault();
+			   
+			   //각 입력 양식의 데이터 검사
+			   var totalResult = true;
+			   var mpasswordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/;
+			   var mpasswordResult = mpasswordPattern.test($("#mpassword").val());
+			   
+			   if($("#mpassword").val() === ""){
+				   $("#spanPWL").addClass("text-danger").html("비밀번호는 필수 값입니다.");
+				   totalResult = false;
+			   }else{
+			       // 빈문자가 아니면 유효성 검사에 따른 결과값 출력
+			       if(mpasswordResult) {
+			           } else {   
+			              totalResult = false;
+			           }
+			   }
+
+			    //2-1)pwcheck 검사 -------------------------------------------------
+			   if($("#mpassword").val()===$("#okpwcheck").val()) {
+				   
+			   } else {   
+			      totalResult = false;
+			   }
+			    
+			    
+			   if(totalResult) {
+				      //수동으로 action 기능을 수행하도록 함
+				      $("#lastForm")[0].submit();
+				   }
+				}
+
+		
+		
 		
 		
 		</script>
@@ -47,55 +120,35 @@
 	
 		<!--  중앙에 가로로 정렬시키기 위해(화면창을 줄이건 늘려도 가운대로 하기위해) 스타일은 너무 위로 치우쳐 있어서 마진탑 10%로 줌 -->
 	 	<div class="d-flex justify-content-center"style="margin-top:5%;">  
-         <div class="login-wrapper">
+         	<div class="login-wrapper">
          <!-- 가운데 이미지 티겟을 설정하기위해 text-align -->
-      <div style="text-align : center;">  
+      			<div style="text-align : center;">  
          <!--  이미지 크기를 맟주기 위해 높이와 너비를 줌 -->
-       <a class="navbar-brand" href="/Tget_mini_web">
+      				 <a class="navbar-brand" href="/Tget_mini_web">
        
-      <h3 class="mb-5"><b>변경하시겠습니까?</b></h3> 
-      
-      
-       </a>   
-        <form method="post" action="${pageContext.request.contextPath}/member/findPw" id="login-form" novalidate>
-        	<!-- placeholder 사용한이유는 아이디와 비밀호를 입력을하는 필드라는것을 알려주기 위해 사용 -->
-    				<div style="height:100px"> <!--비밀번호 값만 넘겨주고 싶으면 사용가능= 비밀번호 : ${mpassword} -->
-
-    				 <button  style="" type="button" onclick="pwModify()"class="btn btn-outline-dark btn-lg">
-					  변경하기    </button> 
-        
-    				
-    				</div> 
-    <!--         <input class="" type="text" name="mname" placeholder="name" id="mname">        
-            <input class="" type="text" name="#mssn" placeholder="ex)00xxxx" id="#mssn">
-            <input class="" type="text" name="mphone" placeholder="phone number" id="mphone"> -->
-       			<!--아이디찾기  기능 -->
-     <%--   			<div class="result-box">
-					<c:choose>
-						<c:when test="${empty findId}">
-						<p class="inquiry">조회결과가 없습니다.</p>
-						</c:when>
-				        <c:otherwise>
-				            <p>${findId.mid}</p>
-				        </c:otherwise>
-					</c:choose>
-				</div> --%>
-       <!--아이디 찾기  -->
-       <%-- method="post" action="${pageContext.request.contextPath}/member/findId" --%>
-            <input type="submit" value="완료"  style="background-color:  #D95B96; color:white;">
-            <div class="link">
-              <p>	
-              <!-- 링크는 각각 아이디찾기, 비밀번호 찾기, 회원가입 페이지로 이동할수 있도록 구현한 링크이다. -->
-              <a href="/Tget_mini_web/member/login">로그인</a> | 
-              <a href="/Tget_mini_web/member/lost_pw">비밀번호 찾기</a> | 
-              <a href="/Tget_mini_web/member/sign_up">회원가입</a> 
-              </p>
-            </div>
-        </form>
-            
-        </div>
-    </div>
-</div>
+      					<div><h3 class="mb-5"><b>변경하시겠습니까?</b></h3></div> 
+ 
+      				 </a>   
+		        <form method="post" action="${pageContext.request.contextPath}/member/findPw" id="login-form" novalidate>
+		        	<!-- placeholder 사용한이유는 아이디와 비밀호를 입력을하는 필드라는것을 알려주기 위해 사용 -->
+		    			<div style="height:100px"> <!--비밀번호 값만 넘겨주고 싶으면 사용가능= 비밀번호 : ${mpassword} -->
+		    				 <button  style="" type="button" onclick="pwModify()"class="btn btn-outline-dark btn-lg">
+							  변경하기    </button>			
+		    			</div> 
+		            		<input type="submit" value="완료"  style="background-color:  #D95B96; color:white;">
+		            <div class="link">
+		              <p>	
+		              <!-- 링크는 각각 아이디찾기, 비밀번호 찾기, 회원가입 페이지로 이동할수 있도록 구현한 링크이다. -->
+		              	<a href="/Tget_mini_web/member/login">로그인</a> | 
+		              	<a href="/Tget_mini_web/member/lost_pw">비밀번호 찾기</a> | 
+		              	<a href="/Tget_mini_web/member/sign_up">회원가입</a> 
+		              </p>
+		            </div>
+		        </form>
+		            
+		        </div>
+		    </div>
+		</div>
 
 	    <!-- footer 하단고정-->
 	     <div class="fixed-bottom"> 
@@ -114,11 +167,14 @@
 						</div>
 						<!-- modal body -->
 						<div class="modal-body">
-							<form class="p-3" method="post">
+							<form class="p-3" method="post" action="ChangePw" onsubmit="lastCheckData()" id="lastForm">
+							<!--정보를 넘겨서 값을 받을때 아이디 표시를 안보이게 하기위해 input type="hidden" 사용 -->
+								<input type="hidden" name="mid" value="${mid}"> 
 								<div class="div_form row">
 									<label for="pw" class="col-3"><strong>새 비밀번호</strong></label> <input
-										class="col-7 mb-5" type="password" id="pw" name="pw"
+										class="col-7 mb-3" type="password" id="mpassword" name="mpassword" oninput="PWCheck()"
 										placeholder="8~12자 영문, 숫자" />
+									
 								
 									<div class="col-2">
 										<button type="button"
@@ -127,10 +183,12 @@
 												style="width: 30px" />
 										</button>
 									</div>
+										<span id="spanPWL" style="margin-bottom: 20px"></span>
+									
 								</div>
 								<div class="div_form row">
 									<label for="pwcheck" class="col-3"><strong>새 비밀번호
-											확인</strong></label> <input class="col-7 mb-5" type="password" id="pwcheck"
+											확인</strong></label> <input class="col-7 mb-3" type="password" id="okpwcheck" oninput="OkpwCheck()"
 										name="pwcheck" placeholder="8~12자 영문, 숫자" />
 									<div class="col-2">
 										<button type="button"
@@ -139,16 +197,18 @@
 												style="width: 30px" />
 										</button>
 									</div>
+										<span id="spanokPwCheck" style="margin-bottom: 20px"></span>
+								</div>
+						<!-- modal footer -->
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-bs-dismiss="modal">닫기</button>
+									<button type="submit" class="btn" 
+										style="background-color: #d95b96; color: white"  >수정 완료</button>
 								</div>
 							</form>
 						</div>
-						<!-- modal footer -->
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-bs-dismiss="modal">닫기</button>
-							<button type="submit" class="btn"
-								style="background-color: #d95b96; color: white" onclick="location='/Tget_mini_web'" >수정 완료</button>
-						</div>
+						<!--모달 폼을 감싸서 값을 보내주기위해 -->
 					</div>
 				</div>
 			</div>		

@@ -22,7 +22,7 @@ public interface MemberDao {
 	public int selectByMnicknameIsUnique(String mnickname);
 	public String findId(MemberDto memberDto);
 	public String findPw(MemberDto memberDto);
-	
+	public int ChangePw(MemberDto memberDto);
 	
 
 }

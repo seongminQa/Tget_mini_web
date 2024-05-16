@@ -26,5 +26,6 @@ public class MemberDto {
 	private byte[] mprofileImgData;
 	private String mprofileImgType;
 	private String mprofileImgName;
+
 	
 }
