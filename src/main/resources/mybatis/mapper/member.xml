@@ -137,4 +137,57 @@
 		where mid= #{mid}
 	</update>	
 	
+	<!-- 회원정보 얻기 (이미지 정보 없음)-->
+	<!--<select id="selectMemberByMidNoImg" parameterType="String" resultType="MemberDto">
+		select mid, mname, mpassword, mssn, memail, mrole, mnickname, 
+			mphone, msince, mprefergenre, mgrade, mtotalpay
+		from member
+		where mid = #{mid}
+	</select> -->
+	
+	<!-- 회원정보 얻기 (이미지만)-->
+	<select id="selectImgByMid" parameterType="String" resultType="MemberDto">
+		select mprofileimgtype, mprofileimgname, mprofileimg as mprofileimgdata
+		from member
+		where mid = #{mid}
+	</select>
+	
+	<!-- memberInfoModify에서 비밀번호 변경하기 -->
+ 	<update id="updateMpassword" parameterType="MemberDto">
+		update member set
+			mpassword = #{mpassword}
+		where mid = #{mid}
+	</update>
+	
+	<!-- memberInfoModify에서 닉네임 변경하기 -->
+ 	<update id="updateMnickname" parameterType="MemberDto">
+		update member set
+			mnickname = #{mnickname}
+		where mid = #{mid}
+	</update>
+	
+	<!-- memberInfoModify에서 이메일 변경하기 -->
+ 	<update id="updateMemail" parameterType="MemberDto">
+		update member set
+			memail = #{memail}
+		where mid = #{mid}
+	</update>
+	
+	<!-- memberInfoModify에서 휴대폰 번호 변경하기 -->
+ 	<update id="updateMphone" parameterType="MemberDto">
+		update member set
+			mphone = #{mphone}
+		where mid = #{mid}
+	</update>
+	
+	<!-- memberInfoModify에서 이미지 정보 변경하기 -->
+ 	<update id="updateMprofileImg" parameterType="MemberDto">
+		update member set
+			mprofileimg = #{mprofileImgData},
+			mprofileimgtype = #{mprofileImgType}, 
+			mprofileimgname = #{mprofileImgName}
+		where mid = #{mid}
+	</update>
+	
+	
 </mapper>
