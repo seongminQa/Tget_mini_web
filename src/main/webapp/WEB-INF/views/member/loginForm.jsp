@@ -88,15 +88,14 @@
 	
 		<!--  중앙에 가로로 정렬시키기 위해(화면창을 줄이건 늘려도 가운대로 하기위해) 스타일은 너무 위로 치우쳐 있어서 마진탑 10%로 줌 -->
 	 	<div class="d-flex justify-content-center"style="margin-top:5%;">  
-         <div class="login-wrapper">
-         
-         
-         <!-- 가운데 이미지 티겟을 설정하기위해 text-align -->
-      <div style="text-align : center;">  
-         <!--  이미지 크기를 맟주기 위해 높이와 너비를 줌 -->
-       <a class="navbar-brand" href="/Tget_mini_web"> <img src ="/Tget_mini_web/resources/image/project_image/t_get_logo.svg" style="width:200px ; height: 145px;"></a>   
-        <form method="post" action="${pageContext.request.contextPath}/login" id="login-form" name="join">
-     
+        	 <div class="login-wrapper">
+ 
+		         <!-- 가운데 이미지 티겟을 설정하기위해 text-align -->
+		    	  <div style="text-align : center;">  
+		         <!--  이미지 크기를 맟주기 위해 높이와 너비를 줌 -->
+		       <a class="navbar-brand" href="/Tget_mini_web"> <img src ="/Tget_mini_web/resources/image/project_image/t_get_logo.svg" style="width:200px ; height: 145px;"></a>   
+		        <form method="post" action="${pageContext.request.contextPath}/login" id="login-form" name="join">
+		     
       <%--      <c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
              <div class="alert alert-danger mb-2" role="alert">
                 <c:if test="${SPRING_SECURITY_LAST_EXCEPTION.message == 'Bad credentials'}">
@@ -119,20 +118,20 @@
             <!-- 버튼을 생성하는 입력요소 form 타입 sumbit은 제출버튼 동작으로 지정하여  value 값을 로그인으로 지정하였습니다.
             사용자가 입력한 데이터를 서버로 제출하기위해서 사용함 (서버 전송버튼)-->
             <!-- 로그인 버튼이지만 클릭을 할경우 입력한 아이디와 비밀번호 정보가 서보로 전송될 수있도록 사용 -->
-            <input type="submit" value="Login" onclick="joinCheck()"> <!--onclick="joinCheck()"  -->
-            <div class="link">
-              <p>	
-              <!-- 링크는 각각 아이디찾기, 비밀번호 찾기, 회원가입 페이지로 이동할수 있도록 구현한 링크이다. -->
-              <a href="/Tget_mini_web/member/lost_id">아이디 찾기</a> | 
-              <a href="/Tget_mini_web/member/lost_pw">비밀번호 찾기</a> | 
-              <a href="/Tget_mini_web/member/sign_up">회원가입</a> 
-              </p>
-            </div>
-              		
-        </form>
-        </div>
-    </div>
-</div>
+			            <input type="submit" value="Login" onclick="joinCheck()"> <!--onclick="joinCheck()"  -->
+			            <div class="link">
+			              <p>	
+			              <!-- 링크는 각각 아이디찾기, 비밀번호 찾기, 회원가입 페이지로 이동할수 있도록 구현한 링크이다. -->
+			              <a href="/Tget_mini_web/member/lost_id">아이디 찾기</a> | 
+			              <a href="/Tget_mini_web/member/lost_pw">비밀번호 찾기</a> | 
+			              <a href="/Tget_mini_web/member/sign_up">회원가입</a> 
+			              </p>
+			            </div>
+			              		
+			        </form>
+			        </div>
+			    </div>
+			</div>
 
 	    <!-- footer 하단고정-->
 	     <div class="fixed-bottom"> 
