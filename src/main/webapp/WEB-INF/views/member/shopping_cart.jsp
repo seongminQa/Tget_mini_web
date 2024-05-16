@@ -156,19 +156,93 @@
 			getTotalPrice();
 		}
 
-		
-		// CartItem 업데이트  
-		function updateCartItem(pno) {
-			var amount = $("#amount"+pno).val();
+		// 주문하기 버튼을 클릭하여 선택된 체크박스의 값 수집
+		/* function order() {
+			// 체크박스들을 변수에 담기
+			const checkboxes = document.querySelectorAll("input[name=tiket]");
+			// form 생성
+			const form = document.createElement('form');
+			form.setAttribute('method', 'post');
+			form.setAttribute('action', 'order'); // 모달창 id는 order 확인해보자.
 			
-			$.ajax({
-				url: "updateCartItem",
-				method: "post",
-				data: {pno:pno, oamount:amount},
-				success: function(data) {
-					console.log(data);
-				}
-			});
+			checkboxes.forEach((checkbox) => {
+		        const input = document.createElement('input');
+		        input.setAttribute('type', 'hidden');
+		        input.setAttribute('name', 'selectedItems[]');
+		        input.setAttribute('value', checkbox.value);
+		        form.appendChild(input);
+		    });
+
+		    document.body.appendChild(form);
+		    form.submit();
+		} */
+		
+		// orderInfo 컨트롤러로 값 보내기
+		/* function sendOrderInfo() {
+			// 체크된 박스들 찾기
+		    const checkboxes = document.querySelectorAll('input[name=tiket]:checked');
+		    
+		    const selectedItems = [];
+
+		    checkboxes.forEach((checkbox) => {
+		        selectedItems.push(checkbox.value);
+		    });
+
+		    // AJAX 요청 보내기
+		    $.ajax({
+		        url: "/orderInfo", // 요청을 보낼 URL
+		        method: "POST", // HTTP 메서드 설정
+		        data: { selectedItems: selectedItems }, // 전송할 데이터 설정
+		        success: function(response) {
+		            // 성공적으로 응답을 받았을 때 처리할 내용
+		            // 예를 들어, 다른 페이지로 리다이렉트하거나 메시지를 표시할 수 있습니다.
+		            console.log("주문 정보를 성공적으로 전송했습니다.");
+		            window.location.href = "/product/cart"; // 리다이렉트 예시
+		        },
+		        error: function(xhr, status, error) {
+		            // 요청이 실패했을 때 처리할 내용
+		            console.error("주문 정보 전송에 실패했습니다.");
+		            // 실패 메시지를 표시하거나 다시 시도할 수 있습니다.
+		        }
+		    });
+		} */
+		
+		function order() {
+			const cartList = ${cartList};
+			const orderInfo = [];
+			
+			// cartList에 담긴 정보를 추출하여 orderInfo 배열에 담기
+		    cartList.forEach((item) => {
+		        const orderItem = {
+		        	cno: item.cno,
+		            pno: item.pno,
+		            odate: item.odate,
+		            oamount: item.oamount
+		        };
+		        console.log(cno);
+		        console.log(pno);
+		        console.log(odate);
+		        console.log(oamount);
+		        //orderInfo.push(orderItem);
+		    });
+			
+		 	// AJAX 요청 보내기
+		    /* $.ajax({
+		        url: "/orderInfo", // 요청을 보낼 URL
+		        method: "POST", // HTTP 메서드 설정
+		        contentType: "application/json", // 전송할 데이터 타입 설정
+		        data: JSON.stringify(orderInfo), // 전송할 데이터를 JSON 문자열로 변환하여 설정
+		        success: function(response) {
+		            // 성공적으로 응답을 받았을 때 처리할 내용
+		            console.log("주문 정보를 성공적으로 전송했습니다.");
+		            window.location.href = "/product/cart"; // 리다이렉트 예시
+		        },
+		        error: function(xhr, status, error) {
+		            // 요청이 실패했을 때 처리할 내용
+		            console.error("주문 정보 전송에 실패했습니다.");
+		        }
+		    }); */
+			
 		}
 
       </script>
@@ -234,6 +308,10 @@
           <tbody>
             	<!-- 목록 -->
             <c:forEach var="cartitem" items="${cartList}">
+            	
+            	<input id="pno${cartitem.cno}" type="hidden" value="${cartitem.pno}" />
+            	<input id="odate${cartitem.cno}" type="hidden" value="${cartitem.odate}" />
+	            
 	            <tr class="cart_list_detail">
 	              <td style="width: 3%">
 	                <input id="cartitem-${cartitem.cno}" onchange="updateSelectPrice(${cartitem.cno}, ${cartitem.pprice})" type="checkbox" 
@@ -317,8 +395,8 @@
         
 		
       <div class="cart__mainbtns mb-5">
-        <button class="cart__bigorderbtn left"><a href="${pageContext.request.contextPath}/shopping/productList" style="text-decoration: none">쇼핑 계속하기</a></button>
-        <button onclick="priceSum()" class="cart__bigorderbtn right">주문하기</button>
+        <button class="cart__bigorderbtn left"><a href="${pageContext.request.contextPath}/product" style="text-decoration: none">쇼핑 계속하기</a></button>
+        <button onclick="order()" class="cart__bigorderbtn right">주문하기</button>
       </div>
       <!-- 추천 상품 목록 뿌리기 -->
       <!-- ul 리스트로 구현해보기 -->
@@ -372,6 +450,60 @@
     <%@include file="/WEB-INF/views/common/footer.jsp"%>
     
     <!-- 주문 모달 -->
-    
+	<div class="modal" id="order">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header d-flex justify-content-center">
+	        <h4 class="modal-title">관리자 등록</h4>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+	      </div>
+
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+			<form method="post" action="#">
+				<!-- 시큐리티의 위조 방지를 위한 토큰번호. -->
+			   <%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
+			   <div class="form-group mb-2">
+			       <label for="mid">아이디</label>
+			       <input type="text" class="form-control" id="mid" name="mid">
+			   </div>
+			   <div class="form-group mb-2">
+			       <label for="mname">이름</label>
+			       <input type="text" class="form-control" id="mname" name="mname">
+			   </div>
+			   <div class="form-group mb-2">
+			      <label for="mpassword">비밀번호</label>
+			      <input type="password" class="form-control" id="mpassword" name="mpassword">
+			   </div>
+			   <div class="form-group mb-2">
+			      <label for="memail">이메일</label>
+			      <input type="email" class="form-control" id="memail" name="memail">
+			   </div>
+			   
+	           <!-- <div class="form-group">
+	              <label for="mrole">Member Role</label>
+	              <select class="form-control" id="mrole" name="mrole">
+	                 <option value="ROLE_ADMIN">Admin</option>
+	                 <option value="ROLE_MANAGER">Manager</option>
+	                 <option value="ROLE_USER" selected>User</option>
+	              </select>
+	           </div> -->
+			   
+			   <button type="submit" class="btn btn-info btn-sm mt-2">등록</button>
+			</form>
+			<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->		
+	      </div>
+		  
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+	      </div>
+	
+	    </div>
+	  </div>
+	</div>
   </body>
 </html>

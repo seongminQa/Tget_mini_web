@@ -20,6 +20,7 @@ import com.mycompany.Tget_mini_web.dao.CartDao;
 import com.mycompany.Tget_mini_web.dao.ProductDao;
 import com.mycompany.Tget_mini_web.dto.CartDto;
 import com.mycompany.Tget_mini_web.dto.MemberDto;
+import com.mycompany.Tget_mini_web.dto.OrderInfoDto;
 import com.mycompany.Tget_mini_web.dto.ProductDto;
 import com.mycompany.Tget_mini_web.security.TgetUserDetails;
 import com.mycompany.Tget_mini_web.service.CartService;
@@ -172,6 +173,18 @@ public class ProductController {
 		 }
 	  }
 	  
+	  /*for(CartDto item : cartList) {
+		    log.info("for문의 item, CartDto 확인1 : " + item.getOseatgrade().toString() + cartDto.getOseatgrade().toString());
+		    log.info("for문의 item, CartDto 확인1 : " + item.getOdate().toString() + cartDto.getOdate().toString());
+		    if(item.getOseatgrade().equals(cartDto.getOseatgrade()) &&
+		       item.getOdate().equals(cartDto.getOdate())) {
+		        item.setOamount(cartDto.getOamount() + item.getOamount());
+		        cartService.updateCartItem(item);
+		        isUpdate = true;
+		        break;
+		    }
+		}*/
+	  
 	  if(!isUpdate) {
 		  cartService.addCartItem(cartDto);
 	  }
@@ -207,6 +220,14 @@ public class ProductController {
 		log.info("removeCartItem 실행");
 		// Cart 테이블에서 해당 인스턴스 삭제
 		cartService.removeCartItem(cno);
+		return "redirect:/product/cart";
+	}
+	
+	// ==================================================================
+	
+	@PostMapping("/orderInfo")
+	public String orderInfo(OrderInfoDto orderInfoDto, Authentication authentication) {
+		
 		return "redirect:/product/cart";
 	}
    
