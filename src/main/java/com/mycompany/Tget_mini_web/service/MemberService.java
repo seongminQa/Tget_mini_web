@@ -146,5 +146,44 @@ public class MemberService {
 		memberDao.ChangePw(memberDto);
 
 	}
+	
+	// 회원정보 수정에서 회원 비밀번호 변경하기
+	public void updateMpassword(MemberDto memberDto) {
+		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		memberDto.setMpassword(passwordEncoder.encode(memberDto.getMpassword()));
+		memberDao.updateMpassword(memberDto);
+	}
+	
+	//회원정보수정에서 회원 닉네임 변경하기
+	public void updateMnickname(MemberDto memberDto) {
+		memberDao.updateMnickname(memberDto);
+		
+	}
+	// 회원정보수정에서 회원 이메일 변경하기
+	public void updateMemail(MemberDto memberDto) {
+		memberDao.updateMemail(memberDto);
+		
+	}
+	// 회원정보수정에서 회원 휴대폰 번호 변경하기
+	public void updateMphone(MemberDto memberDto) {
+		memberDao.updateMphone(memberDto);
+		
+	}
+
+	public MemberDto getMemberImg(String mid) {
+		MemberDto memberdto = memberDao.selectImgByMid(mid);
+		return memberdto;
+	}
+
+	public void updateMprofileImg(MemberDto memberDto) {
+		memberDao.updateMprofileImg(memberDto);
+		
+	}
+
+	public void deletemember(MemberDto auMemberDto) {
+		memberDao.deleteByMid(auMemberDto.getMid());
+		
+	}
+
 
 }
