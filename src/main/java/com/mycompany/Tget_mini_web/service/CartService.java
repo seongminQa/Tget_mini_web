@@ -25,8 +25,8 @@ public class CartService {
 
    // 카트 리스트 페이지 당 리스트를 보여주는 메소드
    public List<CartDto> getCartList(PagerDto pager) {
-      List<CartDto> cart = cartDao.selectByPage(pager);
-      return cart;
+      List<CartDto> cartList = cartDao.selectByPage(pager);
+      return cartList;
    }
    
    // 리스트들의 총 행의 수를 반환하는 메소드
@@ -46,12 +46,21 @@ public class CartService {
       
       int rowNum = cartDao.updateCart(cartDto);
    }
-   
-	// 카트 리스트 삭제 메소드
-	public void removeMember(String cno) {
-	   cartDao.deleteByCno(cno);
+
+	// 현재 로그인한 mid를 확인하여 장바구니에 넣은 상품들 불러오기
+	public List<CartDto> getCartItemList(String mid) {
+		List<CartDto> cartList = cartDao.selectCartItem(mid);
+		return cartList;
 	}
 	
-	
+	// 카트 리스트 삭제 메소드
+	public void removeCartItem(int cno) {
+		cartDao.deleteCartItem(cno);
+	}
+
+	public void updateCartItem(CartDto item) {
+		cartDao.updateCartItem(item);
+		
+	}
 
 }

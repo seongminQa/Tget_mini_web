@@ -23,4 +23,12 @@ public interface CartDao {
 
    public void insertCartItem(CartDto cartDto);
 
+   // 로그인한 회원이 장바구니에 넣은 상품의 정보 가져오기
+   List<CartDto> selectCartItem(String mid);
+   
+   // 해당 장바구니 번호를 이용하여 삭제
+   public void deleteCartItem(int cno);
+
+   void updateCartItem(CartDto item);
+
 }
