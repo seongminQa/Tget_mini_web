@@ -191,16 +191,7 @@
 						</c:if>--%>
 						<img id="board_img" alt=""
 							src="board/attachDownload?bno=${board.bno}"> 
-						<<%-- c:choose>
-							<c:when test="${empty board.bimgtype}">
-								<img id="board_img" alt=""
-									src="/Tget_mini_web/resources/image/board/no_img.png">
-							</c:when>
-							<c:otherwise>
-								<img id="board_img" alt=""
-									src="board/attachDownload?bno=${board.bno}">
-							</c:otherwise>
-						</c:choose> --%>
+						
 					</div>
 					<!-- 게시글 타이틀, 작성자, 글-->
 					<div id="board_2">
