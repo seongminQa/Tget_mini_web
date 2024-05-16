@@ -38,6 +38,11 @@
 		where pno = #{pno}
 	</select>
 	
+	<select id="selectAttachProductContent" parameterType="int" resultType="ProductDto">
+		select pcontent from product
+		where pno = #{pno}
+	</select>
+	
 	<!-- 상품 수에 따라 페이징 처리하기 -->
  	<select id="selectByPage" parameterType="PagerDto" resultType="ProductDto">
 		<!-- C는 캐릭터를 의미. 문자 그대로의 데이터를 받아들이는 구문 -->
