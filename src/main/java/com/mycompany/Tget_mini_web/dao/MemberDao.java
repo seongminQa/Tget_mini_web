@@ -23,6 +23,12 @@ public interface MemberDao {
 	public String findId(MemberDto memberDto);
 	public String findPw(MemberDto memberDto);
 	public int ChangePw(MemberDto memberDto);
-	
+	public int updateMpassword(MemberDto memberDto);
+	public int updateMnickname(MemberDto memberDto);
+	public MemberDto selectImgByMid(String mid);
+	public int updateMemail(MemberDto memberDto);
+	public int updateMphone(MemberDto memberDto);
+	public int updateMprofileImg(MemberDto memberDto);
+
 
 }
