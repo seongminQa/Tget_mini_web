@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
@@ -167,98 +167,59 @@
 		</div>
 		<!-- 베스트 글 시작-->
 		<div id="best_board" class="d-flex" style="background-color: #F2F2F2;">
-			<div id="board">
-				<!-- 게시글 이미지 -->
-				<div>
-					<img id="board_img" alt=""
-						src="/Tget_mini_web/resources/image/board/리뷰1.jpg">
-				</div>
-				<!-- 게시글 타이틀, 작성자, 글-->
-				<div id="board_2">
-					<div id="board_text">
-						<div id="board_title">${boardDto.btitle}</div>
-						<div id="board_profile" class="d-flex">
-							<img id="profile_img"
-								src="/Tget_mini_web/resources/image/board/리뷰1.jpg">
-							<div id="user_id">
-								<span class="ms-2">myeonhwan57</span>
+			<c:forEach var="board" items="${boardList}" begin="0" end="3"
+				step="1">
+				<div id="board">
+					<!-- 게시글 이미지 -->
+					<div>
+						<%-- 	<c:choose>
+							<c:when test="${empty board.bimg}">
+								<img id="board_img" alt=""
+									src="/Tget_mini_web/resources/image/board/no_img.png">
+							</c:when>
+							<c:when test="${not empty board.bimg}">
+								
+							</c:when>
+						</c:choose> --%>
+						<%-- <c:if test="${empty board.bimg}">
+							<img id="board_img" alt=""
+								src="/Tget_mini_web/resources/image/board/no_img.png">
+						</c:if>
+						<c:if test="${not empty board.bimg}">
+							<img id="board_img" alt=""
+								src="board/attachDownload?bno=${board.bno}">
+						</c:if>--%>
+						<img id="board_img" alt=""
+							src="board/attachDownload?bno=${board.bno}"> 
+						<<%-- c:choose>
+							<c:when test="${empty board.bimgtype}">
+								<img id="board_img" alt=""
+									src="/Tget_mini_web/resources/image/board/no_img.png">
+							</c:when>
+							<c:otherwise>
+								<img id="board_img" alt=""
+									src="board/attachDownload?bno=${board.bno}">
+							</c:otherwise>
+						</c:choose> --%>
+					</div>
+					<!-- 게시글 타이틀, 작성자, 글-->
+					<div id="board_2">
+						<div id="board_text">
+							<div id="board_title">${board.btitle}</div>
+							<div id="board_profile" class="d-flex">
+								<img id="profile_img"
+									src="/Tget_mini_web/resources/image/board/리뷰1.jpg">
+								<div id="user_id">
+									<span class="ms-2">${board.mid}</span>
+								</div>
 							</div>
+							<div id="board_content">${board.bcontent}</div>
 						</div>
-						<div id="board_content">여기는 게시글의 전반적인 여기는 게시글의 전반적인 내용이 들어가는
-							부분입니다. 여기는 게시글의 전반적인 내용이 들어가는 부분입니다.부분입니다.여기는 게시글의 전반적인 내용이 들어가는
-							부분입니다.여기는 게시글의 전반적인 내용이 들어가는 부분입니다.</div>
 					</div>
 				</div>
-			</div>
-			<div id="board">
-				<!-- 게시글 이미지 -->
-				<div>
-					<img id="board_img" alt=""
-						src="/Tget_mini_web/resources/image/board/리뷰2.jpg">
-				</div>
-				<!-- 게시글 타이틀, 작성자, 글-->
-				<div id="board_2">
-					<div id="board_text">
-						<div id="board_title">게시글의 타이틀asdfdasfasdfsdfasdfsad</div>
-						<div id="board_profile" class="d-flex">
-							<img id="profile_img"
-								src="/Tget_mini_web/resources/image/board/리뷰1.jpg">
-							<div id="user_id">
-								<span class="ms-2">myeonhwan57</span>
-							</div>
-						</div>
-						<div id="board_content">여기는 게시글의 전반적인 여기는 게시글의 전반적인 내용이 들어가는
-							부분입니다. 여기는 게시글의 전반적인 내용이 들어가는 부분입니다.부분입니다.여기는 게시글의 전반적인 내용이 들어가는
-							부분입니다.여기는 게시글의 전반적인 내용이 들어가는 부분입니다.</div>
-					</div>
-				</div>
-			</div>
-			<div id="board">
-				<!-- 게시글 이미지 -->
-				<div>
-					<img id="board_img" alt=""
-						src="/Tget_mini_web/resources/image/board/리뷰3.jpg">
-				</div>
-				<!-- 게시글 타이틀, 작성자, 글-->
-				<div id="board_2">
-					<div id="board_text">
-						<div id="board_title">게시글의 타이틀asdfdasfasdfsdfasdfsad</div>
-						<div id="board_profile" class="d-flex">
-							<img id="profile_img"
-								src="/Tget_mini_web/resources/image/board/리뷰1.jpg">
-							<div id="user_id">
-								<span class="ms-2">myeonhwan57</span>
-							</div>
-						</div>
-						<div id="board_content">여기는 게시글의 전반적인 여기는 게시글의 전반적인 내용이 들어가는
-							부분입니다. 여기는 게시글의 전반적인 내용이 들어가는 부분입니다.부분입니다.여기는 게시글의 전반적인 내용이 들어가는
-							부분입니다.여기는 게시글의 전반적인 내용이 들어가는 부분입니다.</div>
-					</div>
-				</div>
-			</div>
-			<div id="board">
-				<!-- 게시글 이미지 -->
-				<div>
-					<img id="board_img" alt=""
-						src="/Tget_mini_web/resources/image/board/리뷰4.jpg">
-				</div>
-				<!-- 게시글 타이틀, 작성자, 글-->
-				<div id="board_2">
-					<div id="board_text">
-						<div id="board_title">게시글의 타이틀asdfdasfasdfsdfasdfsad</div>
-						<div id="board_profile" class="d-flex">
-							<img id="profile_img"
-								src="/Tget_mini_web/resources/image/board/리뷰1.jpg">
-							<div id="user_id">
-								<span class="ms-2">myeonhwan57</span>
-							</div>
-						</div>
-						<div id="board_content">여기는 게시글의 전반적인 여기는 게시글의 전반적인 내용이 들어가는
-							부분입니다. 여기는 게시글의 전반적인 내용이 들어가는 부분입니다.부분입니다.여기는 게시글의 전반적인 내용이 들어가는
-							부분입니다.여기는 게시글의 전반적인 내용이 들어가는 부분입니다.</div>
-					</div>
-				</div>
-			</div>
+			</c:forEach>
+
+
 
 
 		</div>
@@ -301,29 +262,36 @@
 
 									</tbody>
 									<tr>
-                           <td colspan="4" class="text-center">
-                              <div>
-                                 <a class="btn btn-outline-primary btn-sm" href="?pageNo=1#board-list">처음</a>
-                                 <c:if test="${pagerDto.groupNo>1}">
-                                    <a class="btn btn-outline-info btn-sm" href="?pageNo=${pagerDto.startPageNo-1}#board-list">이전</a>
-                                 </c:if>
-                                 
-                                 <c:forEach var="i" begin="${pagerDto.startPageNo}" end="${pagerDto.endPageNo}">
-                                    <c:if test="${pagerDto.pageNo != i}">
-                                       <a class="btn btn-outline-success btn-sm" href="?pageNo=${i}#board-list">${i}</a>
-                                    </c:if>
-                                    <c:if test="${pagerDto.pageNo == i}">
-                                       <a class="btn btn-danger btn-sm" href="?pageNo=${i}#board-list">${i}</a>
-                                    </c:if>
-                                 </c:forEach>
-                                 
-                                 <c:if test="${pagerDto.groupNo<pagerDto.totalGroupNo}">
-                                    <a class="btn btn-outline-info btn-sm" href="?pageNo=${pagerDto.endPageNo+1}#board-list">다음</a>
-                                 </c:if>
-                                 <a class="btn btn-outline-primary btn-sm" href="?pageNo=${pagerDto.totalPageNo}#board-list">맨끝</a>
-                              </div>
-                           </td>
-                        </tr>
+										<td colspan="4" class="text-center">
+											<div>
+												<a class="btn btn-outline-primary btn-sm"
+													href="?pageNo=1#board-list">처음</a>
+												<c:if test="${pagerDto.groupNo>1}">
+													<a class="btn btn-outline-info btn-sm"
+														href="?pageNo=${pagerDto.startPageNo-1}#board-list">이전</a>
+												</c:if>
+
+												<c:forEach var="i" begin="${pagerDto.startPageNo}"
+													end="${pagerDto.endPageNo}">
+													<c:if test="${pagerDto.pageNo != i}">
+														<a class="btn btn-outline-success btn-sm"
+															href="?pageNo=${i}#board-list">${i}</a>
+													</c:if>
+													<c:if test="${pagerDto.pageNo == i}">
+														<a class="btn btn-danger btn-sm"
+															href="?pageNo=${i}#board-list">${i}</a>
+													</c:if>
+												</c:forEach>
+
+												<c:if test="${pagerDto.groupNo<pagerDto.totalGroupNo}">
+													<a class="btn btn-outline-info btn-sm"
+														href="?pageNo=${pagerDto.endPageNo+1}#board-list">다음</a>
+												</c:if>
+												<a class="btn btn-outline-primary btn-sm"
+													href="?pageNo=${pagerDto.totalPageNo}#board-list">맨끝</a>
+											</div>
+										</td>
+									</tr>
 								</table>
 							</div>
 							<button class="btn"
