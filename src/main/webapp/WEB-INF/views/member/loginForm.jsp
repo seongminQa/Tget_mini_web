@@ -95,7 +95,6 @@
       <div style="text-align : center;">  
          <!--  이미지 크기를 맟주기 위해 높이와 너비를 줌 -->
        <a class="navbar-brand" href="/Tget_mini_web"> <img src ="/Tget_mini_web/resources/image/project_image/t_get_logo.svg" style="width:200px ; height: 145px;"></a>   
-        
         <form method="post" action="${pageContext.request.contextPath}/login" id="login-form" name="join">
      
       <%--      <c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
@@ -107,22 +106,16 @@
           </c:if> --%>
         	<!-- placeholder 사용한이유는 아이디와 비밀호를 입력을하는 필드라는것을 알려주기 위해 사용 -->
               <!-- 체크박스를 가운데로 정렬하기 위하여 -->
-            <input type="text" id="mid" name="mid" placeholder="id">
-               
+            <input type="text" id="mid" name="mid" placeholder="id">  
             <input type="password" id="mpassword" name="mpassword" placeholder="Password">
-             		 
-             <label for="remember-check" class="d-flex justify-content-center">
-             
-             	<!-- m-5를 준이유는 체크박스의 간격을 띄우기 위해서 -->
-             	<div class="me-5">
-	            	<input type="checkbox" id="remember-check" class="m-1">아이디 저장하기  	         	             	
-             	</div>
-             	
-				<div>
+             	<div style="margin-right:50%;">	 
+             		<label for="remember-check" class="d-flex justify-content-center">
+	            		<input type="checkbox" id="remember-check" class="m-1">아이디 저장하기  	         	             	
+          			<!-- 	<div>
 	             	<input type="checkbox" id="remember-check" class="m-1">자동 로그인             	
-             	
-             	</div>
-             </label> 
+             	</div> -->
+             		</label>
+             	</div> 
             <!-- 버튼을 생성하는 입력요소 form 타입 sumbit은 제출버튼 동작으로 지정하여  value 값을 로그인으로 지정하였습니다.
             사용자가 입력한 데이터를 서버로 제출하기위해서 사용함 (서버 전송버튼)-->
             <!-- 로그인 버튼이지만 클릭을 할경우 입력한 아이디와 비밀번호 정보가 서보로 전송될 수있도록 사용 -->
