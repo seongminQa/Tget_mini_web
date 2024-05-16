@@ -81,8 +81,7 @@
 			,
 			bimgoname = #{bimgoname},
 			bimgtype = #{bimgtype},
-			bimg =
-			#{bimg}
+			bimg =#{bimg}
 		</if>
 		where bno=#{bno}
 	</update>
@@ -93,5 +92,12 @@
 	<update id="plusCnt" parameterType="int">
 		UPDATE BOARD SET BHITCOUNT = BHITCOUNT + 1 WHERE BNO = #{bno}
 	</update>
+	
+	
+	<select id="selectByBoardList" resultType="BoardDto">
+		select *
+		from board
+		order by bno desc
+	</select>
 
 </mapper>    
