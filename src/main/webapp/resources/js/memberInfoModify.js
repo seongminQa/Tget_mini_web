@@ -1,4 +1,30 @@
-// 비밀번호 보이게 하는 스크립트
+////////////////////////////////
+// 모달 창 보이게 하기
+function pwModify() {
+   const pwModal = new bootstrap.Modal("#pwModifyModal");
+           pwModal.show();
+         }
+   
+ function nickModify() {
+   const nickModal = new bootstrap.Modal("#nickModifyModal");
+           nickModal.show();
+         }
+   
+ function emailModify() {
+   const emailModal = new bootstrap.Modal("#emailModifyModal");
+   		emailModal.show();
+ }
+ function mprofileImgModify() {
+   const mprofileImgModal = new bootstrap.Modal("#mprofileImgModifyModal");
+           mprofileImgModal.show();
+         }
+   
+ function phoneModify() {
+   const phoneModal = new bootstrap.Modal("#phoneModifyModal");
+   		phoneModal.show();
+ }
+
+// 비밀번호 보이게 하는 스크립트-------------------------------------------------------------------
 
 $(function() { // html 문서 로드 이후 로드하는 스크립트
    // 문서보다 먼저 로드 되면 해당 클래스를 인식할 수 없기에 문서로드 제이쿼리 안에 작성한다.
@@ -190,6 +216,12 @@ function pwSubmit(){
 	   } else {   
 	      totalResult = false;
 	   }
+	   
+	 //유효성 검사 결과가 true일 경우
+	   if(totalResult) {
+	      //수동으로 action 기능을 수행하도록 함
+	      $("#pwModify")[0].submit();
+	   }
 };
 
 //nickname-------------------------------------------------------------
@@ -217,6 +249,11 @@ function nicknameSubmit(){
 	        }
 	    }
 	});
+	//유효성 검사 결과가 true일 경우
+	   if(totalResult) {
+	      //수동으로 action 기능을 수행하도록 함
+	      $("#nicknameModify")[0].submit();
+	   }
 };
 
 //email------------------------------------------------------
@@ -240,6 +277,11 @@ function emailSubmit(){
 			   $("#spanEmail").addClass("text-danger").html("이메일이 양식에 맞지 않습니다.");
 			   totalResult = false;
 		   }
+	   }
+	 //유효성 검사 결과가 true일 경우
+	   if(totalResult) {
+	      //수동으로 action 기능을 수행하도록 함
+	      $("#emailModify")[0].submit();
 	   }
 }
 
@@ -285,5 +327,10 @@ function phoneSubmit(){
 			   
 			   totalResult = false;
 		   }
+	   }
+	 //유효성 검사 결과가 true일 경우
+	   if(totalResult) {
+	      //수동으로 action 기능을 수행하도록 함
+	      $("#phoneModify")[0].submit();
 	   }
 }
