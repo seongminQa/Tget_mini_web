@@ -100,9 +100,14 @@ public class BoardController {
 	}
 
 	@GetMapping("/detailBoard")
-	public String detailBoard(int bno, Model model) {
+	public String detailBoard(int bno, Model model, Authentication authentication) {
+		TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
+		MemberDto memberDto = userDetails.getMember();
+		String mid = memberDto.getMid();
+
 		BoardDto boardDto = service.getBoard(bno);
 		model.addAttribute("boardDto", boardDto);
+		model.addAttribute("mid", mid);
 		service.plusHitCnt(bno);
 		log.info(boardDto.toString());
 		return "board/detailBoard";

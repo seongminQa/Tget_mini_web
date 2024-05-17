@@ -30,7 +30,7 @@
          <![CDATA[
          select rnum, bno ,btitle, bcontent, mid, bdate,bhitcount
          from (
-             select  rownum as rnum, bno ,btitle, bcontent, mid, bdate,bhitcount
+             select  rownum as rnum, bno ,btitle, bcontent, mid, bdate, bhitcount
              from (
                  select bno ,btitle, bcontent, mid, bdate,bhitcount
                  from board
