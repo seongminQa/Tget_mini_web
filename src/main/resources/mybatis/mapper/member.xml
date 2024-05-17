@@ -188,6 +188,8 @@
 			mprofileimgname = #{mprofileImgName}
 		where mid = #{mid}
 	</update>
+	<!-- 게시글 확인하기 -->
+	
 	
 	
 </mapper>
