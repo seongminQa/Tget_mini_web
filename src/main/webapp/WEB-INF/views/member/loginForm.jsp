@@ -2,6 +2,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html> 
 
 
@@ -77,9 +78,9 @@
         	 }
            	 document.join.submit();
         	 
-         }
-          
+         } 
          
+       
 		</script>
 	</head>
 	<body>
@@ -105,8 +106,10 @@
           </c:if> --%>
         	<!-- placeholder 사용한이유는 아이디와 비밀호를 입력을하는 필드라는것을 알려주기 위해 사용 -->
               <!-- 체크박스를 가운데로 정렬하기 위하여 -->
-            <input type="text" id="mid" name="mid" placeholder="id">  
+            <input type="text" id="mid" name="mid" placeholder="id" class="check" >  
+            
             <input type="password" id="mpassword" name="mpassword" placeholder="Password">
+            	
              	<div style="margin-right:50%;">	 
              		<label for="remember-check" class="d-flex justify-content-center">
 	            		<input type="checkbox" id="remember-check" class="m-1">아이디 저장하기  	         	             	
