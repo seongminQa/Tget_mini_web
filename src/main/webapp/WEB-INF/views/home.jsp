@@ -111,18 +111,9 @@
 		</div>
 
 	</div>
-
-
-
-
-
-
-
 	<!-- 구분선 꾸미기 -->
 	<!-- <div style="border-bottom: 2px solid #D95B96;"></div> -->
-
 	<!-- Carousel Start -->
-
 	<div id="card-carousel">
 		<div class="container" id="review-title">
 			<h3>
@@ -136,135 +127,58 @@
 					<div class="carousel-item active">
 						<!--5개 카드  -->
 						<div class="row row-cols-md-1  row-cols-lg-5 g-5">
+							<c:forEach var="product" items="${productList}" begin="0" end="4">
+								<div>
+									<a href="${pageContext.request.contextPath}/product/detail?pno=${product.pno}"><img
+										id="poster_img" alt=""
+										src="product/attachProduct?pno=${product.pno}"></a>
 
+									<div id="right_info">
+										<h5>${product.ptitle}</h5>
+										<p>${product.pplace}</p>
+										<p>
+											<fmt:formatDate value="${product.pdatestart}"
+												pattern="yyyy-MM-dd" />
+											~
+											<fmt:formatDate value="${product.pdateend}"
+												pattern="yyyy-MM-dd" />
+										</p>
+									</div>
+								</div>
+							</c:forEach>
 
-							<div class="col">
-								<div id="card h-100">
-									<a> <img
-										src="https://tickets.interpark.com/contents/_next/image?url=http%3A%2F%2Fticketimage.interpark.com%2FPlay%2Fimage%2Flarge%2F23%2F23017766_p.gif&w=256&q=75"
-										class="card-img-top" alt="...">
-									</a>
-									<div class="card-body">
-										<h5>알앤제이</h5>
-										<p>동국대학교 이해랑예술극장</p>
-										<p>2024.02.07 ~ 2024.04.28</p>
-									</div>
-								</div>
-							</div>
-							<div class="col">
-								<div id="card h-100">
-									<a href="${pageContext.request.contextPath}/item"><img
-										src="https://tickets.interpark.com/contents/_next/image?url=http%3A%2F%2Fticketimage.interpark.com%2FTCMS3.0%2FGMain%2FPlay%2F2404%2F240402033345_24004955.gif&w=1920&q=75"
-										class="card-img-top" alt="..."></a>
-
-									<div class="card-body">
-										<h5>존경하는 엘레나 선생님</h5>
-										<p>상명아트홀1관</p>
-										<p>2024.06.01 ~ 2024.06.30</p>
-									</div>
-								</div>
-							</div>
-							<div class="col">
-								<div id="card h-100">
-									<img
-										src="https://tickets.interpark.com/contents/_next/image?url=http%3A%2F%2Fticketimage.interpark.com%2FTCMS3.0%2FGMain%2FPlay%2F2403%2F240319025722_24003302.gif&w=256&q=75"
-										class="card-img-top" alt="...">
-									<div class="card-body">
-										<h5>클로저</h5>
-										<p>플러스씨어터</p>
-										<p>2024.04.23 ~ 2024.07.14</p>
-									</div>
-								</div>
-							</div>
-							<div class="col">
-								<div id="card h-100">
-									<img
-										src="https://tickets.interpark.com/contents/_next/image?url=http%3A%2F%2Fticketimage.interpark.com%2FPlay%2Fimage%2Flarge%2F24%2F24000251_p.gif&w=256&q=75"
-										class="card-img-top" alt="...">
-									<div class="card-body">
-										<h5>초선의원</h5>
-										<p>대학로 자유극장</p>
-										<p>2024.03.22 ~ 2024.05.12</p>
-									</div>
-								</div>
-							</div>
-							<div class="col">
-								<div id="card h-100">
-									<img
-										src="https://tickets.interpark.com/contents/_next/image?url=http%3A%2F%2Fticketimage.interpark.com%2FPlay%2Fimage%2Flarge%2F24%2F24000709_p.gif&w=256&q=75"
-										class="card-img-top" alt="...">
-									<div class="card-body">
-										<h5>비클래스</h5>
-										<p>링크아트센터드림 드림2관</p>
-										<p>2024.02.20 ~ 2024.05.06</p>
-									</div>
-								</div>
-							</div>
 						</div>
 					</div>
 					<div class="carousel-item ">
 						<!--5개 카드  -->
 						<div class="row row-cols-md-1  row-cols-lg-5 g-5">
-							<div class="col">
-								<div id="card h-100">
-									<img
-										src="https://tickets.interpark.com/contents/_next/image?url=http%3A%2F%2Fticketimage.interpark.com%2FTCMS3.0%2FGMain%2FPlay%2F2404%2F240408115010_24005215.gif&w=1920&q=75"
-										class="card-img-top" alt="...">
-									<div id="card-body">
-										<h5>고도를 기다리며</h5>
-										<p>국립극장 달오름극장</p>
-										<p id="date">2024.04.26 ~ 2024.05.05</p>
+							<c:forEach var="product" items="${productList}" begin="0" end="4">
+								<div>
+									<a href="${pageContext.request.contextPath}/product/detail?pno=${product.pno}"><img
+										id="poster_img" alt=""
+										src="product/attachProduct?pno=${product.pno}"></a>
+
+									<div id="right_info">
+										<h5>${product.ptitle}</h5>
+										<p>${product.pplace}</p>
+										<p>
+											<fmt:formatDate value="${product.pdatestart}"
+												pattern="yyyy-MM-dd" />
+											~
+											<fmt:formatDate value="${product.pdateend}"
+												pattern="yyyy-MM-dd" />
+										</p>
 									</div>
+
 								</div>
-							</div>
-							<div class="col">
-								<div id="card h-100">
-									<img
-										src="https://tickets.interpark.com/contents/_next/image?url=http%3A%2F%2Fticketimage.interpark.com%2FPlay%2Fimage%2Flarge%2F24%2F24000651_p.gif&w=256&q=75"
-										class="card-img-top" alt="...">
-									<div id="card-body">
-										<h5>아트</h5>
-										<p>링크아트센터 벅스홀</p>
-										<p id="date">2024.02.13 ~ 2024.05.12</p>
-									</div>
-								</div>
-							</div>
-							<div class="col">
-								<div id="card h-100">
-									<img
-										src="https://tickets.interpark.com/contents/_next/image?url=http%3A%2F%2Fticketimage.interpark.com%2FTCMS3.0%2FGMain%2FPlay%2F2403%2F240306045305_L0000078.gif&w=1920&q=75"
-										class="card-img-top" alt="...">
-									<div class="card-body">
-										<h5>러브레터</h5>
-										<p>LG아트센터 서울 U+ 스테이지</p>
-										<p>2024.04.04 ~ 2024.04.27</p>
-									</div>
-								</div>
-							</div>
-							<div class="col">
-								<div id="card h-100">
-									<img
-										src="https://tickets.interpark.com/contents/_next/image?url=http%3A%2F%2Fticketimage.interpark.com%2FTCMS3.0%2FGMain%2FPlay%2F2402%2F240205035456_21013096.gif&w=1920&q=75"
-										class="card-img-top" alt="...">
-									<div class="card-body">
-										<h5>옥탑방 고양이</h5>
-										<p>대학로 틴틴홀</p>
-										<p>2024.04.06 ~ Open run</p>
-									</div>
-								</div>
-							</div>
-							<div class="col">
-								<div id="card h-100">
-									<img
-										src="https://tickets.interpark.com/contents/_next/image?url=http%3A%2F%2Fticketimage.interpark.com%2FTCMS3.0%2FGMain%2FPlay%2F2403%2F240329020847_24003189.gif&w=1920&q=75"
-										class="card-img-top" alt="...">
-									<div class="card-body">
-										<h5>웃음의 대학</h5>
-										<p>세종문화회관 S씨어터(자세히)</p>
-										<p>2024.05.11 ~ 2024.06.09</p>
-									</div>
-								</div>
-							</div>
+
+							</c:forEach>
+
+							
+							
+							
+							
+							
 						</div>
 					</div>
 					<button class="carousel-control-prev" type="button"
@@ -328,8 +242,11 @@
 			<div id="right_contents">
 				<c:forEach var="product" items="${productList}" begin="0" end="3">
 					<div>
-						<img id="right_img" alt=""
-							src="product/attachProduct?pno=${product.pno}">
+						<a
+							href="${pageContext.request.contextPath}/product/detail?pno=${product.pno}"><img
+							id="right_img" alt=""
+							src="product/attachProduct?pno=${product.pno}"></a>
+
 						<div id="right_info">
 							<h5>${product.ptitle}</h5>
 							<p>${product.pplace}</p>
@@ -344,10 +261,6 @@
 					</div>
 
 				</c:forEach>
-
-
-
-
 
 
 			</div>
@@ -390,8 +303,7 @@
 					<div class="card mb-3">
 						<div class="row g-0">
 							<div class="col-md-4">
-								<img id="review_img"
-									src="board/attachDownload?bno=${board.bno}"
+								<img id="review_img" src="board/attachDownload?bno=${board.bno}"
 									class="img-fluid rounded-start" alt="...">
 							</div>
 							<div class="col-md-8">
@@ -402,8 +314,8 @@
 									<br>
 									<p class="card-text">${board.bcontent}</p>
 									<p class="card-text">
-										<small class="text-muted"><fmt:formatDate value="${board.bdate}"
-														pattern="yyyy-MM-dd" /></small>
+										<small class="text-muted"><fmt:formatDate
+												value="${board.bdate}" pattern="yyyy-MM-dd" /></small>
 									</p>
 								</div>
 							</div>
