@@ -55,8 +55,7 @@
           
  
    
-      <!-- 검색 네비게이션 바 사용 -->
-      <nav class="navbar">
+        <nav class="navbar">
 			  <div class="container-fluid">
 			    <a class="navbar-brand" ></a>
 			    <form class="d-flex" role="search" >
@@ -79,31 +78,31 @@
 					    </tr>
 					  </thead>
 					  <tbody class="table-group-divider">
-			 		  <c:if test="${board.mid == member.mid}">
-					  <c:forEach var="board" items="${boradList}">
+					  <c:forEach var="board" items="${boardList}">
+			 		
 					    <tr>
-				<!-- 	      <th scope="row" class="table-active" style="border:1px solid white"></th> -->
-					      <td><a href="board/detailBoard?bno=${board.bno}">${board.btitle}</a></td>
+					  <!--     <th scope="row" class="table-active" style="border:1px solid white"></th>  -->
+					      <td ><a href="${pageContext.request.contextPath}/board/detailBoard?bno=${board.bno}">${board.btitle}</a></td>
 					      <td><fmt:formatDate value="${board.bdate}" pattern="yyyy-MM-dd" /></td>
 					      <td>${board.bhitcount}</td>
 					    </tr>
+			
 					  </c:forEach>
-					  </c:if>
 					    
-					    <tr>
+				<!-- 	    <tr>
 					      <th scope="row" class="table-active" style="border:1px solid white;"></th>
-					      <td>가족끼리 보기 좋아요</td>
-					      <td>2024-02-15</td>
-					      <td>20</td>
+					      <td>d</td>
+					      <td>s</td>
+					      <td>s</td>
 					    </tr>
 					    
 					    <tr>
 					      <th scope="row" class="table-active" style="border:1px solid white"></th>
-					      <td>배우가 멋있어요</td>
-					      <td>2024-02-20</td>
-					      <td>5</td>
+					      <td>s</td>
+					      <td>s</td>
+					      <td>s</td>
 					    </tr>
-					    
+					     -->
 					  	</tbody>
 						</table>
 					</div> 
@@ -139,6 +138,7 @@
            </div>
       </div>
     </div>
+
  
   		  
  
