@@ -92,14 +92,6 @@ public class ItemController {
 	}
 	
 	
-	@PostMapping("/writeReview")
-	public String writeReview(ReviewDto reviewDto) {
-		
-		reviewDto.setMid("admin");
-		reviewDto.setPno(20);
-		service.writeReview(reviewDto);
-
-		return "item/detail";
-	}
+	
 		
 }
