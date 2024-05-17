@@ -2,11 +2,11 @@ package com.mycompany.Tget_mini_web.controller;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.json.JSONObject;
@@ -26,8 +26,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.Tget_mini_web.dao.BoardDao;
 import com.mycompany.Tget_mini_web.dto.BoardDto;
+import com.mycompany.Tget_mini_web.dto.JoinFormValidator;
 import com.mycompany.Tget_mini_web.dto.MemberDto;
-import com.mycompany.Tget_mini_web.dto.joinFormValidator;
 import com.mycompany.Tget_mini_web.security.TLogoutSuccessHandler;
 import com.mycompany.Tget_mini_web.security.TgetUserDetails;
 import com.mycompany.Tget_mini_web.service.BoardService;
@@ -114,18 +114,32 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberservice;
+	
+	@Autowired 
+	private JoinFormValidator joinFormValidator;
+	
+	@InitBinder("memberDto")
+	public void joinFormValidator(WebDataBinder binder) {		
+	binder.setValidator(joinFormValidator);
+	}
 
 	// member 회원가입 form DB저장 후 로그인 페이지로 redirect
 	@PostMapping("/join")
-	public String joinForm(MemberDto member) {
-
+	public String joinForm(@Valid MemberDto memberdto, Errors errors) {
+		 log.info("들어오자 마자" +memberdto.toString() );
+		if(errors.hasErrors()) {
+			log.info("오류발생시"+memberdto.toString());
+			return "redirect:/";
+		}
+		log.info("validator검사 후 "+ memberdto.toString());
+		
 		// 첨부 파일이 있는지 여부 조사
-		if (member.getMprofileImg() != null && !member.getMprofileImg().isEmpty()) {// battach가 null이 아니거나 비어있지 않다면
+		if (memberdto.getMprofileImg() != null && !memberdto.getMprofileImg().isEmpty()) {// battach가 null이 아니거나 비어있지 않다면
 			// DTO 추가 설정(첨부 파일이 넘어 왔을 경우)
-			member.setMprofileImgType(member.getMprofileImg().getContentType());
-			member.setMprofileImgName(member.getMprofileImg().getOriginalFilename());
+			memberdto.setMprofileImgType(memberdto.getMprofileImg().getContentType());
+			memberdto.setMprofileImgName(memberdto.getMprofileImg().getOriginalFilename());
 			try {
-				member.setMprofileImgData(member.getMprofileImg().getBytes()); // 예외 처리 하라고 나옴
+				memberdto.setMprofileImgData(memberdto.getMprofileImg().getBytes()); // 예외 처리 하라고 나옴
 			} catch (Exception e) {
 				// 비즈니스 로직 때문에 생기는 예외는 아니라서 간단하게 처리 한다.
 			}
@@ -134,10 +148,11 @@ public class MemberController {
 			log.info("첨부파일 없음");
 		}
 		log.info("회원가입 form controller 도착");
-		memberservice.join(member);
-		log.info(member.toString());
+		memberservice.join(memberdto);
+		log.info(memberdto.toString());
 		return "redirect:/member/login";
 	}
+
 
 	// id 중복 검사
 	@PostMapping(value = "/uniqueid", produces = "application/json; charset=UTF-8")
@@ -236,7 +251,13 @@ public class MemberController {
 	// member 회원탈퇴 페이지 매핑
 	@Secured("ROLE_USER")
 	@RequestMapping("/memberInfoWithdrawal")
-	public String memberInfoWithdrawal() {
+	public String memberInfoWithdrawal(Authentication authentication, Model model) {
+		if (authentication == null || !authentication.isAuthenticated()) {
+			return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
+		}
+		TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
+		MemberDto memberDto = userDetails.getMember();
+		model.addAttribute(memberDto);
 		log.info("memberInfoWithdrawal 실행");
 		return "member/memberInfoWithdrawal";
 	}
@@ -244,32 +265,32 @@ public class MemberController {
 	// 리뷰
 	@Secured("ROLE_USER")
 	@RequestMapping("/review_ing")
-	public String review_ing(Model model, String pageNo, HttpSession session) {
+	public String review_ing(Authentication authentication, Model model,BoardDto boardDto) {
+		if (authentication == null || !authentication.isAuthenticated()) {
+			return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
+		}
+		TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
+		MemberDto memberDto = userDetails.getMember();
+		model.addAttribute(memberDto);
 		log.info("member.review_ing() 실행");
+		
+		List<BoardDto> boardList= memberservice.detail(userDetails.getMember().getMid());
+		model.addAttribute("boardList", boardList);
 
-		/*
-		 * // pageNo를 받지 못했을 경우, 세션에 저장되어 있는지 확인 if (pageNo == null) { pageNo = (String)
-		 * session.getAttribute("pageNo"); // 세션에 저장되어 있지 않을 경우"1"로 강제 세팅 if (pageNo ==
-		 * null) { pageNo = "1"; } } // 세션에 pageNo 저장 session.setAttribute("pageNo",
-		 * pageNo); // 문자열을 정수로 반환 int intPageNo = Integer.parseInt(pageNo);
-		 * 
-		 * // Pager 객체 생성 int rowsPagingTarget = boardService.getTotalRows(); PagerDto
-		 * pager = new PagerDto(10, 10, rowsPagingTarget, intPageNo);
-		 * 
-		 * // Service에서 게시물 목록 요청 List<BoardDto> boardList =
-		 * boardService.getBoardList(pager);
-		 * 
-		 * // JSP에서 사용할 수 있도록 설정 model.addAttribute("pager", pager);
-		 * model.addAttribute("boardList", boardList);
-		 */
-
+		
 		return "member/review_ing";
 	}
 
 	// 구매내역
 	@Secured("ROLE_USER")
 	@RequestMapping("/purchase")
-	public String purchase() {
+	public String purchase(Authentication authentication, Model model) {
+		if (authentication == null || !authentication.isAuthenticated()) {
+			return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
+		}
+		TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
+		MemberDto memberDto = userDetails.getMember();
+		model.addAttribute(memberDto);
 		log.info("member.purchase() 실행");
 		return "member/purchase";
 	}

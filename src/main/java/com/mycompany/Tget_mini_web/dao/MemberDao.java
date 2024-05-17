@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.mycompany.Tget_mini_web.dto.BoardDto;
 import com.mycompany.Tget_mini_web.dto.MemberDto;
 import com.mycompany.Tget_mini_web.dto.PagerDto;
 
@@ -29,6 +30,8 @@ public interface MemberDao {
 	public int updateMemail(MemberDto memberDto);
 	public int updateMphone(MemberDto memberDto);
 	public int updateMprofileImg(MemberDto memberDto);
-
+	public List<BoardDto> selectBoard(String mid);
+	
+	
 
 }

@@ -89,7 +89,15 @@
         <div class="pt-3 pb-3 row align-items-stretch" style="width: 45%">
           <div class="col-3 mt-1">
             <div style="background-color: white; border-radius: 10px;" class="pt-3 pb-3">
-              <h4 class="ms-3"><strong>홍길동</strong>님의 <br />마이페이지</h4>
+            <div>
+           	 <c:if test="${empty memberDto.mprofileImgData}">
+               <img src="${pageContext.request.contextPath}/resources/image/project_image/circle_user.svg" width="150" style="margin-bottom: 20px"/>
+            </c:if>
+            <c:if test="${not empty memberDto.mprofileImgData}">
+               <img src="imgProfileDownload?mid=${memberDto.mid}" width="150" style="border-radius: 70%; margin-bottom: 20px; border:3px solid black;" />
+            </c:if>
+           </div>
+              <h4 class="ms-3"><strong>${memberDto.mname}</strong>님의 <br />마이페이지</h4>
               <hr />
               <%@ include file="/WEB-INF/views/common/myPageList.jsp"%>
             </div>
