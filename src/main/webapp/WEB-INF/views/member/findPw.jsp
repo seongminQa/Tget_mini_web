@@ -83,7 +83,7 @@
 			   var mpasswordResult = mpasswordPattern.test($("#mpassword").val());
 			   
 			   if($("#mpassword").val() === ""){
-				   $("#spanPWL").addClass("text-danger").html("비밀번호는 필수 값입니다.");
+				   $("#spanPWL").addClass("text-danger").html("비밀번호를 입력해주세요.");
 				   totalResult = false;
 			   }else{
 			       // 빈문자가 아니면 유효성 검사에 따른 결과값 출력
@@ -93,7 +93,7 @@
 			           }
 			   }
 
-			    //2-1)pwcheck 검사 -------------------------------------------------
+			    //)pwcheck 검사 -------------------------------------------------
 			   if($("#mpassword").val()===$("#okpwcheck").val()) {
 				   
 			   } else {   
@@ -107,10 +107,46 @@
 				   }
 				}
 
-		
-		
-		
-		
+/*----------------------------비밀번호 보이게하는것--------------------------------------------  */
+			$(function() { // html 문서 로드 이후 로드하는 스크립트
+   			// 문서보다 먼저 로드 되면 해당 클래스를 인식할 수 없기에 문서로드 제이쿼리 안에 작성한다.
+			
+			   // 버튼을 누르면 비밀번호확인 보여주는 함수 실행
+			   $(".seepw").click(function() {
+			      toggleView();
+			   });
+			
+			   // 객체 찾아서 변수에 담기
+			   const seepwType = document.querySelector(".seepwClazz");
+			   const seeEye = document.querySelector(".seepw");
+			
+			   // input 타입 변환하는 함수
+			   function toggleView() {
+			      if (seepwType.type === "password") {
+			    	  seepwType.type = "text";
+			      } else {
+			    	  seepwType.type = "password";
+			      }
+			   }
+			});
+			
+			$(function() {
+			   // 버튼을 누르면 비밀번호확인 보여주는 함수 실행
+			   $(".reseeEye").click(function() {
+			      toggleView();
+			   });
+			
+			   const seepwType  = document.querySelector(".reseeClazz");
+			   const seepw = document.querySelector(".reseeEye");
+			
+			   function toggleView() {
+			      if (seepwType.type === "password") {
+			    	  seepwType.type = "text";
+			      } else {
+			    	  seepwType.type = "password";
+			      }
+			   }
+			});
 		</script>
 	</head>
 	<body>
@@ -172,30 +208,31 @@
 								<input type="hidden" name="mid" value="${mid}"> 
 								<div class="div_form row">
 									<label for="pw" class="col-3"><strong>새 비밀번호</strong></label> <input
-										class="col-7 mb-3" type="password" id="mpassword" name="mpassword" oninput="PWCheck()"
+										class="seepwClazz col-7 mb-3" type="password" id="mpassword" name="mpassword" oninput="PWCheck()"
 										placeholder="8~12자 영문, 숫자" />
-									
 								
-									<div class="col-2">
+									<div class="seepw col-2">
+									
 										<button type="button"
 											style="border: none; background-color: transparent">
 											<img src="/Tget_mini_web/resources/image/project_image/eye.svg"
-												style="width: 30px" />
+												style="width: 30px"/>
 										</button>
+					
 									</div>
 										<span id="spanPWL" style="margin-bottom: 20px"></span>
+							
 									
 								</div>
 								<div class="div_form row">
-									<label for="pwcheck" class="col-3"><strong>새 비밀번호
-											확인</strong></label> <input class="col-7 mb-3" type="password" id="okpwcheck" oninput="OkpwCheck()"
-										name="pwcheck" placeholder="8~12자 영문, 숫자" />
+									<label for="pwcheck" class="col-3"><strong>새 비밀번호확인</strong></label> 
+									<input class="reseeClazz  col-7 mb-3" type="password" id="okpwcheck" oninput="OkpwCheck()"name="pwcheck" placeholder="8~12자 영문, 숫자" />
 									<div class="col-2">
-										<button type="button"
+										<div class="reseeEye"><button type="button"
 											style="border: none; background-color: transparent">
 											<img src="/Tget_mini_web/resources/image/project_image/eye.svg"
 												style="width: 30px" />
-										</button>
+										</button></div>
 									</div>
 										<span id="spanokPwCheck" style="margin-bottom: 20px"></span>
 								</div>
