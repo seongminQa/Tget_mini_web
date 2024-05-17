@@ -57,88 +57,18 @@
 		/* day.max = ${productDto.pdateend}; */
 	}
 </script>
-
 <script type="text/javascript">
-	var button = document.getElementById("tab01")
-	button.addEventListener('click', function(event) {
-		var move_el = document.getElementById("p1"); //옮길 요소
-		var div = document.getElementById("tab01"); // 옮기고자하는 부모노드
-
-		div.appendChild(move_el);
-
-	});
+	var name = $('#userid').val();
+	if (name !== '') {
+		$('#insertReviewbody').show();
+	} else {
+		$('#insertReviewbody').hide();
+	}
 </script>
+
 </head>
 <body>
-	<header class="container" style="border-bottom: 5px solid #D95B96">
-		<div class="row align-items-center">
-			<div class="col d-flex justify-content-start">
-				<a class="navbar-brand" href="#"><img
-					src="/Tget_mini_web/resources/image/project_image/t_get_logo.svg"
-					style="height: 100px;" /></a>
-			</div>
-			<div class="col d-flex justify-content-end">
-				<ul class="nav ustify-content-center">
-					<li class="nav-item"><a class="nav-link" href="#"
-						style="color: black;"> <img
-							src="/Tget_mini_web/resources/image/project_image/login.svg"
-							style="height: 20px; width: 15px;" /> <span
-							style="font-size: small; display: block;">로그인</span>
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"
-						style="color: black;"> <img
-							src="/Tget_mini_web/resources/image/project_image/sign-up.svg"
-							style="height: 20px; width: 15px;" /> <span
-							style="font-size: small; display: block;">회원 가입</span>
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"
-						style="color: black;"> <img
-							src="/Tget_mini_web/resources/image/project_image/user.svg"
-							style="height: 20px; width: 15px;" /> <span
-							style="font-size: small; display: block;">마이페이지</span>
-					</a></li>
-				</ul>
-			</div>
-		</div>
-	</header>
-	<!-- navar -->
-	<nav class="container"
-		style="border-bottom: 5px solid #D95B96; height: 60px;">
-		<!-- 토글 어느정도 줄였을 때 사용할 것인가? -->
-		<!-- 스크롤을 내렸을 때 처리해주기 -->
-		<!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-              <span class="navbar-toggler-icon"></span>
-            </button> -->
-		<div class="row d-flex align-items-start">
-			<div class="row justify-content-between">
-				<div class="col mt-2">
-					<ul class="nav">
-						<li class="nav-item"><a class="menu nav-link"
-							style="color: grey;">연극</a></li>
-						<li class="nav-item"><a class="menu nav-link"
-							style="color: grey;">뮤지컬</a></li>
-						<li class="nav-item"><a class="menu nav-link"
-							style="color: grey;">콘서트</a></li>
-						<li class="nav-item"><a class="menu nav-link"
-							style="color: grey;">공연장</a></li>
-						<li class="nav-item"><a class="menu nav-link"
-							style="color: grey;">예매</a></li>
-						<li class="nav-item"><a class="menu nav-link"
-							style="color: grey;"></a></li>
-					</ul>
-				</div>
-				<div class="col mt-2">
-					<div class="d-flex">
-						<input class="form-control" type="text" placeholder="Search"
-							style="width: 300px; margin-left: 300px">
-						<button class="btn"
-							style="background-color: #D95B96; color: white" type="button">Search</button>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</nav>
+	<%@include file="/WEB-INF/views/common/header.jsp"%>
 
 
 	<div id="detail_container" class="container" style="heigth: 100%;">
@@ -178,176 +108,49 @@
 						<div class="sticky_nav" style="z-index: 2">
 							<ul class="tabnav">
 								<li><a id="tab01" href="#tab01">공연정보</a></li>
-								<li><a href="#tab02">캐스팅정보</a></li>
-								<li><a href="#tab03">관람후기</a></li>
-								<li><a href="#tab04">판매정보</a></li>
+								<li><a href="#tab02">관람후기</a></li>
+								<li><a href="#tab03">판매정보</a></li>
 							</ul>
 						</div>
 
 						<div class="tabcontent" style="width: 100%; height: 100%">
 							<div id="tab01">
 								<div id="tab01-01">
-									<h3>공연 시간 정보</h3>
-									<p>예매 가능한 시간: 관람 3시간 전까지</p>
-									<p>화~금 오후 8시 / 토 오후 3시,7시 / 일 오후 2시,6시 / 월 공연없음</p>
-									<p>*6/1(토) 오후 7시 (1회)</p>
-									<h3 class="my-5">공지사항</h3>
-									<img alt=""
-										src="/Tget_mini_web/resources/image/detail_photos/공지사항.jpg">
-									<h3 class="my-5">할인정보</h3>
-									<img alt=""
-										src="/Tget_mini_web/resources/image/detail_photos/할인정보.jpg">
-									<h3 class="my-5">공연상세</h3>
-									<img alt=""
-										src="/Tget_mini_web/resources/image/detail_photos/공연상세.jpg">
+									<img style="width: 100%;"
+										src="attachProductContent?pno=${productDto.pno}" />
 								</div>
 							</div>
+
 							<div id="tab02">
-								<div class="d-flex" id="casting">
-									<div id="profile">
-										<div id="actor">
-											<img id="actor_img" alt=""
-												src="/Tget_mini_web/resources/image/casting/엘레나_박현미.jpg">
-										</div>
-										<div id="name">
-											<strong>엘레나</strong>
-											<p style="color: #808080">박현미</p>
-										</div>
 
-									</div>
-									<div id="profile">
-										<div id="actor">
-											<img id="actor_img" alt=""
-												src="/Tget_mini_web/resources/image/casting/엘레나_강정임.gif">
-										</div>
-										<div id="name">
-											<strong>엘레나</strong>
-											<p style="color: #808080">강정임</p>
-										</div>
-
-									</div>
-									<div id="profile">
-										<div id="actor">
-											<img id="actor_img" alt=""
-												src="/Tget_mini_web/resources/image/casting/발로쟈_정대성.gif">
-										</div>
-										<div id="name">
-											<strong>발로쟈</strong>
-											<p style="color: #808080">정대성</p>
-										</div>
-
-									</div>
-									<div id="profile">
-										<div id="actor">
-											<img id="actor_img" alt=""
-												src="/Tget_mini_web/resources/image/casting/발로쟈_이봉준.gif">
-										</div>
-										<div id="name">
-											<strong>발로쟈</strong>
-											<p style="color: #808080">이봉준</p>
-										</div>
-
-									</div>
-									<div id="profile">
-										<div id="actor">
-											<img id="actor_img" alt=""
-												src="/Tget_mini_web/resources/image/casting/삐샤_서우진.gif">
-										</div>
-										<div id="name">
-											<strong>빠샤</strong>
-											<p style="color: #808080">서우진</p>
-										</div>
-
-									</div>
-									<div id="profile">
-										<div id="actor">
-											<img id="actor_img" alt=""
-												src="/Tget_mini_web/resources/image/casting/삐샤_양보현.gif">
-										</div>
-										<div id="name">
-											<strong>빠샤</strong>
-											<p style="color: #808080">양보현</p>
-										</div>
-
-									</div>
-								</div>
-								<!-- 더보기 -->
-								<div class="d-flex" id="casting">
-									<div id="profile">
-										<div id="actor">
-											<img id="actor_img" alt=""
-												src="/Tget_mini_web/resources/image/casting/랄랴_오유민.gif">
-										</div>
-										<div id="name">
-											<strong>랼랴</strong>
-											<p style="color: #808080">오유민</p>
-										</div>
-									</div>
-									<div id="profile">
-										<div id="actor">
-											<img id="actor_img" alt=""
-												src="/Tget_mini_web/resources/image/casting/랄랴_조은정.gif">
-										</div>
-										<div id="name">
-											<strong>랼랴</strong>
-											<p style="color: #808080">조은정</p>
-										</div>
-
-									</div>
-									<div id="profile">
-										<div id="actor">
-											<img id="actor_img" alt=""
-												src="/Tget_mini_web/resources/image/casting/비쨔_장두환.gif">
-										</div>
-										<div id="name">
-											<strong>비쨔</strong>
-											<p style="color: #808080">장두환</p>
-										</div>
-
-									</div>
-									<div id="profile">
-										<div id="actor">
-											<img id="actor_img" alt=""
-												src="/Tget_mini_web/resources/image/casting/비쨔_나준영.gif">
-										</div>
-										<div id="name">
-											<strong>비쨔</strong>
-											<p style="color: #808080">나준영</p>
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<div id="tab03">
-								<div class="d-flex" style="justify-content: space-between;">
-									<div class="d-flex" style="align-items: center;">
-										<div>총 4 개의 관람 후기가 등록 되었습니다.</div>
-									</div>
-									<div class="d-flex">
-										<div class="search"></div>
-										<a id="srch_btn" class="btn"
-											href="${pageContext.request.contextPath}/item/writeReviewForm">관람후기
-											작성</a>
-									</div>
-								</div>
 								<hr />
 								<!-- 리뷰 작성 -->
 								<div class="card" id="comments">
 									<div class="card-body">
-										<form>
-											<div class="form-group">
-												<label>댓글 작성</label>
-												<textarea class="form-control" id="comment-content" rows="3"></textarea>
-											</div>
-											<input type="hidden" id="comment-author" value="익명">
-											<button type="button" class="btn btn-primary"
-												id="comment-create-btn">등록</button>
-										</form>
+										<div class="form-group">
+											<form action="writeReview" method="post">
+												<input type="hidden" name="pno" value="${productDto.pno}"
+													readonly="readonly" />
+												<textarea class="form-control" name="rcontent" id="rcontent"
+													rows="3"></textarea>
+												<button type="submit" class="btn btn-dark" id="reviewbtn">등록</button>
+											</form>
+										</div>
 									</div>
 								</div>
 								<!-- 리뷰 작성 끝 -->
+								<hr />
+								<!-- 리뷰 목록 -->
+								<div>
+									<c:forEach var="review" items="${reviewList}">
+										<div>
+											<p>${review.rcontent}</p>
+										</div>
+									</c:forEach>
+								</div>
+								<!-- 리뷰 목록 끝-->
 							</div>
-							<div id="tab04">
+							<div id="tab03">
 								<div>
 									<div style="margin-bottom: 20px;">
 										<h4>
