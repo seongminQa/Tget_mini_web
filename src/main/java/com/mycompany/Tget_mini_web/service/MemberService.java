@@ -2,16 +2,16 @@ package com.mycompany.Tget_mini_web.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.Tget_mini_web.dao.MemberDao;
+import com.mycompany.Tget_mini_web.dto.BoardDto;
 import com.mycompany.Tget_mini_web.dto.MemberDto;
 import com.mycompany.Tget_mini_web.dto.PagerDto;
 
@@ -184,6 +184,11 @@ public class MemberService {
 		memberDao.deleteByMid(auMemberDto.getMid());
 		
 	}
+	public List<BoardDto> detail(String mid) {
+		List<BoardDto> saved= memberDao.selectBoard(mid);
+		return saved;
+	}
+
 
 
 }
