@@ -189,7 +189,12 @@
 		where mid = #{mid}
 	</update>
 	<!-- 게시글 확인하기 -->
-	
+	<select id="selectBoard" parameterType="String" resultType="BoardDto">
+	select bno,btitle,bcontent,mid,bdate,bhitcount
+	from board 
+	where mid=#{mid}	
+	</select>
+
 	
 	
 </mapper>
