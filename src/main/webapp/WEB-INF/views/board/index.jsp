@@ -167,31 +167,18 @@
 		</div>
 		<!-- 베스트 글 시작-->
 		<div id="best_board" class="d-flex" style="background-color: #F2F2F2;">
-			<c:forEach var="board" items="${boardList}" begin="0" end="3"
-				step="1">
+			<c:forEach var="board" items="${boardList}" begin="0" end="3">
 				<div id="board">
 					<!-- 게시글 이미지 -->
 					<div>
-						<%-- 	<c:choose>
-							<c:when test="${empty board.bimg}">
-								<img id="board_img" alt=""
-									src="/Tget_mini_web/resources/image/board/no_img.png">
-							</c:when>
-							<c:when test="${not empty board.bimg}">
-								
-							</c:when>
-						</c:choose> --%>
-						<%-- <c:if test="${empty board.bimg}">
+						<c:if test="${not empty board.bimgoname}">
+							<img id="board_img" alt=""
+								src="board/attachDownload?bno=${board.bno}">
+						</c:if>
+						<c:if test="${empty board.bimgoname}">
 							<img id="board_img" alt=""
 								src="/Tget_mini_web/resources/image/board/no_img.png">
 						</c:if>
-						<c:if test="${not empty board.bimg}">
-							<img id="board_img" alt=""
-								src="board/attachDownload?bno=${board.bno}">
-						</c:if>--%>
-						<img id="board_img" alt=""
-							src="board/attachDownload?bno=${board.bno}"> 
-						
 					</div>
 					<!-- 게시글 타이틀, 작성자, 글-->
 					<div id="board_2">

@@ -129,7 +129,8 @@
 						<div class="row row-cols-md-1  row-cols-lg-5 g-5">
 							<c:forEach var="product" items="${productList}" begin="0" end="4">
 								<div>
-									<a href="${pageContext.request.contextPath}/product/detail?pno=${product.pno}"><img
+									<a
+										href="${pageContext.request.contextPath}/product/detail?pno=${product.pno}"><img
 										id="poster_img" alt=""
 										src="product/attachProduct?pno=${product.pno}"></a>
 
@@ -154,7 +155,8 @@
 						<div class="row row-cols-md-1  row-cols-lg-5 g-5">
 							<c:forEach var="product" items="${productList}" begin="0" end="4">
 								<div>
-									<a href="${pageContext.request.contextPath}/product/detail?pno=${product.pno}"><img
+									<a
+										href="${pageContext.request.contextPath}/product/detail?pno=${product.pno}"><img
 										id="poster_img" alt=""
 										src="product/attachProduct?pno=${product.pno}"></a>
 
@@ -174,11 +176,11 @@
 
 							</c:forEach>
 
-							
-							
-							
-							
-							
+
+
+
+
+
 						</div>
 					</div>
 					<button class="carousel-control-prev" type="button"
@@ -303,8 +305,17 @@
 					<div class="card mb-3">
 						<div class="row g-0">
 							<div class="col-md-4">
-								<img id="review_img" src="board/attachDownload?bno=${board.bno}"
-									class="img-fluid rounded-start" alt="...">
+								<c:if test="${not empty board.bimgoname}">
+									<img id="review_img"
+										src="board/attachDownload?bno=${board.bno}"
+										class="img-fluid rounded-start" alt="...">
+								</c:if>
+								<c:if test="${empty board.bimgoname}">
+									<img id="review_img"
+										src="/Tget_mini_web/resources/image/board/no_img2.png"
+										class="img-fluid rounded-start" alt="...">
+								</c:if>
+
 							</div>
 							<div class="col-md-8">
 								<div class="card-body">
