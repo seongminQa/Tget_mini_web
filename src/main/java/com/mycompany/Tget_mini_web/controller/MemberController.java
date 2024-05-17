@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,10 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mycompany.Tget_mini_web.dao.BoardDao;
 import com.mycompany.Tget_mini_web.dto.BoardDto;
 import com.mycompany.Tget_mini_web.dto.MemberDto;
+import com.mycompany.Tget_mini_web.dto.joinFormValidator;
 import com.mycompany.Tget_mini_web.security.TLogoutSuccessHandler;
 import com.mycompany.Tget_mini_web.security.TgetUserDetails;
 import com.mycompany.Tget_mini_web.service.BoardService;
@@ -53,11 +58,29 @@ public class MemberController {
 	}
 
 	// member 로그인 페이지 매핑
-	@RequestMapping("/login")
-	public String login() {
+	@GetMapping("/login")
+	public String login(Model model) {
+		model.addAttribute("member");
 		log.info("member.login() 실행");
+
 		return "member/loginForm";
 	}
+/*
+	@InitBinder("MemberDto")
+	public void joinFormValidator(WebDataBinder binder) {
+		binder.setValidator(new joinFormValidator());
+	}
+
+	@RequestMapping("/log")
+	public String log(@Valid MemberDto memberDto, Errors errors, Model model) {
+		log.info("실행");
+
+		if (errors.hasErrors()) {
+			model.addAttribute("member");
+			return "member/loginForm";
+		}
+		return "redirect:/";
+	}*/
 
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/admin/page")
@@ -188,17 +211,16 @@ public class MemberController {
 		return "member/memberInfoModify";
 	}
 
-
 	// 게시물 첨부파일 보기 메소드
 	@GetMapping("/imgProfileDownload")
 	public void imgProfileDownload(String mid, HttpServletResponse response, Model model) throws Exception {
 		log.info("실행");
 		// 다운로드할 데이터를 준비
 		MemberDto memberDto = memberservice.getMemberImg(mid);
-		//log.info(memberDto.toString());
+		// log.info(memberDto.toString());
 		byte[] data = memberDto.getMprofileImgData();
-		//model.addAttribute("data", data);
-		//log.info(data.toString());
+		// model.addAttribute("data", data);
+		// log.info(data.toString());
 		// 응답 헤더 구성
 		response.setContentType(memberDto.getMprofileImgType());
 		String fileName = new String(memberDto.getMprofileImgName().getBytes("UTF-8"), "ISO-8859-1");
@@ -292,7 +314,7 @@ public class MemberController {
 			return "member/lost_pw";
 		}
 		model.addAttribute("mpassword", memberservice.findPw(memberDto));
-		 model.addAttribute("mid", memberDto.getMid()); 
+		model.addAttribute("mid", memberDto.getMid());
 		return "member/findPw";
 	}
 
@@ -303,158 +325,157 @@ public class MemberController {
 		log.info("Mid:" + memberDto.getMid());
 		memberservice.ChangePw(memberDto);
 		return "redirect:/member/login";
-		
-		
+
 	}
 
-	 // 회원 비밀번호 수정
-    @PostMapping("/pwModify")
-    public String pwModify(Authentication authentication, MemberDto memberDto) {
-    	// 이 메소드가 실행 될 때는 이미 바뀐 비밀번호가 DTO에 담겨서 온다.
-    	// 인증정보가 없다면 
-    	if (authentication == null || !authentication.isAuthenticated()) {
-            return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
-        }
-    	// 로그인 할 때 받아온 사용자 정보 사용
-       TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
-       // 인증된 사용자의 아이디를 dto에 넣기
-       memberDto.setMid(userDetails.getMember().getMid());
-    	memberservice.updateMpassword(memberDto);
-    	return "redirect:/member/memberInfoModify";
-    }
-    
-    // 회원 닉네임 수정
-    @PostMapping("/nicknameModify")
-    public String nicknameModify(Authentication authentication, MemberDto memberDto) {
-    	// 이 메소드가 실행 될 때는 이미 바뀐 비밀번호가 DTO에 담겨서 온다.
-    	// 인증정보가 없다면 
-    	if (authentication == null || !authentication.isAuthenticated()) {
-            return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
-        }
-    	// 로그인 할 때 받아온 사용자 정보 사용
-        TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
-        // 인증된 사용자의 아이디를 dto에 넣기
-        MemberDto auMemberDto = userDetails.getMember();
-        memberDto.setMid(auMemberDto.getMid());
-       
-        // 닉네임 변경하는 service실행
-    	memberservice.updateMnickname(memberDto);
-    	
-    	// 인증된 사용자의 정보에서 닉네임을 변경된 닉네임으로 갱신하기
-    	auMemberDto.setMnickname(memberDto.getMnickname());
-    	
-    	return "redirect:/member/memberInfoModify";
-    }
-    
-    // 회원 이메일 수정
-    @PostMapping("/emailModify")
-    public String emailModify(Authentication authentication, MemberDto memberDto) {
-    	// 이 메소드가 실행 될 때는 이미 바뀐 이메일이 DTO에 담겨서 온다.
-    	// 인증정보가 없다면 
-    	log.info(memberDto.toString());
-    	if (authentication == null || !authentication.isAuthenticated()) {
-            return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
-        }
-    	// 로그인 할 때 받아온 사용자 정보 사용
-        TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
-        // 인증된 사용자의 아이디를 dto에 넣기
-        MemberDto auMemberDto = userDetails.getMember();
-        memberDto.setMid(auMemberDto.getMid());
-       
-        // 닉네임 변경하는 service실행
-    	memberservice.updateMemail(memberDto);
-    	
-    	// 인증된 사용자의 정보에서 닉네임을 변경된 닉네임으로 갱신하기
-    	auMemberDto.setMemail(memberDto.getMemail());
-    	
-    	return "redirect:/member/memberInfoModify";
-    }
-    
-    // 회원 이메일 수정
-    @PostMapping("/phoneModify")
-    public String phoneModify(Authentication authentication, MemberDto memberDto) {
-    	// 이 메소드가 실행 될 때는 이미 바뀐 이메일이 DTO에 담겨서 온다.
-    	// 인증정보가 없다면 
-    	log.info(memberDto.toString());
-    	if (authentication == null || !authentication.isAuthenticated()) {
-            return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
-        }
-    	// 로그인 할 때 받아온 사용자 정보 사용
-        TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
-        // 인증된 사용자의 아이디를 dto에 넣기
-        MemberDto auMemberDto = userDetails.getMember();
-        memberDto.setMid(auMemberDto.getMid());
-       
-        // 닉네임 변경하는 service실행
-    	memberservice.updateMphone(memberDto);
-    	
-    	// 인증된 사용자의 정보에서 닉네임을 변경된 닉네임으로 갱신하기
-    	auMemberDto.setMphone(memberDto.getMphone());
-    	
-    	return "redirect:/member/memberInfoModify";
-    }
-    
-    // 회원 프로필 이미지 수정
-    @PostMapping("/mprofileImgModify")
-    public String mprofileImgModify(Authentication authentication, MemberDto memberDto) {
-    	// 이 메소드가 실행 될 때는 이미 바뀐 프로필 사진이 DTO에 담겨서 온다.
-    	// 인증정보가 없다면 
-    	//log.info(memberDto.toString());
-    	if (authentication == null || !authentication.isAuthenticated()) {
-            return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
-        }
-    	// 로그인 할 때 받아온 사용자 정보 사용
-        TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
-        // 인증된 사용자의 아이디를 dto에 넣기
-        MemberDto auMemberDto = userDetails.getMember();
-        memberDto.setMid(auMemberDto.getMid());
-        
-        // 멀티파트파일을 이름, 데이터(바이트배열), 타입으로 분해하기
-        try {
-        	// 바이트 배열을  dto에 담기
+	// 회원 비밀번호 수정
+	@PostMapping("/pwModify")
+	public String pwModify(Authentication authentication, MemberDto memberDto) {
+		// 이 메소드가 실행 될 때는 이미 바뀐 비밀번호가 DTO에 담겨서 온다.
+		// 인증정보가 없다면
+		if (authentication == null || !authentication.isAuthenticated()) {
+			return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
+		}
+		// 로그인 할 때 받아온 사용자 정보 사용
+		TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
+		// 인증된 사용자의 아이디를 dto에 넣기
+		memberDto.setMid(userDetails.getMember().getMid());
+		memberservice.updateMpassword(memberDto);
+		return "redirect:/member/memberInfoModify";
+	}
+
+	// 회원 닉네임 수정
+	@PostMapping("/nicknameModify")
+	public String nicknameModify(Authentication authentication, MemberDto memberDto) {
+		// 이 메소드가 실행 될 때는 이미 바뀐 비밀번호가 DTO에 담겨서 온다.
+		// 인증정보가 없다면
+		if (authentication == null || !authentication.isAuthenticated()) {
+			return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
+		}
+		// 로그인 할 때 받아온 사용자 정보 사용
+		TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
+		// 인증된 사용자의 아이디를 dto에 넣기
+		MemberDto auMemberDto = userDetails.getMember();
+		memberDto.setMid(auMemberDto.getMid());
+
+		// 닉네임 변경하는 service실행
+		memberservice.updateMnickname(memberDto);
+
+		// 인증된 사용자의 정보에서 닉네임을 변경된 닉네임으로 갱신하기
+		auMemberDto.setMnickname(memberDto.getMnickname());
+
+		return "redirect:/member/memberInfoModify";
+	}
+
+	// 회원 이메일 수정
+	@PostMapping("/emailModify")
+	public String emailModify(Authentication authentication, MemberDto memberDto) {
+		// 이 메소드가 실행 될 때는 이미 바뀐 이메일이 DTO에 담겨서 온다.
+		// 인증정보가 없다면
+		log.info(memberDto.toString());
+		if (authentication == null || !authentication.isAuthenticated()) {
+			return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
+		}
+		// 로그인 할 때 받아온 사용자 정보 사용
+		TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
+		// 인증된 사용자의 아이디를 dto에 넣기
+		MemberDto auMemberDto = userDetails.getMember();
+		memberDto.setMid(auMemberDto.getMid());
+
+		// 닉네임 변경하는 service실행
+		memberservice.updateMemail(memberDto);
+
+		// 인증된 사용자의 정보에서 닉네임을 변경된 닉네임으로 갱신하기
+		auMemberDto.setMemail(memberDto.getMemail());
+
+		return "redirect:/member/memberInfoModify";
+	}
+
+	// 회원 이메일 수정
+	@PostMapping("/phoneModify")
+	public String phoneModify(Authentication authentication, MemberDto memberDto) {
+		// 이 메소드가 실행 될 때는 이미 바뀐 이메일이 DTO에 담겨서 온다.
+		// 인증정보가 없다면
+		log.info(memberDto.toString());
+		if (authentication == null || !authentication.isAuthenticated()) {
+			return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
+		}
+		// 로그인 할 때 받아온 사용자 정보 사용
+		TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
+		// 인증된 사용자의 아이디를 dto에 넣기
+		MemberDto auMemberDto = userDetails.getMember();
+		memberDto.setMid(auMemberDto.getMid());
+
+		// 닉네임 변경하는 service실행
+		memberservice.updateMphone(memberDto);
+
+		// 인증된 사용자의 정보에서 닉네임을 변경된 닉네임으로 갱신하기
+		auMemberDto.setMphone(memberDto.getMphone());
+
+		return "redirect:/member/memberInfoModify";
+	}
+
+	// 회원 프로필 이미지 수정
+	@PostMapping("/mprofileImgModify")
+	public String mprofileImgModify(Authentication authentication, MemberDto memberDto) {
+		// 이 메소드가 실행 될 때는 이미 바뀐 프로필 사진이 DTO에 담겨서 온다.
+		// 인증정보가 없다면
+		// log.info(memberDto.toString());
+		if (authentication == null || !authentication.isAuthenticated()) {
+			return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
+		}
+		// 로그인 할 때 받아온 사용자 정보 사용
+		TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
+		// 인증된 사용자의 아이디를 dto에 넣기
+		MemberDto auMemberDto = userDetails.getMember();
+		memberDto.setMid(auMemberDto.getMid());
+
+		// 멀티파트파일을 이름, 데이터(바이트배열), 타입으로 분해하기
+		try {
+			// 바이트 배열을 dto에 담기
 			memberDto.setMprofileImgData(memberDto.getMprofileImg().getBytes());
 		} catch (IOException e) {
 			// 비즈니스 로직 때문에 생기는 예외는 아니라서 간단하게 처리 한다.
 		}
-        
-        // 사진 이름을 dto에 담기
-        memberDto.setMprofileImgName(memberDto.getMprofileImg().getOriginalFilename());
-        
-    	// 사진 타입을 dto에 담기
-        memberDto.setMprofileImgType(memberDto.getMprofileImg().getContentType());
-        
-     // 닉네임 변경하는 service실행
-    	memberservice.updateMprofileImg(memberDto);
-    	
-    	// 인증된 사용자의 정보에서 닉네임을 변경된 닉네임으로 갱신하기
-    	auMemberDto.setMprofileImgName(memberDto.getMprofileImgName());
-    	auMemberDto.setMprofileImgData(memberDto.getMprofileImgData());
-    	auMemberDto.setMprofileImgType(memberDto.getMprofileImgType());
-    	return "redirect:/member/memberInfoModify";
-    }
-    
-    // 회원 탈퇴
-    @Autowired
-    private TLogoutSuccessHandler logout;
-    
-    @PostMapping("/memberWithdrawal")
-    public void memberWithdrawal(HttpServletRequest request, HttpServletResponse response, Authentication authentication, boolean withdrawal) {
-    	
-    	// 로그인 할 때 받아온 사용자 정보 사용
-        TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
-        // 인증된 사용자의 아이디를 dto에 넣기
-        MemberDto auMemberDto = userDetails.getMember();
-        memberservice.deletemember(auMemberDto);
-        
-        // 로그아웃 하기
-        try {
+
+		// 사진 이름을 dto에 담기
+		memberDto.setMprofileImgName(memberDto.getMprofileImg().getOriginalFilename());
+
+		// 사진 타입을 dto에 담기
+		memberDto.setMprofileImgType(memberDto.getMprofileImg().getContentType());
+
+		// 닉네임 변경하는 service실행
+		memberservice.updateMprofileImg(memberDto);
+
+		// 인증된 사용자의 정보에서 닉네임을 변경된 닉네임으로 갱신하기
+		auMemberDto.setMprofileImgName(memberDto.getMprofileImgName());
+		auMemberDto.setMprofileImgData(memberDto.getMprofileImgData());
+		auMemberDto.setMprofileImgType(memberDto.getMprofileImgType());
+		return "redirect:/member/memberInfoModify";
+	}
+
+	// 회원 탈퇴
+	@Autowired
+	private TLogoutSuccessHandler logout;
+
+	@PostMapping("/memberWithdrawal")
+	public void memberWithdrawal(HttpServletRequest request, HttpServletResponse response,
+			Authentication authentication, boolean withdrawal) {
+
+		// 로그인 할 때 받아온 사용자 정보 사용
+		TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
+		// 인증된 사용자의 아이디를 dto에 넣기
+		MemberDto auMemberDto = userDetails.getMember();
+		memberservice.deletemember(auMemberDto);
+
+		// 로그아웃 하기
+		try {
 			logout.onLogoutSuccess(request, response, authentication);
 			// 로그아웃 자체에 리턴 페이지가 있어서 void메소드로 사용
 		} catch (IOException | ServletException e) {
-			
+
 		}
-        
-    	
-    }
+
+	}
 
 }
