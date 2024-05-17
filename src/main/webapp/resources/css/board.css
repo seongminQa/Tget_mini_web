@@ -304,6 +304,14 @@ table {
   width: 1px;
   height: 1px;
 }
-
-
-
+#form_box{
+	
+	width: 900px;
+	margin:auto;
+	
+}
+#form_title{
+	text-align:center;
+	width: 900px;
+	margin:auto;
+}

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.Tget_mini_web.dto.BoardDto;
+import com.mycompany.Tget_mini_web.dto.MemberDto;
 import com.mycompany.Tget_mini_web.dto.PagerDto;
+import com.mycompany.Tget_mini_web.security.TgetUserDetails;
 import com.mycompany.Tget_mini_web.service.BoardService;
-
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,7 +49,13 @@ public class BoardController {
 	}
 
 	@PostMapping("/writeBoard")
-	public String writeBoard(BoardDto boardDto) {
+	public String writeBoard(BoardDto boardDto, Authentication authentication) {
+		if (authentication == null || !authentication.isAuthenticated()) {
+			return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
+		}
+		TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
+		MemberDto memberDto = userDetails.getMember();
+		String mid = memberDto.getMid();
 		if (boardDto.getBattach() != null && !boardDto.getBattach().isEmpty()) {
 			// DTO 추가 설정
 			boardDto.setBimgoname(boardDto.getBattach().getOriginalFilename());
@@ -57,6 +65,7 @@ public class BoardController {
 			} catch (Exception e) {
 			}
 		}
+		boardDto.setMid(mid);
 		service.writeBoard(boardDto);
 
 		return "redirect:/board";
@@ -138,9 +147,10 @@ public class BoardController {
 		return "redirect:/board/detailBoard?bno=" + boardDto.getBno();
 
 	}
+
 	@GetMapping("/deleteBoard")
-	   public String deleteBoard(int bno) {
-		   service.removeBoard(bno);
-		   return"redirect:/board";
-	   }
+	public String deleteBoard(int bno) {
+		service.removeBoard(bno);
+		return "redirect:/board";
+	}
 }
