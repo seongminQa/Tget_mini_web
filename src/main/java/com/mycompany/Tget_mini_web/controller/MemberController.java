@@ -2,6 +2,7 @@ package com.mycompany.Tget_mini_web.controller;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -264,7 +265,7 @@ public class MemberController {
 	// 리뷰
 	@Secured("ROLE_USER")
 	@RequestMapping("/review_ing")
-	public String review_ing(Authentication authentication, Model model) {
+	public String review_ing(Authentication authentication, Model model,BoardDto boardDto) {
 		if (authentication == null || !authentication.isAuthenticated()) {
 			return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
 		}
@@ -272,6 +273,11 @@ public class MemberController {
 		MemberDto memberDto = userDetails.getMember();
 		model.addAttribute(memberDto);
 		log.info("member.review_ing() 실행");
+		
+		List<BoardDto> boardList= memberservice.detail(userDetails.getMember().getMid());
+		model.addAttribute("boardList", boardList);
+
+		
 		return "member/review_ing";
 	}
 
