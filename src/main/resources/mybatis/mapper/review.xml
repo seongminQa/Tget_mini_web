@@ -13,5 +13,9 @@
 		#{rno}, #{rtitle}, #{mid}, #{pno}, #{rcontent}
 		)
 	</insert>
-	
+	<select id="selectByReviewList" parameterType="int" resultType="ReviewDto">
+		select *
+		from review
+		where pno = #{pno}
+	</select>
 </mapper>
