@@ -33,11 +33,15 @@
                      style="font-size: small; display: block;">로그아웃</span>
                </a></li>
             </sec:authorize>
+            
+            <sec:authorize access="isAnonymous()">
             <li class="nav-item"><a class="nav-link"
                href="${pageContext.request.contextPath}/member/sign_up"
                style="color: black;"> <span
                   style="font-size: small; display: block;">회원 가입</span>
             </a></li>
+            </sec:authorize>
+            
             <li class="nav-item"><a class="nav-link"
                href="${pageContext.request.contextPath}/member/memberInfoModify"
                style="color: black;">  <span
