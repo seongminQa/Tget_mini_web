@@ -42,10 +42,10 @@
 				if(kind == "new") {
 					var input = event.target;
 					console.log(input);
-					var reader = new FileReader();
-					if(input.files && input.files[0]) {
-						reader.onload = function() {
-							var imgTag = document.getElementById('repimg-container');
+					var reader = new FileReader(); // FileReader객체 생성. 파일을 읽어 결과를 데이터 URL로 변환하는데 사용
+					if(input.files && input.files[0]) { // 파일 입력 요소에 파일이 있는지 확인
+						reader.onload = function() { // 파일을 성공적으로 읽으면 실행되는 함수
+							var imgTag = document.getElementById('repimg-container'); // 이미지 태그 찾기
 							imgTag.setAttribute("src", reader.result);
 							console.log(imgTag);
 						};
@@ -108,7 +108,7 @@
 											<td>${product.pno}</td>
 											<td>${product.pkind}</td>
 											<td><img src="attachProduct?pno=${product.pno}" width="90" height="54"></td>
-											<td>${product.ptitle}</td>
+											<td><a href="${pageContext.request.contextPath}/product/detail?pno=${product.pno}">${product.ptitle}</a></td>
 											<td>${product.pplace}</td>
 											<td>
 												<fmt:formatDate value="${product.pdatestart}" pattern="yyyy-MM-dd"/> ~ <br> 

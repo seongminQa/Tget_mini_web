@@ -255,7 +255,7 @@ public class AdminController {
 			productDto.setPcontentattachtype(productDto.getPcontentattach().getContentType());
 			productDto.setPposterattachtype(productDto.getPposterattach().getContentType());
 			try {
-				// 바이트 형식으로 pposter, pcontent, pactors 변수에 값 저장
+				// 바이트 형식으로 pposter, pcontent, pactors 필드값 저장
 				productDto.setPposter(productDto.getPposterattach().getBytes());
 				productDto.setPcontent(productDto.getPcontentattach().getBytes());
 			} catch (Exception e) {
