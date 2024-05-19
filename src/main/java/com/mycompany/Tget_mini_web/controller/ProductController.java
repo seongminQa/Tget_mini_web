@@ -21,15 +21,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mycompany.Tget_mini_web.dao.CartDao;
 import com.mycompany.Tget_mini_web.dao.OrderInfoDao;
 import com.mycompany.Tget_mini_web.dao.ProductDao;
+import com.mycompany.Tget_mini_web.dao.ReviewDao;
 import com.mycompany.Tget_mini_web.dto.CartDto;
 import com.mycompany.Tget_mini_web.dto.MemberDto;
 import com.mycompany.Tget_mini_web.dto.OrderInfoDto;
 import com.mycompany.Tget_mini_web.dto.ProductDto;
+import com.mycompany.Tget_mini_web.dto.ReviewDto;
 import com.mycompany.Tget_mini_web.dto.TempDto;
 import com.mycompany.Tget_mini_web.security.TgetUserDetails;
 import com.mycompany.Tget_mini_web.service.CartService;
 import com.mycompany.Tget_mini_web.service.OrderInfoService;
 import com.mycompany.Tget_mini_web.service.ProductService;
+import com.mycompany.Tget_mini_web.service.ReviewService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -92,27 +95,33 @@ public class ProductController {
 
    // 상품 상세 페이지
    @GetMapping("/detail")
-   public String detail(Model model, int pno, Authentication authentication) {
-      if (authentication == null || !authentication.isAuthenticated()) {
-           return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
-       }      
-      
-      TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
-      MemberDto memberDto = userDetails.getMember();
-      String mid = memberDto.getMid();
-      
-     log.info("detail()실행");
-     log.info(Integer.toString(pno));
-     log.info("mid : " + mid);
-      
-      ProductDto productDto = productService.getProductDetail(pno);
-      log.info(productDto.getPplace());
-      log.info(Integer.toString(productDto.getPprice()));
-      
-      model.addAttribute("productDto", productDto);
-      
-      return "item/detail";
-   }
+	public String detail(Model model, int pno, Authentication authentication) {
+		if (authentication == null || !authentication.isAuthenticated()) {
+			return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
+		}
+
+		TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
+		MemberDto memberDto = userDetails.getMember();
+		String mid = memberDto.getMid();
+
+		log.info("detail()실행");
+		log.info(Integer.toString(pno));
+		log.info("mid : " + mid);
+
+		ProductDto productDto = productService.getProductDetail(pno);
+		
+		log.info(productDto.getPplace());
+		log.info(Integer.toString(productDto.getPprice()));
+		List<ReviewDto> reviewList = reviewService.getReviewList(pno);
+		log.info(reviewList.toString());
+		
+		
+		model.addAttribute("productDto", productDto);
+		model.addAttribute("reviewList", reviewList);
+
+
+		return "item/detail";
+	}
    
    // ==================================================================
    
@@ -311,5 +320,35 @@ public class ProductController {
       
       return "redirect:/product/cart";
    }
+   @Autowired
+   ReviewDao reviewDao;
+   
+   @Autowired
+   ReviewService reviewService;
+   
+   
+   
+   @PostMapping("/writeReview")
+	public String writeReview(ReviewDto reviewDto, int pno ,Authentication authentication, Model model) {
+		if (authentication == null || !authentication.isAuthenticated()) {
+			return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
+		}
+		
+		TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
+		MemberDto memberDto = userDetails.getMember();
+		String mid = memberDto.getMid();
+		int rno = reviewDto.getRno();
+		reviewDto.setMid(mid);
+		reviewDto.setPno(pno);
+		reviewDto.setRtitle("review"+rno+"-"+pno);
+
+		log.info("writeReview 실행");
+		reviewService.writeReview(reviewDto);
+
+		return "redirect:/product/detail?pno="+pno;
+	}
+   
+   
+   
    
 }
