@@ -3,6 +3,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
    uri="http://www.springframework.org/security/tags"%>
+  <script>
+  $(document).ready(function() { 
+
+	    // Top 버튼 특정 스크롤높이에서만 보이기 / 숨기기
+	    $(window).scroll(function(){
+	    	if($(this).scrollTop() > 100){
+	        	$('#top-btn').fadeIn();
+	        }else{
+	        	$('#top-btn').fadeOut();
+	        }
+	    });
+	    
+	    // Top 버튼 클릭시 페이지 상단으로 이동
+	   	$('#top-btn').click(function(){
+	    	$('html, body').animate({scrollTop : 0}, 500);
+	        return false;
+	    });
+	    
+	 });
+  
+  </script>
+<link rel="stylesheet" href="/Tget_mini_web/resources/css/home.css">
+
 
 <header class="container mb-3">
    <div class="row align-items-center">
@@ -89,3 +112,4 @@
    </nav>
 </header>
 <div class="container-fluid" style="border: 3px solid #D95B96;"></div>
+<button id="top-btn"> ▲ <br/> TOP </button >

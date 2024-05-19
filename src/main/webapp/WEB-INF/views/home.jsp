@@ -306,7 +306,7 @@
 	<div class="container">
 		<div id="review-title" style="margin-top: 150px;">
 			<h3>
-				<b><a href="${pageContext.request.contextPath}/board">베스트글 </a></b>
+				<b><a href="${pageContext.request.contextPath}/board">게시판 </a></b>
 			</h3>
 
 		</div>
