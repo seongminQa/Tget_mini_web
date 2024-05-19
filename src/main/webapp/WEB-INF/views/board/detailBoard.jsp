@@ -19,7 +19,7 @@
 <!-- jQuery 외부 라이브러리  설정-->
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-
+<link rel="stylesheet" href="/Tget_mini_web/resources/css/board.css">
 <!-- 사용자 정의 자바스크립트 -->
 <script>
 	
@@ -28,49 +28,36 @@
 </head>
 
 <body>
-	<div class="d-flex flex-column vh-100">
+	<%@include file="/WEB-INF/views/common/header.jsp"%>
+	<div id="board_detail">
 
-		<div class="flex-grow-1 m-2">
-			<div class="d-flex row">
-				
-				<div class="col-md-8">
-					<!-- ###################################### -->
-					<div class="card">
-						<div class="card-header">게시물 보기</div>
-						<div class="card-body">
-							<p>번호 : ${boardDto.bno}</p>
-							<p>제목 : ${boardDto.btitle}</p>
-							<p>글쓴이 : ${boardDto.mid}</p>
-							<p>
-								날짜 :
-								<fmt:formatDate value="${boardDto.bdate}" pattern="yyyy-MM-dd" />
-							</p>
-							<p>조회수 : ${boardDto.bhitcount}</p>
-							<c:if test="${boardDto.bimgoname != null}">
-								<div class="mb-2">
-									<p>
-										첨부파일 :<a href="attachDownload?bno=${boardDto.bno}">${boardDto.bimgoname}</a>
-									</p>
-									<img src="attachDownload?bno=${boardDto.bno}" width="150" />
-								</div>
-							</c:if>
-								<p>내용 : ${boardDto.bcontent}</p>
-
-								<hr />
-
-								<a href="javascript:window.history.back()"
-									class="btn btn-info btn-sm">목록</a>
-								<c:if test="${boardDto.mid == mid}">
-									<a href="updateBoardForm?bno=${boardDto.bno}"
-										class="btn btn-info btn-sm">수정</a>
-									<a href="deleteBoard?bno=${boardDto.bno}"
-										class="btn btn-info btn-sm">삭제</a>
-								</c:if>
-						</div>
-					</div>
-					<!-- ###################################### -->
+		<div>
+			<div class="d-flex">
+				<div id="board_detail_title">${boardDto.btitle}</div>
+				<div style="border:solid">
+					<fmt:formatDate value="${boardDto.bdate}" pattern="yyyy-MM-dd" />
 				</div>
 			</div>
+			<hr>
+			<div class="d-flex">
+				<div>${boardDto.mid}</div>
+				<div>조회수:${boardDto.bhitcount}</div>
+			</div>
+			<c:if test="${boardDto.bimgoname != null}">
+				<div class="mb-2">
+					<img src="attachDownload?bno=${boardDto.bno}" width="150" />
+				</div>
+			</c:if>
+			<p>내용 : ${boardDto.bcontent}</p>
+			<hr />
+			<a id="writebtn" href="javascript:window.history.back()"
+				class="btn btn-info btn-sm">목록</a>
+			<c:if test="${boardDto.mid == mid}">
+				<a id="writebtn" href="updateBoardForm?bno=${boardDto.bno}"
+					class="btn btn-info btn-sm">수정</a>
+				<a id="writebtn" href="deleteBoard?bno=${boardDto.bno}"
+					class="btn btn-info btn-sm">삭제</a>
+			</c:if>
 		</div>
 	</div>
 </body>

@@ -364,10 +364,19 @@ table {
     font-weight: 600;
     transition: 0.25s;
     background-color: #D95B96;
+    color:white;
     margin-right:10px;
 }
 #writebtn:hover{
 	letter-spacing: 2px;
     transform: scale(1.2);
     cursor: pointer;
+}
+#board_detail{
+	width:900px;
+	margin:auto;
+}
+
+#board_detail_title{
+	font-size: 30px;
 }
