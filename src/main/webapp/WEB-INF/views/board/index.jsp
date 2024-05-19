@@ -127,7 +127,7 @@
                      <div id="board_title">${board.btitle}</div>
                      <div id="board_profile" class="d-flex">
                         <img id="profile_img"
-                           src="/Tget_mini_web/resources/image/board/리뷰1.jpg">
+                           src="member/imgProfileDownload?mid=${board.mid}">
                         <div id="user_id">
                            <span class="ms-2">${board.mid}</span>
                         </div>
@@ -181,7 +181,7 @@
 
                            </tbody>
                            <tr>
-                              <td colspan="4" class="text-center">
+                              <td colspan="10" class="text-center">
                                  <div>
                                     <a class="btn btn-outline-primary btn-sm"
                                        href="?pageNo=1#board-list">처음</a>
