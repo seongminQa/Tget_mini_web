@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title>관리자 페이지 </title>
 <!-- Bootstrap 5를 위한 외부 라이브러리 설정 -->
 <!-- Latest compiled and minified CSS -->
 <link
@@ -90,7 +90,7 @@ a:hover {
 
 								</tbody>
 								<tr>
-									<td colspan="4" class="text-center">
+									<td colspan="10" class="text-center">
 										<div>
 											<a class="btn btn-outline-primary btn-sm"
 												href="?pageNo=1#board-list">처음</a>
@@ -132,9 +132,8 @@ a:hover {
 							<button type="button" class="btn btn-outline-info me-2">Q&A</button>
 						</div>
 						<div class="col text-end">
-							<button type="button" class="btn btn-outline-secondary me-2">등록</button>
-							<button type="button" class="btn btn-outline-secondary me-2">수정</button>
-							<button type="button" class="btn btn-outline-secondary me-2">삭제</button>
+							<button type="button" class="btn btn-outline-secondary me-2" onClick="location.href='../board/writeBoardForm'">등록</button>
+							
 						</div>
 					</div>
 					<!-- 페이지네이션 -->

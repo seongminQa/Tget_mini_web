@@ -53,7 +53,7 @@
 			<div class="mb-5">
 				<a id="writebtn" href="javascript:window.history.back()"
 					class="btn btn-info btn-sm">목록</a>
-				<c:if test="${boardDto.mid == mid}">
+				<c:if test="${mid == 'admin' || boardDto.mid == mid}">
 					<a id="writebtn" href="updateBoardForm?bno=${boardDto.bno}"
 						class="btn btn-info btn-sm">수정</a>
 					<a id="writebtn" href="deleteBoard?bno=${boardDto.bno}"
