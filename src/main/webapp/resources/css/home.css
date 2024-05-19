@@ -31,13 +31,13 @@ a {
    text-decoration: none;
 }
 a:link {
-   color : green;
+   color : black;
 }
 a:visited {
-   color : green;
+   color : black;
 }
 a:hover {
-   color : red;
+   color : #D95B96;
 }
 
 .menu nav-link{

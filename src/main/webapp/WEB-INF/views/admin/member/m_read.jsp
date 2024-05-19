@@ -109,11 +109,6 @@
 															       		value="${member.mname}" readOnly>
 															   </div>
 															   <div class="form-group d-flex align-items-center mb-2">
-															      <label for="mpassword" style="width:30%">회원 비밀번호 : </label>
-															      <!-- 비밀번호 부분 어떻게 할지?** -->
-															      <input type="password" class="form-control" id="mpassword" name="mpassword" style="width:50%">
-															   </div>
-															   <div class="form-group d-flex align-items-center mb-2">
 															      <label for="memail" style="width:30%">e-mail : </label>
 															      <input type="email" class="form-control" id="memail" name="memail" style="width:50%"
 															      		value="${member.memail}">
@@ -246,10 +241,6 @@
 			   <div class="form-group mb-2">
 			       <label for="mname">이름</label>
 			       <input type="text" class="form-control" id="mname" name="mname">
-			   </div>
-			   <div class="form-group mb-2">
-			      <label for="mpassword">비밀번호</label>
-			      <input type="password" class="form-control" id="mpassword" name="mpassword">
 			   </div>
 			   <div class="form-group mb-2">
 			      <label for="memail">이메일</label>

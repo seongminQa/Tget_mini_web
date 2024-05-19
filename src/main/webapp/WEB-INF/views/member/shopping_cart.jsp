@@ -219,135 +219,142 @@
         function order() {
             // 체크된 cno 찾기
             const checkboxes = document.querySelectorAll("input[name=tiket]");
-              // 체크된 cno값들을 찾아 cno[] 배열에 값을 저장한다.
+            // 체크된 cno값들을 찾아 cno[] 배열에 값을 저장한다.
             var cno = [];
-         // 체크된 input 태그들을 찾아 cno값을 구하고, 
+            // 체크된 박스가 있는지 확인
+            var length = 0;
+         	// 체크된 input 태그들을 찾아 cno값을 구하고, cno[] 배열에 저장
             for (const checkbox of checkboxes) {
                 if (checkbox.checked) {
                     console.log(checkbox.id.substr(9));
                     cno.push(parseInt(checkbox.id.substr(9)));
                     console.log(cno);
+                    length++;
                 }
             }
-         // 모달의 id를 이용하여 주문하기 버튼을 눌렀을 때 실행할 수 있도록 해당 모달태그를 찾음
-            const previousOrderModal = document.getElementById('previousOrderModal');
-            
-            // AJAX 요청 보내기
-            $.ajax({
-                url: "temporder", // 임시로 데이터를 보낼 URL인 "temporder"
-                method: "POST",
-                contentType: "application/json", // cno[](JSON 데이터형식)를 보내기위해 사용. contentType이 명시되지 않으면 기본값인 application/x-www-form-urlencoded가 사용
-                data: JSON.stringify(cno), // 전송할 데이터 설정
-                success: function(response) {
-                    // 성공적으로 응답을 받았을 때 처리할 내용
-                    console.log("주문 정보를 성공적으로 전송했습니다.");
-                    console.log(response); // 서버 응답 데이터 확인
-                   // tempDtoList를 'temporder' 컨트롤러에서 응답받은 JSON 객체 값을 저장 
-                    const tempDtoList = response.tempDtoList;
-                    const ordertotalPrice = response.ordertotalPrice;
-               
-                    // 응답이 성공했다면 실행
-                    if (response.result === "success") {
-   
-                       // tempDtoList를 이용하여 모달창에서 HTML 업데이트
-                       // 주문 모달창의 Body 부분의 태그를 찾아 innerHTML로 화면을 꾸며준다.
-                       const oderModalBody = document.getElementById('oderModalBody');
-                       oderModalBody.innerHTML = ""; // 초기화
-                       oderModalBody.innerHTML = `
-                           <div class="row w-100">
-                               <div class="col-6">
-                                   <img src="attachProduct?pno=`
-                                         + tempDtoList[0].pno +
-                                         `" style="width:90%; height:370px"/>
-                               </div>
-                               <div class="col-6 ps-3 pt-3">
-                                   <h4 class="ps-3">
-                                       <strong>`
-                                       + tempDtoList[0].pkind +
-                                       ` - `
-                                       + tempDtoList[0].ptitle +
-                                       ` 등 총` + tempDtoList.length + `건</strong>
-                                   </h4>
-   
-                                   <ul id="tempItemList">
-                                   </ul>
-                                   
-                                   <div class="ps-3 pt-4" >
-                                       <table width="100%" style="text-align: center;">
-                                           <th style="background-color: #D95B96; color: white">합계</th>
-                                           <tr id="ordertotalPriceRow">
-                                               <td style="border: 1px solid #D95B96; font-weight: bold; font-size: 30px;">`
-                                               + ordertotalPrice + ` 원</td>
-                                           </tr>
-                                       </table>
-                                   </div>
-                               </div>
-                           </div>
-                       `;
-                       
-                  function formatDate(inputString) {
-                      // 주어진 문자열을 공백을 기준으로 나누어 배열로 저장
-                      const parts = inputString.split(" ");
-                  
-                      // 배열에서 연도, 월, 일 정보 추출
-                      const year = parts[5];
-                      const monthStr = parts[1];
-                      const day = parts[2];
-                  
-                      // 월을 숫자로 변환
-                      const months = {
-                          "Jan": "01",
-                          "Feb": "02",
-                          "Mar": "03",
-                          "Apr": "04",
-                          "May": "05",
-                          "Jun": "06",
-                          "Jul": "07",
-                          "Aug": "08",
-                          "Sep": "09",
-                          "Oct": "10",
-                          "Nov": "11",
-                          "Dec": "12"
-                      };
-                      const month = months[monthStr];
-                      
-                      console.log(year);
-                      console.log(month);
-                      console.log(day);
-                  
-                      // YYYY-MM-DD 형식의 날짜 문자열 반환
-                      return year.toString() + " / " + month.toString() + " / " + day.toString();
-                  }
-   
-                       // tempItemList에 항목 추가
-                       const tempItemList = document.getElementById('tempItemList');
-                       tempDtoList.forEach(tempItem => {
-                           const listItem = document.createElement('li');
-                           //const date = new Date(tempItem.odate); // Date 객체로 변환
-                           console.log(tempItem.odate);
-                           console.log(typeof tempItem.odate); // string 형식.
-                           
-                           // tempItem.odate를 먼저 '2024-05-20' 형식으로 변환해주어야 한다. 
-                           // date형식으로 변환해야 한다.
-   
-                           listItem.innerHTML = `
-                              ` + formatDate(tempItem.odate) + ` – ` + tempItem.ptitle + ` (` + tempItem.oamount + `매)
-                           `;
-                           tempItemList.appendChild(listItem);
-                       });
-   
-                       $(previousOrderModal).modal('show'); // 모달을 띄우기.
-                   } else {
-                       console.error("Error in response: ", response);
-                   }
-                      
-                   },
-                   error: function(xhr, status, error) {
-                       // 요청이 실패했을 때 처리할 내용
-                       console.error("주문 정보 전송에 실패했습니다.");
-                       // 실패 메시지를 표시하거나 다시 시도할 수 있습니다.
-                   }
-               });
+         	if(length > 0) {
+	         	// 모달의 id를 이용하여 주문하기 버튼을 눌렀을 때 실행할 수 있도록 해당 모달태그를 찾음
+	            const previousOrderModal = document.getElementById('previousOrderModal');
+	            
+	            // AJAX 요청 보내기
+	            $.ajax({
+	                url: "temporder", // 임시로 데이터를 보낼 URL인 "temporder"
+	                method: "POST",
+	                contentType: "application/json", // cno[](JSON 데이터형식)를 보내기위해 사용. contentType이 명시되지 않으면 기본값인 application/x-www-form-urlencoded가 사용
+	                data: JSON.stringify(cno), // 전송할 데이터 설정
+	                success: function(response) {
+	                    // 성공적으로 응답을 받았을 때 처리할 내용
+	                    console.log("주문 정보를 성공적으로 전송했습니다.");
+	                    console.log(response); // 서버 응답 데이터 확인
+	                   // tempDtoList를 'temporder' 컨트롤러에서 응답받은 JSON 객체 값을 저장 
+	                    const tempDtoList = response.tempDtoList;
+	                    const ordertotalPrice = response.ordertotalPrice;
+	               
+	                    // 응답이 성공했다면 실행
+	                    if (response.result === "success") {
+	   
+	                       // tempDtoList를 이용하여 모달창에서 HTML 업데이트
+	                       // 주문 모달창의 Body 부분의 태그를 찾아 innerHTML로 화면을 꾸며준다.
+	                       const oderModalBody = document.getElementById('oderModalBody');
+	                       oderModalBody.innerHTML = ""; // 초기화
+	                       oderModalBody.innerHTML = `
+	                           <div class="row w-100">
+	                               <div class="col-6">
+	                                   <img src="attachProduct?pno=`
+	                                         + tempDtoList[0].pno +
+	                                         `" style="width:90%; height:370px"/>
+	                               </div>
+	                               <div class="col-6 ps-3 pt-3">
+	                                   <h4 class="ps-3">
+	                                       <strong>`
+	                                       + tempDtoList[0].pkind +
+	                                       ` - `
+	                                       + tempDtoList[0].ptitle +
+	                                       ` <br>포함 총 ` + tempDtoList.length + `건</strong>
+	                                   </h4>
+	   
+	                                   <ul id="tempItemList">
+	                                   </ul>
+	                                   
+	                                   <div class="ps-3 pt-4" >
+	                                       <table width="100%" style="text-align: center;">
+	                                           <th style="background-color: #D95B96; color: white">합계</th>
+	                                           <tr id="ordertotalPriceRow">
+	                                               <td style="border: 1px solid #D95B96; font-weight: bold; font-size: 30px;">`
+	                                               + ordertotalPrice + ` 원</td>
+	                                           </tr>
+	                                       </table>
+	                                   </div>
+	                               </div>
+	                           </div>
+	                       `;
+	                       
+	                  function formatDate(inputString) {
+	                      // 주어진 문자열을 공백을 기준으로 나누어 배열로 저장
+	                      const parts = inputString.split(" ");
+	                  
+	                      // 배열에서 연도, 월, 일 정보 추출
+	                      const year = parts[5];
+	                      const monthStr = parts[1];
+	                      const day = parts[2];
+	                  
+	                      // 월을 숫자로 변환
+	                      const months = {
+	                          "Jan": "01",
+	                          "Feb": "02",
+	                          "Mar": "03",
+	                          "Apr": "04",
+	                          "May": "05",
+	                          "Jun": "06",
+	                          "Jul": "07",
+	                          "Aug": "08",
+	                          "Sep": "09",
+	                          "Oct": "10",
+	                          "Nov": "11",
+	                          "Dec": "12"
+	                      };
+	                      const month = months[monthStr];
+	                      
+	                      console.log(year);
+	                      console.log(month);
+	                      console.log(day);
+	                  
+	                      // YYYY-MM-DD 형식의 날짜 문자열 반환
+	                      return year.toString() + " / " + month.toString() + " / " + day.toString();
+	                  }
+	   
+	                       // tempItemList에 항목 추가
+	                       const tempItemList = document.getElementById('tempItemList');
+	                       tempDtoList.forEach(tempItem => {
+	                           const listItem = document.createElement('li');
+	                           //const date = new Date(tempItem.odate); // Date 객체로 변환
+	                           console.log(tempItem.odate);
+	                           console.log(typeof tempItem.odate); // string 형식.
+	                           
+	                           // tempItem.odate를 먼저 '2024-05-20' 형식으로 변환해주어야 한다. 
+	                           // date형식으로 변환해야 한다.
+	   
+	                           listItem.innerHTML = `
+	                              ` + formatDate(tempItem.odate) + ` – ` + tempItem.ptitle + ` (` + tempItem.oamount + `매)
+	                           `;
+	                           tempItemList.appendChild(listItem);
+	                       });
+	   
+	                       $(previousOrderModal).modal('show'); // 모달을 띄우기.
+	                   } else {
+	                       console.error("Error in response: ", response);
+	                   }
+	                      
+	                   },
+	                   error: function(xhr, status, error) {
+	                       // 요청이 실패했을 때 처리할 내용
+	                       console.error("주문 정보 전송에 실패했습니다.");
+	                       // 실패 메시지를 표시하거나 다시 시도할 수 있습니다.
+	                   }
+	               });
+         	  } else {
+         		  alert("선택된 상품이 없습니다! 상품 선택 후 진행해주세요!");
+         	  }
            }
          
          // 모달 초기화
@@ -368,6 +375,7 @@
       }
       a {
          text-decoration: none;
+         color: black;
       }
       .list_price{
          font-size: 20px;
@@ -420,10 +428,18 @@
           </thead>
           <!-- 장바구니 목록 리스트 시작 -->
           <tbody>
-               <!-- 목록 -->
+          
+			<c:if test="${empty cartList}">
+			    <tr>
+			        <td colspan="6" style="text-align: center;">
+			            <img class="mt-5 mb-5" src="/Tget_mini_web/resources/image/shoppingcart/emptyCart.svg" alt="No items in cart" />
+			            <p style="font-size: 2em;">장바구니에 담긴 상품이 없습니다.</p>
+			        </td>
+			    </tr>
+			</c:if>
+          
+            <!-- 목록 -->
             <c:forEach var="cartitem" items="${cartList}" varStatus="i">
-               
-               
                <input id="pno${cartitem.cno}" type="hidden" value="${cartitem.pno}" />
                <input id="odate${cartitem.cno}" type="hidden" value="${cartitem.odate}" />
                
@@ -437,10 +453,10 @@
                  </td>
                  <td style="text-align: start;">
                    <div>
-                   <a href="${pageContext.request.contextPath}/product/detail?pno=${cartitem.pno}">주소 : ${cartitem.paddress} / ${cartitem.pplace}</a>
+                     <a href="${pageContext.request.contextPath}/product/detail?pno=${cartitem.pno}" style="font-size:1.5em;"><b>제목 : ${cartitem.ptitle}</b></a>
                    </div>
                    <div class="cart__list__smartstore">${cartitem.pkind}</div>
-                   <div>제목 : ${cartitem.ptitle}</div>
+                   <a>주소 : ${cartitem.paddress} / ${cartitem.pplace}</a>
    
                    <span>20%</span>
                    <!-- 가격 할인 표현하기 -->
@@ -472,7 +488,7 @@
                  </td>
                  <!-- 취소 버튼 표시 // 미구현 -->
                  <td style="width: 15%">
-                       <a href="removeCartItem?cno=${cartitem.cno}">
+                       <a href="removeCartItem?cno=${cartitem.cno}" style="width:30%;">
                           <img style="width:30%; height: 30%;" src="/Tget_mini_web/resources/image/shoppingcart/trash.svg"/>
                        </a>
                     <!-- <div class="cart__list__cansel" style="border:none; background-color:transparent;">
@@ -481,13 +497,14 @@
                </tr>
            </c:forEach>
             
-            <tr style="font-size: 20px;">
-              <td colspan="6">
-                    <!-- 자바스크립트로 구현** AJAX? -->
-                   <span id="totalPrice">총 결제 금액 : ????</span>
-              </td>
-            </tr>
-            
+            <!-- 자바스크립트로 구현** AJAX? -->
+            <c:if test="${!empty cartList}">
+	            <tr style="font-size: 20px;">
+	              <td colspan="6">
+	                   <span id="totalPrice"></span>
+	              </td>
+	            </tr>
+            </c:if>
           </tbody>
         </form>
 
@@ -588,7 +605,7 @@
               </div>
               
               <div style="text-align: center; margin-top: 30px;" >
-                  <button onclick="order()" class="btn btn-sm" style="background-color: #D95B96; width:100%; color:white;">결제 하기</button>
+                  <button onclick="payment()" class="btn btn-sm" style="background-color: #D95B96; width:100%; color:white;">결제 하기</button>
               </div>
                 
          <!-- </form> -->
