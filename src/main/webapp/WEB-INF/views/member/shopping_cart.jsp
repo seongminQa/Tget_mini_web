@@ -492,7 +492,7 @@
             <c:if test="${!empty cartList}">
 	            <tr style="font-size: 20px;">
 	              <td colspan="6">
-	                   <span id="totalPrice">총 결제 금액 : 0원</span>
+	                   <span id="totalPrice">총 결제 금액 : 0원 </span>
 	              </td>
 	            </tr>
             </c:if>
