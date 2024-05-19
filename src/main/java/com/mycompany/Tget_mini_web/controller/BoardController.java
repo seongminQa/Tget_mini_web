@@ -93,9 +93,10 @@ public class BoardController {
 
 		// Service에서 게시물 목록 요청
 		List<BoardDto> boardList = service.getBoardList(pagerDto);
-
+		List<BoardDto> bListHit = service.getBListHit();
 		model.addAttribute("pagerDto", pagerDto);
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("bListHit",bListHit);
 		return "board/index";
 
 	}

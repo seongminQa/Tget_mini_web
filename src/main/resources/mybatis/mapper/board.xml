@@ -95,9 +95,20 @@
    
    
    <select id="selectByBoardList" resultType="BoardDto">
+   
       select *
       from board
       order by bno desc
+      
    </select>
+   
+<select id="selectByHitcount" resultType="BoardDto">
+   
+      select *
+      from board
+      order by bhitcount desc
+      
+   </select>
+   
 
 </mapper>    

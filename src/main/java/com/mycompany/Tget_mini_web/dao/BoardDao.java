@@ -21,4 +21,5 @@ public interface BoardDao {
 
 	public void plusCnt(int bno);
 	public List<BoardDto> selectByBoardList();
+	public List<BoardDto> selectByHitcount();
 }

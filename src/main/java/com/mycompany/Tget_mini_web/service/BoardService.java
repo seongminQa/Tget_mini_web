@@ -67,6 +67,13 @@ public class BoardService {
 		List<BoardDto> boardList = boardDao.selectByBoardList();
 		return boardList;
 	}
+
+	public List<BoardDto> getBListHit() {
+		List<BoardDto> bListHit = boardDao.selectByHitcount();
+		return bListHit;
+	}
+
+
 	
 
 }

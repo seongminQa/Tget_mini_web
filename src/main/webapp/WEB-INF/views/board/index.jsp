@@ -107,10 +107,12 @@
 		</div>
 		<!-- 베스트 글 시작-->
 		<div id="best_board" class="d-flex" style="background-color: #F2F2F2;">
-			<c:forEach var="board" items="${boardList}" begin="0" end="3">
-				
-						<!-- 게시글 이미지 -->
-						<a href="board/detailBoard?bno=${board.bno}"><div id="board">
+			<c:forEach var="board" items="${bListHit}" begin="0" end="3">
+
+				<!-- 게시글 이미지 -->
+
+				<div id="board">
+					<a href="board/detailBoard?bno=${board.bno}">
 						<div>
 
 							<c:if test="${not empty board.bimg}">
@@ -121,24 +123,24 @@
 								<img id="board_img"
 									src="/Tget_mini_web/resources/image/board/no_img.png">
 							</c:if>
-			
+
 						</div>
-						</a>
-						<!-- 게시글 타이틀, 작성자, 글-->
-						<div id="board_2">
-							<div id="board_text">
-								<div id="board_title">${board.btitle}</div>
-								<div id="board_profile" class="d-flex">
-									<img id="profile_img"
-										src="member/imgProfileDownload?mid=${board.mid}">
-									<div id="user_id">
-										<span class="ms-2">${board.mid}</span>
-									</div>
+					</a>
+					<!-- 게시글 타이틀, 작성자, 글-->
+					<div id="board_2">
+						<div id="board_text">
+							<div id="board_title">${board.btitle}</div>
+							<div id="board_profile" class="d-flex">
+								<img id="profile_img"
+									src="member/imgProfileDownload?mid=${board.mid}">
+								<div id="user_id">
+									<span class="ms-2">${board.mid}</span>
 								</div>
-								<div id="board_content">${board.bcontent}</div>
 							</div>
+							<div id="board_content">${board.bcontent}</div>
 						</div>
-					</div> 
+					</div>
+				</div>
 			</c:forEach>
 
 

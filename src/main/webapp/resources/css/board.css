@@ -375,8 +375,14 @@ table {
 #board_detail{
 	width:900px;
 	margin:auto;
+	margin-top:50px;
 }
 
 #board_detail_title{
 	font-size: 30px;
+}
+#board_detail_date{
+	font-size: 14px;
+	display: flex;
+	align-items: flex-end;
 }

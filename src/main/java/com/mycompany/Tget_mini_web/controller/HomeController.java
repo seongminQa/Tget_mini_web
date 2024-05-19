@@ -39,7 +39,7 @@ public class HomeController {
 		// 페이징 정보를 얻어서 서비스쪽으로 넘기고  Service에서 게시물 목록 요청
 		List<ProductDto> productList = productService.getShoppingProductList();
 		model.addAttribute("productList", productList);
-		List<BoardDto> boardList = boradService.getBoardList();
+		List<BoardDto> boardList = boradService.getBListHit();
 		model.addAttribute("boardList", boardList);
 		  
 		return "home";
