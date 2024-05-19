@@ -456,31 +456,22 @@
                      <a href="${pageContext.request.contextPath}/product/detail?pno=${cartitem.pno}" style="font-size:1.5em;"><b>제목 : ${cartitem.ptitle}</b></a>
                    </div>
                    <div class="cart__list__smartstore">${cartitem.pkind}</div>
-                   <a>주소 : ${cartitem.paddress} / ${cartitem.pplace}</a>
-   
-                   <span>20%</span>
+                   <a>주소 : ${cartitem.paddress} / ${cartitem.pplace}</a><br>
                    <!-- 가격 할인 표현하기 -->
                    <span style="text-decoration: line-through; color: lightgray"
                      >가격 : <fmt:formatNumber value="${cartitem.pprice}" pattern="#,###" />원</span>
-                   <div class="price" style="text-align: start">할인 후 가격 : <fmt:formatNumber value="${cartitem.pprice}" pattern="#,###" />원</div>
+                   <div class="price" style="text-align: start">상품 가격 : <fmt:formatNumber value="${cartitem.pprice}" pattern="#,###" />원</div>
                  </td>
                  <td class="cart__list__option" style="width: 27%">
-                   <span>>날짜 : <fmt:formatDate value="${cartitem.odate}" pattern="yyyy-MM-dd"/></span><br />
-                   
-                   <span>>시간 : 1시50분 특가</span><br />
+                   <span style="font-size: 1.2em"><b>>날짜 : <fmt:formatDate value="${cartitem.odate}" pattern="yyyy-MM-dd"/></b></span><br/>
                    <span>
-                      <span>${cartitem.cno}</span>
-                      <button type="button" onclick="amountMinus(${cartitem.cno}, ${cartitem.pprice})" class="btn btn-outline-secondary btn-sm">-</button>
-                      <%-- >수량 : ${cartitem.oamount}매 --%>
+                      <button type="button" onclick="amountMinus(${cartitem.cno}, ${cartitem.pprice})" class="btn btn-outline-secondary btn-sm rounded-circle"><b>-</b></button>
                       <input type="text" id="oamount-${cartitem.cno}" value="${cartitem.oamount}" style="width:30px;" readonly="readonly"/>
-                      <button type="button" onclick="amountPlus(${cartitem.cno}, ${cartitem.pprice})" class="btn btn-outline-secondary btn-sm">+</button>
+                      <button type="button" onclick="amountPlus(${cartitem.cno}, ${cartitem.pprice})" class="btn btn-outline-secondary btn-sm rounded-circle"><b>+</b></button>
                       <%-- <button onclick="amountPlus('plus', ${cartitem.cno})" class="btn btn-outline-secondary btn-sm">+</button> --%>
                       <%-- <input type="number" id="amount${cartItem.pno}" value="${cartItem.oamount}" style="width:60px;" /> --%>
-                   </span>
-                   <br />
-               <span class="seatGrade">${cartitem.oseatgrade}</span><br />
-               <!-- 주문 수정 버튼 미구현 // 추후 어떻게 기능을 구현할 지 미정 -->
-                   <a href="${pageContext.request.contextPath}/product/detail?pno=${cartitem.pno}" class="cart_list_optionbtn">주문 수정</a>
+                   </span><br>
+                   <span class="seatGrade" style="font-size: 1.2em"><b>${cartitem.oseatgrade}</b></span>
                  </td>
                  <!-- 상품 금액 표시 셀 -->
                  <td>
@@ -501,7 +492,7 @@
             <c:if test="${!empty cartList}">
 	            <tr style="font-size: 20px;">
 	              <td colspan="6">
-	                   <span id="totalPrice"></span>
+	                   <span id="totalPrice">총 결제 금액 : 0원</span>
 	              </td>
 	            </tr>
             </c:if>
