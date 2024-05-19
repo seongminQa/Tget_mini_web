@@ -156,7 +156,7 @@
 													readonly="readonly" />
 												<textarea class="form-control" name="rcontent" id="rcontent"
 													rows="3"></textarea>
-												<button type="submit" class="btn btn-dark" id="reviewbtn">등록</button>
+												<button type="submit" class="btn btn-dark mt-2" id="reviewbtn">등록</button>
 											</form>
 										</div>
 									</div>
@@ -166,9 +166,11 @@
 								<!-- 리뷰 목록 -->
 								<div>
 									<c:forEach var="review" items="${reviewList}">
-										<div>
+										<div class="d-flex" style="justify-content: space-between;">
 											<p>${review.rcontent}</p>
+											<p>${review.mid}
 										</div>
+										<hr/>
 									</c:forEach>
 								</div>
 								<!-- 리뷰 목록 끝-->
