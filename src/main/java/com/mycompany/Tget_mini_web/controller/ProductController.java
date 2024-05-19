@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -133,7 +134,7 @@ public class ProductController {
    CartService cartService;
 
    // 장바구니 리스트(cart)
-   //@Secured("ROLE_USER")
+   @Secured("ROLE_USER")
    @RequestMapping("/cart")
    public String cart(HttpSession session, Model model, String pageNo, 
          Authentication authentication) {
