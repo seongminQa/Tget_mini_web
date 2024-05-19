@@ -229,20 +229,29 @@
 	<div class="container d-flex ">
 		<div id="left_content" style="flex: 1;">
 			<div id="left_img" class="d-flex">
-				<img id="left_img_inner" alt=""
-					src="/Tget_mini_web/resources/image/detail_photos/시카고.jpg"
-					style="width: 400px; margin: auto">
-				<div style="text-align: center; margin-top: 10px;">
-					<h5>뮤지컬 시카고</h5>
-					<p>디큐브 링크아트센터</p>
-					<p>2024.06.07 ~ 2024.06.13</p>
-				</div>
-
+				<c:forEach var="product" items="${productList}" end="0">
+					<a
+						href="${pageContext.request.contextPath}/product/detail?pno=${product.pno}"
+						style="margin: auto;"> <img id="left_img_inner" alt=""
+						src="product/attachProduct?pno=${product.pno}"
+						style="width: 400px;">
+					</a>
+					<div style="text-align: center; margin-top: 10px;">
+						<h5>${product.ptitle}</h5>
+						<p>${product.pplace}</p>
+						<p>
+							<fmt:formatDate value="${product.pdatestart}"
+								pattern="yyyy-MM-dd" />
+							~
+							<fmt:formatDate value="${product.pdateend}" pattern="yyyy-MM-dd" />
+						</p>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 		<div class="d-flex" style="flex: 1;">
 			<div id="right_contents">
-				<c:forEach var="product" items="${productList}" begin="0" end="3">
+				<c:forEach var="product" items="${productList}" begin="1" end="4">
 					<div>
 						<a
 							href="${pageContext.request.contextPath}/product/detail?pno=${product.pno}"><img
@@ -267,10 +276,12 @@
 
 			</div>
 			<div id="right_contents">
-				<c:forEach var="product" items="${productList}" begin="4" end="7">
+				<c:forEach var="product" items="${productList}" begin="5" end="8">
 					<div>
-						<img id="right_img" alt=""
-							src="product/attachProduct?pno=${product.pno}">
+						<a
+							href="${pageContext.request.contextPath}/product/detail?pno=${product.pno}"><img
+							id="right_img" alt=""
+							src="product/attachProduct?pno=${product.pno}"></a>
 						<div id="right_info">
 							<h5>${product.ptitle}</h5>
 							<p>${product.pplace}</p>
@@ -302,40 +313,40 @@
 		<div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 g-4">
 			<c:forEach var="board" items="${boardList}" begin="0" end="3">
 				<div class="col">
-					<div class="card mb-3">
-						<div class="row g-0">
-							<div class="col-md-4">
-								<c:if test="${not empty board.bimgoname}">
-									<img id="review_img"
-										src="board/attachDownload?bno=${board.bno}"
-										class="img-fluid rounded-start" alt="...">
-								</c:if>
-								<c:if test="${empty board.bimgoname}">
-									<img id="review_img"
-										src="/Tget_mini_web/resources/image/board/no_img2.png"
-										class="img-fluid rounded-start" alt="...">
-								</c:if>
+					<a href="board/detailBoard?bno=${board.bno}">
+						<div class="card mb-3">
+							<div class="row g-0">
+								<div class="col-md-4">
+									<c:if test="${not empty board.bimgoname}">
+										<img id="review_img"
+											src="board/attachDownload?bno=${board.bno}"
+											class="img-fluid rounded-start" alt="...">
+									</c:if>
+									<c:if test="${empty board.bimgoname}">
+										<img id="review_img"
+											src="/Tget_mini_web/resources/image/board/no_img2.png"
+											class="img-fluid rounded-start" alt="...">
+									</c:if>
 
-							</div>
-							<div class="col-md-8">
-								<div class="card-body">
-									<h5 class="card-title">
-										<b>${board.btitle}</b>
-									</h5>
-									<br>
-									<p class="card-text">${board.bcontent}</p>
-									<p class="card-text">
-										<small class="text-muted"><fmt:formatDate
-												value="${board.bdate}" pattern="yyyy-MM-dd" /></small>
-									</p>
+								</div>
+								<div class="col-md-8">
+									<div class="card-body">
+										<h5 class="card-title">
+											<b>${board.btitle}</b>
+										</h5>
+										<br>
+										<p class="card-text">${board.bcontent}</p>
+										<p class="card-text">
+											<small class="text-muted"><fmt:formatDate
+													value="${board.bdate}" pattern="yyyy-MM-dd" /></small>
+										</p>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</a>
 				</div>
-
 			</c:forEach>
-
 		</div>
 	</div>
 	<!-------------- 관람후기 --------------------->

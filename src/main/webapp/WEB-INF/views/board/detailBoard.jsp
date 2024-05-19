@@ -32,8 +32,7 @@
 
 		<div class="flex-grow-1 m-2">
 			<div class="d-flex row">
-				<div class="col-md-4"></div>
-
+				
 				<div class="col-md-8">
 					<!-- ###################################### -->
 					<div class="card">

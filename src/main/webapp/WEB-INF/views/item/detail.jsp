@@ -65,6 +65,29 @@
 		$('#insertReviewbody').hide();
 	}
 </script>
+<!-- <script>
+	$(document).ready(
+			function() {
+				$('#reviewForm').on('submit', function(event) {
+					event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
+
+					$.ajax({
+						url : 'writeReview',
+						type : 'POST',
+						data : $(this).serialize(),
+						success : function(response) {
+							// 서버로부터 성공 응답을 받았을 때의 처리
+							// 리뷰 목록을 업데이트합니다.
+							loadReviews();
+							$('#rcontent').val(''); // 텍스트 영역을 비웁니다.
+						},
+						error : function(jqXHR, textStatus, errorThrown) {
+							// 오류가 발생했을 때의 처리
+							console.log('Error:', textStatus, errorThrown);
+						}
+					});
+				});
+</script> -->
 
 </head>
 <body>

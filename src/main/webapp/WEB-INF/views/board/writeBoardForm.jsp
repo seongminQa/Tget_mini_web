@@ -22,34 +22,36 @@
 </head>
 
 <body>
+<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div>
 		<div id="form_title">
 			게시물 작성
 		</div>
-		<div id="form_box">
+		<div id="form_box" class='my-5'>
 			<form id="writeBoardForm" method="post" action="writeBoard"
 				enctype="multipart/form-data">
 				<div>
 					<div>
-						<span>이미지</span>
+						<span id="small_title">이미지</span>
+						
 					</div>
 					<input id="battach" type="file" name="battach" class="form-control">
 				</div>
 				<div>
 					<div>
-						<span>제목</span>
+						<span id="small_title">제목</span>
 					</div>
 					<input id="btitle" type="text" name="btitle" class="form-control">
 				</div>
 				<div>
 					<div>
-						<span>내용</span>
+						<span id="small_title">내용</span>
 					</div>
 					<textarea id="bcontent" name="bcontent" class="form-control"></textarea>
 				</div>
 				<div class="mt-3">
-					<button type="submit">글쓰기</button>
-					<a class="btn" href="boardList">목록보기</a>
+					<button id="writebtn" type="submit">글쓰기</button>
+					<a id="writebtn" class="btn" href="${pageContext.request.contextPath}/board#board-list">목록보기</a>
 				</div>
 			</form>
 		</div>
