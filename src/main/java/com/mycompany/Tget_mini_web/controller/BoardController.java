@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -98,7 +99,7 @@ public class BoardController {
 		return "board/index";
 
 	}
-
+	@Secured("ROLE_USER")
 	@GetMapping("/detailBoard")
 	public String detailBoard(int bno, Model model, Authentication authentication) {
 		TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
