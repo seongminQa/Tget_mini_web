@@ -58,7 +58,7 @@ function midUniqueCheck(){
 
    //아이디가 빈 문자이면 span에 아무 글씨도 안 넣는다.
 	if($("#mid").val() === ""){
-		$("#spanId").removeClass("text-danger").html("");
+		$("#spanId").addClass("text-danger").html("필수 입력 값입니다.");
 		midUniqueCheckResult = false;
 	} else{
 		// 빈문자가 아니면 유효성 검사 실행
@@ -101,7 +101,7 @@ function mpwPatternCheck(){
 
 	//비밀번호가 빈 문자이면 span에 아무 글씨도 안 넣는다.
 	if($("#mpassword").val() === ""){
-		$("#spanPw").removeClass("text-danger").html("");
+		$("#spanPw").addClass("text-danger").html("필수 입력 값입니다.");
 		mpwPatternCheckResult = false;
 	}else{
 		// 빈문자가 아니면 유효성 검사에 따른 결과값 출력
@@ -140,7 +140,7 @@ function mpwCompareCheck(){
 function mnameCheck(){
 	//이름이 빈 문자이면 span에 아무 글씨도 안 넣는다.
 	if($("#mname").val() === ""){
-		$("#spanName").removeClass("text-danger").html("");
+		$("#spanName").addClass("text-danger").html("필수 입력 값입니다.");
 		mnameCheckResult = false;
 	}else{
 		// 빈문자가 아니면 유효성 검사를 실행한다.
@@ -160,7 +160,7 @@ function mnameCheck(){
 function mssnUniqueCheck(){
 	// ssn이 빈문자면 아무것도 출력하지 않는다.
 	if($("#mssn").val() === ""){
-		$("#spanSsn").removeClass("text-danger").html("");
+		$("#spanSsn").addClass("text-danger").html("필수 입력 값입니다.");
 		mssnUniqueCheckResult = false;
 	}else{
 		   // 빈문자가 아니면 유효성 검사 실행
@@ -204,7 +204,7 @@ function memailCheck(){
 	
 	// ssn이 빈문자면 아무것도 출력하지 않는다.
 	if($("#memail").val() === ""){
-		$("#spanEmail").removeClass("text-danger").html("");
+		$("#spanEmail").addClass("text-danger").html("필수 입력 값입니다.");
 		memailCheckResult = false;
 	}else{
 		   // 빈문자가 아니면 유효성 검사 실행한다.
@@ -227,7 +227,7 @@ function mphoneUniqueCheck(){
 	
 	// email이 빈문자면 아무것도 출력하지 않는다.
 	if($("#mphone").val() === ""){
-		$("#spanPhone").removeClass("text-danger").html("");
+		$("#spanPhone").addClass("text-danger").html("필수 입력 값입니다.");
 		mphoneUniqueCheckResult = false;
 	}else{
 		   // 빈문자가 아니면 유효성 검사 실행
@@ -274,7 +274,7 @@ function mnicknameUniqueCheck(){
 	// nickname이 빈문자면 아무것도 출력하지 않는다.
 	if($("#mnickname").val() === ""){
 		$("#spanNickname").removeClass("text-danger").html("");
-		mnicknameUniqueCheckResult = false;
+		//mnicknameUniqueCheckResult = false;
 	} else {// 빈문자가 아니면 
 		
 		// 중복 아이디 검사 실행
