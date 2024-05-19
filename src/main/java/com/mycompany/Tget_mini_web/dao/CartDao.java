@@ -29,6 +29,8 @@ public interface CartDao {
    // 해당 장바구니 번호를 이용하여 삭제
    public void deleteCartItem(int cno);
 
-   void updateCartItem(CartDto item);
+   public void updateCartItem(CartDto cartDto);
+
+   CartDto selectByCno(int cno); // 주문정보를 보기 위해 장바구니의 cno로 정보를 가져온다
 
 }

@@ -3,61 +3,46 @@
 
 <mapper namespace="com.mycompany.Tget_mini_web.dao.CartDao">
 
-	<!-- 상품 더미 집어넣기 테스트 -->
-	<insert id="insertCartItem" parameterType="CartDto">
-		<selectKey keyProperty="cno" order="BEFORE" resultType="int">
-			select cno_seq.nextval from dual
-		</selectKey>
-		insert into cart (cno, mid, pno, oseatgrade, oamount, 
-			odate)
-		values( #{cno}, #{mid}, #{pno}, #{oseatgrade}, #{oamount}, #{odate} )
-	</insert>
-	
-	<!-- 장바구니에 넣은 아이템 가져오기 -->
-	<select id="selectCartItem" parameterType="String" resultType="CartDto">
-		select c.cno as cno, p.pno as pno, p.pposter as pposter, p.pkind as pkind, p.ptitle as ptitle, 
-			p.paddress as paddress, p.pplace as pplace, c.oseatgrade as oseatgrade, p.pprice as pprice, 
-			c.oamount as oamount, c.odate as odate, p.pgenre as pgenre
-		from cart c, product p, member m
-		where m.mid = c.mid
-			and c.pno = p.pno
-			and m.mid = #{mid}
-		order by c.cno desc
-	</select>
-	
-	<!-- 장바구니에 들어가 있는 아이템과 사용자가 다시 상품 상세페이지에서 옵션이 같은 아이템을 장바구니에 넣을 때, 수량 업데이트하기 -->
-	<update id="updateCartItem" parameterType="CartDto">
-		update cart set
-			oamount = #{oamount}
-	</update>
-	
-	<!-- 장바구니에 넣은 아이템 삭제하기 -->
-	<delete id="deleteCartItem" parameterType="int">
-		delete
-		from cart
-		where cno = #{cno}
-	</delete>
-	
-	<!-- 카트의 수 얻기(Pager와 같이 사용 / 보류) -->
-	<!-- <select id="count" resultType="int">
-		select count(*) from cart
-	</select> -->
-	
-	<!-- 장바구니 리스트의 수에 따라 페이징 처리하기(Pager와 같이 사용 / 보류) -->
- 	<!-- <select id="selectByPage" parameterType="PagerDto" resultType="CartDto">
-		<![CDATA[
-         select rnum, cno, mid, pno, oseatgrade, oamount, odate
-         from (
-             select rownum as rnum, cno, mid, pno, oseatgrade, oamount, odate
-             from (
-                 select cno, mid, pno, oseatgrade, oamount, odate
-                 from cart
-                 order by cno desc
-             )
-             where rownum <= #{endRowNo}
-         )
-         where rnum >= #{startRowNo}
-         ]]>
-	</select> -->
+   <!-- 상품 더미 집어넣기 테스트 -->
+   <insert id="insertCartItem" parameterType="CartDto">
+      <selectKey keyProperty="cno" order="BEFORE" resultType="int">
+         select cno_seq.nextval from dual
+      </selectKey>
+      insert into cart (cno, mid, pno, oseatgrade, oamount, 
+         odate)
+      values( #{cno}, #{mid}, #{pno}, #{oseatgrade}, #{oamount}, #{odate} )
+   </insert>
+   
+   <!-- 장바구니에 넣은 아이템 가져오기 -->
+   <select id="selectCartItem" parameterType="String" resultType="CartDto">
+      select c.cno as cno, p.pno as pno, p.pposter as pposter, p.pkind as pkind, p.ptitle as ptitle, 
+         p.paddress as paddress, p.pplace as pplace, c.oseatgrade as oseatgrade, p.pprice as pprice, 
+         c.oamount as oamount, c.odate as odate, p.pgenre as pgenre
+      from cart c, product p, member m
+      where m.mid = c.mid
+         and c.pno = p.pno
+         and m.mid = #{mid}
+      order by c.cno desc
+   </select>
+   
+   <!-- 장바구니에 들어가 있는 아이템과 사용자가 다시 상품 상세페이지에서 옵션이 같은 아이템을 장바구니에 넣을 때, 수량 업데이트하기 -->
+   <update id="updateCartItem" parameterType="CartDto">
+      update cart set
+         oamount = #{oamount}
+      where cno = #{cno}
+   </update>
+   
+   <!-- 장바구니에 넣은 아이템 삭제하기 -->
+   <delete id="deleteCartItem" parameterType="int">
+      delete
+      from cart
+      where cno = #{cno}
+   </delete>
+   
+   <select id="selectByCno" parameterType="int" resultType="CartDto">
+      select *
+      from cart
+      where cno = #{cno}
+   </select>
 
 </mapper>

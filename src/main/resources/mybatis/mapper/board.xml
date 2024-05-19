@@ -4,35 +4,35 @@
 <mapper namespace="com.mycompany.Tget_mini_web.dao.BoardDao">
 
 
-	<insert id="insert" parameterType="BoardDto">
-		<selectKey keyProperty="bno" order="BEFORE" resultType="int">
-			select seq_bno.nextval from dual
-		</selectKey>
-		insert into board(
-		bno, btitle, bcontent, mid, bdate, bhitcount, bimg,
-		bimgoname, bimgtype
-		)
-		values(
-		#{bno}, #{btitle}, #{bcontent}, #{mid},
-		sysdate, 0, #{bimg},
-		#{bimgoname},
-		#{bimgtype}
+   <insert id="insert" parameterType="BoardDto">
+      <selectKey keyProperty="bno" order="BEFORE" resultType="int">
+         select seq_bno.nextval from dual
+      </selectKey>
+      insert into board(
+      bno, btitle, bcontent, mid, bdate, bhitcount, bimg,
+      bimgoname, bimgtype
+      )
+      values(
+      #{bno}, #{btitle}, #{bcontent}, #{mid},
+      sysdate, 0, #{bimg},
+      #{bimgoname},
+      #{bimgtype}
 
 
-		)
-	</insert>
-	<select id="count" resultType="int">
-		select count(*) from board
-	</select>
+      )
+   </insert>
+   <select id="count" resultType="int">
+      select count(*) from board
+   </select>
 
-	<select id="selectByPage" parameterType="PagerDto"
-		resultType="BoardDto">
+   <select id="selectByPage" parameterType="PagerDto"
+      resultType="BoardDto">
          <![CDATA[
-         select rnum, bno ,btitle, bcontent, mid, bdate,bhitcount
+         select rnum, bno ,btitle, bcontent, mid, bdate,bhitcount, bimg
          from (
-             select  rownum as rnum, bno ,btitle, bcontent, mid, bdate, bhitcount
+             select  rownum as rnum, bno ,btitle, bcontent, mid, bdate, bhitcount, bimg
              from (
-                 select bno ,btitle, bcontent, mid, bdate,bhitcount
+                 select bno ,btitle, bcontent, mid, bdate,bhitcount, bimg
                  from board
                  order by  bno desc
              )
@@ -40,17 +40,17 @@
          )
          where rnum >= #{startRowNo}
          ]]>
-	</select>
+   </select>
 
-	<!-- 한 유저가 쓴 구매 리뷰 정보 데이터베이스에서 가져오기 -->
-	<select id="selectByMyPage" parameterType="PagerDto"
-		resultType="BoardDto">
+   <!-- 한 유저가 쓴 구매 리뷰 정보 데이터베이스에서 가져오기 -->
+   <select id="selectByMyPage" parameterType="PagerDto"
+      resultType="BoardDto">
          <![CDATA[
-         select rnum, bno ,btitle, bdate, bhitcount
+         select rnum, bno ,btitle, bdate, bhitcount, bimg
          from (
-             select rownum as rnum, bno ,btitle, bdate, bhitcount
+             select rownum as rnum, bno ,btitle, bdate, bhitcount, bimg
              from (
-                 select bno ,btitle, bdate, bhitcount
+                 select bno ,btitle, bdate, bhitcount, bimg
                  from board inner join member on member.mid = board.mid 
                  order by  bno desc
              )
@@ -58,46 +58,46 @@
          )
          where rnum >= #{startRowNo}
          ]]>
-	</select>
+   </select>
 
 
-	<select id="selectByBno" parameterType="int"
-		resultType="BoardDto">
-		select bno ,btitle, bcontent, mid,
-		bdate,bhitcount,bimgoname, bimgtype
-		from board
-		where bno= #{bno}
-	</select>
-	<select id="selectAttachData" parameterType="int"
-		resultType="BoardDto">
-		select bimg from board where bno = #{bno}
+   <select id="selectByBno" parameterType="int"
+      resultType="BoardDto">
+      select bno ,btitle, bcontent, mid,
+      bdate,bhitcount,bimgoname, bimgtype
+      from board
+      where bno= #{bno}
+   </select>
+   <select id="selectAttachData" parameterType="int"
+      resultType="BoardDto">
+      select bimg from board where bno = #{bno}
 
-	</select>
-	<update id="update" parameterType="BoardDto">
-		update board set
-		btitle = #{btitle},
-		bcontent = #{bcontent}
-		<if test="bimgoname != null">
-			,
-			bimgoname = #{bimgoname},
-			bimgtype = #{bimgtype},
-			bimg =#{bimg}
-		</if>
-		where bno=#{bno}
-	</update>
-	<delete id="deleteByBno" parameterType="int">
-		delete from board where
-		bno=#{bno}
-	</delete>
-	<update id="plusCnt" parameterType="int">
-		UPDATE BOARD SET BHITCOUNT = BHITCOUNT + 1 WHERE BNO = #{bno}
-	</update>
-	
-	
-	<select id="selectByBoardList" resultType="BoardDto">
-		select *
-		from board
-		order by bno desc
-	</select>
+   </select>
+   <update id="update" parameterType="BoardDto">
+      update board set
+      btitle = #{btitle},
+      bcontent = #{bcontent}
+      <if test="bimgoname != null">
+         ,
+         bimgoname = #{bimgoname},
+         bimgtype = #{bimgtype},
+         bimg =#{bimg}
+      </if>
+      where bno=#{bno}
+   </update>
+   <delete id="deleteByBno" parameterType="int">
+      delete from board where
+      bno=#{bno}
+   </delete>
+   <update id="plusCnt" parameterType="int">
+      UPDATE BOARD SET BHITCOUNT = BHITCOUNT + 1 WHERE BNO = #{bno}
+   </update>
+   
+   
+   <select id="selectByBoardList" resultType="BoardDto">
+      select *
+      from board
+      order by bno desc
+   </select>
 
 </mapper>    

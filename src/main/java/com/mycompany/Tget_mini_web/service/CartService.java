@@ -20,7 +20,7 @@ public class CartService {
    
    // 장바구니에 아이템 추가하기
    public void addCartItem(CartDto cartDto) {
-	   cartDao.insertCartItem(cartDto);
+      cartDao.insertCartItem(cartDto);
    }
 
    // 카트 리스트 페이지 당 리스트를 보여주는 메소드
@@ -43,24 +43,29 @@ public class CartService {
    
    // 카트 리스트 정보 수정 메소드 **
    public void updateCart(CartDto cartDto) {
-      
       int rowNum = cartDao.updateCart(cartDto);
    }
 
-	// 현재 로그인한 mid를 확인하여 장바구니에 넣은 상품들 불러오기
-	public List<CartDto> getCartItemList(String mid) {
-		List<CartDto> cartList = cartDao.selectCartItem(mid);
-		return cartList;
-	}
-	
-	// 카트 리스트 삭제 메소드
-	public void removeCartItem(int cno) {
-		cartDao.deleteCartItem(cno);
-	}
+   // 현재 로그인한 mid를 확인하여 장바구니에 넣은 상품들 불러오기
+   public List<CartDto> getCartItemList(String mid) {
+      List<CartDto> cartList = cartDao.selectCartItem(mid);
+      return cartList;
+   }
+   
+   // 카트 리스트 삭제 메소드
+   public void removeCartItem(int cno) {
+      cartDao.deleteCartItem(cno);
+   }
 
-	public void updateCartItem(CartDto item) {
-		cartDao.updateCartItem(item);
-		
-	}
+   public void updateCartItem(CartDto cartDto) {
+      cartDao.updateCartItem(cartDto);
+      
+   }
+   
+   // 장바구니에서 체크된 상품의 cno에 따라 아이템의 정보를 가져온다.
+   public CartDto getCartItem(int cno) {
+      CartDto cartDto = cartDao.selectByCno(cno);
+      return cartDto;
+   }
 
 }

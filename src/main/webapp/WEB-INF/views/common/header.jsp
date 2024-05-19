@@ -44,7 +44,7 @@
                   style="font-size: small; display: block;">마이페이지</span>
             </a></li>
             <li class="nav-item"><a class="nav-link"
-               href="${pageContext.request.contextPath}/shopping/cart"
+               href="${pageContext.request.contextPath}/product/cart"
                style="color: black;">  <span
                   style="font-size: small; display: block;">장바구니</span>
             </a></li>
@@ -57,12 +57,11 @@
             <div class="col-8 mt-2" style="width: 100%;">
                <ul class="nav">
                   <li class="nav-item"><a class="menu nav-link"
-                     style="color: grey;">연극</a></li>
-                  <li class="nav-item"><a class="menu nav-link"
-                     style="color: grey;">뮤지컬</a></li>
+                     href="${pageContext.request.contextPath}/product" style="color: grey;">연극 / 뮤지컬</a></li>
+                  
                   <sec:authorize access="hasRole('ROLE_ADMIN')">
                      <li class="nav-item"><a class="menu nav-link"
-                        href="/Tget_mini_web/admin" style="color: grey;">관리자</a></li>
+                        href="${pageContext.request.contextPath}/admin" style="color: grey;">관리자</a></li>
                   </sec:authorize>
                </ul>
             </div>
