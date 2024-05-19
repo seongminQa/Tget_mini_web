@@ -78,7 +78,7 @@ public class AdminController {
 
 		// pageNo를 받지 못했을 경우
 		if (pageNo == null) {
-			pageNo = (String) session.getAttribute("pageNo");
+			pageNo = (String) session.getAttribute("memberPageNo");
 			// 세션에 저장되어 있지 않을 경우 "1"로 강제 세팅
 			if (pageNo == null) {
 				pageNo = "1";
@@ -86,7 +86,7 @@ public class AdminController {
 		}
 
 		// 세션에 pageNo 저장
-		session.setAttribute("pageNo", pageNo);
+		session.setAttribute("memberPageNo", pageNo);
 		// 문자열을 정수로 변환
 		int intPageNo = Integer.parseInt(pageNo);
 
@@ -154,7 +154,7 @@ public class AdminController {
 
 		// pageNo를 받지 못했을 경우
 		if (pageNo == null) {
-			pageNo = (String) session.getAttribute("pageNo");
+			pageNo = (String) session.getAttribute("productPageNo");
 			// 세션에 저장되어 있지 않을 경우 "1"로 강제 세팅
 			if (pageNo == null) {
 				pageNo = "1";
@@ -162,7 +162,7 @@ public class AdminController {
 		}
 
 		// 세션에 pageNo 저장
-		session.setAttribute("pageNo", pageNo);
+		session.setAttribute("productPageNo", pageNo);
 		// 문자열을 정수로 변환
 		int intPageNo = Integer.parseInt(pageNo);
 
@@ -282,7 +282,7 @@ public class AdminController {
 	@GetMapping("/boardReader")
 	public String boardList(String pageNo, Model model, HttpSession session) {
 		if (pageNo == null) {
-			pageNo = (String) session.getAttribute("pageNo");
+			pageNo = (String) session.getAttribute("boardPageNo");
 			// 세션에 저장되어 있지 않을 경우"1"로 강제 세팅
 			if (pageNo == null) {
 				pageNo = "1";
@@ -290,7 +290,7 @@ public class AdminController {
 		}
 
 		// 세션에 pageNo 저장
-		session.setAttribute("pageNo", pageNo);
+		session.setAttribute("boardPageNo", pageNo);
 
 		// 문자열을 정수로 반환
 		int intPageNo = Integer.parseInt(pageNo);
