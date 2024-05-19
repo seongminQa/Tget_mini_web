@@ -170,6 +170,7 @@ function nicknameUniqueCheck(){
 		   $.ajax({
 		       url: 'uniquenickname',
 		       type: 'post',
+		       
 		       data: {mnickname:mnickname},
 		       success: function(data){
 		          console.log("json객체의 count값"+data.count);
@@ -237,23 +238,27 @@ function nicknameSubmit(){
 	    url: 'uniquenickname',
 	    type: 'post',
 	    data: {mnickname:mnickname},
+	    async:false,
 	    success: function(data){
 	       console.log("json객체의 count값"+data.count);
-	        if(data.count == 0){
+	        if(data.count === 0){
 	            // 중복값이 없다면
-	     	   
+	     	  
+	     	 console.log("중복값 없어");
 	        } else {
 	            // 중복 값이 있다면
-	     	   totalResult = false;
+	     	  console.log("중복값 있어");
+	     	 totalResult = false;
 
 	        }
 	    }
 	});
+	console.log("totalResult", totalResult);
 	//유효성 검사 결과가 true일 경우
 	   if(totalResult) {
 	      //수동으로 action 기능을 수행하도록 함
 	      $("#nicknameModify")[0].submit();
-	   }
+	   };
 };
 
 //email------------------------------------------------------
@@ -308,6 +313,7 @@ function phoneSubmit(){
 	           $.ajax({
 	               url: 'uniquephone',
 	               type: 'post',
+	               async:false,
 	               data: {mphone:mphone},
 	               success: function(data){
 	                  console.log("json객체의 count값"+data.count);
@@ -328,6 +334,7 @@ function phoneSubmit(){
 			   totalResult = false;
 		   }
 	   }
+	   
 	 //유효성 검사 결과가 true일 경우
 	   if(totalResult) {
 	      //수동으로 action 기능을 수행하도록 함
