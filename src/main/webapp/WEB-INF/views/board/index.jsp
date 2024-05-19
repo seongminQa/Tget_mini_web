@@ -201,7 +201,6 @@
                                              href="?pageNo=${i}#board-list">${i}</a>
                                        </c:if>
                                     </c:forEach>
-
                                     <c:if test="${pagerDto.groupNo<pagerDto.totalGroupNo}">
                                        <a class="btn btn-outline-info btn-sm"
                                           href="?pageNo=${pagerDto.endPageNo+1}#board-list">다음</a>
