@@ -56,7 +56,7 @@ $(function() {
 function midUniqueCheck(){
    console.log("midUniqueCheck 실행");
 
-   //아이디가 빈 문자이면 span에 아무 글씨도 안 넣는다.
+   //아이디가 빈 문자이면 
 	if($("#mid").val() === ""){
 		$("#spanId").addClass("text-danger").html("필수 입력 값입니다.");
 		midUniqueCheckResult = false;
@@ -99,7 +99,7 @@ function midUniqueCheck(){
 // pw검사----------------------------------------------------------------
 function mpwPatternCheck(){
 
-	//비밀번호가 빈 문자이면 span에 아무 글씨도 안 넣는다.
+	//비밀번호가 빈 문자이면 
 	if($("#mpassword").val() === ""){
 		$("#spanPw").addClass("text-danger").html("필수 입력 값입니다.");
 		mpwPatternCheckResult = false;
@@ -138,7 +138,7 @@ function mpwCompareCheck(){
 
 //3)nameCheck 검사 -------------------------------------------------
 function mnameCheck(){
-	//이름이 빈 문자이면 span에 아무 글씨도 안 넣는다.
+	//이름이 빈 문자이면 
 	if($("#mname").val() === ""){
 		$("#spanName").addClass("text-danger").html("필수 입력 값입니다.");
 		mnameCheckResult = false;
@@ -158,7 +158,7 @@ function mnameCheck(){
 }
 //4)ssnCheck검사(중복검사 해야 한다.) ------------------------------------------------------------
 function mssnUniqueCheck(){
-	// ssn이 빈문자면 아무것도 출력하지 않는다.
+	// ssn이 빈문자면 
 	if($("#mssn").val() === ""){
 		$("#spanSsn").addClass("text-danger").html("필수 입력 값입니다.");
 		mssnUniqueCheckResult = false;
@@ -202,7 +202,7 @@ function mssnUniqueCheck(){
 //5)emailCheck검사 ------------------------------------------------------------
 function memailCheck(){
 	
-	// ssn이 빈문자면 아무것도 출력하지 않는다.
+	// ssn이 빈문자면 
 	if($("#memail").val() === ""){
 		$("#spanEmail").addClass("text-danger").html("필수 입력 값입니다.");
 		memailCheckResult = false;
@@ -225,7 +225,7 @@ function memailCheck(){
 //6)phoneCheck검사(중복검사 해야한다.) ------------------------------------------------------------
 function mphoneUniqueCheck(){
 	
-	// email이 빈문자면 아무것도 출력하지 않는다.
+	// email이 빈문자면 
 	if($("#mphone").val() === ""){
 		$("#spanPhone").addClass("text-danger").html("필수 입력 값입니다.");
 		mphoneUniqueCheckResult = false;
@@ -271,7 +271,7 @@ function mphoneUniqueCheck(){
 
 function mnicknameUniqueCheck(){
 	
-	// nickname이 빈문자면 아무것도 출력하지 않는다.
+	// nickname이 빈문자면 
 	if($("#mnickname").val() === ""){
 		$("#spanNickname").removeClass("text-danger").html("");
 		//mnicknameUniqueCheckResult = false;

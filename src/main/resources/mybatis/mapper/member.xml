@@ -63,9 +63,9 @@
 	<!-- 비밀번호는 어떻게 할 것인지??** -->
 	<update id="updateMember" parameterType="MemberDto">
 		update member set
-		mpassword = #{mpassword},
 		memail = #{memail},
-		mphone = #{mphone}
+		mphone = #{mphone},
+		mgrade = #{mgrade}
 		where mid = #{mid}
 	</update>
 

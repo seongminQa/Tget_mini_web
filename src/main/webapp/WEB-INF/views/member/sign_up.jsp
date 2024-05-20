@@ -159,7 +159,7 @@
             </div>
             <div class="div_form_checkbox row">
                 <input id="necessaryBox" class="col-2" type="checkbox" style="width: 20px;">
-                <span id="necessaryBoxSpan" class="span_radio col-10" >14세 미만입니다.(필수)</span>
+                <span id="necessaryBoxSpan" class="span_radio col-10" >14세 이상입니다.(필수)</span>
             </div>
             <div class="row" style="width: 40%; height: 60px;">
                 <span style="display: inline;" class="d-flex justify-content-center mt-3">만 14세 미만 회원은 법정 대리인(부모님) 동의를 받은 경우만 회원가입이 가능합니다.</span>

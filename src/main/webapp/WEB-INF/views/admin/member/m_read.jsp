@@ -123,9 +123,9 @@
 													           <div class="form-group d-flex align-items-center mb-2">
 													              <label for="mgrade" style="width:30%">회원 등급 : </label>
 													              <select class="form-control" id="mgrade" name="mgrade" style="width:50%">
-													                 <option value="GRADE_1" selected>일반</option>
-													                 <option value="GRADE_2">골드</option>
-													                 <option value="GRADE_3">플래티넘</option>
+													                 <option value="일반" selected>일반</option>
+													                 <option value="골드">골드</option>
+													                 <option value="플래티넘">플래티넘</option>
 													              </select>
 													           </div>
 															</div>

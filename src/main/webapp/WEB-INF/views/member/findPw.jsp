@@ -70,7 +70,7 @@
 					}
 				}
 			}
-/*)--------------------------------전체 제출방법 버튼이다 이자식아-------------------------------------------------------  */
+/*)--------------------------------전체 제출방법 버튼-------------------------------------------------------  */
 		function lastCheckData() {
 			   console.log("입력 데이터를 검사합니다.");
 			   
@@ -120,7 +120,8 @@
 			   const seepwType = document.querySelector(".seepwClazz");
 			   const seeEye = document.querySelector(".seepw");
 			
-			   // input 타입 변환하는 함수
+			   // input 타입 변환하는 함수 
+			   // 만약 입력 타입이 "password"아면  "text"로, 그렇지 않으면 "password"로 변경합니다.
 			   function toggleView() {
 			      if (seepwType.type === "password") {
 			    	  seepwType.type = "text";

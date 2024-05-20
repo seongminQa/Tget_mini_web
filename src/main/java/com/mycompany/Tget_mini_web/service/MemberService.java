@@ -57,8 +57,6 @@ public class MemberService {
 
 	// 회원 정보 수정 메소드
 	public void updateMember(MemberDto memberDto) {
-		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-		memberDto.setMpassword(passwordEncoder.encode(memberDto.getMpassword()));
 		int rowNum = memberDao.updateMember(memberDto);
 	}
 
@@ -68,7 +66,8 @@ public class MemberService {
 		// 필요없으면 안써도 된다.
 		memberDao.deleteByMid(mid);
 	}
-
+	
+	// 아이디 중복값 확인
 	public int getMidCount(String mid) {
 		int count = 0;
 		log.info("service 진입" + mid);
@@ -82,7 +81,7 @@ public class MemberService {
 
 		return count;
 	}
-
+	// 주민번호 중복값 확인
 	public int getMssnCount(String mssn) {
 		int count = 0;
 		log.info("service 진입" + mssn);
@@ -138,21 +137,23 @@ public class MemberService {
 
 	}
 
-	// 비밀번호 찾기 기능
+	// 비밀번호 찾기(변경하기) 기능(재원)
 	public void ChangePw(MemberDto memberDto) {
 
 		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		memberDto.setMpassword(passwordEncoder.encode(memberDto.getMpassword()));
+		// 암호화된 비밀번호가 설정된 memberDto 객체를 사용하여 DAO(Data Access Object)를 통해 데이터베이스의 회원 비밀번호를 업데이트합니다.
 		memberDao.ChangePw(memberDto);
 
 	}
 	
-	// 회원정보 수정에서 회원 비밀번호 변경하기
+	// 회원정보 수정에서 회원 비밀번호 변경하기 (수민)
 	public void updateMpassword(MemberDto memberDto) {
 		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		memberDto.setMpassword(passwordEncoder.encode(memberDto.getMpassword()));
 		memberDao.updateMpassword(memberDto);
 	}
+	
 	
 	//회원정보수정에서 회원 닉네임 변경하기
 	public void updateMnickname(MemberDto memberDto) {
