@@ -146,12 +146,16 @@ public class ProductController {
        TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
        MemberDto memberDto = userDetails.getMember();
       
+       // 회원 아이디가 가지고 있는 장바구니 리스트들을 DB에서 불러와 저장
        List<CartDto> cartList = cartService.getCartItemList(memberDto.getMid());
-       // 카트리스트에 넘기기전에 상품금액을 갱신하여 전달 (원래 상품의 가격 * 수량)
+       
+       // 장바구니에 넘기기전에 상품금액을 갱신하여 전달 (원래 상품의 가격 * 수량)
        for(CartDto cartDto : cartList) {
           cartDto.setResultprice(cartDto.getPprice()*cartDto.getOamount());
        }
+       // 장바구니 하단의 상품 목록을 보여주기위해 상품 목록 리스트도 DB에서 가져옴
        List<ProductDto> productList = productService.getShoppingProductList();
+       // 장바구니 jsp에
        model.addAttribute("productList", productList);
        model.addAttribute("cartList", cartList);
        
@@ -163,18 +167,16 @@ public class ProductController {
    public String addCartItem(CartDto cartDto, Authentication authentication) {
      
      log.info("addCartItem 컨트롤러 실행");
+     // 현재 로그인한 유저의 id를 구하고, 그 유저가 가지고 있는 장바구니 아이템들을 가져온다.
      TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
      MemberDto memberDto = userDetails.getMember();
 
      cartDto.setMid(memberDto.getMid());
      
-     log.info(cartDto.getOdate().toString());
-     log.info(cartDto.getOseatgrade());
-     
      // 만약 해당 상품이 장바구니에 추가 되어있다면, (옵션 : 좌석의 등급과 날짜가 같다면)
      // 해당하는 장바구니 품목에 수량을 변경해준다.
      List<CartDto> cartList = cartService.getCartItemList(memberDto.getMid());
-
+     // 플래그 역할.
      boolean isUpdate = false;
      // 비교연산자('==')는 객체의 내용을 비교하는 것이 아니라 참조값을 비교하는 것이다.
      // 객체의 내용을 비교하기 위해선 equals() 메서드를 사용해야한다.
@@ -192,11 +194,11 @@ public class ProductController {
               log.info("updateCartItem 실행");
               System.out.println(newAmount);
               cartService.updateCartItem(item);
-              isUpdate = true;
+              isUpdate = true; // 장바구니에 내가 새로 추가할 상품이 완전히 동일 시 실행
               break;
           }
       }
-     
+     // 따라서 장바구니에 담은 아이템이 지금 내가 담으려는 아이템과 완전히 동일하지 않다면 장바구니에 새롭게 추가
      if(!isUpdate) {
         cartService.addCartItem(cartDto);
      }
@@ -204,15 +206,16 @@ public class ProductController {
       return "redirect:/product/cart";
    }
    
-   // 업데이트 방법   // get을 사용한 경우에는 이렇게 가능하다. set을 사용한 경우는 못함!
+   // 수량에 대한 실시간 업데이트  // get을 사용한 경우에는 이렇게 가능하다. set을 사용한 경우는 못함!
    @RequestMapping(value="/updateCartItem", produces="application/json; charset=UTF-8")
    @ResponseBody
    public String updateCartItem(int cno, int amount, Authentication authentication) {
-      // 카트안의 cno를 찾고 그 cno의 수량(oamount)를 데이터베이스에 반영해보자.
+      
       TgetUserDetails userDetails = (TgetUserDetails) authentication.getPrincipal();
       MemberDto memberDto = userDetails.getMember();
       List<CartDto> cartList = cartService.getCartItemList(memberDto.getMid());
       
+      // 카트안의 cno를 찾고 그 cno의 수량(oamount)를 데이터베이스에 반영
       // cno와 같은 CartItem 찾기
       for(CartDto item : cartList) {
          if(item.getCno() == cno) {
@@ -252,13 +255,14 @@ public class ProductController {
    @ResponseBody
    public String temporder(@RequestBody int[] cno, Model model) {
       log.info("temporder 실행");
-      
-      
       log.info("선택된 카트 갯수 : "+cno.length);
+      
+      // 임시적으로 만든 TempDto.
+      // 결제전 정보를 나타낸다.
       List<TempDto> tempDtoList = new ArrayList<TempDto>();
+      // 총 주문 결제 금액
       int ordertotalPrice = 0;
       
-
       for(int i=0; i<cno.length; i++) {
          CartDto cartDto = cartService.getCartItem(cno[i]);
          log.info(""+cartDto.getPno());

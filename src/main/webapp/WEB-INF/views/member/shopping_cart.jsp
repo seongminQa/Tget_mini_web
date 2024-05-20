@@ -428,7 +428,7 @@
           </thead>
           <!-- 장바구니 목록 리스트 시작 -->
           <tbody>
-          
+          	<!-- 장바구니에 상품이 하나도 담겨있지 않을 때 (empty) -->
 			<c:if test="${empty cartList}">
 			    <tr>
 			        <td colspan="6" style="text-align: center;">
@@ -438,7 +438,7 @@
 			    </tr>
 			</c:if>
           
-            <!-- 목록 -->
+            <!-- 장바구니 목록 -->
             <c:forEach var="cartitem" items="${cartList}" varStatus="i">
                <input id="pno${cartitem.cno}" type="hidden" value="${cartitem.pno}" />
                <input id="odate${cartitem.cno}" type="hidden" value="${cartitem.odate}" />
