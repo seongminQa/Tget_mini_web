@@ -306,13 +306,13 @@ public class MemberController {
 	@PostMapping("/findId")
 	public String findId(MemberDto memberDto, Model model) {
 		log.info("member.findId()실행");
-		memberservice.findId(memberDto);
+		String mid=memberservice.findId(memberDto);
 		/* log.info(memberservice.findId(memberDto)); */
 
-		if (memberservice.findId(memberDto) == null || memberservice.findId(memberDto) == "") {
+		if (mid== null || mid== "") {
 			return "member/lost_id"; // redirect:/
 		}
-		model.addAttribute("mid", memberservice.findId(memberDto));
+		model.addAttribute("mid", mid);
 
 		return "member/findId";
 	}
